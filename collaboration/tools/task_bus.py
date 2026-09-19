@@ -100,6 +100,15 @@ def healthcheck(remote_head, local_head):
 
 def main():
     ok = True
+    # 0) 先处理本地 inbox（ChatGPT→OpenClaw 投递入口）：校验 → 写入任务总线 → push
+    inbox_res = []
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import submit_task as ST
+        inbox_res = ST.process_inbox()
+    except Exception as e:  # noqa: BLE001
+        inbox_res = [{"ok": False, "error": f"{type(e).__name__}:{e}"}]
+
     g("fetch", "origin", "-q")
     remote_head = g("rev-parse", "origin/main").stdout.strip()
     local_head = g("rev-parse", "HEAD").stdout.strip()
@@ -132,17 +141,23 @@ def main():
             st = "REJECTED"
             append_claims([dict(base, EVENT="REJECTED", TS=now_iso())])
         else:
-            facts = healthcheck(remote_head, local_head)
-            lines = "".join(f"- **{k}**: `{v}`\n" for k, v in facts.items())
-            st = "COMPLETED"
-            body = (f"STATUS=COMPLETED\nSTARTED_AT={started}\nFINISHED_AT={now_iso()}\n\n"
-                    f"LOCAL_HEAD={local_head}\nREMOTE_HEAD={remote_head}\n\n"
-                    f"FILES_CHANGED=\nFILES_CREATED={result_rel}\nFILES_DELETED=\n\n"
-                    f"V1_UNTOUCHED=TRUE\nV2_UNTOUCHED=TRUE\nV3_UNTOUCHED=TRUE\nHERMES_UNTOUCHED=TRUE\n\n"
-                    f"BROKER_ORDER_SENT=FALSE\n\n"
-                    f"FINDINGS:\n{lines}\n"
-                    f"DATA_GAPS=\nERRORS=\nNEXT_RECOMMENDATION=\nREPORT_COMMIT=<the commit that adds this result>\n")
-            append_claims([dict(base, EVENT="DONE", TS=now_iso())])
+            try:
+                facts = healthcheck(remote_head, local_head)
+                lines = "".join(f"- **{k}**: `{v}`\n" for k, v in facts.items())
+                st = "COMPLETED"
+                body = (f"STATUS=COMPLETED\nSTARTED_AT={started}\nFINISHED_AT={now_iso()}\n\n"
+                        f"LOCAL_HEAD={local_head}\nREMOTE_HEAD={remote_head}\n\n"
+                        f"FILES_CHANGED=\nFILES_CREATED={result_rel}\nFILES_DELETED=\n\n"
+                        f"V1_UNTOUCHED=TRUE\nV2_UNTOUCHED=TRUE\nV3_UNTOUCHED=TRUE\nHERMES_UNTOUCHED=TRUE\n\n"
+                        f"BROKER_ORDER_SENT=FALSE\n\n"
+                        f"FINDINGS:\n{lines}\n"
+                        f"DATA_GAPS=\nERRORS=\nNEXT_RECOMMENDATION=\nREPORT_COMMIT=<the commit that adds this result>\n")
+                append_claims([dict(base, EVENT="DONE", TS=now_iso())])
+            except Exception as e:  # noqa: BLE001
+                st = "FAILED"
+                body = f"STATUS=FAILED\nSTARTED_AT={started}\nFINISHED_AT={now_iso()}\nERRORS={type(e).__name__}:{e}\n"
+                append_claims([dict(base, EVENT="FAILED", TS=now_iso())])
+                ok = False
 
         os.makedirs(os.path.join(ROOT, OUT_DIR), exist_ok=True)
         with open(os.path.join(ROOT, result_rel), "w", encoding="utf-8") as f:
@@ -179,6 +194,7 @@ def main():
             ok = False
 
     print(json.dumps({"remote_head": remote_head, "local_head": local_head,
+                      "inbox": inbox_res,
                       "tasks_found": len(tasks), "processed": processed,
                       "commit": commit, "ok": ok}, ensure_ascii=False, indent=1))
     return 0 if ok else 1
