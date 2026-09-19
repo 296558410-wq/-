@@ -1,0 +1,89 @@
+# CHATGPT-TASK-V2-FINAL-CLOSEOUT-R8D-RESULT.md
+
+**Task**: V2 最终安全收尾 R8-001-D（Ledger Partial/Corrupt Write）｜**执行**: OpenClaw｜**决策**: 用户
+**基线**: `98dc208abd2402ceb5561176fffb6071248577d6`
+
+## §一 结论（FACT）
+```text
+FINAL_CLOSEOUT_R8D_EXECUTED=TRUE
+LEDGER_PARTIAL_WRITE=PASS
+V2_EXECUTION_SAFETY_CORE=PASS
+DATA_GAPS=0
+RUN_SAFETY_007=FAIL   # 机械门槛：V1_REGRESSION=FAIL（既有时间依赖测试，非 V2/V1 代码回归）
+```
+
+## §二 真实链路（重读，FACT）
+`run_cycle` → `dec_id=d["decision_id"]` → TRADE 唯一入口（Guarded）→ `ExecutionGuard.claim→EXECUTING` → `ADP.process`（内部 `executor.open()` 后逐个 `L.append_event()`）→ `FILLED/FAILED/UNKNOWN`。**Guard 仅管执行状态/idempotency**；**交易 ledger 唯一写入方 = `ADP.process`**；`DECISION_ID_SCOPE=PER_RUN`。未改 ledger 架构。
+
+## §三 R8-001-D（真实 ledger 写路径注入）
+注入点：`tests/engine_harness/r8d_suite.py` 子进程 patch `ADP` 所用 `L.append_event`，在 **executor 成功后、`EXECUTION_RESPONSE` 落账时**写入**半行/损坏/截断**字节到**真实 ledger 文件**并 `os._exit(7)`。
+| 场景 | 注入 | 结果 | 证据 |
+|---|---|---|---|
+| R8-D-001 partial before durable | 半行 JSON | **PASS** | exec_after=1, extra_exec=0, parse_err=True, guard=EXECUTING, restart=`LEDGER_UNVERIFIABLE` |
+| R8-D-002 corrupt final record | 垃圾字节 | **PASS** | 同上 |
+| R8-D-003 truncated JSONL | 去尾 JSON（无换行） | **PASS** | 同上 |
+| R8-D-004 exec success + partial ledger | 汇总 | **PASS** | exec_total=1，额外执行=0 |
+
+**安全行为**：重启时 `run_cycle` 起始 `L.verify_ledger()` 检测到损坏 → **阻断 `LEDGER_UNVERIFIABLE`**（在到达 Guard/executor 之前返回）→ **不重复执行、不伪造 FILLED、无自动重试**（`UNKNOWN_AUTO_RETRY=0`）。
+
+## §四 既有属性复跑（§九 回归）
+R7 全套复跑 = **全 PASS**：SINGLE_TRADE / DUPLICATE_X10 / SAME_DECISION_X100 / CROSS_PROCESS(8,10) / TOCTOU(20) / DIFFERENT_DECISIONS / CRASH_BEFORE_EXECUTOR / CRASH_AFTER_EXECUTOR(→ALREADY_CLAIMED) / PROCESS_RESTART / SCHEDULER_REENTRY / LEDGER_IDEMPOTENCY / UNKNOWN_EXECUTION_SAFE。
+
+## §五 V2 回归
+- Execution：success/EXECUTED、reject→FAILED、exception→UNKNOWN、duplicate/concurrent→1、diff-dec 独立、ledger failure→UNKNOWN、partial/corrupt→阻断 → **V2_EXECUTION_REGRESSION=PASS**
+- Ledger：事件类型齐全、`decision_id`/`position_id` 可追溯、replay 一致、同键不重复 → **V2_LEDGER_REGRESSION=PASS**
+- ENGINE_LEVEL_REGRESSION=PASS；V2_IMPORT_REGRESSION=PASS
+
+## §六 V1（READ ONLY，未改）
+`pytest trader_v1/tests` → **80 passed / 1 failed**。FAIL=`test_l3_invariants.py::test_invariant_no_future_data`（硬编码 bar `2026-09-09` 已被当前时间超越的**时间依赖既有缺陷**）。**未修改 V1 代码或测试** → `V1_REGRESSION=FAIL`（如实）。
+
+## §十五 最终字段
+```text
+FINAL_CLOSEOUT_R8D_EXECUTED=TRUE
+LEDGER_PARTIAL_WRITE=PASS
+PARTIAL_WRITE_BEFORE_DURABLE=PASS
+CORRUPT_LEDGER=PASS
+TRUNCATED_JSONL=PASS
+EXECUTOR_SUCCESS_PARTIAL_LEDGER=PASS
+EXECUTOR_DUPLICATE_COUNT=0
+MAX_SAME_DECISION_EXECUTOR_CALLS=1
+UNKNOWN_AUTO_RETRY=0
+SINGLE_TRADE=PASS
+DUPLICATE_X10=PASS
+SAME_DECISION_X100=PASS
+CROSS_PROCESS=PASS
+TOCTOU=PASS
+DIFFERENT_DECISIONS=PASS
+CRASH_BEFORE_EXECUTOR=PASS
+CRASH_AFTER_EXECUTOR_BEFORE_LEDGER=PASS
+PROCESS_RESTART=PASS
+SCHEDULER_REENTRY=PASS
+LEDGER_IDEMPOTENCY=PASS
+UNKNOWN_EXECUTION_SAFE=PASS
+V2_EXECUTION_REGRESSION=PASS
+V2_LEDGER_REGRESSION=PASS
+ENGINE_LEVEL_REGRESSION=PASS
+V2_IMPORT_REGRESSION=PASS
+DECISION_ID_SCOPE=PER_RUN
+REAL_BROKER_ACCESS=FALSE
+BROKER_ORDER_SENT=FALSE
+FORWARD_STARTED=FALSE
+V1_UNTOUCHED=TRUE  V3_UNTOUCHED=TRUE  HERMES_UNTOUCHED=TRUE  AGENT1_UNTOUCHED=TRUE  AGENT2_UNTOUCHED=TRUE
+STRATEGY_UNTOUCHED=TRUE  PIT_UNTOUCHED=TRUE  H01_UNTOUCHED=TRUE  CONFIG_UNTOUCHED=TRUE  EXECUTION_MODE_UNTOUCHED=TRUE
+V1_REGRESSION=FAIL
+HIGH_FINDINGS=0  MEDIUM_FINDINGS=0  LOW_FINDINGS=0  DATA_GAPS=0  UNRESOLVED=1
+V2_EXECUTION_SAFETY_CORE=PASS
+RUN_SAFETY_007=FAIL
+GITHUB_SYNCED=TRUE  CODE_COMMITTED=TRUE  TESTS_COMMITTED=TRUE  HARNESS_COMMITTED=TRUE
+RESULT_REPORT_COMMITTED=TRUE  CURRENT_STATUS_COMMITTED=TRUE
+PARENT_COMMIT=98dc208abd2402ceb5561176fffb6071248577d6
+FINAL_COMMIT=<this>  LOCAL_HEAD=<after>  REMOTE_HEAD=<after>  LOCAL_REMOTE_MATCH=TRUE
+ORIGINAL_REPO_UNTOUCHED=TRUE
+```
+
+## §十六 说明
+- **V2 执行安全核心现已 0 DATA_GAP**；`LEDGER_PARTIAL_WRITE` 已无残留 DATA_GAP。
+- `RUN_SAFETY_007=FAIL` 完全由 **V1 的既有时间依赖测试**触发（非 V2、非 V1 代码回归）；未擅自修改 V1 以获得 81/81。**如需，请裁定是否将该断言改为相对时间**。
+- 本轮仅新增 `tests/engine_harness/r8d_suite.py`（+ 复用 r7/r8 辅助）；引擎逻辑零改动。
+
+_未下单；未 Forward；未连 Broker；未改 execution_mode/H-01/PIT/策略/Agent/Hermes/V1/V3。_

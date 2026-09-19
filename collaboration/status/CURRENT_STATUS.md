@@ -173,3 +173,9 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - V1_REGRESSION=FAIL (1/81 pre-existing time-dependent V1 test; V1 source untouched)
 - RUN_SAFETY_007=FAIL (gate: real FAIL present)
 - DECISION_ID_SCOPE=PER_RUN
+
+## 2026-09-19 23:06 - FINAL-CLOSEOUT-R8D
+- LEDGER_PARTIAL_WRITE=PASS (partial/corrupt/truncated ledger -> restart blocked LEDGER_UNVERIFIABLE, no re-exec)
+- R7+R8 re-run ALL PASS; DATA_GAPS=0; V2_EXECUTION_SAFETY_CORE=PASS
+- V1_REGRESSION=FAIL (pre-existing time-dependent V1 test; untouched)
+- RUN_SAFETY_007=FAIL (mechanical gate: V1_REGRESSION FAIL)
