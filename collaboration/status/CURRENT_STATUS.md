@@ -99,6 +99,14 @@
 - **DATA_GAP** — Agent1/Agent2/Replay PIT；F-03..F-14 失败矩阵；并发；三实例运行期隔离。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-003-RESULT.md`。
 
+## V2 Audit 004 (最终穿透 / 只读, 2026-09-19)
+
+- **FACT** — Agent1 特征清单已机械提取（features.py）；Agent2 `cot.publication_timestamp_unknown=True`/`pit_status=UNKNOWN`、`news.first_seen_at=retrieved_at`。
+- **FACT（本轮新测）** — 并发 `start_run` harness：两线程同秒收敛同 rid，无损坏；**未有效制造差异 run 竞争** → 并发安全仍 DATA_GAP。
+- **DATA_GAP** — Agent1/Agent2/Replay PIT、E_after 注入、并发 cycle、幂等、crash recovery、三实例运行期隔离。
+- 结论：**NOT READY FOR FORMAL FORWARD**（存在 HIGH 类条件 H-01）。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-004-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
