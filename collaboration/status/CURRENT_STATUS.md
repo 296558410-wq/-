@@ -205,3 +205,9 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - SCHEDULER_CONFIG_READ=PASS; PAPER_SCHEDULER_PATH=PASS; SCHEDULER_EXECUTION_MODE=PAPER
 - V1_CRON=TRUE (openclaw cron hermes-trader-m15-cycle -> trader_v1); V2_CRON=FALSE
 - V1_V2/V2_V3 isolation=PASS; PAPER_STATE_READY=PASS; FORWARD_STARTED=FALSE
+
+## 2026-09-19 23:37 - BROKER-DEMO-FORWARD-48H START
+- V2 execution_mode PAPER -> BROKER_DEMO (user GO); broker.enabled=true; broker_demo_enabled=true; allow_real_trading=false
+- LIVE_GATE=LOCKED; MT5 demo terminal fxtm_demo_01 PID36460; MAGIC=90003; creds=.env.mt5_demo
+- FORWARD_STARTED=TRUE start 2026-09-19T15:36:00Z end 2026-09-21T15:36:00Z; CODE_FREEZE=TRUE CONFIG_FREEZE=TRUE
+- FORWARD_STATUS=INCOMPLETE (in progress); monitor cron every 3h

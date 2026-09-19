@@ -60,9 +60,9 @@
   },
   "execution": {
     "backend": "fxtm_demo",
-    "execution_mode": "PAPER",
+    "execution_mode": "BROKER_DEMO",
     "live_trading": false,
-    "broker_demo_enabled": false,
+    "broker_demo_enabled": true,
     "backends_available": ["paper_local", "fxtm_demo", "oanda_v20"],
     "cost_model": { "spread_bps_typical": 0.35, "slippage_bps": 0.30, "latency_ms": 250, "commission_per_lot_usd": 0.0 },
     "contract": { "min_lot": 0.01, "max_lot": 0.05, "contract_size_oz": 100, "price_dp": 2, "lot_dp": 2, "leverage": 500 },
@@ -71,7 +71,7 @@
   "broker": {
     "broker": "FXTM",
     "environment": "DEMO",
-    "enabled": false,
+    "enabled": true,
     "credentials_source": "env:FXTM_DEMO_LOGIN/FXTM_DEMO_PASSWORD/FXTM_DEMO_INVESTOR/FXTM_DEMO_SERVER",
     "note": "凭据永不写入 config/git/日志; 仅环境变量; execution_mode 必须=BROKER_DEMO 且 enabled=true 才允许连接(当前禁止)"
   },
