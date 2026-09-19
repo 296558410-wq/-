@@ -166,3 +166,10 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - DECISION_ID_SCOPE=PER_RUN; UNKNOWN_AUTO_RETRY=0; MAX_SAME_DECISION_EXECUTOR_CALLS=1
 - FIX: guard.ledger_append_once idempotency key -> (decision_id,event_type,position_id)
 - DATA_GAP: LEDGER_CRASH_CONSISTENCY, V2_EXEC/LEDGER + V1 regression; RUN_SAFETY_007=INCOMPLETE
+
+## 2026-09-19 23:01 - FINAL-CLOSEOUT-001
+- R8 ledger crash-consistency ALL PASS (before-append/after-append/write-failure) + reject->FAILED + exception->UNKNOWN
+- V2_EXECUTION/LEDGER_REGRESSION=PASS; LEDGER_PARTIAL_WRITE=DATA_GAP
+- V1_REGRESSION=FAIL (1/81 pre-existing time-dependent V1 test; V1 source untouched)
+- RUN_SAFETY_007=FAIL (gate: real FAIL present)
+- DECISION_ID_SCOPE=PER_RUN
