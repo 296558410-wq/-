@@ -123,6 +123,13 @@
 - **H01_UNTOUCHED=TRUE**（execution_mode/broker flags 未改）。`RUN_SAFETY_REPAIR=INCOMPLETE`。
 - 代码+测试+报告已同步至 GitHub 协作仓。详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-006-RESULT.md`。
 
+## V2 Repair 006B (并发交易链/幂等/crash recovery, 2026-09-19) — **INCOMPLETE（未改执行链）**
+
+- **DECISION** — 本轮**未修改 V2 执行链代码**：幂等键/执行状态机/crash recovery/UNKNOWN 属**执行语义**改动，回归风险高于 006；在无法完成 R6B-001..R6B-016 全回归（含 multiprocessing/crash injection）前不实施。
+- 交付：幂等键设计（建议 `decision_id`）+ 状态机 + crash 三态 + 待实现清单；核心项 DATA_GAP。
+- **H01_UNTOUCHED=TRUE**。V1 零接触。原始仓 HEAD/历史未变。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-006B-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
