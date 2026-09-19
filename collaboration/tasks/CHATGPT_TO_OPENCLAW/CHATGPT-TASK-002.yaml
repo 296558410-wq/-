@@ -1,0 +1,39 @@
+# bridged via submit_task.py at 2026-09-19T12:51:48.197179+00:00
+# ChatGPT 任务（经 bridge inbox 投递；OpenClaw 自动写入任务总线并执行）
+TASK_ID: CHATGPT-TASK-002
+TASK_TYPE: READONLY_HEALTHCHECK
+CREATED_BY: ChatGPT
+CREATED_AT: 2026-09-19T20:52:00+08:00
+PRIORITY: NORMAL
+STATUS: PROPOSED
+
+OBJECTIVE: >
+  经桥接入口验证 ChatGPT→OpenClaw 自动任务链：只读健康检查第二版（确认 bridge 投递→自动领取→执行→回写全链路）。
+
+SCOPE: >
+  READ ONLY。仅读 GitHub 与本地 repo；允许 OpenClaw 在 collaboration/ 下写结果与领取记录。
+
+READ_ONLY: true
+
+ALLOWED_PATHS:
+  - collaboration/
+
+FORBIDDEN_PATHS:
+  - research/hermes/trader_v1/
+  - research/hermes/trader_v2/
+  - research/hermes/trader_v3/
+
+SAFETY_CONSTRAINTS: >
+  不得下单/不得改交易系统/不得改 V1·V2·V3·Hermes/不得 force push/不得 amend/不得 squash。
+
+INPUTS: >
+  GitHub repo https://github.com/296558410-wq/-.git
+
+EXPECTED_OUTPUT: >
+  collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-002_RESULT.md
+
+ACCEPTANCE_CRITERIA: >
+  RESULT 出现在远端 main；含 LOCAL_HEAD/REMOTE_HEAD/FINDINGS；BROKER_ORDER_SENT=FALSE；V1/V2/V3/HERMES_UNTOUCHED=TRUE。
+
+REQUIRED_REPORT: collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-002_RESULT.md
+REQUIRED_COMMIT: yes — 正常 commit + push（禁止 force/amend/squash）
