@@ -107,6 +107,14 @@
 - 结论：**NOT READY FOR FORMAL FORWARD**（存在 HIGH 类条件 H-01）。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-004-RESULT.md`。
 
+## V2 Validation 005 (遗留缺口穿透, 2026-09-19)
+
+- **FACT（新测）** — 并发 `start_run` ×10：**可建两个 run + 覆盖 ACTIVE**（§7 情况 D）→ 新增 **M-04 MEDIUM**。
+- **FACT（代码）** — Replay 为快照驱动（`offline_replay` 仅用 snapshot、hash 校验、不联网）→ **E_AFTER_BLOCKED=TRUE**（代码级）。
+- **DATA_GAP** — Agent1/Agent2/Replay PIT、concurrent cycle、幂等、crash recovery、运行期隔离。
+- 结论：**NOT READY FOR FORMAL FORWARD**（H-01 仍在，风险等同 BLOCKED）。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-VALIDATION-005-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
