@@ -169,7 +169,8 @@ def main():
     sync_val = "SYNCED" if synced else "SYNC_PENDING"
     sync_path = os.path.join(ROOT, "collaboration/status/GITHUB_SYNC.md")
     old = open(sync_path, encoding="utf-8").read() if os.path.exists(sync_path) else ""
-    if processed or f"Sync:          {sync_val}" not in old:
+    old_sync = "SYNCED" if "Sync:          SYNCED" in old else ("SYNC_PENDING" if "Sync:          SYNC_PENDING" in old else None)
+    if processed or (old_sync != sync_val):
         sync_doc = ("# GITHUB_SYNC.md — GitHub 同步状态\n\n"
                     "```text\n"
                     f"GitHub:        CONNECTED\n"
@@ -180,6 +181,8 @@ def main():
                     "```\n")
         with open(sync_path, "w", encoding="utf-8") as f:
             f.write(sync_doc)
+    else:
+        g("checkout", "--", "collaboration/status/GITHUB_SYNC.md")  # 丢弃仅 heads/时间戳变化，避免噪声 commit
 
     # commit + push (仅当有变更)
     g("add", "-A")
