@@ -111,9 +111,12 @@ class ExecutionGuard:
         lp = self._lock(f"ledger_{decision_id}")
         try:
             if ledger_path.exists():
+                _ek = (event.get("event_type"), event.get("position_id"))
                 for ln in ledger_path.read_text(encoding="utf-8").splitlines():
                     try:
-                        if json.loads(ln).get("decision_id") == decision_id:
+                        _o = json.loads(ln)
+                        # 幂等键 = decision_id + event_type + position_id（REPAIR-007 STAGE4B-REMAINDER 修正）
+                        if _o.get("decision_id") == decision_id and (_o.get("event_type"), _o.get("position_id")) == _ek:
                             return False
                     except Exception:  # noqa: BLE001
                         pass

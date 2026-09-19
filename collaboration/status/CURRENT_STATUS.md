@@ -160,3 +160,9 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - SINGLE_TRADE=PASS; DUP(engine-level)=PASS (ALREADY_CLAIMED)
 - 其余 4B 回归=DATA_GAP; RUN_SAFETY_007=INCOMPLETE
 - shadow_run.py 仅加 TRADE 分支 Guard 接线; 未改策略/Hermes/A1/A2/PIT/H-01/execution_mode/V1/V3
+
+## 2026-09-19 22:56 - REPAIR-007 STAGE4B-REMAINDER
+- R7 engine-level suite ALL PASS (single/x10/x100/TOCTOU20/cross8/cross10/diff-dec/crash-before/crash-after/sched-reentry/ledger-idempotency/unknown-safe)
+- DECISION_ID_SCOPE=PER_RUN; UNKNOWN_AUTO_RETRY=0; MAX_SAME_DECISION_EXECUTOR_CALLS=1
+- FIX: guard.ledger_append_once idempotency key -> (decision_id,event_type,position_id)
+- DATA_GAP: LEDGER_CRASH_CONSISTENCY, V2_EXEC/LEDGER + V1 regression; RUN_SAFETY_007=INCOMPLETE
