@@ -154,3 +154,9 @@
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
+
+## 2026-09-19 22:46 — REPAIR-007 STAGE4B
+- EXECUTION_GUARD_WIRED=TRUE (run_cycle TRADE branch; key=decision_id)
+- SINGLE_TRADE=PASS; DUP(engine-level)=PASS (ALREADY_CLAIMED)
+- 其余 4B 回归=DATA_GAP; RUN_SAFETY_007=INCOMPLETE
+- shadow_run.py 仅加 TRADE 分支 Guard 接线; 未改策略/Hermes/A1/A2/PIT/H-01/execution_mode/V1/V3

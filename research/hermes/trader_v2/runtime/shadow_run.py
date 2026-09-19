@@ -408,10 +408,36 @@ def run_cycle(run_id, cycle=None, market_mid=None, close_after=False, window=Non
             timeline["price_space_error"] = f"{type(e).__name__}:{e}"
             execution_reject = {"valid": False, "reject_code": "PRICE_SPACE_ERROR",
                                 "reject_detail": {"error": timeline["price_space_error"]}}
-    out = ADP.process(d, pe, led, market_mid=(market_mid if market_mid is not None else px),
-                      close_after=close_after, input_hash=input_hash, run_id=run_id,
-                      decision_window=win, execution_mode=mode,
-                      execution_plan=execution_plan, execution_reject=execution_reject)
+    _g = None
+    if d.get("decision") == "TRADE":
+        from execution_guard import ExecutionGuard  # REPAIR-007 STAGE4B: 真实 TRADE 分支执行幂等门
+        _g = ExecutionGuard(run_dir(run_id) / "exec_guard")
+        _ok, _gst = _g.claim(dec_id)
+        if not _ok:
+            timeline["execution_guard"] = {"claimed": False, "status": _gst}
+            st["counters"]["duplicate_skips"] += 1
+            _write(state_path(run_id), st)
+            return {"run_id": run_id, "decision_window": win, "decision_id": dec_id,
+                    "duplicate_skipped": True, "guard_status": _gst}
+        _g.transition(dec_id, "EXECUTING")
+        timeline["execution_guard"] = {"claimed": True, "status": _gst}
+    try:
+        out = ADP.process(d, pe, led, market_mid=(market_mid if market_mid is not None else px),
+                          close_after=close_after, input_hash=input_hash, run_id=run_id,
+                          decision_window=win, execution_mode=mode,
+                          execution_plan=execution_plan, execution_reject=execution_reject)
+    except BaseException:
+        if _g is not None:
+            _g.transition(dec_id, "UNKNOWN", result="EXCEPTION")  # UNKNOWN: 禁止自动重试
+        raise
+    if _g is not None:
+        _er = out.get("execution_result")
+        if _er and str(_er).startswith("EXECUTED"):
+            _g.transition(dec_id, "FILLED", result=_er)
+        elif _er and str(_er).startswith("REJECTED"):
+            _g.transition(dec_id, "FAILED", result=_er)
+        else:
+            _g.transition(dec_id, "UNKNOWN", result=_er)
     timeline["execution_backend"] = getattr(pe, "backend", None)
     timeline["paper_execution_ts"] = iso(utcnow())
 
