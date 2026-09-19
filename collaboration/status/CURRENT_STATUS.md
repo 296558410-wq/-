@@ -137,6 +137,13 @@
 - **H01_UNTOUCHED=TRUE**；V1 零接触；原仓 d22d9fb/249 未变。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007-RESULT.md`。
 
+## V2 Repair 007A (执行链维修 STAGE-1/2, 2026-09-19) — 部分完成
+
+- **已实施**：`execution/execution_guard.py`（幂等键=`decision_id` 的原子占位 + 单向状态机 + UNKNOWN 禁重试 + ledger 幂等）。
+- **回归（真实模块/文件系统；threads+8 进程）**：`tests/test_execution_guard.py` **10/10 PASS**（含 R6B-003/004/005/007/009/010/011/012 + SAME_DECISION_X100=1 + 不同 decision 独立）。
+- **wiring**：guard **尚未接入 shadow_run/executor** → 引擎级 R6B = DATA_GAP → `RUN_SAFETY_007=INCOMPLETE`。
+- **H01/PIT/策略/V1/V3 未改**；原仓 HEAD/历史未变。详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007A-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
