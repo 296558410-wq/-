@@ -60,35 +60,72 @@ class ExecutionGuard:
     def _set_state(self, did, st):
         write_atomic(self._state_path(did), st)
 
+    def _lock(self, decision_id, stale=120.0, timeout=5.0):
+        """跨进程单写者锁（O_EXCL 锁文件 + stale 接管）。REPAIR-007A 风险 B。"""
+        lp = self.base / f"{decision_id}.lock"
+        deadline = time.time() + timeout
+        while True:
+            try:
+                fd = os.open(str(lp), os.O_CREAT | os.O_EXCL | os.O_WRONLY); os.write(fd, str(os.getpid()).encode()); os.close(fd)
+                return lp
+            except FileExistsError:
+                try:
+                    if time.time() - lp.stat().st_mtime > stale:
+                        lp.unlink()
+                        continue
+                except FileNotFoundError:
+                    continue
+                if time.time() >= deadline:
+                    raise RuntimeError("STATE_LOCK_TIMEOUT")
+                time.sleep(0.02)
+
     def transition(self, decision_id, new_status, result=None):
-        """单向 + 合法迁移校验；非法迁移 → 拒绝（返回 False）。"""
-        st = self._read_state(decision_id)
-        if st is None:
-            return False
-        cur = st["status"]
-        if new_status not in _FSM.get(cur, set()):
-            return False  # 非法迁移（含 UNKNOWN→RETRY 类）
-        st["status"] = new_status
-        st["history"].append({"status": new_status, "ts": time.time()})
-        if result is not None:
-            st["result"] = result
-        self._set_state(decision_id, st)
-        return True
+        """单向 + 合法迁移校验；**跨进程** read-validate-write（锁保护，防后写覆盖）。"""
+        lp = self._lock(decision_id)               # REPAIR-007A 风险 B
+        try:
+            st = self._read_state(decision_id)
+            if st is None:
+                return False
+            cur = st["status"]
+            if new_status not in _FSM.get(cur, set()):
+                return False  # 非法迁移（含 UNKNOWN→RETRY 类）
+            st["status"] = new_status
+            st["history"].append({"status": new_status, "ts": time.time()})
+            if result is not None:
+                st["result"] = result
+            self._set_state(decision_id, st)
+            return True
+        finally:
+            try: lp.unlink()
+            except FileNotFoundError: pass
 
     def can_execute(self, decision_id):
         """已 claim 后一律不可再执行（防重启/重入自动重试；UNKNOWN 尤其禁止）。"""
         return not self._claim_path(decision_id).exists()
 
     def ledger_append_once(self, ledger_path, decision_id, event):
-        """以 decision_id 为唯一键，仅追加一次（marker O_EXCL），返回是否实际写入。"""
+        """**crash-一致** 幂等追加（REPAIR-007A 风险 A）。
+        以 ledger 实际内容为真相：已存在该 decision_id 记录 → 不重复写；
+        否则 append+fsync（先落账本，再写 marker）。若 append 后 marker 前 crash，重启扫描账本仍能去重。"""
         ledger_path = Path(ledger_path)
-        marker = self.base / f"{decision_id}.ledger.committed"
+        lp = self._lock(f"ledger_{decision_id}")
         try:
-            fd = os.open(str(marker), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-            os.close(fd)
-        except FileExistsError:
-            return False
-        ledger_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(ledger_path, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"decision_id": decision_id, **event}, ensure_ascii=False) + "\n")
-        return True
+            if ledger_path.exists():
+                for ln in ledger_path.read_text(encoding="utf-8").splitlines():
+                    try:
+                        if json.loads(ln).get("decision_id") == decision_id:
+                            return False
+                    except Exception:  # noqa: BLE001
+                        pass
+            ledger_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(ledger_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"decision_id": decision_id, **event}, ensure_ascii=False) + "\n")
+                f.flush(); os.fsync(f.fileno())
+            try:
+                (self.base / f"{decision_id}.ledger.committed").write_text("1", encoding="ascii")
+            except Exception:  # noqa: BLE001
+                pass
+            return True
+        finally:
+            try: lp.unlink()
+            except FileNotFoundError: pass

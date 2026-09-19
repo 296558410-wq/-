@@ -4,7 +4,7 @@
 用法: python tests/test_execution_guard.py
 """
 from __future__ import annotations
-import importlib.util, multiprocessing as mp, os, pathlib, sys, tempfile, threading
+import importlib.util, json, multiprocessing as mp, os, pathlib, sys, tempfile, threading
 
 V2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(V2, "execution")); sys.path.insert(0, os.path.join(V2, "runtime"))
@@ -17,6 +17,12 @@ def check(name, ok, detail=""):
 
 def _mp_worker(base, did, q):
     g = EG.ExecutionGuard(base); q.put(g.claim(did))
+
+def _mp_transition(base, did, target, q):
+    try:
+        q.put(EG.ExecutionGuard(base).transition(did, target))
+    except Exception:  # noqa: BLE001
+        q.put(False)
 
 def main():
     B = tempfile.mkdtemp(prefix="eg1_")
@@ -58,6 +64,25 @@ def main():
     B12 = tempfile.mkdtemp(prefix="eg12_"); g12 = EG.ExecutionGuard(B12); L = pathlib.Path(B12) / "ledger.jsonl"
     w = sum(1 for _ in range(10) if g12.ledger_append_once(L, "DEC-L", {"status": "FILLED"}))
     check("R6B-012 ledger idempotency", w == 1 and len(L.read_text(encoding="utf-8").strip().splitlines()) == 1, f"writes={w}")
+
+    # R6B-008 ledger crash-consistency：账本已有记录但 marker 缺失（模拟 append 后 crash）→ 不得重复
+    B8 = tempfile.mkdtemp(prefix="eg8_"); g8 = EG.ExecutionGuard(B8); L8 = pathlib.Path(B8) / "ledger.jsonl"
+    L8.write_text(json.dumps({"decision_id": "DEC-C8", "status": "FILLED"}) + "\n", encoding="utf-8")
+    dup = g8.ledger_append_once(L8, "DEC-C8", {"status": "FILLED"})
+    n8 = len(L8.read_text(encoding="utf-8").strip().splitlines())
+    check("R6B-008 ledger crash-consistency (no dup after crash)", dup is False and n8 == 1, f"wrote={dup} lines={n8}")
+
+    # R6B-004b 跨进程状态迁移（防后写覆盖）：两进程从 EXECUTING 迁移不同目标 → 仅 1 成功
+    try:
+        Bc = tempfile.mkdtemp(prefix="egc_"); g0 = EG.ExecutionGuard(Bc); g0.claim("DEC-C4"); g0.transition("DEC-C4", "EXECUTING")
+        q2 = mp.Queue()
+        p1 = mp.Process(target=_mp_transition, args=(Bc, "DEC-C4", "UNKNOWN", q2))
+        p2 = mp.Process(target=_mp_transition, args=(Bc, "DEC-C4", "FAILED", q2))
+        [p.start() for p in (p1, p2)]; [p.join() for p in (p1, p2)]
+        res2 = [q2.get() for _ in (p1, p2)]
+        check("R6B-004b cross-process transition (single winner)", sum(1 for r in res2 if r) == 1, f"succeeded={sum(1 for r in res2 if r)}/2")
+    except Exception as e:  # noqa: BLE001
+        check("R6B-004b cross-process transition (single winner)", False, f"{type(e).__name__}:{e}")
 
     Bd = tempfile.mkdtemp(prefix="egd_"); gd = EG.ExecutionGuard(Bd)
     check("DIFFERENT decisions independent", all(gd.claim(f"DEC-{i:03d}")[0] for i in range(5)), "")
