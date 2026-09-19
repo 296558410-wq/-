@@ -211,3 +211,10 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - LIVE_GATE=LOCKED; MT5 demo terminal fxtm_demo_01 PID36460; MAGIC=90003; creds=.env.mt5_demo
 - FORWARD_STARTED=TRUE start 2026-09-19T15:36:00Z end 2026-09-21T15:36:00Z; CODE_FREEZE=TRUE CONFIG_FREEZE=TRUE
 - FORWARD_STATUS=INCOMPLETE (in progress); monitor cron every 3h
+
+## 2026-09-20 02:37 - BROKER-DEMO-FORWARD-48H MONITOR (T+3h, UTC 2026-09-19T18:37Z)
+- SAFETY=PASS: execution_mode=BROKER_DEMO; broker.enabled=true; broker_demo_enabled=true; live_trading=false; allow_real_trading=false; LIVE_ALLOWED=false; execution_mode!=LIVE -> NO VIOLATION
+- MT5 fxtm_demo_01 terminal64.exe PID=36460 (portable, C:\AIQuant\mt5_instances\fxtm_demo_01); MAGIC=90003; server=ForexTimeFXTM-Demo01 (DEMO)
+- LEDGER ledger/hermes_v2_ledger.jsonl: 12 lines; bad_json=0; dup_triples=0 (last evt 2026-09-11T13:09:29Z demo-calibration); per-run ledgers append-only
+- RUN ACTIVE run_id=V2-PAPER-20260919-145431-c5a1; run_status=RUNNING; market_open=false (weekend); cycle_result=MARKET_CLOSED_SKIP; 0 orders / 0 trades this window; missed_cycles=1
+- FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~3h/48h); V1/V3 untouched; REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only
