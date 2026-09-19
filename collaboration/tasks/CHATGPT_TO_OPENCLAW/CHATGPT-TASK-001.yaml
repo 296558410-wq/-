@@ -1,0 +1,40 @@
+# 由 ChatGPT 写入的任务文件（第一阶段机器任务总线）。OpenClaw 只读发现并领取执行。
+TASK_ID: CHATGPT-TASK-001
+TASK_TYPE: READONLY_HEALTHCHECK
+CREATED_BY: ChatGPT
+CREATED_AT: 2026-09-19T20:35:00+08:00
+PRIORITY: NORMAL
+STATUS: PROPOSED
+
+OBJECTIVE: >
+  对当前 GitHub/OpenClaw 协作链进行只读健康检查：确认仓库可读、baseline 保留、
+  协作层文件存在、远端无凭据/runtime、原始本地仓库未被触碰。
+
+SCOPE: >
+  READ ONLY。仅允许读 GitHub 与本地 repo；允许 OpenClaw 在 collaboration/ 下写结果与领取记录。
+
+READ_ONLY: true
+
+ALLOWED_PATHS:
+  - collaboration/
+
+FORBIDDEN_PATHS:
+  - research/hermes/trader_v1/
+  - research/hermes/trader_v2/
+  - research/hermes/trader_v3/
+
+SAFETY_CONSTRAINTS: >
+  不得下单/不得改交易系统/不得改 V1·V2·V3·Hermes/不得 force push/不得 amend/不得 squash。
+
+INPUTS: >
+  GitHub repo https://github.com/296558410-wq/-.git ；baseline 22f27df40f4f3b71fdbbcc9a92753c3bb2743241
+
+EXPECTED_OUTPUT: >
+  collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-001_RESULT.md （含 RESULT_SCHEMA 全部字段）
+
+ACCEPTANCE_CRITERIA: >
+  RESULT 文件出现在远端 main；包含 LOCAL_HEAD/REMOTE_HEAD/FINDINGS；BROKER_ORDER_SENT=FALSE；
+  V1/V2/V3/HERMES_UNTOUCHED=TRUE。
+
+REQUIRED_REPORT: collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-001_RESULT.md
+REQUIRED_COMMIT: yes — 正常 commit + push（禁止 force/amend/squash）
