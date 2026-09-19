@@ -130,6 +130,13 @@
 - **H01_UNTOUCHED=TRUE**。V1 零接触。原始仓 HEAD/历史未变。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-006B-RESULT.md`。
 
+## V2 Repair 007 (执行语义/幂等/crash/并发/ledger) — **INCOMPLETE（未改执行链）**
+
+- **DECISION** — 未对 V2 执行链写入代码：R6B-001..016 + SAME_DECISION_X100（跨进程/crash/重启/reconciliation）**无法单轮安全完成**；不为 PASS 造假，**不提交未回归的执行链代码/死代码**。
+- 交付：幂等键(`decision_id`)/状态机/crash 三态/ledger 唯一约束 **设计+计划**；核心项 DATA_GAP。
+- **H01_UNTOUCHED=TRUE**；V1 零接触；原仓 d22d9fb/249 未变。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_

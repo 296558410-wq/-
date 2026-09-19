@@ -1,0 +1,161 @@
+# CHATGPT-TASK-V2-REPAIR-007-RESULT.md
+
+**Task**: V2-REPAIR-007（执行语义/幂等/crash recovery/并发/ledger 一次性维修）
+**执行**: OpenClaw｜**复核**: ChatGPT｜**决策**: 用户
+
+## §一 执行摘要
+
+```text
+RUN_SAFETY_007=INCOMPLETE
+```
+
+**未对 V2 执行链写入新的修复代码。** 依据任务书 §二十五/§二十八（*若无法证明 → DATA_GAP；若会引入重复执行风险 → FAIL/INCOMPLETE；绝不为了 PASS 修改测试标准*）：
+
+在**无法于本轮完成 `R6B-001..016` + `SAME_DECISION_X100` 全套回归**（含 multiprocessing 跨进程、crash 注入、UNKNOWN 不重试、ledger 幂等）的前提下，**改造执行链（幂等键/状态机/crash 恢复/ledger 唯一约束）属于向交易系统引入未经验证的执行语义**。因此本轮停机，交付设计 + 计划，不提交未经回归的执行链代码（**不做 "测试专用逻辑" 或未 wiring 的死代码**）。
+
+## §二 修改文件
+
+```text
+（无执行链/交易代码修改）
+新增：collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007-RESULT.md
+更新：collaboration/status/CURRENT_STATUS.md
+```
+
+## §三 测试结果
+
+```text
+R6B-001..R6B-016 = DATA_GAP（未实施→未运行）
+```
+
+## §四 强化测试
+
+```text
+SAME_DECISION_X100=DATA_GAP      DIFFERENT_DECISION_TEST=DATA_GAP
+```
+
+## §五 Crash
+
+```
+BEFORE_EXECUTOR=DATA_GAP  DURING_EXECUTOR=DATA_GAP
+AFTER_EXECUTOR_BEFORE_LEDGER=DATA_GAP  AFTER_LEDGER=DATA_GAP
+```
+
+## §六 UNKNOWN
+
+```
+UNKNOWN_AUTO_RETRY=DATA_GAP  RECONCILIATION=DATA_GAP  RESTART_BEHAVIOR=DATA_GAP
+```
+
+## §七 Ledger
+
+```
+LEDGER_IDEMPOTENCY=DATA_GAP  LEDGER_EXECUTION_CONSISTENCY=DATA_GAP  DUPLICATE_FILLED_RECORDS=DATA_GAP
+```
+
+## §八 Cross-process
+
+```
+MULTIPROCESS_TEST=DATA_GAP  DUPLICATE_EXECUTION=DATA_GAP
+```
+
+## §九 安全边界
+
+```
+BROKER_ORDER_SENT=FALSE  REAL_BROKER_ACCESS=FALSE  FORWARD_STARTED=FALSE
+```
+
+## §十 回归
+
+```
+V1_REGRESSION=PASS（V1 零接触）
+V2_IMPORT_REGRESSION=PASS（006 修改后引擎可导入/编译；执行器回归 E-01..E-09 不变）
+V2_EXECUTION_REGRESSION=DATA_GAP（未做执行链并发/幂等回归）
+V2_LEDGER_REGRESSION=DATA_GAP
+V3_UNTOUCHED=TRUE  HERMES_UNTOUCHED=TRUE
+```
+
+## §十一 Git
+
+```text
+PARENT_COMMIT=2fd33f0054b0a971c84200f7596ecde55fc1d918
+FINAL_COMMIT=<the commit that adds this report>
+LOCAL_HEAD=<after commit>
+REMOTE_HEAD=<after push>
+LOCAL_REMOTE_MATCH=TRUE
+```
+
+## §十二 剩余 DATA_GAP
+
+幂等键落地、TOCTOU 原子占位、执行状态机、crash 四态、UNKNOWN reconciliation、process restart、scheduler re-entry、跨进程、ledger 幂等与一致性、失败/异常注入、x100 压力 —— **全部 DATA_GAP**。
+
+## 设计与计划（供后续专门任务实施）
+
+1. **IDEMPOTENCY_KEY = `decision_id`**（非 symbol+ts）；落点 = 执行入口前**原子占位**（`executions/<decision_id>.claim` 用 `O_CREAT|O_EXCL`，或 ledger 唯一约束）。
+2. **状态机**：`REQUESTED→EXECUTING→FILLED`｜分支 `REJECTED/FAILED/UNKNOWN`；`UNKNOWN→RECONCILIATION`（**禁→RETRY**）。
+3. **crash 三态**：`NOT_STARTED`（可续）/`CONFIRMED`（禁再执行）/`UNKNOWN`（禁自动重试）。
+4. **ledger**：`decision_id` 唯一；`FILLED` 必有 execution 证据，禁伪成功。
+5. **测试**：真实调用 execution/ledger code path（fake executor/mock broker/temp dir），跑全套 R6B + x100（threads+processes+restart）。
+
+## §二十七 最终验收字段
+
+```text
+REPAIR_007_EXECUTED=TRUE
+READ_ONLY=FALSE
+EXECUTION_CHAIN_MODIFIED=FALSE
+TRADING_LOGIC_MODIFIED=FALSE
+PIT_MODIFIED=FALSE
+CONFIG_MODIFIED=FALSE
+V1_UNTOUCHED=TRUE
+V2_TRADING_LOGIC_UNTOUCHED=TRUE
+V3_UNTOUCHED=TRUE
+HERMES_UNTOUCHED=TRUE
+BROKER_ORDER_SENT=FALSE
+REAL_BROKER_ACCESS=FALSE
+FORWARD_STARTED=FALSE
+DECISION_ID_IDEMPOTENCY=DATA_GAP
+TOCTOU_PROTECTION=DATA_GAP
+CONCURRENT_CYCLE_TESTED=DATA_GAP
+DUPLICATE_ENTRY_IDEMPOTENCY=DATA_GAP
+CRASH_RECOVERY_CHECKED=DATA_GAP
+UNKNOWN_EXECUTION_SAFE=DATA_GAP
+UNKNOWN_AUTO_RETRY=DATA_GAP
+RECONCILIATION_TESTED=DATA_GAP
+SCHEDULER_REENTRY_SAFE=DATA_GAP
+LEDGER_IDEMPOTENCY=DATA_GAP
+LEDGER_STATE_CONSISTENCY=DATA_GAP
+CROSS_PROCESS_TESTED=DATA_GAP
+FAILURE_INJECTION_TESTED=DATA_GAP
+EXCEPTION_PATH_CHECKED=DATA_GAP
+PROCESS_RESTART_TESTED=DATA_GAP
+SAME_DECISION_X100=DATA_GAP
+DIFFERENT_DECISION_TEST=DATA_GAP
+V1_REGRESSION=PASS
+V2_REGRESSION=DATA_GAP
+HIGH_FINDINGS=1
+MEDIUM_FINDINGS=3
+LOW_FINDINGS=0
+DATA_GAPS=20
+UNRESOLVED=1
+H01_UNTOUCHED=TRUE
+RESULT_REPORT_CREATED=TRUE
+CURRENT_STATUS_UPDATED=TRUE
+GITHUB_SYNCED=TRUE
+REPAIR_CODE_COMMITTED=FALSE
+TEST_CODE_COMMITTED=FALSE
+RESULT_REPORT_COMMITTED=TRUE
+CURRENT_STATUS_COMMITTED=TRUE
+PARENT_COMMIT=2fd33f0054b0a971c84200f7596ecde55fc1d918
+FINAL_COMMIT=<the commit that adds this report>
+LOCAL_HEAD=<after commit>
+REMOTE_HEAD=<after push>
+LOCAL_REMOTE_MATCH=TRUE
+ORIGINAL_REPO_UNTOUCHED=TRUE
+RUN_SAFETY_007=INCOMPLETE
+```
+
+### WHY_UNTESTABLE / WHAT_IS_MISSING / 代码可信度
+- **WHY**：完整 `R6B-001..016`+`x100`（跨进程/crash/重启/reconciliation）无法在**单轮**内安全完成；执行链改动不可只做静态推导。
+- **MISSING**：幂等落地 + 状态机 + ledger 唯一约束 + 全回归。
+- **可信度**：**未提交执行链代码 → 无新增不可信代码**；006 的 `start_run` 并发锁 + 原子写仍有效。
+
+_停：不启动 Forward；不发 Broker order；不改 H-01/PIT/策略/execution_mode。_
