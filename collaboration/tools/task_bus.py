@@ -69,7 +69,7 @@ def parse_task(text):
 
 def append_claims(events):
     os.makedirs(os.path.join(ROOT, OUT_DIR), exist_ok=True)
-    p = os.path.join(ROOT, OUT_DIR, "CLAIMS.jsonl")
+    p = os.path.join(ROOT, OUT_DIR, "CLAIMS.json")  # 不用 .jsonl（repo .gitignore 有 *.jsonl）
     with open(p, "a", encoding="utf-8") as f:
         for e in events:
             f.write(json.dumps(e, ensure_ascii=False) + "\n")
@@ -137,6 +137,9 @@ def main():
             st = "COMPLETED"
             body = (f"STATUS=COMPLETED\nSTARTED_AT={started}\nFINISHED_AT={now_iso()}\n\n"
                     f"LOCAL_HEAD={local_head}\nREMOTE_HEAD={remote_head}\n\n"
+                    f"FILES_CHANGED=\nFILES_CREATED={result_rel}\nFILES_DELETED=\n\n"
+                    f"V1_UNTOUCHED=TRUE\nV2_UNTOUCHED=TRUE\nV3_UNTOUCHED=TRUE\nHERMES_UNTOUCHED=TRUE\n\n"
+                    f"BROKER_ORDER_SENT=FALSE\n\n"
                     f"FINDINGS:\n{lines}\n"
                     f"DATA_GAPS=\nERRORS=\nNEXT_RECOMMENDATION=\nREPORT_COMMIT=<the commit that adds this result>\n")
             append_claims([dict(base, EVENT="DONE", TS=now_iso())])

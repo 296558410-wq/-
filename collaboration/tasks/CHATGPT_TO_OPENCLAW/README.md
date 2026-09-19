@@ -10,13 +10,14 @@
 ## OpenClaw 如何发现（自动，无需用户复制）
 - OpenClaw 定时任务 `collab-task-bus` 周期性执行 `collaboration/tools/task_bus.py --once`。
 - 该脚本 `git fetch origin`，读取 **origin/main** 上本目录的任务文件，发现 `STATUS: PROPOSED`。
-- **不覆盖原任务文件**；领取与状态变化记录在 `../OPENCLAW_TO_CHATGPT/CLAIMS.jsonl`（PROPOSED→QUEUED→RUNNING→DONE）。
+- **不覆盖原任务文件**；领取与状态变化记录在 `../OPENCLAW_TO_CHATGPT/CLAIMS.json`（PROPOSED→QUEUED→RUNNING→DONE）。
+  （注：不含 `.jsonl` 后缀——repo `.gitignore` 有 `*.jsonl`，避开以免误被忽略。）
 - 完成后在 `../OPENCLAW_TO_CHATGPT/<TASK_ID>_RESULT.md` 写结果，并 commit+push。
 - 通过"是否已存在 RESULT/CLAIM"避免重复执行。
 
 ## 状态集
 `PROPOSED` → `QUEUED` → `RUNNING` → `COMPLETED` / `REJECTED` / `CANCELLED`
-（任务文件本体保持 `PROPOSED` 不被改写；实际状态以 `CLAIMS.jsonl` 与 RESULT 为准。）
+（任务文件本体保持 `PROPOSED` 不被改写；实际状态以 `CLAIMS.json` 与 RESULT 为准。）
 
 ## 第一阶段范围
 只支持**只读**任务（`READ_ONLY: true`）。第一阶段**不做**：自动改交易代码、自动部署、自动下单、自动改策略/风控、自动合并交易 PR。

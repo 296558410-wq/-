@@ -4,9 +4,10 @@
 
 ## 产出
 - `<TASK_ID>_RESULT.md` —— 每个任务的结果（格式见 `RESULT_SCHEMA.md`）。
-- `CLAIMS.jsonl` —— 任务领取/状态流水（JSONL，一行一事件）。**这是运行态协作记录**，非交易 runtime。
+- `CLAIMS.json` —— 任务领取/状态流水（JSON Lines，一行一事件）。**这是运行态协作记录**，非交易 runtime。
+  （文件名不用 `.jsonl`，因为 repo `.gitignore` 含 `*.jsonl`。）
 
-## CLAIMS.jsonl 事件字段（§七）
+## CLAIMS.json 事件字段（§七）
 ```json
 {"TASK_ID":"...","EVENT":"DISCOVERED|CLAIMED|RUNNING|DONE|REJECTED","TS":"...","OPENCLAW_VERSION":"...","LOCAL_HEAD":"...","REMOTE_HEAD":"..."}
 ```
