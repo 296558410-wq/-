@@ -91,6 +91,14 @@
 - **DATA_GAP** — Agent1 逐字段 look-ahead/统一 cutoff、Agent2 PIT（COT/ETF/geopolitics）+ Replay 未来 evidence、Execution 负向测试、Failure Matrix、三实例运行期隔离。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-002-003-RESULT.md`。
 
+## V2 Audit 003 (执行隔离负向测试 mock + 失败门禁, 2026-09-19)
+
+- **FACT（mock 实测，零 broker）** — E-01 `PAPER`→Paper；E-02 `BROKER_DEMO+shadow`→Paper；E-03 `BROKER_DEMO+!shadow`→BrokerDemo；E-04..E-07 均 REFUSE；E-08/E-09 初始化失败**无跨执行器回落**。
+- **FACT** — 非 mt5 源 → `build_health` DEGRADED；a1 缺失 → FAIL。
+- **SUPPORTED** — 4 个 RUNNING 并存 = 旧 run 未 finalize 残留；ACTIVE/health 漂移 = start_run 覆盖 ACTIVE。
+- **DATA_GAP** — Agent1/Agent2/Replay PIT；F-03..F-14 失败矩阵；并发；三实例运行期隔离。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-003-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
