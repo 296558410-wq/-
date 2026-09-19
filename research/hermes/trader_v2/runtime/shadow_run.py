@@ -35,6 +35,11 @@ except Exception:  # noqa: BLE001
 
 RUNS = ROOT / "research" / "runs"
 ACTIVE = ROOT / "state" / "runs" / "ACTIVE.json"
+START_LOCK = ROOT / "state" / "runs" / ".start_run.lock"   # REPAIR-006
+try:
+    import atomic_io  # REPAIR-006: 原子写 + 跨进程 Run 锁
+except Exception:  # noqa: BLE001
+    atomic_io = None
 CERT = ROOT / "state" / "FORWARD_VALIDATION_ALLOWED"
 SHADOW_FLAG = ROOT / "state" / "SHADOW_ALLOWED"
 DEFAULT_MINUTES = 1440
@@ -127,6 +132,9 @@ def _load(p, d=None):
 
 
 def _write(p, obj):
+    # REPAIR-006: 原子写（临时文件 + fsync + os.replace），防半写 JSON 损坏
+    if atomic_io is not None:
+        return atomic_io.write_atomic(p, obj)
     Path(p).parent.mkdir(parents=True, exist_ok=True)
     Path(p).write_text(json.dumps(obj, indent=1, ensure_ascii=False), encoding="utf-8")
 
@@ -166,14 +174,22 @@ def start_run(minutes=DEFAULT_MINUTES, market_data_source="XAUUSD (router: mt5�
            "execution_mode": ADP.execution_mode_of(), "symbol": "XAUUSD", "timezone": "UTC",
            "config_hash": sha_file(ROOT / "config" / "v2_config.json"), "code_commit": code_commit(),
            "market_data_source": market_data_source, "frozen": True, **versions()}
-    run_dir(rid).mkdir(parents=True, exist_ok=True)
-    _write(run_dir(rid) / "run_manifest.json", man)
-    _write(run_dir(rid) / "RUN_META.json", {"shadow": bool(shadow), "execution_mode": ("PAPER" if shadow else ADP.execution_mode_of()),
-                                             "created_utc": iso(now), "note": "shadow=PAPER/no-broker" if shadow else ""})
-    _write(ACTIVE, {"run_id": rid, "start_utc": iso(now), "end_utc": iso(end), "stopped": False})
-    _write(state_path(rid), {"run_id": rid, "status": "RUNNING", "windows": {}, "counters": _zero_counters(),
-                             "failures": {"agent1": 0, "agent2": 0, "hermes": 0, "ledger": 0, "restarts": 0},
-                             "last_decision": None, "blocked": None})
+    # REPAIR-006: 跨进程互斥 + 拒绝覆盖活跃 run（防并发 start_run 生成两个有效 ACTIVE）
+    import contextlib
+    _lock = atomic_io.RunLock(START_LOCK) if atomic_io is not None else contextlib.nullcontext()
+    with _lock:
+        act = _load(ACTIVE, {}) or {}
+        if act.get("run_id") and not act.get("stopped") and run_dir(act["run_id"]).exists():
+            if (_load(state_path(act["run_id"]), {}) or {}).get("status") == "RUNNING":
+                raise RuntimeError(f"REFUSE_TO_START: active run exists ({act['run_id']})")
+        run_dir(rid).mkdir(parents=True, exist_ok=True)
+        _write(run_dir(rid) / "run_manifest.json", man)
+        _write(run_dir(rid) / "RUN_META.json", {"shadow": bool(shadow), "execution_mode": ("PAPER" if shadow else ADP.execution_mode_of()),
+                                                 "created_utc": iso(now), "note": "shadow=PAPER/no-broker" if shadow else ""})
+        _write(ACTIVE, {"run_id": rid, "start_utc": iso(now), "end_utc": iso(end), "stopped": False})
+        _write(state_path(rid), {"run_id": rid, "status": "RUNNING", "windows": {}, "counters": _zero_counters(),
+                                 "failures": {"agent1": 0, "agent2": 0, "hermes": 0, "ledger": 0, "restarts": 0},
+                                 "last_decision": None, "blocked": None})
     return rid
 
 

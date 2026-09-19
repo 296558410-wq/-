@@ -115,13 +115,13 @@
 - 结论：**NOT READY FOR FORMAL FORWARD**（H-01 仍在，风险等同 BLOCKED）。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-VALIDATION-005-RESULT.md`。
 
-## V2 Repair 006 (运行安全修复, 2026-09-19) — **INCOMPLETE（未写入代码）**
+## V2 Repair 006 (运行安全修复, 2026-09-19) — 部分完成
 
-- **DECISION** — 本轮**未修改 trader_v2 代码**：并发锁/幂等/崩溃恢复/原子写属高回归风险改造，需专门可迭代任务 + 完整 R6-001..R6-014 回归；在无法完整回归前不实施，以免向交易系统引入新缺陷。
-- 已交付：问题确认 + 具体修复设计（P1..P6）+ 不实施声明；核心项 DATA_GAP。
-- **H01_UNTOUCHED=TRUE**（execution_mode/broker flags 未改）。
-- `V1_REGRESSION=PASS`（无代码改动，V1 零接触）；原始仓 d22d9fb/249 未变。
-- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-006-RESULT.md`。
+- **已实施（授权范围）**：`runtime/atomic_io.py`(新) + `shadow_run.py`(`_write` 原子写 + `start_run` 加跨进程 `RunLock` + 拒绝覆盖 RUNNING run)。
+- **回归**：`tests/test_run_lifecycle_fix.py` **3/3 PASS**（R6-001/R6-002 并发/R6-012 原子写）；执行器回归 E-01..E-09 不变；V1 零接触。
+- **仍 DATA_GAP**：concurrent cycle / duplicate idempotency / crash recovery / UNKNOWN / scheduler re-entry / ledger 一致性。
+- **H01_UNTOUCHED=TRUE**（execution_mode/broker flags 未改）。`RUN_SAFETY_REPAIR=INCOMPLETE`。
+- 代码+测试+报告已同步至 GitHub 协作仓。详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-006-RESULT.md`。
 
 ---
 
