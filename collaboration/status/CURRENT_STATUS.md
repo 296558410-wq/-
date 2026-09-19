@@ -82,6 +82,15 @@
 - **DATA_GAP** — Agent1 look-ahead/stale、Agent2 PIT、机会发现阈值、风险门绕过、负向注入矩阵、Ledger/Replay 全量、G3 全量统计，均待独立只读深挖。
 - 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-FULL-AUDIT-RESULT.md`。
 
+## V2 Audit 002/003 (穿透：时序 + PIT + 执行隔离, 2026-09-19)
+
+- **FACT** — Agent1 有显式 look-ahead 防护（`market_data.py:165` 剔除未收盘 bar；`validate.py` 拒未来 bar）；新鲜度阈值存在（`context.FRESH_RULES` / `cache`）。
+- **FACT** — 当前 ACTIVE 运行：non-shadow + BROKER_DEMO（若 TRADE → 真实 demo 执行器）。
+- **FACT** — 同时有 **4 个 run** `status=RUNNING`（仅 1 个 ACTIVE）。
+- **SUPPORTED** — ACTIVE/health 漂移根因：`start_run` 覆盖 ACTIVE 而无对应 cycle。
+- **DATA_GAP** — Agent1 逐字段 look-ahead/统一 cutoff、Agent2 PIT（COT/ETF/geopolitics）+ Replay 未来 evidence、Execution 负向测试、Failure Matrix、三实例运行期隔离。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-AUDIT-002-003-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
