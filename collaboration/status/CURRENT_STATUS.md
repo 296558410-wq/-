@@ -73,6 +73,15 @@
 - **FACT** — 当前无已批准的研究/交易动作
 - 说明：任何 research → trading 的改变都必须经用户明确决策（见 `decisions/DECISION_LOG.md`）。
 
+## V2 Full Audit (V2-FULL-AUDIT-001, 2026-09-19)
+
+- **FACT** — 当前运行配置 `execution_mode=BROKER_DEMO`（broker.enabled/broker_demo_enabled=true，live_trading=false）；非 shadow run 使用 `BrokerDemoExecutor`。`BROKER_ORDER_SENT=FALSE` 目前成立仅因无合格周期执行。
+- **FACT** — MT5-only 门禁存在：`hermes/context.py::_trading_source_status` 对非 mt5 行情源判 DEGRADED → WAIT。
+- **OBSERVATION** — 状态漂移：`v2_run_health.run_id` ≠ `ACTIVE.json.run_id`；ACTIVE run 计数全 0；09-19 出现数个短命 run。
+- **SUPPORTED** — Paper/Broker 隔离依赖配置而非硬不变量（G3 事故印证）。
+- **DATA_GAP** — Agent1 look-ahead/stale、Agent2 PIT、机会发现阈值、风险门绕过、负向注入矩阵、Ledger/Replay 全量、G3 全量统计，均待独立只读深挖。
+- 详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-FULL-AUDIT-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
