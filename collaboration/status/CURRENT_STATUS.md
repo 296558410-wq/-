@@ -1,0 +1,78 @@
+# CURRENT_STATUS.md
+
+> 项目协作层的当前事实快照。**禁止把 hypothesis 写成 fact。**
+> 每条状态须标注分类：`FACT` / `OBSERVATION` / `HYPOTHESIS` / `UNRESOLVED` / `DATA_GAP`。
+
+---
+
+## Meta
+
+- **Last Updated**: 2026-09-19 (GMT+8)
+- **GitHub Repository**: https://github.com/296558410-wq/-.git (Public)
+- **Maintained By**: OpenClaw (本地执行)｜Audited By: ChatGPT (独立审计)｜Decided By: 用户
+
+## GitHub Baseline
+
+- **FACT** — Baseline commit: `22f27df40f4f3b71fdbbcc9a92753c3bb2743241`
+- **FACT** — Message: `chore: establish clean research baseline`
+- **FACT** — Branch: `main`，commit count = 1（该 commit 经 ChatGPT 独立复核）
+- **FACT** — 后续协作层提交在此 commit 之上叠加，不修改/重写/删除该 commit，不使用 force push
+
+## Original Local Repository
+
+- **FACT** — 原始项目路径：`C:\AIQuant`
+- **FACT** — 原始仓库 HEAD: `d22d9fb`，commit count = 249
+- **FACT** — 本协作层任务不修改原始仓库历史
+- **FACT** — GitHub 发布使用独立 staging 仓：`C:\AIQuant\github_publish_staging`
+
+## V1 Status
+
+- **FACT** — 路径：`C:\AIQuant\research\hermes\trader_v1`
+- **FACT** — 本任务中 V1 = READ ONLY（未修改）
+
+## V2 Status
+
+- **FACT** — 路径：`C:\AIQuant\research\hermes\trader_v2`
+- **FACT** — 阶段：Shadow / Paper（非实盘）
+- **FACT** — 本任务中 V2 = READ ONLY（未修改）
+- **OBSERVATION** — MT5 为 V2 唯一交易决策行情源；MT5 异常须安全 WAIT（不 fallback 交易）
+
+## V3 Status
+
+- **FACT** — 路径：`C:\AIQuant\research\hermes\trader_v3` 与 Hermes V3 workspace `C:\Users\surface\HermesWorkspaces\v3`
+- **FACT** — 本任务中 V3 = READ ONLY（未修改）
+
+## Hermes Status
+
+- **FACT** — 角色：交易智能 / XAUUSD 决策智能
+- **FACT** — 本任务中 Hermes = READ ONLY（未修改）
+- **UNRESOLVED** — Hermes 各版本能力/边界的量化结论未在本层裁定
+
+## Research Status
+
+- **FACT** — 研究方法遵循 §7「研究真实性规则」与 §8「结论分类」
+- **UNRESOLVED** — 各候选机制/结论的最终评级（SUPPORTED/…）待后续研究任务产出
+
+## Collaboration Layer Status
+
+- **FACT** — 本层为 v1：角色定义、任务协议、报告协议、决策日志、状态快照、协作文档
+- **FACT** — 目录：`collaboration/{status,decisions,tasks/CHATGPT_TO_OPENCLAW,tasks/OPENCLAW_TO_CHATGPT}`
+
+## Known Risks
+
+- **OBSERVATION** — 误把文档关键词（token/password 等）当成凭据的风险 → 需按"值 vs 词"区分
+- **OBSERVATION** — 运行态/私密数据误入 GitHub 的风险 → 提交前强制扫描与边界检查
+- **HYPOTHESIS** — 若不强制隔离，研究结论可能被误升级为生产行为 → 已以 §9 规则约束
+
+## Known Data Gaps
+
+- **DATA_GAP** — 记录当前已知、未解决的数据缺口（示例：部分宏观/行情源缺失）。具体清单以 V2 运行审计为准，本快照不臆造。
+
+## Next Approved Actions
+
+- **FACT** — 当前无已批准的研究/交易动作
+- 说明：任何 research → trading 的改变都必须经用户明确决策（见 `decisions/DECISION_LOG.md`）。
+
+---
+
+_更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
