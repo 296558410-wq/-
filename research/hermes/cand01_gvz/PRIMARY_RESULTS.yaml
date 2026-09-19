@@ -1,0 +1,17 @@
+# PRIMARY_RESULTS / INCREMENTAL_INFORMATION / OOS_RESULTS — CAND-01（RESULTS.json + RESULTS_SUPP.json）
+primary_results:
+  raw_vs_pointlag_baseline:
+    h5: {delta_r2_oos: 0.237, DM_HAC_t: 2.72, n_oos: 368}
+    h10: {delta_r2_oos: 0.292, DM_HAC_t: 2.85, n_oos: 363}
+    h20: {delta_r2_oos: 0.318, DM_HAC_t: 2.92, n_oos: 353}
+  note: "原始 B vs A 看似强, 但 A(点滞后)在 5-20d 目标上 R²≈0 → 该增益大部分是'平滑 vol 水平'载体效应"
+incremental_information:
+  formal_increment_vs_A2_smoothing_controls:
+    h5: {delta_r2_oos: 0.074}
+    h10: {delta_r2_oos: 0.100}
+    h20: {delta_r2_oos: 0.122}
+  interpretation: "控本地平滑 RV(21/63d)后 GVZ 残余增量 +0.07..+0.12 ΔR² OOS——存在但中等偏小; 未对 A2 对照做块自举(注记: 重叠窗推断弱于全量级)"
+  cumulation: "与 gold_options 1-2d 结果(+0.017/+0.062, HAC t≈1.0/1.79)方向一致 → 跨 1-20d 一致的正残余, 但幅度小且 regime 相关"
+oos_results:
+  split_note: "expanding walk-forward(全样本 OOS); 另 2025+ 固定段在 gold_options t1/t2 曾报告(符号保持)"
+  verdict: "残余增量在 OOS 内保持正号(未消失); 但幅度不足以支持强声称(KILL-03 未触发/部分)"

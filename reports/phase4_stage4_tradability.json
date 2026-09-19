@@ -1,0 +1,79 @@
+{
+  "asia|tick_imb_r120|60": {
+    "n_days": 24,
+    "pos_day_frac": 0.583,
+    "pos_day_frac_drop2": 0.636,
+    "median_day_ic": 0.1411,
+    "gross_sharpe": -15.33,
+    "net_sharpe_1x": -15.66,
+    "cost_total": 0.0014,
+    "n_trades": 16,
+    "n_oos": 3361
+  },
+  "london|tick_imb_r120|60": {
+    "n_days": 24,
+    "pos_day_frac": 0.458,
+    "pos_day_frac_drop2": 0.5,
+    "median_day_ic": -0.1201,
+    "gross_sharpe": 9.0,
+    "net_sharpe_1x": 8.7,
+    "cost_total": 0.0013,
+    "n_trades": 16,
+    "n_oos": 2880
+  },
+  "london_ny_overlap|tick_imb_r30|30": {
+    "n_days": 24,
+    "pos_day_frac": 0.458,
+    "pos_day_frac_drop2": 0.5,
+    "median_day_ic": -0.0699,
+    "gross_sharpe": -8.93,
+    "net_sharpe_1x": -9.73,
+    "cost_total": 0.0027,
+    "n_trades": 36,
+    "n_oos": 2289
+  },
+  "ny|z_tick_count_120|30": {
+    "n_days": 23,
+    "pos_day_frac": 0.565,
+    "pos_day_frac_drop2": 0.619,
+    "median_day_ic": 0.1333,
+    "gross_sharpe": 3.42,
+    "net_sharpe_1x": 2.62,
+    "cost_total": 0.0026,
+    "n_trades": 34,
+    "n_oos": 2760
+  },
+  "ny|z_tick_count_120|60": {
+    "n_days": 23,
+    "pos_day_frac": 0.826,
+    "pos_day_frac_drop2": 0.905,
+    "median_day_ic": 0.0934,
+    "gross_sharpe": -12.06,
+    "net_sharpe_1x": -12.45,
+    "cost_total": 0.0013,
+    "n_trades": 17,
+    "n_oos": 2760
+  },
+  "ny|spread|10": {
+    "n_days": 23,
+    "pos_day_frac": 0.652,
+    "pos_day_frac_drop2": 0.714,
+    "median_day_ic": 0.0519,
+    "gross_sharpe": 9.25,
+    "net_sharpe_1x": 9.24,
+    "cost_total": 0.0,
+    "n_trades": 1,
+    "n_oos": 2760
+  },
+  "ny|spread|15": {
+    "n_days": 23,
+    "pos_day_frac": 0.696,
+    "pos_day_frac_drop2": 0.762,
+    "median_day_ic": 0.0575,
+    "gross_sharpe": 9.25,
+    "net_sharpe_1x": 9.24,
+    "cost_total": 0.0,
+    "n_trades": 1,
+    "n_oos": 2760
+  }
+}

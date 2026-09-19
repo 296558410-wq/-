@@ -1,0 +1,46 @@
+# NOVEL MECHANISMS（本轮真正的新机制候选 — 非凑数）
+# 生成：2026-09-05 · HERMES-13 · 只收 material 级、非重复的。
+
+mechanisms:
+  - id: NM-01
+    flag: "refinement"
+    title: "黄金 VRP 有真实收益预测力（非'不可及 carry'）"
+    claim: "黄金波动率风险溢价（隐含-已实现波动）正向预测贵金属未来收益，robust to controls（含股票 VRP、过去收益）"
+    source: "BIS Working Paper 619; Central Bank of Brazil wps455, wps479"
+    market_venue: "黄金期权/期货（贵金属）"
+    mechanism: "风险厌恶变化 → 期权快贴现 → VRP 高 → 未来贵金属收益正（月度 horizon）"
+    evidence_grade: E3
+    how_it_challenges_map: "我 HERMES-04 把黄金 VRP 标为'尾部风险 carry、DATA_GAP、不可收割'——框定偏负面。BIS 证据显示它有信息含量（预测贵金属收益），不只 carry"
+    caveat: "月度 horizon；预测力 restricted to precious metals（控变量后）；是 options 层构造"
+    xauusd_relevance: "中-高"
+    value: "REFINEMENT"
+
+  - id: NM-02
+    flag: "novel"
+    title: "黄金期权结构与股票根本不同（demand vol skew, 无 leverage effect）"
+    claim: "黄金 IV-收益关系为正（demand-driven vol skew），与股票的负（leverage）不同；黄金无 leverage effect"
+    source: "J. Futures Markets 'Return-Implied Volatility Relation for Commodity ETFs' (2014); SN Bus Econ (2021)"
+    market_venue: "黄金 ETF(GLD) 期权; 黄金期货期权"
+    mechanism: "黄金避险需求 → 右尾/波动需求主导 → 正 IV-收益关系（与股票投资型 skew 相反）"
+    evidence_grade: E3
+    how_it_challenges_map: "HERMES-04 我用 Muravyev(JFE 2025)的'期权 IV=借券费代理'批评降级黄金期权信息——但 Muravyev 针对股票（有卖空约束）。黄金结构不同（demand skew、无同构卖空约束）→ 该批评不能干净转移到黄金"
+    caveat: "结构差异明确，但'黄金 IV 是否有可交易信息'仍未测"
+    xauusd_relevance: "高"
+    value: "NEW"
+
+  - id: NM-03
+    flag: "refinement"
+    title: "黄金期货在日内价格发现领先现货（time-varying）"
+    claim: "黄金期货 global lead in price discovery & volatility spillover；但 2016-18 在 NY/Shanghai ETF 和现货挑战期货领先"
+    source: "Sehgal, Sobti, Diesting (2021), J. Futures Markets 'Who leads in intraday gold price discovery'"
+    market_venue: "COMEX/TOCOM/MCX/Shanghai 黄金期货 vs 现货/ETF"
+    evidence_grade: E3
+    how_it_challenges_map: "KD-U05 从'COMEX 套利链可能保留'细化到'期货领先现货是时变价格发现'——直接证据"
+    caveat: "是同期价格发现份额（信息流向），非可交易滞后信号；跨 venue 速度要求高于我们能及"
+    xauusd_relevance: "中"
+    value: "REFINEMENT"
+
+novelty_boundary:
+  - "NM-01 不是'黄金 VRP=alpha'——是改可研究性认知（信息含量 vs 纯 carry）"
+  - "NM-02 是机制差异（结构不同），不是'黄金 IV 预测方向'——那仍未测"
+  - "NM-03 是价格发现份额，非可交易 lead-lag（与 rahulsp 2026 不冲突：那是 DXY→黄金预测性，这是期货/现货同期发现）"

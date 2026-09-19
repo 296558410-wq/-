@@ -1,0 +1,14 @@
+# V2 runtime caches (large raw payloads) — not versioned
+data_cache/
+tests/_tmp/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# V2 Module5 runtime run artifacts (data, not code) — not versioned
+research/runs/
+state/runs/
+logs/
+state/snapshots/
+state/*.jsonl

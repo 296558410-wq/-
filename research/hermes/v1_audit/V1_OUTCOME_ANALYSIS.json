@@ -1,0 +1,421 @@
+{
+ "schema": "v1_outcome_analysis/1",
+ "ts_utc": "2026-09-17T12:41:19.874410+00:00",
+ "source": "A(live_fxtm)",
+ "entry_reference_rule": "T_signal 时刻最后一个 <= T_signal 的 tick (mid)",
+ "gap_rule": "区间内 >60s 缺口 -> DATA_GAP（不插值）",
+ "by_horizon": {
+  "1000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0839,
+    "median": 0.06,
+    "win_rate": 0.617,
+    "perm_p_two_sided": 0.028
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.0839,
+    "median": -0.06,
+    "win_rate": 0.383,
+    "perm_p_two_sided": 0.028
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0039,
+    "median": 0.015,
+    "win_rate": 0.532,
+    "perm_p_two_sided": 0.9235
+   }
+  },
+  "2000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.1184,
+    "median": 0.14,
+    "win_rate": 0.617,
+    "perm_p_two_sided": 0.021
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.1184,
+    "median": -0.14,
+    "win_rate": 0.383,
+    "perm_p_two_sided": 0.021
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.1199,
+    "median": 0.1,
+    "win_rate": 0.66,
+    "perm_p_two_sided": 0.0155
+   }
+  },
+  "5000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.2066,
+    "median": 0.135,
+    "win_rate": 0.638,
+    "perm_p_two_sided": 0.005
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.2066,
+    "median": -0.135,
+    "win_rate": 0.362,
+    "perm_p_two_sided": 0.005
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0611,
+    "median": 0.035,
+    "win_rate": 0.553,
+    "perm_p_two_sided": 0.4203
+   }
+  },
+  "10000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.2139,
+    "median": 0.11,
+    "win_rate": 0.638,
+    "perm_p_two_sided": 0.0195
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.2139,
+    "median": -0.11,
+    "win_rate": 0.319,
+    "perm_p_two_sided": 0.0195
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.199,
+    "median": -0.08,
+    "win_rate": 0.383,
+    "perm_p_two_sided": 0.0375
+   }
+  },
+  "30000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0898,
+    "median": -0.04,
+    "win_rate": 0.426,
+    "perm_p_two_sided": 0.5792
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.0898,
+    "median": 0.04,
+    "win_rate": 0.553,
+    "perm_p_two_sided": 0.5792
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0287,
+    "median": 0.04,
+    "win_rate": 0.532,
+    "perm_p_two_sided": 0.8526
+   }
+  },
+  "60000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.2185,
+    "median": -0.25,
+    "win_rate": 0.447,
+    "perm_p_two_sided": 0.4378
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.2185,
+    "median": 0.25,
+    "win_rate": 0.553,
+    "perm_p_two_sided": 0.4378
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.2683,
+    "median": 0.04,
+    "win_rate": 0.511,
+    "perm_p_two_sided": 0.3003
+   }
+  },
+  "180000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.2098,
+    "median": -0.11,
+    "win_rate": 0.489,
+    "perm_p_two_sided": 0.6522
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.2098,
+    "median": 0.11,
+    "win_rate": 0.511,
+    "perm_p_two_sided": 0.6522
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.0926,
+    "median": 0.135,
+    "win_rate": 0.532,
+    "perm_p_two_sided": 0.8386
+   }
+  },
+  "300000": {
+   "computable": 47,
+   "v1": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.0915,
+    "median": -0.79,
+    "win_rate": 0.447,
+    "perm_p_two_sided": 0.8381
+   },
+   "reverse": {
+    "n": 47,
+    "mean_bp_of_usd_raw": 0.0915,
+    "median": 0.79,
+    "win_rate": 0.532,
+    "perm_p_two_sided": 0.8381
+   },
+   "random": {
+    "n": 47,
+    "mean_bp_of_usd_raw": -0.0662,
+    "median": -0.53,
+    "win_rate": 0.447,
+    "perm_p_two_sided": 0.8626
+   }
+  },
+  "900000": {
+   "computable": 46,
+   "v1": {
+    "n": 46,
+    "mean_bp_of_usd_raw": -0.645,
+    "median": -0.4375,
+    "win_rate": 0.435,
+    "perm_p_two_sided": 0.4548
+   },
+   "reverse": {
+    "n": 46,
+    "mean_bp_of_usd_raw": 0.645,
+    "median": 0.4375,
+    "win_rate": 0.565,
+    "perm_p_two_sided": 0.4548
+   },
+   "random": {
+    "n": 46,
+    "mean_bp_of_usd_raw": -0.01,
+    "median": 0.8,
+    "win_rate": 0.565,
+    "perm_p_two_sided": 0.9905
+   }
+  }
+ },
+ "raw_N": 57,
+ "gap_note": "未使用 T_signal 之后 tick 作为 entry reference",
+ "side_LONG": {
+  "n": 8,
+  "2000": {
+   "n": 7,
+   "mean_bp_of_usd_raw": 0.38,
+   "median": 0.34,
+   "win_rate": 0.857,
+   "perm_p_two_sided": 0.03
+  },
+  "30000": {
+   "n": 7,
+   "mean_bp_of_usd_raw": 0.4893,
+   "median": -0.04,
+   "win_rate": 0.429,
+   "perm_p_two_sided": 0.2584
+  },
+  "180000": {
+   "n": 7,
+   "mean_bp_of_usd_raw": 0.9786,
+   "median": -0.11,
+   "win_rate": 0.429,
+   "perm_p_two_sided": 0.2584
+  },
+  "900000": {
+   "n": 7,
+   "mean_bp_of_usd_raw": 0.1071,
+   "median": -0.47,
+   "win_rate": 0.286,
+   "perm_p_two_sided": 1.0
+  }
+ },
+ "side_SHORT": {
+  "n": 49,
+  "2000": {
+   "n": 40,
+   "mean_bp_of_usd_raw": 0.0726,
+   "median": 0.115,
+   "win_rate": 0.575,
+   "perm_p_two_sided": 0.1564
+  },
+  "30000": {
+   "n": 40,
+   "mean_bp_of_usd_raw": 0.0199,
+   "median": -0.0325,
+   "win_rate": 0.425,
+   "perm_p_two_sided": 0.9095
+  },
+  "180000": {
+   "n": 40,
+   "mean_bp_of_usd_raw": 0.0753,
+   "median": -0.0325,
+   "win_rate": 0.5,
+   "perm_p_two_sided": 0.8766
+  },
+  "900000": {
+   "n": 39,
+   "mean_bp_of_usd_raw": -0.78,
+   "median": -0.3,
+   "win_rate": 0.462,
+   "perm_p_two_sided": 0.4133
+  }
+ },
+ "final_WIN": {
+  "n": 30,
+  "1000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.0788,
+   "median": 0.06,
+   "win_rate": 0.615,
+   "perm_p_two_sided": 0.1449
+  },
+  "2000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.079,
+   "median": 0.09,
+   "win_rate": 0.577,
+   "perm_p_two_sided": 0.2704
+  },
+  "5000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.2212,
+   "median": 0.05,
+   "win_rate": 0.615,
+   "perm_p_two_sided": 0.045
+  },
+  "10000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.2077,
+   "median": 0.105,
+   "win_rate": 0.538,
+   "perm_p_two_sided": 0.1304
+  },
+  "30000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.1946,
+   "median": 0.125,
+   "win_rate": 0.5,
+   "perm_p_two_sided": 0.3283
+  },
+  "60000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": -0.27,
+   "median": -0.235,
+   "win_rate": 0.462,
+   "perm_p_two_sided": 0.4928
+  },
+  "180000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": 0.0162,
+   "median": -0.0275,
+   "win_rate": 0.5,
+   "perm_p_two_sided": 0.98
+  },
+  "300000": {
+   "n": 26,
+   "mean_bp_of_usd_raw": -0.1469,
+   "median": -0.815,
+   "win_rate": 0.462,
+   "perm_p_two_sided": 0.7856
+  },
+  "900000": {
+   "n": 25,
+   "mean_bp_of_usd_raw": -1.674,
+   "median": -1.82,
+   "win_rate": 0.44,
+   "perm_p_two_sided": 0.1884
+  }
+ },
+ "final_LOSS": {
+  "n": 27,
+  "1000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.0902,
+   "median": 0.03,
+   "win_rate": 0.619,
+   "perm_p_two_sided": 0.1154
+  },
+  "2000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.1671,
+   "median": 0.17,
+   "win_rate": 0.667,
+   "perm_p_two_sided": 0.016
+  },
+  "5000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.1886,
+   "median": 0.25,
+   "win_rate": 0.667,
+   "perm_p_two_sided": 0.032
+  },
+  "10000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.2217,
+   "median": 0.11,
+   "win_rate": 0.762,
+   "perm_p_two_sided": 0.084
+  },
+  "30000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": -0.04,
+   "median": -0.09,
+   "win_rate": 0.333,
+   "perm_p_two_sided": 0.8891
+  },
+  "60000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": -0.1548,
+   "median": -0.25,
+   "win_rate": 0.429,
+   "perm_p_two_sided": 0.7061
+  },
+  "180000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.4495,
+   "median": -0.11,
+   "win_rate": 0.476,
+   "perm_p_two_sided": 0.4808
+  },
+  "300000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": -0.0229,
+   "median": -0.51,
+   "win_rate": 0.429,
+   "perm_p_two_sided": 0.9765
+  },
+  "900000": {
+   "n": 21,
+   "mean_bp_of_usd_raw": 0.58,
+   "median": -0.3,
+   "win_rate": 0.429,
+   "perm_p_two_sided": 0.5917
+  }
+ }
+}

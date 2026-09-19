@@ -1,0 +1,151 @@
+# REPRESENTATION REGISTRY（V1 · 2026-09-05 · Phase 1 冻结 · 描述性研究）
+# 记录字段：name/formula/inputs/timescale/normalization/rationale/source/expected meaning/
+# limitations/redundancy/tests/result/status。
+# status: NEW | TESTED | SUPPORTED_DESCRIPTIVELY | REDUNDANT | UNSTABLE | UNKNOWN
+# 纪律：成员公式注册后不因结果增删；新成员/新族 = 新注册（V2）。禁"最优表示"搜索。
+meta:
+  task: "XAUUSD MARKET STATE REPRESENTATION"
+  registry_version: "REPREG_V1"
+  frozen: true
+  freeze_note: "Phase-1 freeze; evaluation criteria & stability weights in MARKET_REPRESENTATION_FRAMEWORK.md"
+  phase_status: PHASE1_FROZEN_SEALED (2026-09-05 20:59 人工裁决)
+  phase2_gate: "Phase 2 (registry candidates -> descriptive computation -> Stability A-H ->
+    redundancy/re-encoding -> register -> STOP) requires explicit human release; currently SEALED"
+  candidate_limits: {families_max: 12, members_per_family_max: 4, cluster_k_max: 12,
+                     distance_metrics: ["euclidean_std", "correlation", "dtw_eventtime"]}
+
+baselines:
+  - id: R-B0
+    name: raw price features
+    formula: "各尺度：log-close 序列、bar/窗口收益 r、|r|、累计收益（滞后窗）"
+    inputs: [close, open-high-low]
+    timescale: [M1, M5, H1, tick-agg]
+    normalization: none
+    rationale: "基准 0：原始价格信息（含 past-return 重编码风险对照）"
+    expected_meaning: "参考系"
+    status: NEW
+  - id: R-B1
+    name: simple standardized features
+    formula: "z(r)=(r-mean_t)/sd_t（trailing）；log(|r|) 标准化；range/close"
+    inputs: [r, range]
+    timescale: [M1, M5, H1]
+    normalization: trailing z
+    rationale: "基准 1：简单标准化"
+    status: NEW
+  - id: R-B2
+    name: volatility-normalized
+    formula: "r_n=r/sigma_t；path_n=path/mean_t(path)；z 变体"
+    inputs: [r, path, sigma]
+    timescale: [M1, M5, H1]
+    normalization: "trailing sigma / mean (<= t-1)"
+    rationale: "基准 2：vol-relative（Portability 已提示频率可比性较好，观察非选型）"
+    status: NEW
+  - id: R-B3
+    name: path-normalized
+    formula: "eff=|r|/path；recovery=|retrace|/|move|；consistency 份额"
+    inputs: [r, path, excursion]
+    timescale: [M1, M5, H1]
+    normalization: path-relative
+    rationale: "基准 3：path/efficiency 系"
+    status: NEW
+  - id: R-B4
+    name: multi-dim state vector (baseline composite)
+    formula: "v_t=[vol_f, rvol_ratio, activity_pct, eff, close_pos, spread_state] (逐尺度)"
+    inputs: [close, volume/tick_volume, spread]
+    timescale: [M1, M5, H1]
+    normalization: per-dim trailing z (<= t-1)
+    rationale: "基准 4：复合状态向量（后续候选 vs 此基准比稳定/语义增量）"
+    expected_meaning: "风险-活动-结构三维基线"
+    status: NEW
+
+candidate_families:
+  - id: C1
+    name: price-displacement family
+    members:
+      - {name: disp_z, formula: "z_t = (p_t - mean_L(p))/sd_L(p), L=trailing 500 bars", timescale: [M1, M5, H1], status: NEW}
+    rationale: "位移幅度（vol-relative）；注意与 momentum 冗余检查"
+  - id: C2
+    name: range/compression family
+    members:
+      - {name: range_frac, formula: "(high-low)/close", timescale: [M1, M5, H1], status: NEW}
+      - {name: comp_ratio, formula: "range_frac / median_t20(range_frac)", timescale: [M1, M5, H1], status: NEW}
+    rationale: "压缩/扩张结构（P5 规则曾自限——本族为连续量，非阈值事件）"
+  - id: C3
+    name: realized-vol family
+    members:
+      - {name: rv_ratio, formula: "sigma_20/sigma_200", timescale: [M1, M5, H1], status: NEW}
+      - {name: rv_level, formula: "sigma_L log-ret", timescale: [M1, M5, H1], status: NEW}
+    rationale: "波动水平/比率（E5 信息延续，非方向）"
+  - id: C4
+    name: vol-shock family
+    members:
+      - {name: shock_z, formula: "(sigma_t - mean_L)/sd_L 或 rv_ratio 突升量", timescale: [M1, H1], status: NEW}
+    rationale: "波动冲击强度（F-R14 转换预测接口）"
+  - id: C5
+    name: activity family
+    members:
+      - {name: act_pct, formula: "tick_volume trailing-60 分位（饱和问题已记录：加 act 变化率伴生量）", timescale: [M1, M5, H1], status: NEW}
+      - {name: act_delta, formula: "act_pct_t - act_pct_{t-k}（变化量，规避饱和）", timescale: [M1, M5, H1], status: NEW}
+    rationale: "活动状态（ACTIVITY_PERCENTILE_SATURATION 教训内建）"
+  - id: C6
+    name: liquidity/spread family
+    members:
+      - {name: spread_state, formula: "spread vs trailing session-median（DUKA；FXTM 恒定点差标记退化）", timescale: [M1, M5, H1], status: NEW}
+    rationale: "流动性状态（DUKA 主；FXTM feed 限制如实标注）"
+  - id: C7
+    name: directional-persistence family
+    members:
+      - {name: persist_w, formula: "Sigma_{sign(r)=sign(net)}|r| / path（窗内方向一致性）", timescale: [M1, M5, H1], status: NEW}
+      - {name: run_len, formula: "同号 bar 连续长度分布（滚动均值）", timescale: [M1, H1], status: NEW}
+    rationale: "方向持续性（Taxonomy CONSISTENT 的连续版；冗余检查 vs momentum）"
+  - id: C8
+    name: path-efficiency family
+    members:
+      - {name: eff, formula: "|net|/path", timescale: [M1, M5, H1], status: NEW}
+      - {name: recov, formula: "max excursion 后回复比例（窗内）", timescale: [M1, M5], status: NEW}
+    rationale: "推进/回复效率（charter V 新特征方向）"
+  - id: C9
+    name: excursion/retracement family
+    members:
+      - {name: mfe_mae_ratio, formula: "窗内 MFE/MAE 型比率（rolling）", timescale: [M1, M5], status: NEW}
+    rationale: "路径几何（Bouchaud 系冲击-回复背景）"
+  - id: C10
+    name: acceleration family
+    members:
+      - {name: accel, formula: "r_t - r_{t-1} 或 velocity 差分", timescale: [M1, M5], status: NEW}
+    rationale: "加速度/二阶结构（P1 accel 事件版的连续化）"
+  - id: C11
+    name: cross-timeframe structure family
+    members:
+      - {name: tf_align, formula: "快尺度方向/状态与慢尺度状态的一致度（如 M5 净方向 vs H1 vol 态）", timescale: [M1-M5-H1], status: NEW}
+    rationale: "跨尺度关系（状态在哪产生/传递）"
+  - id: C12
+    name: transition/velocity family
+    members:
+      - {name: dstate, formula: "Delta(B4 state vector) 各分量；state velocity/acceleration", timescale: [M1, H1], status: NEW}
+    rationale: "状态变化动力学（ΔState 可能比水平更有价值）"
+
+rules:
+  - "任何成员计算前登记公式；结果后不增删（V2 例外）"
+  - "冗余：同尺度 |corr|>=0.90 -> REDUNDANT REPRESENTATION；滞后收益 R2>=0.95 可复现 -> RE-ENCODING"
+  - "无监督解释须先定 cluster interpretation protocol；禁后验命名"
+  - "状态可连续；最终产物 = MARKET REPRESENTATION MAP + STATE TRANSITION GRAPH（数据支持时）"
+
+phase2_results:  # REP Phase 2 (2026-09-05, descriptive)
+  note: "KEEP = descriptively stable & non-redundant w/ baselines; NOT 'correct representation'"
+  evidence: reports/market_representation/phase2_evidence.json
+  C1_disp_z: {verdict: KEEP, si: SI-REP2-008}
+  C2_range_frac: {verdict: KEEP, si: SI-REP2-009}
+  C2_comp_ratio: {verdict: KEEP, si: SI-REP2-010}
+  C3_rv_ratio: {verdict: KEEP, si: SI-REP2-011}
+  C3_rv_level: {verdict: KEEP, si: SI-REP2-012}
+  C4_shock_z: {verdict: KEEP, si: SI-REP2-013}
+  C5_act_pct: {verdict: KEEP, si: SI-REP2-014}
+  C5_act_delta: {verdict: KEEP, si: SI-REP2-015}
+  C6_spread_state: {verdict: KEEP, si: SI-REP2-016}
+  C7_persist_w: {verdict: KEEP, si: SI-REP2-017}
+  C7_run_len: {verdict: KEEP, si: SI-REP2-018}
+  C8_recov: {verdict: REJECT, si: SI-REP2-019}
+  C9_mfe_mae: {verdict: KEEP, si: SI-REP2-020}
+  C10_accel: {verdict: KEEP, si: SI-REP2-021}
+  C12_dstate: {verdict: REJECT, si: SI-REP2-022}

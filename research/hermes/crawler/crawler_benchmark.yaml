@@ -1,0 +1,72 @@
+# CRAWLER BENCHMARK（深挖能力基准）
+# 生成：2026-09-05 · HERMES-05 · 诚实版：记录真实演示 + 30 目标模板。
+# 原则：成功 = VALUE_DISCOVERY + DEPTH + TRACEABILITY + COUNTER_EVIDENCE + REPRODUCIBILITY，
+#       不是"抓了多少网页"。不伪造请求数/深度。
+
+meta:
+  note: "本文件记录【真实完成】的深挖链 + 【方法论模板】用于扩展到 30 目标。
+         不虚报未执行的爬取。"
+
+# ---- 真实完成的深挖链（本轮实证） ----
+demonstrated_crawls:
+  - id: CRAWL-01
+    target: "参数化 look-ahead（FINCAD 生态）"
+    initial_discovery: "arxiv:2605.24564 摘要（HERMES-04 检索命中）"
+    why_hard_to_find: "2026 新论文，关键词『look-ahead bias LLM』普通搜索不直接暴露代码/作者"
+    crawl_path: "摘要 → arxiv v2 → GitHub repo → GitHub API 结构 → 作者 → 阅读清单生态"
+    depth_reached: 5
+    sources_found: 6
+    documents_found: 2（abstract + HTML v2）
+    code_found: 1（waylonli/FinCAD）
+    data_found: 1（repo 内 benchmark/data/results 目录）
+    counter_evidence_found: 0（新失败模式，非可交易 claim）
+    access_restrictions: 0
+    value: "HIGH（FL-23 参数化 look-ahead 的代码级确证）"
+
+  - id: CRAWL-02
+    target: "波动率择时争议链（Moreira-Muir → Cederburg → Barroso-Detzel → multifactor）"
+    initial_discovery: "HERMES-03 检索"
+    crawl_path: "JF 原文 → OOS 失败(Cederburg) → 成本侵蚀(Barroso-Detzel) → look-ahead 批评(SWUFE) → GitHub 复制"
+    depth_reached: 5（5 篇独立工作）
+    counter_evidence_found: 4（完整反证链）
+    value: "HIGH（CONTRA-01）"
+    note: "HERMES-03 已完成，本轮归档进 graph"
+
+# ---- 30 目标模板（方法论，非已执行） ----
+benchmark_template:
+  target_categories:
+    deep_html: ["院校课程页深层材料", "机构白皮书附录"]
+    pagination: ["arxiv 作者全列表", "会议 proceedings 翻页"]
+    pdf: ["论文附录含数据表", "央行工作论文 PDF"]
+    attachment: ["报告附带的 .xlsx/.csv", "repo 的 data/ 压缩包"]
+    github: ["README 之外看 source/tests/issues", "config 里的数据依赖"]
+    citation_graph: ["反向引用 + 前向被引"]
+    author_graph: ["作者主页 → 其它论文 → 机构"]
+    public_api: ["GitHub API", "arxiv API", "Crossref"]
+    archive: ["web.archive.org 历史版本", "SSRN 修订版"]
+    counter_evidence: ["replication 失败", "后续 criticism", "retraction"]
+    historical_version: ["论文 v1 vs v2 结论差异", "repo commit 历史"]
+    dynamic_content: ["（不优先，最后手段）"]
+  per_target_fields:
+    - TARGET
+    - INITIAL_DISCOVERY
+    - WHY_HARD_TO_FIND
+    - CRAWL_PATH
+    - DEPTH_REACHED
+    - SOURCES_FOUND
+    - DOCUMENTS_FOUND
+    - CODE_FOUND
+    - DATA_FOUND
+    - COUNTER_EVIDENCE_FOUND
+    - TIME
+    - REQUEST_COUNT
+    - ACCESS_RESTRICTIONS
+  honesty_rule: "每行必须真实；未执行的标 PENDING，不得编造 depth/request 数字"
+
+# ---- 基准评分（冻结） ----
+scoring:
+  value_discovery: "每链是否产出新的、可追溯的 Research Intelligence（非网页计数）"
+  depth: "是否越过第一层入口（≥3 层为达标）"
+  traceability: "每步 URL/accessed date 可追溯"
+  counter_evidence: "是否主动找到反证（高价值 claim 必需）"
+  reproducibility: "代码/数据/步骤可否复现"

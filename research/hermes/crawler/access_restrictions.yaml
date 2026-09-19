@@ -1,0 +1,45 @@
+# ACCESS RESTRICTIONS（访问限制记录 — 真实遇到的边界）
+# 生成：2026-09-05 · HERMES-05 · 只记真实遇到的限制；遇边界 = ACCESS_RESTRICTED，停，不绕过。
+
+restrictions:
+  - id: AR-01
+    target: "huggingface.co 直连"
+    type: "网络不可达（000 超时）"
+    encountered: "HERMES-02/04 实测"
+    impact: "无法直连 HF 下载 GGUF / 读 HF 数据集卡片"
+    workaround: "ollama.com 可达（走自有 registry）；HF 内容经 web_search 摘要间接获取"
+    status: ACCESS_RESTRICTED（未绕过）
+
+  - id: AR-02
+    target: "GitHub 页面 HTML 抓取（waylonli/FinCAD）"
+    type: "exa keyless 后端超时（CRAWL_LIVECRAWL_TIMEOUT）"
+    encountered: "HERMES-05 实测"
+    impact: "web_extract 对 GitHub HTML 偶发失败"
+    workaround: "GitHub 公开 API（api.github.com）成功 → 印证『公开 API > HTML 抓取』"
+    status: WORKAROUND_FOUND
+
+  - id: AR-03
+    target: "GitHub release CDN 下载（OllamaSetup.exe）"
+    type: "限速 ~25MB/min"
+    encountered: "HERMES-02 实测"
+    impact: "大文件下载不可行（~3.5h）"
+    workaround: "无（放弃部署）"
+    status: ACCESS_RESTRICTED
+
+  - id: AR-04
+    target: "期刊库全文（JF/JFE/RFS 非 arXiv）"
+    type: "paywall / 未订阅"
+    encountered: "HERMES-03/04（KD-G1 已记）"
+    impact: "部分关键论文只能拿 abstract + 二手摘要"
+    workaround: "SSRN/arXiv 预印本 + NBER/央行工作论文（免费）+ 复制博客"
+    status: ACCESS_RESTRICTED（未绕过 paywall）
+
+  - id: AR-05
+    target: "专有 dealer 客户订单流（Citibank）"
+    type: "数据不可公开获取"
+    encountered: "HERMES-04 LINE B"
+    impact: "『订单流预测汇率』无法复现（INACCESSIBLE）"
+    workaround: "无"
+    status: INACCESSIBLE（非权限问题，是数据根本不可得）
+
+# 纪律：以上全部遵守『公开信息』边界；无认证绕过/爬墙/SSRF/凭据窃取。

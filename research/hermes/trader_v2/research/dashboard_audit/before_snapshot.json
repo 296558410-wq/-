@@ -1,0 +1,227 @@
+{
+ "system_status": "严重异常",
+ "system_cls": "bad",
+ "run_mode": "Shadow 模拟验证",
+ "real_orders": "否",
+ "stage": "连续验证",
+ "stage_elapsed_s": 3755,
+ "stage_remaining_s": 169044,
+ "stage_end": "2026-09-19T04:20:36.010465+00:00",
+ "stage_cycles": 1,
+ "market": {
+  "symbol": "XAUUSD",
+  "price": 4292.75,
+  "spread": 0.35,
+  "high": 4368.18,
+  "low": 4235.28,
+  "chg_bps": 76.1,
+  "atr_pct": 0.33,
+  "data_age_s": 3752,
+  "source": "sina"
+ },
+ "multi_tf": [
+  {
+   "tf": "5m",
+   "bias": "偏多",
+   "trend": "趋势"
+  },
+  {
+   "tf": "15m",
+   "bias": "偏多",
+   "trend": "趋势"
+  },
+  {
+   "tf": "60m",
+   "bias": "偏多",
+   "trend": "混合"
+  },
+  {
+   "tf": "4h",
+   "bias": "偏空",
+   "trend": "混合"
+  }
+ ],
+ "data_items": [
+  {
+   "name": "黄金价格",
+   "status": "异常",
+   "cls": "bad",
+   "age_s": 3752,
+   "source": "sina",
+   "data_ts": "2026-09-17T04:20:39.479223+00:00"
+  },
+  {
+   "name": "技术分析",
+   "status": "异常",
+   "cls": "bad",
+   "age_s": 4691,
+   "source": "local_fxtm",
+   "data_ts": null
+  },
+  {
+   "name": "宏观数据",
+   "status": "异常",
+   "cls": "bad",
+   "age_s": 3653,
+   "source": "yahoo:DXY/^TNX/^VIX",
+   "data_ts": null
+  },
+  {
+   "name": "新闻",
+   "status": "正常",
+   "cls": "ok",
+   "age_s": null,
+   "source": "wallstcn/cnbc",
+   "data_ts": null
+  },
+  {
+   "name": "资金流",
+   "status": "正常",
+   "cls": "ok",
+   "age_s": null,
+   "source": "eastmoney",
+   "data_ts": {
+    "518880": "2026-09-17",
+    "159934": "2026-09-17"
+   }
+  }
+ ],
+ "decision": {
+  "decision": "WAIT",
+  "cn": "等待",
+  "reason": "data health DEGRADED → 等恢复",
+  "side": null,
+  "entry": null,
+  "sl": null,
+  "tp": null,
+  "rr": null,
+  "confidence": null,
+  "candidate": "opp_bo_long"
+ },
+ "why_no_trade": [
+  "黄金价格：异常",
+  "技术分析：异常",
+  "宏观数据：异常",
+  "新闻：正常",
+  "资金流：正常",
+  "当前没有形成足够强的交易机会"
+ ],
+ "account": {
+  "balance": null,
+  "equity": null,
+  "known": false,
+  "margin_free": null,
+  "leverage": null
+ },
+ "position": {
+  "known": false,
+  "list": null
+ },
+ "recent_trades": [],
+ "performance": {
+  "scope": "当前 V2 Run",
+  "cycles": 1,
+  "decisions": 1,
+  "TRADE": 0,
+  "WAIT": 1,
+  "REJECT": 0,
+  "executed": 0,
+  "rejected": 0,
+  "closed": 0,
+  "wins": 0,
+  "losses": 0,
+  "winrate": null,
+  "net_pnl": 0
+ },
+ "health": [
+  {
+   "name": "数据",
+   "cls": "bad",
+   "text": "部分数据异常"
+  },
+  {
+   "name": "分析",
+   "cls": "ok",
+   "text": "市场/宏观分析正常"
+  },
+  {
+   "name": "判断",
+   "cls": "ok",
+   "text": "交易判断正常"
+  },
+  {
+   "name": "风险",
+   "cls": "ok",
+   "text": "风险检查正常"
+  },
+  {
+   "name": "模拟执行",
+   "cls": "ok",
+   "text": "模拟执行正常（不下真实单）"
+  },
+  {
+   "name": "记录",
+   "cls": "ok",
+   "text": "账本/回放一致"
+  },
+  {
+   "name": "自动运行",
+   "cls": "ok",
+   "text": "调度正常"
+  }
+ ],
+ "workflow": [
+  {
+   "step": "获取黄金数据",
+   "cls": "bad"
+  },
+  {
+   "step": "分析行情",
+   "cls": "bad"
+  },
+  {
+   "step": "分析宏观消息",
+   "cls": "bad"
+  },
+  {
+   "step": "寻找交易机会",
+   "cls": "ok"
+  },
+  {
+   "step": "风险检查",
+   "cls": "ok"
+  },
+  {
+   "step": "模拟执行",
+   "cls": "ok"
+  },
+  {
+   "step": "记录结果",
+   "cls": "ok"
+  }
+ ],
+ "scheduler": {
+  "last_run": "2026-09-17T05:22:06.969105+00:00",
+  "next_run": "2026-09-17T05:30:00+00:00",
+  "missed": 0,
+  "last_failure": "2026-09-16T10:52:03.681515+00:00",
+  "status_cls": "ok"
+ },
+ "forward_gate": {
+  "allowed": false,
+  "label": "未允许",
+  "note": "系统尚未完成全部认证，因此目前不会进入正式前向验证。"
+ },
+ "v1_isolation": {
+  "status": "正常",
+  "items": [
+   "V1 正常",
+   "V1 独立运行",
+   "V2 未使用 V1 账户",
+   "V2 未控制 V1 终端"
+  ]
+ },
+ "recent_problems": [],
+ "last_update": "2026-09-17T05:23:11.625027+00:00",
+ "instrument": "XAUUSD"
+}

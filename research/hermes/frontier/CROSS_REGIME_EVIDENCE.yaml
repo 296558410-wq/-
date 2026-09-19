@@ -1,0 +1,30 @@
+# CROSS-REGIME 合并（EVIDENCE / COUNTER / DATA GAPS）
+# 生成：2026-09-05
+
+evidence:
+  - {claim: "S&P VRP 收割跨双崩盘(1996-2021)长期赚溢价", source: "CFR cfr-23-06", transfer: "equity→gold: INVALID（需期权通道；黄金 VRP 冲突）", grade: E3}
+  - {claim: "商品 ETF(含黄金)VRP 存在", source: "Wiley JFM 2017", transfer: "gold-adjacent", grade: E3}
+  - {claim: "黄金避险两 regime 成立但牛 phase 更强", source: "750yr Markov-switching (Physica A)", transfer: "portfolio-level hedge, non-standalone", grade: E3}
+  - {claim: "黄金 downside VRP = ICAPM 状态变量", source: "ideas.repec 2020", transfer: "info/state not money", grade: E3}
+  - {claim: "黄金避险 regime-dependent（能力随危机而异）", source: "MDPI + SciDirect spillovers", transfer: "非跨 regime", grade: E3}
+
+counter_evidence:
+  - id: CR-CONTRA-1
+    claim: "黄金 VRP 可跨 regime 收割"
+    support: "Wiley 商品 VRP 存在"
+    contradict: "BIS 自限 post-2008；JFM 综合称商品无 VRP OOS；需期权通道"
+    status: "CONFLICTED + INACCESSIBLE"
+  - id: CR-CONTRA-2
+    claim: "黄金避险是跨 regime 稳定属性"
+    support: "Baur/McDermott 等"
+    contradict: "750yr：牛 phase 更强；避险能力随危机/regime 而异；非收益机制"
+    status: "regime-dependent + 组合级"
+  - id: CR-CONTRA-3
+    claim: "VRP 收割 = 无风险收益"
+    contradict: "CFR：危机期受重创；是尾部风险补偿（恰在你不预期时亏）"
+    status: "风险溢价，非免费钱"
+
+data_gaps:
+  - "黄金期权曲面/LJP/skew/VRP 收割数据 → 付费 + 需期权通道（暂不采购；仅当 CAND-01 显正且经济门过才评估）"
+  - "XAUUSD OTC IV surface → 付费 vendors"
+  - "代理说明：GVZ=GLD ATM IV，非 XAUUSD 直接；不是真变量"

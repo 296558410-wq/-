@@ -1,0 +1,11 @@
+env_info           PASS    0 checks     6.7s
+gpu_bench          PASS   11 checks     5.1s
+stats_smoke        PASS   12 checks     1.4s
+ml_smoke           PASS    6 checks     2.6s
+ts_leak            PASS   12 checks     0.6s
+backtest_smoke     PASS    7 checks     0.6s
+tick_smoke         PASS   11 checks     1.9s
+duka_smoke         WARN    9 checks     5.2s
+mt5_smoke          WARN    8 checks     0.5s
+git_smoke          PASS    6 checks     0.4s
+TOTALS {'PASS': 8, 'WARN': 2, 'FAIL': 0, 'SKIP': 0}

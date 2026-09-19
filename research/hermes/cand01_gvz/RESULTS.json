@@ -1,0 +1,63 @@
+{
+ "meta": {
+  "n_days": 573,
+  "span": [
+   "2023-01-03",
+   "2026-08-03"
+  ],
+  "prereg": "c23b046",
+  "target_note": "mean-of-var over next h valid days, log"
+ },
+ "horizons": {
+  "h5": {
+   "n_oos": 368,
+   "r2_A": 0.08336467532148084,
+   "r2_B": 0.3203594673730201,
+   "delta_r2_oos": 0.23699479205153928,
+   "DM_HAC_t": 2.7221098286138408,
+   "rmse_A": 0.41559633978063953,
+   "rmse_B": 0.35785991537666734,
+   "spearman_gvz_vs_residA": 0.189676934123751
+  },
+  "h10": {
+   "n_oos": 363,
+   "r2_A": -0.008073717678972914,
+   "r2_B": 0.2843655740783705,
+   "delta_r2_oos": 0.2924392917573434,
+   "DM_HAC_t": 2.84840474886557,
+   "rmse_A": 0.42465002527480933,
+   "rmse_B": 0.3577919955695599,
+   "spearman_gvz_vs_residA": 0.18622843558282745
+  },
+  "h20": {
+   "n_oos": 353,
+   "r2_A": -0.04664925239587525,
+   "r2_B": 0.2714410566949713,
+   "delta_r2_oos": 0.31809030909084657,
+   "DM_HAC_t": 2.9222860026054263,
+   "rmse_A": 0.42757198363349136,
+   "rmse_B": 0.3567311251849739,
+   "spearman_gvz_vs_residA": 0.16737970803721483
+  }
+ },
+ "redundancy": {
+  "corr_logRV_logGVZ": 0.08784770240347518,
+  "corr_logGVZ_activity": 0.056736665535912695,
+  "corr_logRV_activity": 0.9976458370531446
+ },
+ "regime_audit": {},
+ "directional_monthly": {
+  "n": 35,
+  "spearman_gvz_next_month_ret": -0.06918767507002802,
+  "spearman_vrp_next_month_ret": 0.27871148459383754
+ },
+ "r1_auc_audit": {
+  "n_is": 331,
+  "n_oos": 221,
+  "auc": {
+   "A": 0.736268240695196,
+   "B": 0.7971798655517299
+  },
+  "note": "identify future-5d HIGH vol tercile; A=baseline, B=A+GVZ"
+ }
+}

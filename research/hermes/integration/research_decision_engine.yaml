@@ -1,0 +1,60 @@
+# RESEARCH DECISION ENGINE（研究决策引擎 — 记忆×猎杀接口）
+# 生成：2026-09-05 · HERMES-09 · 新问题进入后，先 QUERY MEMORY → CLASSIFY → DECIDE ACTION。
+
+meta:
+  principle: "先问'我们以前知道什么'，再决定'现在值得偷什么'"
+  forbidden: "UNKNOWN 不得强转 NEW；相似标题不自动判重复（须有 EVIDENCE）"
+
+decision_flow:
+  - step: 1
+    query: "claim_registry + mechanisms.yaml 是否命中同义/改名机制？"
+    yes: "语义去重检查（semantic_duplication.yaml）"
+    no: "→ step 2"
+  - step: 2
+    query: "dead_end_index 是否命中？"
+    yes: "检查 reopen_condition"
+    yes_reopen_met: "REVISIT"
+    yes_reopen_not_met: "STOP (KNOWN_DEAD_END)"
+    no: "→ step 3"
+  - step: 3
+    query: "contradiction_registry 是否命中？"
+    yes: "CONTRADICTION（不选边，走 contradiction_resolver）"
+    no: "→ step 4"
+  - step: 4
+    query: "是否 DATA_GAP / INACCESSIBLE？"
+    yes_data_gap: "DATA_GAP（除非触发 revisit_engine）"
+    yes_inaccessible: "INACCESSIBLE"
+    no: "→ step 5"
+  - step: 5
+    query: "是否既有机制的 extension（新市场结构/新数据/新执行机制）？"
+    yes: "EXTENSION"
+    no: "NEW"
+
+classifier:
+  outputs: [NEW, DUPLICATE, EXTENSION, REVISIT, CONTRADICTION, DATA_GAP, INFRA_UNLOCK, INACCESSIBLE, STOP, UNKNOWN]
+  rules:
+    - {condition: "claim_registry 命中 + 同义机制", output: DUPLICATE}
+    - {condition: "dead_end 命中 + reopen 未满足", output: "STOP (KNOWN_DEAD_END)"}
+    - {condition: "dead_end 命中 + reopen 满足", output: REVISIT}
+    - {condition: "contradiction 命中", output: CONTRADICTION}
+    - {condition: "DATA_GAP 且数据未解锁", output: DATA_GAP}
+    - {condition: "DATA_GAP 且数据已解锁", output: "REVISIT (DATA_UNLOCK)"}
+    - {condition: "INACCESSIBLE", output: INACCESSIBLE}
+    - {condition: "既有机制 + 新条件", output: EXTENSION}
+    - {condition: "无命中 + 有可测假设", output: NEW}
+    - {condition: "无法判断", output: UNKNOWN}
+  hard_rules:
+    - "UNKNOWN 绝不自动转 NEW（等待进一步证据）"
+    - "换关键词/换模型/换写法 ≠ 新研究（判 DUPLICATE）"
+    - "相似标题 ≠ 重复（须有 EVIDENCE 级命中）"
+
+memory_sources:
+  - claim_registry.yaml
+  - dead_end_index.yaml
+  - contradiction_registry.yaml
+  - failure_memory.yaml
+  - mechanisms.yaml
+  - mechanisms_deep.yaml
+  - research_queue.yaml
+  - research_queue_update.yaml
+  - hypothesis_registry.yaml

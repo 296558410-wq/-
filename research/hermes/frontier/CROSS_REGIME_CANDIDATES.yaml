@@ -1,0 +1,35 @@
+# CROSS-REGIME CANDIDATES（跨 regime 候选 — 3 近候选全被门挡 + 1 推荐动作）
+# 生成：2026-09-05
+
+candidates:
+  - id: CR-001
+    name: "波动率风险溢价收割（非方向）"
+    evidence: "CFR cfr-23-06：S&P VRP 1996-2021(含双崩盘)长期赚溢价；Wiley 2017 商品 ETF(含黄金)VRP 存在"
+    mechanism: "卖 vol = 尾部风险 carry"
+    cross_regime: "是（含双崩盘），但赚的是承担尾部风险"
+    gates: "ACCESSIBILITY(NO 期权通道) + CONFLICTED(黄金 VRP: BIS vs JFM) + 尾部 carry(与 R1' 机会成本族冲突)"
+    verdict: "REJECT（对黄金不可及 + 冲突）"
+
+  - id: CR-002
+    name: "黄金避险/对冲（跨资产）"
+    evidence: "1257-2018 Markov-switching：避险两 regime 成立但牛 phase 更强（regime-dependent）"
+    mechanism: "黄金与股票低/负相关，组合级对冲，regime-beta"
+    gates: "非跨 regime + 非单标的 money（组合分散非收益提取）+ 跨资产超 XAUUSD 职责"
+    verdict: "REJECT"
+
+  - id: CR-003
+    name: "黄金 downside VRP 作为状态变量"
+    evidence: "ideas.repec 2020：downside VRP 含市场特定信息，ICAPM 状态变量"
+    mechanism: "信息/风险状态输入"
+    gates: "是信息非 money + 需期权数据"
+    verdict: "非独立货币路线（CAND-01 语境）"
+
+recommended_action:
+  - id: ACT-001
+    action: "解析 CAND-01（黄金期权 IV 层，GVZ 免费测试）"
+    why: "最后一个未测、可及、独立于 R1 的信息维度（R1=spot vol/activity；CAND-01=options-IV）"
+    cost: "零/极低（GVZ=FRED 免费）"
+    kill: "GVZ 增量 ΔIC≈0（控 E5 activity→vol）→ 关闭该维度"
+    boundary: "是信息测试（喂 R1 vol-regime），非独立货币路线；不重复 R1 实验"
+
+verdict: "NO NEW MONEY ROUTE FOUND"

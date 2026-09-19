@@ -1,0 +1,205 @@
+# =====================================================================
+# XAUUSD HFT OBSERVABILITY MATRIX — 可观测性矩阵（本任务最重要维度, v2）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# Version: 2026-09-06-hft-map-v2（v2 并入 HERMES-10 proxy 失败证据: 成交量归一化破坏信号/
+#   毛量≠净流/OBI flicker/VPIN 批判——见 M03/M07/M10/M23 警示字段）
+# 规则: 真实变量 → proxy → proxy-真实差距 → proxy 是否可能足够。
+# 等级: DIRECTLY_OBSERVABLE / PROXY_OBSERVABLE / WEAK_PROXY / NOT_OBSERVABLE
+# 纪律: 只能写"观测到 activity proxy"，不能写"观测到 order flow"；activity ≠ order flow；
+#   volume ≠ signed flow；spread ≠ full liquidity（HARD RULE）。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  proxy_language_rule: "任何基于 tick 活动/波动/spread 的推断必须标注 proxy 词，禁止声称直接观测订单流/簿压力。"
+  hermes10_proxy_warnings:
+    - "volume-normalized order flow 归一化破坏信息信号（arxiv 2512.18648, 他市场）→ activity(成交量代理)特征构造须谨慎"
+    - "毛成交量 ≠ 净流（HBS Rethinking Volume）→ tick_volume 被 HFT 往返污染可能, proxy 只能当标签不能当真相"
+    - "raw OBI 被 HFT flicker（毫秒撤单）污染（arxiv 2507.22712）→ 任何订单簿失衡 proxy 须滤闪烁"
+    - "VPIN 增量预测弱 + 参数敏感（Andersen-Bondarenko）→ 流毒性 proxy 不作 standalone alpha"
+    - "本地含义: E5 activity→vol 信号是'activity 代理→vol'加标签风险, 非推翻（双源双期仍立）"
+
+matrix:
+  - id: M01
+    name: "Information latency"
+    reality: "最先知道事件内容的毫秒级优势"
+    proxy: "无（需要事件源直连）"
+    gap: "全链路不可观测"
+    rating: NOT_OBSERVABLE
+
+  - id: M02
+    name: "Event reaction"
+    reality: "事件后价格/波动/spread 反应的时间与幅度"
+    proxy: "事件时间戳(日历) + 事件窗内 activity/vol/spread 轨迹"
+    gap: "无因果性（日历时间只是前提）；事件强度需人工/外部标注"
+    rating: PROXY_OBSERVABLE
+
+  - id: M03
+    name: "Order flow"
+    reality: "真实 taker 买卖失衡与客户流"
+    proxy: "无成交流；仅 quote tick 频率（activity proxy）"
+    gap: "完全缺失：报价活动 ≠ 成交流（HERMES-10: 毛量≠净流, HBS）；即使有 tick_volume 也只是毛量代理"
+    rating: NOT_OBSERVABLE
+
+  - id: M04
+    name: "Liquidity provision"
+    reality: "订单簿深度/补单行为/存货"
+    proxy: "无（无 L2）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M05
+    name: "Market making"
+    reality: "双边报价盈利与存货风险"
+    proxy: "无"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M06
+    name: "Spread capture"
+    reality: "maker 点差捕获与返佣"
+    proxy: "FXTM 固定点差(不可变观测); DUKA 可变 spread 可见"
+    gap: "可见 spread 是报价 spread 快照，非可捕获点差"
+    rating: WEAK_PROXY
+
+  - id: M07
+    name: "Adverse selection avoidance"
+    reality: "成交后不利价格移动概率（毒流识别）"
+    proxy: "价差宽化 + activity 激增 + 短时 vol（逆向选择条件 proxy）"
+    gap: "无成交归因，无法确知哪笔被选；VPIN 类流毒性 proxy 增量预测弱+参数敏感（Andersen-Bondarenko, HERMES-10）→ 不作 standalone alpha"
+    rating: WEAK_PROXY
+
+  - id: M08
+    name: "Short-term momentum"
+    reality: "未来收益延续（方向）"
+    proxy: "历史收益（直接观测目标本身）"
+    gap: "无（目标即价格）"
+    rating: DIRECTLY_OBSERVABLE
+
+  - id: M09
+    name: "Short-term reversal"
+    reality: "未来收益回复（方向）"
+    proxy: "历史收益/偏离度（直接观测）"
+    gap: "无"
+    rating: DIRECTLY_OBSERVABLE
+
+  - id: M10
+    name: "Volatility clustering"
+    reality: "未来波动率水平（非方向）"
+    proxy: "已实现 vol（RV 可直接计算）+ activity proxy（tick_volume/报价节奏）"
+    gap: "已实现 vs 真实潜在 vol 有估计噪声；activity 是成交量代理 → 毛量归一化破坏信号（arxiv 2512.18648）/毛量≠净流（HBS）→ proxy 标签风险（E5 双源信息仍立, 非推翻）"
+    rating: DIRECTLY_OBSERVABLE
+
+  - id: M11
+    name: "Volatility risk premium"
+    reality: "隐含 vol − 已实现 vol"
+    proxy: "无（无期权）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M12
+    name: "Cross-venue lead-lag"
+    reality: "A 场所价格领先 B 场所"
+    proxy: "FXTM/DUKA 双 feed 报价时间序列（无对齐时间窗）"
+    gap: "两场所零售 feed 均滞后于真实市场；窗口不重叠 → 只能比较结构不能测 lead-lag"
+    rating: WEAK_PROXY
+
+  - id: M13
+    name: "Futures/spot basis"
+    reality: "期货−现货基差"
+    proxy: "无（无期货数据）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M14
+    name: "Options information"
+    reality: "期权 IV/skew/成交信息含量"
+    proxy: "无（无期权数据）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M15
+    name: "Macro information transmission"
+    reality: "宏观事件→XAUUSD 的因果传导强度"
+    proxy: "事件日历时间戳 + 窗内 activity/vol（非因果，仅时间共现）"
+    gap: "时间共现 ≠ 因果（KD-U02）；需事件语义标注"
+    rating: PROXY_OBSERVABLE
+
+  - id: M16
+    name: "Market impact prediction"
+    reality: "订单对价格的冲击函数"
+    proxy: "活动/vol 冲击后的价格路径（描述性）"
+    gap: "无自身订单信息 → 只能做外部冲击响应，且需 tick"
+    rating: WEAK_PROXY
+
+  - id: M17
+    name: "Transaction-cost forecasting"
+    reality: "未来执行成本（spread+滑点）状态"
+    proxy: "DUKA 可变 spread（M1/H1 真实报价 spread）→ 成本状态 proxy"
+    gap: "无成交滑点（无真实成交）；报价 spread ≠ 全成本"
+    rating: PROXY_OBSERVABLE
+
+  - id: M18
+    name: "Regime transition"
+    reality: "平静↔活跃状态与切换概率"
+    proxy: "vol/activity/spread 状态向量（REP Phase2 已测: 描述性稳定 KEEP 13 项）"
+    gap: "状态统计稳定 ≠ 切换可预测（Phase 3+ 判据缺失）"
+    rating: PROXY_OBSERVABLE
+
+  - id: M19
+    name: "Relative value"
+    reality: "金银/利率/实际资产价差偏离"
+    proxy: "无（无跨资产数据）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M20
+    name: "Statistical arbitrage"
+    reality: "多腿价差可回复偏离"
+    proxy: "无跨资产腿；单腿价格可观测"
+    gap: "单腿 ≠ 统计套利"
+    rating: NOT_OBSERVABLE
+
+  - id: M21
+    name: "Execution alpha"
+    reality: "执行质量差异（成本/滑点/成交率）"
+    proxy: "成本状态预测 + 模拟成交（无真实成交反馈）"
+    gap: "模拟器缺失（RQ-07）；真实 fill/queue 行为不可观测"
+    rating: WEAK_PROXY
+
+  - id: M22
+    name: "Queue / microstructure effects"
+    reality: "队列位置与订单簿边缘动力学"
+    proxy: "无（无 L2/队列）"
+    gap: "完全缺失"
+    rating: NOT_OBSERVABLE
+
+  - id: M23
+    name: "Liquidity shocks"
+    reality: "流动性骤降事件（spread 爆宽/深度消失）"
+    proxy: "spread 宽化 + activity 异常 + vol 尖峰（可观测快照）"
+    gap: "深度/做市商撤退不可见；proxy 滞后于真实冲击；activity 代理噪声（HERMES-10）同样适用于冲击 proxy——事后形态 ≠ 事前可识别（Taxonomy regime 依赖 + NBQ-T1 NOT EVALUABLE）"
+    rating: WEAK_PROXY
+
+  - id: M24
+    name: "Auction / fix mechanisms"
+    reality: "fix 窗内失衡与锚定行为"
+    proxy: "fix 时间窗 ± 窗内 spread/vol/activity 轨迹（描述性 autopsy）"
+    gap: "fix 内部撮合不可见；仅外部痕迹"
+    rating: PROXY_OBSERVABLE
+
+  - id: M25
+    name: "Cross-asset information"
+    reality: "他资产对黄金的领先信息"
+    proxy: "无（外部资产未入库）"
+    gap: "完全缺失（当前）"
+    rating: NOT_OBSERVABLE
+
+summary:
+  DIRECTLY_OBSERVABLE: [M08, M09, M10]
+  PROXY_OBSERVABLE: [M02, M15, M17, M18, M24]
+  WEAK_PROXY: [M06, M07, M12, M16, M21, M23]
+  NOT_OBSERVABLE: [M01, M03, M04, M05, M11, M13, M14, M19, M20, M22, M25]
+  key_insight: "方向类（M08/M09）完全可观测但已被证伪；中间层（M17/M18/M02/M15）proxy 可观测且未充分研究；
+    微观结构类（M03/M04/M22）理论上价值最高处恰恰最不可观测——可观测性与价值呈负相关是这张图最重要的结构性事实。"
+  v2_warning: "HERMES-10 后所有 activity/volume 派生 proxy 一律视为'加标签的噪声代理'候选：可用作信息层（E5 双源
+    仍立），禁止写成 order flow / signed flow / 净流 / 真毒流。观测语言 = proxy 语言（HARD RULE）。"

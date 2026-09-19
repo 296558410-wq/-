@@ -1,0 +1,89 @@
+{
+ "schema": "v1_lifecycle_data_registry/1",
+ "ts_utc": "2026-09-17T12:51:03.461590+00:00",
+ "assets": [
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\plan_ledger.jsonl",
+   "source": "V1",
+   "class": "C",
+   "used_by_v1": true,
+   "sha256": "751d8919241e39287ce8fb2b2b7481b9d903c294b61daafc2a12a98e00174aa0",
+   "bytes": 786551
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\statistics.json",
+   "source": "V1",
+   "class": "C",
+   "used_by_v1": true,
+   "sha256": "2460849be639756255ff02e27469271f3027d9905b36c6fa31ccb994ba2c9926",
+   "bytes": 41211
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\trader_summary.txt",
+   "source": "V1",
+   "class": "B",
+   "used_by_v1": true,
+   "sha256": "89cf9ad11861e6a8f964079d3f50dbae8762b27e78271262e11a67314f9e917d",
+   "bytes": 248703
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\workflow_history.jsonl",
+   "source": "V1",
+   "class": "B",
+   "used_by_v1": true,
+   "sha256": "cdb7568b60282df12684659e892015267e526b0553f9e1a496942accef0f6c1e",
+   "bytes": 34212
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\state_package_latest.json",
+   "source": "V1",
+   "class": "E",
+   "used_by_v1": false,
+   "sha256": "53751ec6661fe7bc62e237d601333550c3ba774b8cf2b6a20f8d9ab94ab49d70",
+   "bytes": 3180
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\memory\\reviews",
+   "source": "V1",
+   "class": "C",
+   "used_by_v1": true,
+   "file_count": 57
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\decisions",
+   "source": "V1",
+   "class": "B",
+   "used_by_v1": true,
+   "file_count": 796
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\positions",
+   "source": "V1",
+   "class": "B",
+   "used_by_v1": true,
+   "file_count": 57
+  },
+  {
+   "path": "C:\\AIQuant\\data\\live_fxtm",
+   "source": "V1 collector",
+   "class": "A/D",
+   "used_by_v1": false,
+   "file_count": 9
+  },
+  {
+   "path": "C:\\AIQuant\\data\\staging_mt5",
+   "source": "collector",
+   "class": "D",
+   "used_by_v1": false,
+   "file_count": 3
+  },
+  {
+   "path": "C:\\AIQuant\\data\\staging_fxtm",
+   "source": "collector",
+   "class": "D",
+   "used_by_v1": false,
+   "file_count": 27
+  }
+ ],
+ "state_history": "无历史 state snapshot（仅 latest）→ class E / DATA_GAP"
+}

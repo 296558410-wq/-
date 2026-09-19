@@ -1,0 +1,177 @@
+<!doctype html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hermes AI Trader — 交易系统架构</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #0f172a;
+    --fg: #e5e7eb;
+    --muted: #a3adbd;
+    --line: #94a3b8;
+    --neutral: #334155;
+    --input: #1d4ed8;
+    --process: #4338ca;
+    --storage: #0f766e;
+    --external: #92400e;
+    --risk: #991b1b;
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 14px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+  main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+  svg { width: 100%; height: auto; display: block; }
+  .title { font-size: 22px; font-weight: 650; fill: var(--fg); }
+  .sub { font-size: 13px; fill: var(--muted); }
+  .label { font-size: 14px; font-weight: 600; fill: var(--fg); }
+  .l2 { font-size: 12px; fill: var(--muted); }
+  .node { stroke: var(--line); stroke-width: 1; rx: 10; }
+  .neutral { fill: #1e293b; }
+  .input { fill: #1e3a8a; }
+  .process { fill: #312e81; }
+  .storage { fill: #134e4a; }
+  .external { fill: #78350f; }
+  .risk { fill: #7f1d1d; }
+  .okline { fill: #14532d; }
+  .edge { stroke: #64748b; stroke-width: 1.5; fill: none; }
+  .zone { fill: none; stroke: #475569; stroke-width: 1; stroke-dasharray: 6 5; opacity: .8; }
+  .legend { font-size: 12px; fill: var(--muted); }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#f8fafc; --fg:#172033; --muted:#5b6475; --line:#64748b; }
+    .neutral{fill:#e2e8f0}.input{fill:#bfdbfe}.process{fill:#c7d2fe}
+    .storage{fill:#99f6e4}.external{fill:#fde68a}.risk{fill:#fecaca}.okline{fill:#bbf7d0}
+  }
+</style>
+<main>
+<svg viewBox="0 0 1080 860" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="20" y="34" class="title">Hermes AI Trader — 交易系统架构（2026-09-07 · V12）</text>
+  <text x="20" y="54" class="sub">OpenClaw = 系统总控/工程控制器 ｜ Hermes = 唯一交易员 ｜ Paper 运行中 · Demo 已打通 · 真实资金未授权</text>
+
+  <!-- ═════ Zone 1: 数据层 ═════ -->
+  <rect x="20" y="80" width="1020" height="180" class="zone" />
+  <text x="32" y="102" class="label" fill="#8fd0ff">① 数据层（真实市场数据）</text>
+
+  <rect x="40" y="118" width="200" height="60" class="node external" />
+  <text x="140" y="144" text-anchor="middle" class="label">FXTM MT5 (Real)</text>
+  <text x="140" y="162" text-anchor="middle" class="l2">只读采集 ｜ 报价 tick ｜ volume≡0</text>
+
+  <rect x="280" y="118" width="200" height="60" class="node storage" />
+  <text x="380" y="144" text-anchor="middle" class="label">data/live_fxtm</text>
+  <text x="380" y="162" text-anchor="middle" class="l2">前瞻 tick（今日起积累）</text>
+
+  <rect x="520" y="118" width="200" height="60" class="node storage" />
+  <text x="620" y="144" text-anchor="middle" class="label">data/staging_fxtm</text>
+  <text x="620" y="162" text-anchor="middle" class="l2">历史 24 日 tick（同 feed）</text>
+
+  <rect x="760" y="118" width="250" height="60" class="node process" />
+  <text x="885" y="140" text-anchor="middle" class="label">状态包生成器</text>
+  <text x="885" y="158" text-anchor="middle" class="l2">D1 20 / H4 48 / H1 24 / M15</text>
+  <text x="885" y="174" text-anchor="middle" class="l2">仅已收盘 bar（无 look-ahead）</text>
+
+  <path class="edge" marker-end="url(#ar)" d="M240 148 H278" />
+  <path class="edge" marker-end="url(#ar)" d="M480 148 H518" />
+  <path class="edge" marker-end="url(#ar)" d="M720 148 H758" />
+
+  <!-- 蜡烛图 & 微结构 -->
+  <rect x="40" y="190" width="300" height="52" class="node neutral" />
+  <text x="190" y="210" text-anchor="middle" class="l2">日本蜡烛图识别（19 形态 · 已收盘）</text>
+  <text x="190" y="228" text-anchor="middle" class="l2">微结构记忆 spread/activity/session</text>
+  <path class="edge" marker-end="url(#ar)" d="M885 178 V216 H342" />
+
+  <!-- ═════ Zone 2: 决策层 ═════ -->
+  <rect x="20" y="280" width="1020" height="200" class="zone" />
+  <text x="32" y="302" class="label" fill="#8fd0ff">② 决策层（Hermes 唯一交易员 · cron 每 15 分钟）</text>
+
+  <rect x="40" y="318" width="220" height="72" class="node input" />
+  <text x="150" y="342" text-anchor="middle" class="label">Hermes Trader</text>
+  <text x="150" y="360" text-anchor="middle" class="l2">LLM 14 问决策</text>
+  <text x="150" y="376" text-anchor="middle" class="l2">LONG / SHORT / WAIT（合法）</text>
+
+  <rect x="300" y="318" width="220" height="72" class="node process" />
+  <text x="410" y="342" text-anchor="middle" class="label">Trade Plan 注册</text>
+  <text x="410" y="360" text-anchor="middle" class="l2">触发前注册 · 不可篡改</text>
+  <text x="410" y="376" text-anchor="middle" class="l2">ledger sha256 链</text>
+
+  <rect x="560" y="318" width="220" height="72" class="node risk" />
+  <text x="670" y="342" text-anchor="middle" class="label">Risk Engine（独立）</text>
+  <text x="670" y="360" text-anchor="middle" class="l2">硬风控 可否决 Hermes</text>
+  <text x="670" y="376" text-anchor="middle" class="l2">12 不变量 FAIL CLOSED</text>
+
+  <rect x="820" y="318" width="200" height="72" class="node process" />
+  <text x="920" y="342" text-anchor="middle" class="label">Trigger 机械判定</text>
+  <text x="920" y="360" text-anchor="middle" class="l2">条件满足 → 交执行</text>
+  <text x="920" y="376" text-anchor="middle" class="l2">幂等 只触发一次</text>
+
+  <path class="edge" marker-end="url(#ar)" d="M260 354 H298" />
+  <path class="edge" marker-end="url(#ar)" d="M520 354 H558" />
+  <path class="edge" marker-end="url(#ar)" d="M780 354 H818" />
+  <path class="edge" marker-end="url(#ar)" d="M885 244 V300" />
+
+  <!-- 决策→风控 否决回路 -->
+  <path class="edge" marker-end="url(#ar)" d="M670 390 V410 H410 V392" style="stroke-dasharray:4 3" />
+
+  <!-- ═════ Zone 3: 执行层 ═════ -->
+  <rect x="20" y="500" width="1020" height="180" class="zone" />
+  <text x="32" y="522" class="label" fill="#8fd0ff">③ 执行层（可插拔 · 默认 Paper）</text>
+
+  <rect x="40" y="540" width="300" height="90" class="node okline" />
+  <text x="190" y="566" text-anchor="middle" class="label">P2 Paper（当前运行）</text>
+  <text x="190" y="586" text-anchor="middle" class="l2">本地模拟成交 · execution_reality 模型</text>
+  <text x="190" y="604" text-anchor="middle" class="l2">Position State Machine 全生命周期</text>
+
+  <rect x="400" y="540" width="300" height="90" class="node input" />
+  <text x="550" y="566" text-anchor="middle" class="label">P3 Demo（已打通 · 待启用）</text>
+  <text x="550" y="586" text-anchor="middle" class="l2">FXTM Demo FOK 真实下单</text>
+  <text x="550" y="604" text-anchor="middle" class="l2">已实测 20/20 fills · latency 422ms</text>
+
+  <rect x="760" y="540" width="250" height="90" class="node external" />
+  <text x="885" y="562" text-anchor="middle" class="label">真实资金（未授权）</text>
+  <text x="885" y="580" text-anchor="middle" class="l2">路径已定 = OANDA v20 原生 API</text>
+  <text x="885" y="598" text-anchor="middle" class="l2">需用户明确授权后才进入</text>
+
+  <path class="edge" marker-end="url(#ar)" d="M920 390 V540" />
+  <path class="edge" marker-end="url(#ar)" d="M340 585 H398" style="stroke-dasharray:4 3" />
+  <path class="edge" marker-end="url(#ar)" d="M700 585 H758" style="stroke-dasharray:4 3" />
+
+  <!-- ═════ Zone 4: 记录/看板 ═════ -->
+  <rect x="20" y="700" width="1020" height="130" class="zone" />
+  <text x="32" y="722" class="label" fill="#8fd0ff">④ 记录 · 记忆 · 看板</text>
+
+  <rect x="40" y="740" width="240" height="66" class="node storage" />
+  <text x="160" y="764" text-anchor="middle" class="label">Trade Ledger</text>
+  <text x="160" y="782" text-anchor="middle" class="l2">成交/复盘/记忆 全记录</text>
+
+  <rect x="320" y="740" width="240" height="66" class="node storage" />
+  <text x="440" y="764" text-anchor="middle" class="label">Trade Review + 交易记忆</text>
+  <text x="440" y="782" text-anchor="middle" class="l2">真实结果无过滤</text>
+
+  <rect x="600" y="740" width="410" height="66" class="node neutral" />
+  <text x="805" y="760" text-anchor="middle" class="label">Dashboard 交易控制中心（127.0.0.1:8787）</text>
+  <text x="805" y="778" text-anchor="middle" class="l2">Hermes 状态 · 真实K线 · 账户(demo) · 持仓 · 机会覆盖</text>
+  <text x="805" y="794" text-anchor="middle" class="l2">中文 · 只读 · 10 秒自刷新 · 自愈</text>
+
+  <path class="edge" marker-end="url(#ar)" d="M190 630 V740" />
+  <path class="edge" marker-end="url(#ar)" d="M440 630 V740" />
+  <path class="edge" marker-end="url(#ar)" d="M805 630 V740" />
+
+  <!-- 持续改进回路 -->
+  <path class="edge" marker-end="url(#ar)" d="M40 773 H12 V150 H38" style="stroke-dasharray:4 3" />
+
+  <!-- Legend -->
+  <g class="legend" transform="translate(20, 846)">
+    <rect x="0" y="-10" width="14" height="14" class="node input" /><text x="20" y="1">决策/智能</text>
+    <rect x="110" y="-10" width="14" height="14" class="node process" /><text x="130" y="1">处理/引擎</text>
+    <rect x="220" y="-10" width="14" height="14" class="node storage" /><text x="240" y="1">数据/存储</text>
+    <rect x="330" y="-10" width="14" height="14" class="node external" /><text x="350" y="1">外部/未授权</text>
+    <rect x="460" y="-10" width="14" height="14" class="node risk" /><text x="480" y="1">风控/硬边界</text>
+    <rect x="580" y="-10" width="14" height="14" class="node okline" /><text x="600" y="1">当前运行</text>
+    <text x="740" y="1">虚线 = 可选/未启用/改进回路</text>
+  </g>
+</svg>
+</main>

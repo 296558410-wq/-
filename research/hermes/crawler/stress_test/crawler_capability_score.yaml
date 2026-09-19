@@ -1,0 +1,54 @@
+# CRAWLER CAPABILITY SCORE（能力评分 — 诚实自评）
+# 生成：2026-09-05 · HERMES-06 · 每维度 PASS / PARTIAL / FAIL / UNKNOWN + 依据。
+# 不接受"搜到多少网页"作标准；按验收标准 10 条逐项。
+
+score:
+  - dimension: Discovery（自己找到入口）
+    grade: PASS
+    evidence: "6 个目标全部自主从 TARGET QUESTION 出发找到入口（无人工给路径）"
+
+  - dimension: Depth（越过第一层入口挖生态）
+    grade: PASS
+    evidence: "T-01/T-03/T-04/T-05 达到 4-5 层；T-05 反证链 ≥8 节点"
+    caveat: "本会话新挖 3 个深目标；其余深度在 HERMES-03/04/05 已覆盖"
+
+  - dimension: Route Adaptation（入口失败后换路线）
+    grade: PASS
+    evidence: "GitHub HTML 提取失败 → GitHub API 成功（HERMES-05 + 本会话 2 次）"
+
+  - dimension: Extraction（提取原始材料）
+    grade: PASS
+    evidence: "LBMA IOSCO 自评估 PDF（一手规则）；arxiv 摘要/HTML；GitHub API JSON"
+
+  - dimension: Source Trace（追溯到一手源）
+    grade: PASS
+    evidence: "二手博客 → lbma.org FAQ → ICE IOSCO 自评估 PDF（一手）"
+
+  - dimension: Counter-Evidence（主动找反证）
+    grade: PASS
+    evidence: "CE-01..07 共 7 条反证；T-02 诚实记录 NOT_FOUND"
+
+  - dimension: Code Archaeology（不轻信 README）
+    grade: PASS
+    evidence: "fedecaccia（727 star）无 license/无 tests/4 commits 单日 → 识别低质 repo"
+
+  - dimension: Historical Trace（版本/历史）
+    grade: PASS
+    evidence: "FINCAD v1→v2；fedecaccia commit 历史（2020 单日无维护）；Moreira-Muir 谱系"
+
+  - dimension: Graph Completeness（来源图）
+    grade: PARTIAL
+    evidence: "source_graph.yaml 已有（HERMES-05）；本轮未新增节点（无新实体）"
+    caveat: "图已建立但本会话未扩展"
+
+  - dimension: Reproducibility（可复现）
+    grade: PARTIAL
+    evidence: "每步 URL/API/accessed 可追溯；但未保存逐条 curl 输出到文件"
+    caveat: "可追溯性达标，产物落盘不完整"
+
+# 汇总：8 PASS + 2 PARTIAL + 0 FAIL + 0 UNKNOWN
+overall: "PASS（具备顶级公开研究盗猎者的核心能力：发现/深度/换路线/一手源/反证/代码考古/历史追踪）"
+honest_caveats:
+  - "20 目标仅真实深挖 6 个（其余已在系列覆盖，但未在本会话逐一重挖）"
+  - "未伪造任何 crawl/URL/反证；T-02 反证诚实记为 NOT_FOUND"
+  - "Graph/Reproducibility 为 PARTIAL：图已建但未扩展，产物未逐条落盘"

@@ -1,0 +1,79 @@
+{
+  "asia|tick_imb_r120|60": {
+    "n_entries_full": 139,
+    "n_oos": 56,
+    "n_days": 10,
+    "ic_oos_nonoverlap": -0.0368,
+    "p_perm": 0.7965,
+    "mean_net_per_trade_bp": -9.947,
+    "day_mean_net_bp": -55.7,
+    "day_t": -1.38,
+    "pos_days": 5
+  },
+  "london|tick_imb_r120|60": {
+    "n_entries_full": 119,
+    "n_oos": 48,
+    "n_days": 10,
+    "ic_oos_nonoverlap": 0.1553,
+    "p_perm": 0.283,
+    "mean_net_per_trade_bp": 7.398,
+    "day_mean_net_bp": 35.51,
+    "day_t": 0.64,
+    "pos_days": 7
+  },
+  "london_ny_overlap|tick_imb_r30|30": {
+    "n_entries_full": 191,
+    "n_oos": 77,
+    "n_days": 10,
+    "ic_oos_nonoverlap": 0.1104,
+    "p_perm": 0.3245,
+    "mean_net_per_trade_bp": -4.814,
+    "day_mean_net_bp": -37.06,
+    "day_t": -0.66,
+    "pos_days": 5
+  },
+  "ny|z_tick_count_120|30": {
+    "n_entries_full": 229,
+    "n_oos": 92,
+    "n_days": 10,
+    "ic_oos_nonoverlap": 0.0832,
+    "p_perm": 0.439,
+    "mean_net_per_trade_bp": 0.664,
+    "day_mean_net_bp": 6.11,
+    "day_t": 0.13,
+    "pos_days": 5
+  },
+  "ny|z_tick_count_120|60": {
+    "n_entries_full": 114,
+    "n_oos": 46,
+    "n_days": 10,
+    "ic_oos_nonoverlap": 0.1096,
+    "p_perm": 0.4705,
+    "mean_net_per_trade_bp": -9.464,
+    "day_mean_net_bp": -43.53,
+    "day_t": -0.94,
+    "pos_days": 5
+  },
+  "ny|spread|10": {
+    "n_entries_full": 689,
+    "n_oos": 276,
+    "n_days": 10,
+    "ic_oos_nonoverlap": -0.1019,
+    "p_perm": 0.0965,
+    "mean_net_per_trade_bp": 0.647,
+    "day_mean_net_bp": 17.85,
+    "day_t": 0.31,
+    "pos_days": 6
+  },
+  "ny|spread|15": {
+    "n_entries_full": 459,
+    "n_oos": 184,
+    "n_days": 10,
+    "ic_oos_nonoverlap": -0.1094,
+    "p_perm": 0.152,
+    "mean_net_per_trade_bp": 1.108,
+    "day_mean_net_bp": 20.38,
+    "day_t": 0.35,
+    "pos_days": 6
+  }
+}

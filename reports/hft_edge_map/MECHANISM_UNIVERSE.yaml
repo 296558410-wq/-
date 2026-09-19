@@ -1,0 +1,517 @@
+# =====================================================================
+# XAUUSD HFT MECHANISM UNIVERSE — 全球赚钱机制宇宙（价值拆解, v2）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# File: reports/hft_edge_map/MECHANISM_UNIVERSE.yaml
+# Version: 2026-09-06-hft-map-v2（v1 = 2026-09-05 23:14；v2 并入 HERMES-10 反证,
+#   EVIDENCE_CONVERGENCE.yaml 独立成层）
+# Rule: 机制存在 ≠ 价值存在 ≠ 可观测 ≠ 可交易。本表不假设任何机制有效。
+# Vocabulary discipline: 无主观词；INACCESSIBLE ≠ NO VALUE；DATA GAP ≠ REJECTED。
+# 25 机制编号 M01..M25 对应任务清单 1..25；允许标记 duplicate / dead end /
+#   contradiction / data gap / inaccessible——保留机制只为映射，不为凑数。
+# 每条证据详情: EVIDENCE_CONVERGENCE.yaml#Mxx（INDEPENDENT_EVIDENCE_COUNT 计数纪律见该文件 meta）。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  revision_note: "v2 修正（相对 2026-09-05 v1）: (1) HERMES-10 反证并入——vol/成本择时盈利 WEAKENED
+    (CONTRA-09), M07/M18 相关表述从'唯一可及盈利簇'改为'POSSIBLE INFORMATION LAYER';
+    (2) 每条机制挂 EVIDENCE_CONVERGENCE 证据融合条目; (3) proxy 警示（activity≠order flow,
+    volume 归一化破坏信号, 毛量≠净流, OBI flicker）写入相关机制; (4) M05 标记 DUPLICATE-PARTIAL of M04,
+    M06 并入做市簇——组合层只计一次。"
+  asset: XAUUSD
+  observation_frame: "FXTM(MT5 bid/ask/last, M1-H1 + tick W1 23 日) / DUKA(M1/M5/H1 2023-09..2024-03; tick 缺失)"
+  known_infrastructure_limits:
+    - "无 L2/深度/队列数据"
+    - "无 maker 通道（retail taker-only, 固定/可变点差 feed）"
+    - "无期权/期货/ETF/跨资产入库数据"
+    - "无成交级 tick（DUKA tick 未下载, KD-U01）"
+    - "无事件日历数据（Phase 7 仅日程时间戳簇聚）"
+    - "无真实执行通道（只读 MT5；执行模拟器未落地 RQ-07）"
+    - "FXTM 与 DUKA 窗口时间不对齐（无并发 cross-venue 对齐样本）"
+    - "延迟 ~100ms+ retail 链路（HERMES-10 §10: 延迟是 HFT 根本成本）"
+
+mechanisms:
+  - id: M01
+    name: "Information latency（信息延迟/最先知道）"
+    who: "news 基础设施玩家、直接连接交易所的做市商、宏观速记机构"
+    information: "在公众看到前获知宏观/突发/央行事件的实际数值与措辞"
+    timing: "毫秒-秒级（相对公众）"
+    transmission: "事件 → 瞬时再定价 → 全部 feed 跟随"
+    access: "无事件源直连；无超低延迟链路"
+    execution: "需要事件源直连 + 共址 + 微秒级栈"
+    cost: "基础设施极贵；人力 24h 监控；事件基差风险"
+    capacity: "单事件有限，需高频事件流支撑"
+    competition: "做市商/速记机构长期军备竞赛，公众侧无窗口"
+    failure: "新闻分发延迟收敛、官方直接播报、监管延迟披露"
+    local_status: UNTESTED
+    hermes_status: "CL-12 (宏观新闻前价格漂移 ~30min: UNCERTAIN; 快反应 INACCESSIBLE); HERMES-10 §10 延迟确认"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M01"
+    flags: ["INACCESSIBLE", "TIER3"]
+
+  - id: M02
+    name: "Event reaction（事件反应执行）"
+    who: "事件交易台、能快速执行的方向/波动交易者"
+    information: "事件语义即时解读（数据 vs 预期 vs 隐含）"
+    timing: "秒-分钟"
+    transmission: "波动率冲击 → spread 瞬宽 → 成交量爆发 → 价格发现"
+    access: "事件时间可从公共日历获取（分钟级）；反应快照可在 feed 上观测"
+    execution: "低延迟下单 + 成交确认；滑点控制"
+    cost: "冲击滑点、spread 瞬宽、假突破止损"
+    capacity: "事件窗容量大但拥挤"
+    competition: "快反应者众多；慢反应者吃残羹"
+    failure: "预期充分定价（数据完全可预测）；波动即卖即崩"
+    local_status: "OPEN (KD-O06 事件×微观条件化; KD-U02 因果性未知)"
+    hermes_status: "CL-12 UNCERTAIN; CL-04 日程→activity 簇聚 CONFIRMED(E4)"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M02"
+    flags: ["OPEN", "TIER1-CANDIDATE(RQ-H2)"]
+
+  - id: M03
+    name: "Order flow（订单流信息）"
+    who: "dealer 银行、有专有客户流的流动性提供者"
+    information: "真实买卖失衡、客户流方向、大单分拆痕迹"
+    timing: "实时，领先公开报价数秒-分钟"
+    transmission: "流 → 存货调整 → 报价/点差 → 价格"
+    access: "无；仅报价 tick（非成交流）；零售经纪 feed 不含真实 taker 流"
+    execution: "须本身是 dealer 或购买专有流"
+    cost: "专有数据昂贵；做市存货成本"
+    capacity: "大"
+    competition: "银行间专属，几乎不可能渗透"
+    failure: "电子匿名化削弱流信息价值"
+    local_status: "部分 (P7/KD-C07 ≥5m 聚合微观方向 REJECTED; ≤3m tick 层 DATA GAP)"
+    hermes_status: "CL-08 INACCESSIBLE (Evans-Lyons 不可复现); DE-09 永久 dead end; HERMES-10: 毛量≠净流(HBS), OBI 被 HFT flicker 污染(arxiv 2507.22712)"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M03"
+    flags: ["INACCESSIBLE", "PROXY-DIRECTION-DEAD(≥5m)", "DATA_GAP(≤3m)"]
+
+  - id: M04
+    name: "Liquidity provision（流动性提供）"
+    who: "做市商、流动性提供者、HFT 庄家"
+    information: "订单簿状态、存货、逆向选择风险、补单流"
+    timing: "实时连续"
+    transmission: "报价两侧同时更新 → 赚取买卖价差"
+    access: "无 maker 通道、无 L2（KD-U06）"
+    execution: "做市引擎、队列管理、价格/数量/时间权衡"
+    cost: "逆向选择、存货风险、拥挤"
+    capacity: "按做市商资本与风险预算；总量大"
+    competition: "生态位竞争激烈；盈利由环境信息度主导而非策略（arxiv:2606.05882）"
+    failure: "信息度环境突变、波动率尖峰、监管变化"
+    local_status: UNTESTED (不可观测)
+    hermes_status: "CL-09 CONTRADICTED + INACCESSIBLE; DE-08 INFRA_UNLOCK 前不可开"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M04"
+    flags: ["INACCESSIBLE", "TIER3", "MM-CLUSTER"]
+
+  - id: M05
+    name: "Market making（报价做市）"
+    who: "同上；需报价义务与双向往来"
+    information: "订单簿 + 自身存货 + 对手方流统计"
+    timing: "微秒-毫秒"
+    transmission: "持续双边报价 → 从交易频繁度与 spread 盈利"
+    access: "无（与 M04 同约束）"
+    execution: "双边报价引擎 + 风险中性对冲"
+    cost: "存货 + 逆向选择 + 技术成本"
+    capacity: "大但高度内卷"
+    competition: "生态位已饱和且技术门槛高"
+    failure: "环境驱动盈利下策略差异化无意义"
+    local_status: UNTESTED
+    hermes_status: "CL-09 CONTRADICTED; DE-08 短期不可能"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M05"
+    flags: ["INACCESSIBLE", "TIER3", "DUPLICATE-PARTIAL-of-M04", "MM-CLUSTER"]
+
+  - id: M06
+    name: "Spread capture（点差捕获）"
+    who: "做市商与 maker 返佣参与者"
+    information: "订单簿边缘、返佣结构、queue 位置"
+    timing: "毫秒级"
+    transmission: "挂单吃 spread + maker rebate"
+    access: "无 maker 接入；零售点差为固定成本非捕获对象"
+    execution: "maker 引擎 + 队列位置优化"
+    cost: "逆向选择、queue 风险"
+    capacity: "中等"
+    competition: "饱和"
+    failure: "返佣取消、点差压缩"
+    local_status: UNTESTED
+    hermes_status: "DE-08 INACCESSIBLE"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M06"
+    flags: ["INACCESSIBLE", "TIER3", "MM-CLUSTER", "MERGE-WITH-M04/M05"]
+
+  - id: M07
+    name: "Adverse selection avoidance（逆向选择规避）"
+    who: "做市商、taker 端的聪明执行者"
+    information: "识别何时自己是信息劣势方（大玩家入场、波动前兆）"
+    timing: "秒-分钟"
+    transmission: "规避被吃单的时机 → 减少毒流亏损"
+    access: "只能通过活动/spread/波动 proxy 间接推断"
+    execution: "需要真实执行环境验证（当前无）"
+    cost: "规避过度的机会成本"
+    capacity: "依附于执行层"
+    competition: "与 M03 同源优势"
+    failure: "无法区分信息流与噪音流"
+    local_status: "OPEN (KD-U07 taker adverse selection 10-30s 未知; KD-O08 影响曲线描述性)"
+    hermes_status: "HERMES-10: VPIN 批判确认（Andersen-Bondarenko）→ VPIN standalone alpha = IGNORE; 相关成本/风险信息 = POSSIBLE INFORMATION LAYER（非盈利声称）"
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: WEAK_PROXY
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M07"
+    flags: ["OPEN-PROXY-ONLY", "VPIN-CAUTION"]
+
+  - id: M08
+    name: "Short-term momentum（短时动量）"
+    who: "统计套利/事件后延续交易者"
+    information: "价格趋势延续统计（无需私有信息）"
+    timing: "秒-小时"
+    transmission: "订单流惯性/信息扩散 → 延续"
+    access: "公开价格完全可观测"
+    execution: "常规 taker 执行即可"
+    cost: "点差 + 滑点（高频下吞噬大部分毛收益）"
+    capacity: "有限且拥挤"
+    competition: "已被广泛开采（学术+业界）"
+    failure: "开采殆尽、成本侵蚀"
+    local_status: "CLOSED-REJECTED (KD-C01; F-R1/R17 双源双期 0 SUPPORTED; ≤3m tick 层为补测 KD-O01)"
+    hermes_status: "CL-03 REJECTED (已测空间); DE-01"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: DIRECTLY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M08"
+    flags: ["CLOSED", "DEAD-END(DE-01)", "OBSERVABLE-BUT-REJECTED"]
+
+  - id: M09
+    name: "Short-term reversal（短时反转）"
+    who: "流动性提供者型、过度反应收割者"
+    information: "价格过度偏离（流动性冲击后回摆）"
+    timing: "秒-分钟"
+    transmission: "冲击 → 回复"
+    access: "公开价格可观测"
+    execution: "taker 即可但成本敏感"
+    cost: "点差、冲击反向风险"
+    capacity: "中"
+    competition: "拥挤（做市商天然反向）"
+    failure: "趋势市反转失效"
+    local_status: "CLOSED-REJECTED (KD-C02 无条件 MR; 条件 MR 预注册 P2/P4)"
+    hermes_status: "CL-03 REJECTED; DE-02 条件化存活路径"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: DIRECTLY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M09"
+    flags: ["CLOSED-UNCONDITIONAL", "OPEN-CONDITIONAL(P2/P4-PREREGISTERED)"]
+
+  - id: M10
+    name: "Volatility clustering（波动聚集）"
+    who: "波动率交易者、风险管理者"
+    information: "波动自相关（大波动后仍大）"
+    timing: "分钟-天"
+    transmission: "风险状态持续 → 未来 vol 可部分预测"
+    access: "完全可观测（历史价格）"
+    execution: "无需方向预测；用于头寸/成本/风险层"
+    cost: "模型风险、regime 突变"
+    capacity: "大（风险层容量）"
+    competition: "拥挤但作为风险输入仍有价值"
+    failure: "长期记忆断裂、regime 切换"
+    local_status: "SUPPORTED-NON_DIRECTIONAL (Phase 3-6; CL-01/02 双源 IC 0.60-0.89)"
+    hermes_status: "CL-01 CONFIRMED (activity→vol); CL-02 CONFIRMED (spread→vol-); HERMES-10 proxy 警示: activity 是成交量代理 → 毛量归一化破坏信号(arxiv 2512.18648)/毛量≠净流(HBS)——加标签风险非推翻(E5 双源仍立)"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: DIRECTLY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M10"
+    flags: ["E5-CONFIRMED-NON-DIRECTIONAL", "RISK-INPUT-ONLY", "PROXY-LABEL-CAUTION"]
+
+  - id: M11
+    name: "Volatility risk premium（波动率风险溢价）"
+    who: "期权卖方/结构产品发行方"
+    information: "隐含 vol > 已实现 vol（系统性）"
+    timing: "天-周"
+    transmission: "卖出波动收取溢价（承担尾部）"
+    access: "无期权数据（CL-11 DATA GAP）"
+    execution: "需期权做市/结构通道"
+    cost: "尾部风险、负偏度"
+    capacity: "大但尾部成本大"
+    competition: "保险型资金拥挤"
+    failure: "尾部事件一次性吞没多年溢价"
+    local_status: DATA_GAP
+    hermes_status: "CL-11 DATA_GAP; 黄金 vol 本身是尾部风险 carry"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M11"
+    flags: ["DATA_GAP", "TIER3", "INACCESSIBLE"]
+
+  - id: M12
+    name: "Cross-venue lead-lag（跨场所领先-滞后）"
+    who: "HFT 套利者（COMEX 黄金期货 vs 伦敦现货 vs ETF）"
+    information: "同资产跨场所价格先后"
+    timing: "毫秒-秒"
+    transmission: "主导场所先动 → 从属场所跟随"
+    access: "仅 FXTM/DUKA 两个零售现货 feed；无 COMEX 期货/LBMA 深度；两 feed 时间不对齐"
+    execution: "跨场所同时挂单（需多场所通道）"
+    cost: "场所间结算/转换成本"
+    capacity: "中"
+    competition: "机构主导"
+    failure: "场所同步化、套利收敛"
+    local_status: DATA_GAP (无期货数据; KD-U05)
+    hermes_status: "CL-10 CONTRADICTED (DXY→黄金 OOS 负——不同机制, 勿混); COMEX 套利链可能成立但需期货数据"
+    accessibility: PARTIALLY_ACCESSIBLE (仅现货-现货比较，非真 lead-lag)
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M12"
+    flags: ["DATA_GAP", "TIER3(真套利链)", "WEAK-PROXY-ONLY"]
+
+  - id: M13
+    name: "Futures/spot basis（期货-现货基差）"
+    who: "套利者、实物交易商、bullion bank"
+    information: "basis/backwardation = 实物压力信号"
+    timing: "天-周（信号），分钟（套利执行）"
+    transmission: "实物需求压力 → basis 错位 → 现货价格传导"
+    access: "无期货数据（KD-U05）；无 EFP/GOFO 类数据"
+    execution: "需期货+现货+实物交割通道"
+    cost: "资金成本、存储、转换"
+    capacity: "机构级"
+    competition: "bullion bank 生态"
+    failure: "套利基础设施普及后收敛"
+    local_status: DATA_GAP
+    hermes_status: "MECH-14 机制真实（描述性）; RQ-06 DATA_GAP"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M13"
+    flags: ["DATA_GAP", "TIER3", "INACCESSIBLE"]
+
+  - id: M14
+    name: "Options information（期权信息）"
+    who: "做市商、聪明钱（用期权表达观点）"
+    information: "IV 结构/skew/成交 = 知情交易信号"
+    timing: "分钟-天"
+    transmission: "期权先行 → 现货滞后"
+    access: "无黄金期权数据（CL-11/15）"
+    execution: "期权+现货组合"
+    cost: "期权价差、保证金"
+    capacity: "大"
+    competition: "学术界已质疑（借券费代理问题）"
+    failure: "信息已被期权市场自身定价"
+    local_status: DATA_GAP
+    hermes_status: "CL-07/15 CONTRADICTED (Muravyev JFE 2025: 大部分是借券费代理; 黄金无卖空约束, 机制可能不同, 但需数据)"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M14"
+    flags: ["DATA_GAP", "TIER3", "EXPECTATION-DOWNGRADED"]
+
+  - id: M15
+    name: "Macro information transmission（宏观信息传导）"
+    who: "宏观交易者、事件反应台"
+    information: "宏观数据发布如何传导至 XAUUSD"
+    timing: "分钟-小时"
+    transmission: "数据 → 美元/利率 → 黄金（间接）或直接避险流"
+    access: "日历时间可获（分钟级）；需要事件日历数据"
+    execution: "事件窗执行"
+    cost: "事件基差风险"
+    capacity: "事件依赖"
+    competition: "反应速度竞争"
+    failure: "传导链断裂、数据预定价"
+    local_status: "OPEN (KD-O06; Phase 7 仅日程簇聚 E4)"
+    hermes_status: "CL-04 CONFIRMED (日程→activity 簇聚)"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M15"
+    flags: ["OPEN", "TIER1-CANDIDATE(RQ-H2)", "CAUSALITY-UNKNOWN(KD-U02)"]
+
+  - id: M16
+    name: "Market impact prediction（市场冲击预测）"
+    who: "大单执行者（机构）"
+    information: "自身订单对未来价格的影响函数"
+    timing: "分钟-小时"
+    transmission: "拆单执行 → 可预测冲击曲线"
+    access: "无自身大单（小资金）；可研究外部冲击响应"
+    execution: "执行算法（TWAP/VWAP/IS）"
+    cost: "冲击本身"
+    capacity: "依附于规模"
+    competition: "执行商竞争"
+    failure: "冲击模型失效于 regime 突变"
+    local_status: "OPEN (KD-O08 影响曲线描述性待做; tick 缺失; P7 impact 探测器已 REJECT)"
+    hermes_status: "执行层 INACCESSIBLE 簇 (无真实执行); RQ-02 真实成本警示"
+    accessibility: PARTIALLY_ACCESSIBLE (描述性研究)
+    observability: WEAK_PROXY
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M16"
+    flags: ["OPEN-DESCRIPTIVE", "TICK-GATED", "NO-OWN-IMPACT"]
+
+  - id: M17
+    name: "Transaction-cost forecasting（交易成本预测）"
+    who: "执行优化者、任何成本敏感策略"
+    information: "未来 spread/滑点/成本状态可预测 → 择时执行"
+    timing: "分钟-小时"
+    transmission: "成本状态本身有结构（spread↔vol 关系）"
+    access: "spread 可在 DUKA feed 观测（M1/H1）；FXTM 固定点差不可"
+    execution: "执行调度（等好成本窗）"
+    cost: "等待的机会成本"
+    capacity: "大（服务所有层）"
+    competition: "低（中间层被忽视）"
+    failure: "成本状态不可预测（纯白噪音）"
+    local_status: "OPEN (KD-O02 execution 层; C6_spread_state 稳定但未接成本)"
+    hermes_status: "CL-06 SUPPORTED (成本 regime 依赖, E3 美股单源未独立复现; XAUUSD 未验证 AD-1); HERMES-10: 保留为 POSSIBLE INFORMATION LAYER——盈利升级需成本建模+预注册, 禁止提前声称 PROFITABLE EDGE"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M17"
+    flags: ["OPEN", "TIER1-CANDIDATE(RQ-H1)", "INFORMATION-LAYER-NOT-EDGE", "FEED-LIMITED(FXTM)"]
+
+  - id: M18
+    name: "Regime transition（状态切换）"
+    who: "风险管理者、条件化策略"
+    information: "平静↔活跃状态切换的先行信号（vol 层, 非方向）"
+    timing: "分钟-天"
+    transmission: "流动性/vol 状态切换 → 风险机会再分配"
+    access: "可观测（价格+spread proxy）"
+    execution: "风险层 gate（非方向）"
+    cost: "误判成本（切换噪声）"
+    capacity: "大"
+    competition: "中"
+    failure: "切换无先行信号（纯泊松）"
+    local_status: "OPEN (KD-REP1/TAX1 描述性; REP Phase2 状态稳定 13 KEEP; 切换动力未验; F-R14 vol 切换信息 SUPPORTED)"
+    hermes_status: "HERMES-10 特别修正: 'risk/cost timing = 当前最可接近盈利 edge' 不成立——ACTIVITY→FUTURE VOL = CONFIRMED INFORMATION(E5), VOL INFO→PROFITABLE TIMING = UNPROVEN/WEAKENED(CONTRA-09: JFE 成本归零 + Elsevier 2000 后消失)。定位 = POSSIBLE INFORMATION LAYER（风险管理输入）"
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M18"
+    flags: ["OPEN", "INFORMATION-LAYER-NOT-EDGE", "TIER1-CANDIDATE(RQ-H3, RISK-INPUT-FRAMING)", "HERMES-10-CORRECTED"]
+
+  - id: M19
+    name: "Relative value（相对价值）"
+    who: "配对交易者、跨资产相对价值基金"
+    information: "同族资产价差偏离（金银比、黄金-通胀、黄金-实际利率）"
+    timing: "天-周"
+    transmission: "基本面锚 → 偏离回归"
+    access: "需跨资产数据（银/利率/ETF），当前未入库"
+    execution: "双腿执行"
+    cost: "双腿成本、锚漂移"
+    capacity: "大"
+    competition: "拥挤（宏观基金核心策略）"
+    failure: "锚本身漂移（regime 变化）"
+    local_status: UNTESTED (无跨资产数据)
+    hermes_status: "无独立条目; KD-U05 中低优先级; CONTRA-03 相关 regime 依赖"
+    accessibility: INACCESSIBLE (当前数据)
+    observability: NOT_OBSERVABLE (当前)
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M19"
+    flags: ["DATA_GAP", "TIER4", "ANCHOR-DRIFT-RISK"]
+
+  - id: M20
+    name: "Statistical arbitrage（统计套利）"
+    who: "量化对冲基金"
+    information: "多腿协整/统计关系偏离"
+    timing: "秒-天"
+    transmission: "价差回复"
+    access: "单资产上表现为 MR（已测）；跨资产腿无数据"
+    execution: "多资产执行"
+    cost: "多腿成本"
+    capacity: "大"
+    competition: "拥挤"
+    failure: "协整断裂"
+    local_status: "单腿 MR CLOSED-REJECTED (KD-C02); 多腿 DATA GAP"
+    hermes_status: "并入 CL-03/DE-02"
+    accessibility: INACCESSIBLE (当前数据)
+    observability: NOT_OBSERVABLE (当前)
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M20"
+    flags: ["DATA_GAP(多腿)", "CLOSED(单腿)", "TIER4"]
+
+  - id: M21
+    name: "Execution alpha（执行 alpha）"
+    who: "聪明执行者（把好信号执行好）"
+    information: "何时/如何执行优于平均（成本+滑点+选择）"
+    timing: "秒-分钟"
+    transmission: "信号 → 执行调度增益"
+    access: "部分（成本状态可观测）; 真实成交反馈缺失"
+    execution: "执行引擎 + 回测模拟器（RQ-07 未建）"
+    cost: "模拟与现实差距"
+    capacity: "叠加在所有层上"
+    competition: "低关注"
+    failure: "执行模拟失真 → 纸上增益"
+    local_status: "OPEN (KD-R1A 声称边界: 不做 execution alpha 声称; RQ-07 执行模拟器候选; Phase5 DUKA 薄 execution alpha 0.041bp/笔)"
+    hermes_status: "RQ-02/RQ-07 REGISTERED (执行层真实成本; last look/流毒性 > 半价差)"
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: WEAK_PROXY
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M21"
+    flags: ["OPEN", "ENGINEERING-GATED(RQ-07)", "THIN-SINGLE-SOURCE"]
+
+  - id: M22
+    name: "Queue / microstructure effects（队列与微观结构效应）"
+    who: "做市商、HFT"
+    information: "队列位置、订单簿边缘动力学"
+    timing: "毫秒-秒"
+    transmission: "queue 位置决定成交优先与逆向选择"
+    access: "无 L2/队列数据"
+    execution: "maker 引擎"
+    cost: "queue 风险"
+    capacity: "中"
+    competition: "生态位内卷"
+    failure: "队列随机化（FIFO→pro-rata）"
+    local_status: UNTESTED (KD-U06 不可观测)
+    hermes_status: "DE-08 INACCESSIBLE"
+    accessibility: INACCESSIBLE
+    observability: NOT_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M22"
+    flags: ["INACCESSIBLE", "TIER3"]
+
+  - id: M23
+    name: "Liquidity shocks（流动性冲击）"
+    who: "风险管理者、逆向交易者、做市商"
+    information: "流动性瞬间消失的前兆/同步指标"
+    timing: "秒-分钟"
+    transmission: "流动性收缩 → spread 爆宽 → 价格跳变"
+    access: "部分 proxy（spread 宽化、vol 尖峰、活动异常）"
+    execution: "风险规避 + 机会捕获"
+    cost: "冲击中的不利成交"
+    capacity: "事件驱动"
+    competition: "中"
+    failure: "前兆不存在（无预警冲击）"
+    local_status: "OPEN (KD-TAX1 风险形态描述; KD-O03 条件 MR; 高波动 taxonomy regime 依赖; NBQ-T1 前置识别 NOT EVALUABLE)"
+    hermes_status: "HERMES-10 修正: 属成本/风险信息层（POSSIBLE INFORMATION LAYER）；盈利声称 WEAKENED（同 CONTRA-09）；无条件 gate 已否(CL-15) → 形态条件化为存活路径"
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: WEAK_PROXY
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M23"
+    flags: ["OPEN-DESCRIPTIVE", "PREDICTIVE-NOT-EVALUABLE(NBQ-T1)", "INFORMATION-LAYER-NOT-EDGE"]
+
+  - id: M24
+    name: "Auction / fix mechanisms（定盘与集中竞价机制）"
+    who: "LBMA 定盘参与者、围绕 fix 的套利与做市"
+    information: "fix 流程中的失衡/成交节奏"
+    timing: "分钟（fix 窗）"
+    transmission: "fix 失衡 → 现货价格锚定/波动"
+    access: "fix 时间窗（伦敦 10:30/15:00）可从公开来源获；feed 覆盖 24h"
+    execution: "事件窗内执行"
+    cost: "fix 窗点差/波动"
+    capacity: "中"
+    competition: "中"
+    failure: "fix 机制改革后失衡消失"
+    local_status: "OPEN (KD-U03 从未研究; FXTM tick 可做描述性 autopsy)"
+    hermes_status: "evidence trail E1→E2 (IOSCO 自评估) 已建档; RQ-03 WARM"
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M24"
+    flags: ["OPEN", "TIER1-CANDIDATE(RQ-H5)", "ZERO-COST-DESCRIPTIVE"]
+
+  - id: M25
+    name: "Cross-asset information（跨资产信息）"
+    who: "宏观基金、跨市场套利者"
+    information: "美元/美债/股指/原油/避险情绪 → 黄金"
+    timing: "分钟-天"
+    transmission: "跨市场同步/领先传播"
+    access: "外部数据未入库（KD-U05）"
+    execution: "跨资产执行"
+    cost: "多腿成本"
+    capacity: "大"
+    competition: "拥挤（宏观共识）"
+    failure: "相关结构 regime 依赖（黄金-DXY 相关断裂本身是信号 CONTRA-03）"
+    local_status: DATA_GAP (无外部数据)
+    hermes_status: "CL-10 CONTRADICTED (DXY lead-lag 已否: rahulsp 2026); CONTRA-03 regime 依赖"
+    accessibility: INACCESSIBLE (当前数据)
+    observability: NOT_OBSERVABLE (当前)
+    evidence_convergence: "EVIDENCE_CONVERGENCE.yaml#M25"
+    flags: ["DATA_GAP", "DXY-LEADLAG-CONTRADICTED", "TIER4"]
+
+# 汇总口径（v2）
+summary:
+  accessible_now: [M02, M08, M09, M10, M15, M17, M18, M21, M23, M24]
+  partially_accessible: [M07, M12, M16, M21, M23, M24]
+  inaccessible: [M01, M03, M04, M05, M06, M11, M13, M14, M19, M20, M22, M25]
+  note: "accessible_now = 至少存在可观测 proxy 或可测组件；不意味有 edge。M08/M09 可观测但本地已 REJECTED（成本后无价值）——可观测性 ≠ 价值。M10 是唯一 E5 CONFIRMED（非方向信息）。M07/M17/M18/M21/M23 的可及限于 INFORMATION/PROXY 层——盈利 edge 声称一律 WEAKENED 或 UNPROVEN（HERMES-10）。"
+  duplicate_handling: "M05 = DUPLICATE-PARTIAL of M04（做市簇）；M06 并入做市簇（MERGE-WITH-M04/M05）；经济机制去重后 = 22 条独立机制线 + 3 条同簇变体。组合层（HFT_RESEARCH_PORTFOLIO）按簇计，不重复投入。"
+  dead_end_handling: "M03(≥5m 方向) / M08 / M09(无条件) / M20(单腿) = DEAD END（本地已测空间），保留条目用于映射与 reentry 防误；重开条件见 dead_end_index + hypothesis_registry。"
+  contradiction_handling: "M14（IV 信息, CONTRA-05/CL-07）与 M25（DXY lead-lag, CONTRA-08/CL-10）被外部反证削弱——记录为 CONTRADICTED 期待降级，不自动升级任何一侧。"
+  data_gap_handling: "M11/M13/M14/M19/M25/M20(多腿)/M12(真套利) = DATA GAP ≠ REJECTED——数据解锁即重评（dead_end_index reopen_conditions）。"

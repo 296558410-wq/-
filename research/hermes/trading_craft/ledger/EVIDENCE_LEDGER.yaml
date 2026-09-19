@@ -1,0 +1,70 @@
+# EVIDENCE LEDGER（Trading Craft 证据账本）
+# 生成：2026-09-05 · 每条 EVD → CLM → SRC。严格分离 SOURCE SAYS / OUR INTERPRETATION / OUR INFERENCE。
+
+evidence:
+  - id: EVD-0001
+    links: {claim: CLM-0001, source: SRC-0001}
+    source_says: "随机游走下简单 0/1 止损规则总降低期望收益；存在动量时止损可增值（stopping premium，牛市期 50-100bp/月）"
+    our_interpretation: "止损是被动依附信号结构的 option-like 规则"
+    our_inference: "对无趋势的黄金，止损手艺无 edge 可加 → 支撑 CLM-0001/0002/0009/0010"
+    evidence_type: "analytical framework + empirical (futures)"
+    result: "conditional: random-walk→stops hurt; momentum→may add"
+    limitations: "基于买持策略；非交易系统退出通用"
+    counter_evidence: "无"
+    applicability: CROSS_ASSET
+    economic_value_status: "条件相关（无动量则否）"
+    openclaw_relevance: "防把止损当普遍有益"
+
+  - id: EVD-0002
+    links: {claim: CLM-0002, source: SRC-0004}
+    source_says: "黄金 MACD 出场规则（止损/止盈）与参数强耦合；出场设计本身不足以弥补次优参数"
+    our_interpretation: "出场不独立制造 edge"
+    our_inference: "手艺放大/不制造 → CLM-0002/0010"
+    evidence_type: "empirical (gold, ML+classical)"
+    limitations: "MACD 方向=换皮（本地 REJECTED）；结果受参数影响"
+    applicability: GOLD_DIRECT
+    economic_value_status: "方法论点相关，方向无关"
+
+  - id: EVD-0003
+    links: {claim: CLM-0003, source: SRC-0003}
+    source_says: "CTA 凸性=持续趋势中加仓（正 gamma），chop 中小损（负 theta）；2008/2022 证明趋势期的加速收益"
+    our_interpretation: "凸性来自可放大方向趋势的存在"
+    our_inference: "无趋势 → 无赢家群体可奔跑 → CLM-0003/0009"
+    evidence_type: "institutional context"
+    limitations: "聚合指数语境；非单一可复现研究"
+    applicability: CROSS_ASSET
+    economic_value_status: "依赖底层趋势 edge"
+
+  - id: EVD-0004
+    links: {claim: CLM-0004, source: SRC-0005}
+    source_says: "MFE/MAE 是 hindsight 数据，不能作实时出场输入"
+    our_interpretation: "多周期和出场趋势信号常混入事后信息（MFE 类）"
+    our_inference: "多周期方向无独立机制（换皮）+ lookahead 纪律 → CLM-0004"
+    evidence_type: "practitioner caution"
+    applicability: CROSS_ASSET
+    economic_value_status: "方法论纪律"
+
+  - id: EVD-0005
+    links: {claim: CLM-0006, source: "本地 E5 + Collin-Dufresne（前研究）"}
+    source_says: "vol-targeting 定风险暴露；成本 regime 择时优于收益择时"
+    our_interpretation: "vol-sizing 和成本择时是非方向风险/执行层手艺"
+    our_inference: "→ CLM-0006/0007（R1 形式）"
+    evidence_type: "本地 E5 + external E3"
+    applicability: GOLD
+    economic_value_status: "R1 唯一可及实现"
+
+  - id: EVD-0006
+    links: {claim: CLM-0008, source: SRC-0002}
+    source_says: "黄金简单趋势+momentum，2015-2025 OOS，净成本 Sharpe 2.88、MDD 0.52%、基准中性"
+    our_interpretation: "红旗：实际已实现波动 0.91%(≈空仓)、43%年化=15%vol 名义杠杆、Sharpe 2.88 是搜索强度特征"
+    our_inference: "RED_FLAG/UNCONFIRMED，矛盾本地 E5；需对抗复现，不采信 → CLM-0008"
+    evidence_type: "preprint, single, unreplicated"
+    limitations: "无独立复现；方法学红旗"
+    counter_evidence: "本地 E5 + Kaminski-Lo + vol-timing 失败文献"
+    applicability: GOLD_FUTURES
+    economic_value_status: "UNCONFIRMED"
+
+counter_search_log:
+  - {claim: CLM-0001, searched: "止损相关文献", result: "无强反证；条件性已内置"}
+  - {claim: CLM-0008, searched: "黄金趋势复现", result: "无独立复现；本地 E5 矛盾"}
+  - {claim: CLM-0003, searched: "CTA 凸性", result: "机制真实，前提依赖明确"}

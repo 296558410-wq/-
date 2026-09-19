@@ -1,0 +1,47 @@
+[
+  {
+    "feature": "spread_z_chg",
+    "auc_oos": 0.4909,
+    "p_perm": 0.708,
+    "n_oos_blocks": 1321,
+    "base_rate": 0.311,
+    "q": 0.708,
+    "bh_reject_01": false
+  },
+  {
+    "feature": "log_act_chg",
+    "auc_oos": 0.5264,
+    "p_perm": 0.056,
+    "n_oos_blocks": 1321,
+    "base_rate": 0.311,
+    "q": 0.0933,
+    "bh_reject_01": true
+  },
+  {
+    "feature": "vol_ratio_5_30",
+    "auc_oos": 0.5104,
+    "p_perm": 0.28,
+    "n_oos_blocks": 1321,
+    "base_rate": 0.311,
+    "q": 0.35,
+    "bh_reject_01": false
+  },
+  {
+    "feature": "abs_mom30",
+    "auc_oos": 0.5331,
+    "p_perm": 0.016,
+    "n_oos_blocks": 1321,
+    "base_rate": 0.311,
+    "q": 0.04,
+    "bh_reject_01": true
+  },
+  {
+    "feature": "rvol_pct",
+    "auc_oos": 0.6003,
+    "p_perm": 0.0,
+    "n_oos_blocks": 1321,
+    "base_rate": 0.311,
+    "q": 0.0,
+    "bh_reject_01": true
+  }
+]

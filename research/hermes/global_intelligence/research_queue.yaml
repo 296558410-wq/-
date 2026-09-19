@@ -1,0 +1,92 @@
+# XAUUSD RESEARCH QUEUE（研究队列 → OpenClaw Handoff 的机器可读版）
+# 生成：2026-09-05 · HERMES-03 · 冻结评分规则（测试前固定，非事后）
+# 评分维度(权重，和=100): novelty(15) evidence(15) mechanism(15) xauusd_relevance(15)
+#   data_feasibility(10) execution_feasibility(10) economic_potential(10) research_cost(5) overlap(5)
+# 优先级: HOT / WARM / ARCHIVE / CONTRADICTION / DATA_GAP
+# 状态: NEW|SCREENED|RELEVANT|REGISTERED_CANDIDATE|PREREG_PENDING|RESEARCH_READY|REJECTED|ARCHIVED|DATA_GAP|CONTRADICTED
+# Hermes 只能建 REGISTERED_CANDIDATE，不得自行实验。
+
+meta:
+  scoring_frozen: true
+  note: "评分是 Priority Aid 非 Final Judgment；高分组只进『OpenClaw 审查队列』"
+
+queue:
+  - id: RQ-01
+    title: "形态条件化的 adaptive risk edge（vol/activity/trading-cost 择时）"
+    mechanism: [MECH-03, MECH-04]
+    source: "NBER w24222 (Collin-Dufresne); arxiv:2212.07288; CONTRA-01"
+    evidence: "E3（美股/多因子）；XAUUSD 层 E5（activity→vol 0.60-0.89 已证非方向）"
+    why_relevant: "外部证据直指『波动+交易成本择时 > 收益择时』，正是 R1 adaptive 方向的机制层支撑；R1' 已证无条件日级 gate 为负，外部证据提示应走『形态条件化』"
+    what_known: "XAUUSD vol/activity 信息非方向（E5）；R1'-B-N2 无条件日级降险 REJECT、C REDUNDANT"
+    what_unknown: "哪种风险『形态』值得事前门控（R1' NEXT QUESTION 的 autopsy 尚未完成）"
+    required_data: "已有（FXTM H1/M1 + DUKA M1）；tick 级需 D2"
+    value_score: 88
+    overlap: "与 R1' 直接衔接，非重复"
+    risk: "重蹈『无条件 gate』覆辙 → 必须先 autopsy 定形态，再预注册"
+    status: REGISTERED_CANDIDATE
+    priority: HOT
+    recommended_next_step: REVIEW
+
+  - id: RQ-02
+    title: "执行层真实成本模型（last look + 流毒性 > 半价差）"
+    mechanism: [MECH-05]
+    source: "BIS 2025 Triennial; FX execution 文献"
+    evidence: "E3（FX/OTC 结构事实）"
+    why_relevant: "直接解释 Phase 5 成本幻觉 + FL-05/FL-21；≤1m 候选的『真实可交易性』依赖此"
+    what_known: "Phase 5：FXTM 固定点差无择时空间；DUKA 可变点差有薄 execution alpha"
+    what_unknown: "XAUUSD 零售 feed 的 last look 参数、流毒性、拒单率"
+    required_data: "成交级 tick + 拒单/流毒性标记（当前缺失 → DATA GAP）"
+    value_score: 80
+    overlap: "扩展 RID-005/KD-O02，非重复"
+    risk: "数据缺口（无 signed flow/拒单）→ 只能理论+理想化假设"
+    status: DATA_GAP
+    priority: HOT
+    recommended_next_step: DATA_GAP
+
+  - id: RQ-03
+    title: "LBMA 定盘窗（10:30/15:00 伦敦）microstructure autopsy"
+    mechanism: [MECH-01]
+    source: "IBA auction 机制 + WatchGold 拆解"
+    evidence: "E2/E3（机制描述）"
+    why_relevant: "定盘是黄金 spot 最重权重的定价时刻；可观察的报价/流动性行为（描述性）"
+    what_known: "Phase 6/7 有 macro 日程窗 activity 簇聚（E4）；RID-009 已登记"
+    what_unknown: "定盘窗在 FXTM tick 上是否有可辨识的微观结构特征"
+    required_data: "已有（FXTM tick 覆盖 24h）"
+    value_score: 55
+    overlap: "RID-009 延伸"
+    risk: "描述性研究，不预判方向"
+    status: REGISTERED_CANDIDATE
+    priority: WARM
+    recommended_next_step: REVIEW
+
+  - id: RQ-04
+    title: "COMEX 期货→现货 lead-lag（跨资产价格发现）"
+    mechanism: [MECH-02]
+    source: "COMEX/LBMA/GLD 套利结构"
+    evidence: "E3（多源一致：COMEX 领先尤其美国时段）"
+    why_relevant: "XAUUSD 价格发现源头在 COMEX；lead-lag 是跨资产信息（KD-U05）"
+    what_known: "KD-U05 已登记为跨资产数据缺口"
+    what_unknown: "COMEX→XAUUSD spot 的具体 lead-lag 结构"
+    required_data: "COMEX/GLD 数据（未接入 → KD-U05）"
+    value_score: 45
+    overlap: "KD-U05 延伸"
+    risk: "数据缺口"
+    status: DATA_GAP
+    priority: DATA_GAP
+    recommended_next_step: DATA_GAP
+
+  - id: RQ-05
+    title: "研究协议升级：LLM search-intensity 泄漏的结构性防护"
+    mechanism: [MECH-11]
+    source: "arxiv:2608.27734 (What survives honest evaluation?)"
+    evidence: "E2/E3（方法论）"
+    why_relevant: "直接针对 OpenClaw/Hermes 的 LLM 研究范式；FL-20"
+    what_known: "Phase 9A 已有 freeze+Gate+redundancy 守卫；FL-16/17 已登记"
+    what_unknown: "如何把『lookahead 修正 + search 缩减』从程序性升级为结构性"
+    required_data: "无（方法论）"
+    value_score: 75
+    overlap: "扩展 FL-16/17/20"
+    risk: "无"
+    status: REGISTERED_CANDIDATE
+    priority: HOT
+    recommended_next_step: REVIEW

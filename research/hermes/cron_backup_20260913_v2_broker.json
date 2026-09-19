@@ -1,0 +1,26 @@
+{
+  "_note": "V2 BROKER_DEMO 启用前的 cron 备份（2026-09-13）。回滚参考。",
+  "_exported_utc": "2026-09-13T23:40Z",
+  "jobs": {
+    "hermes-v2-fixed-run-start": {
+      "id": "48579789-517c-4f94-8a***",
+      "schedule": {"kind": "at", "at": "2026-09-13T20:00:00.000Z"},
+      "sessionTarget": "isolated",
+      "payload_kind": "agentTurn",
+      "expected_code_commit_before": "e1a3517ab725985417c75a08968ac6675517aced",
+      "expected_config_hash_before": "eec4330cbf6c1a826340e1859adeafef183663a8ab3233c3077d22e16dabfd81",
+      "message_before": "V2 全新 24H Paper Shadow Run — 一次性启动（开市前2小时, 静默, PAPER only）…"
+    },
+    "hermes-v2-paper-shadow": {
+      "id": "372058cf-d83a-4264-a268-1306a829deb8",
+      "schedule_before": {"kind": "cron", "expr": "7-59/15 * * * 0-5", "tz": "UTC"},
+      "payload": "步骤0 trading_hours.py --gate → 否则跳过；否则 shadow_run.py cycle --minutes 1440"
+    },
+    "hermes-v2-fixed-run-acceptance": {
+      "id": "48671c37-ff19-46a5-a15a-dd7ef527d32f",
+      "schedule": {"kind": "at", "at": "2026-09-14T20:20:00.000Z"},
+      "sessionTarget": "main",
+      "note_before": "验收文本假设 PAPER-only（code e1a3517 / config eec4330c / execution_mode PAPER）"
+    }
+  }
+}

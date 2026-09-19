@@ -1,0 +1,160 @@
+# V3_MULTIPLE_TESTING_LEDGER.yaml — 多重检验冻结台账 v1
+# Owner: "@default" (组G) | 依据: TEAM_PLAN §22.5 / §23.6, 任务书 §九 §十二 §十三 §十四
+# 状态: FROZEN_AT_REGISTRATION_BATCH_1 —— 跑数之前冻结；登记后不得改，要改 = 新 Experiment ID + 申报前次
+# 纪律: 只认盘上 sha256; 不登记不跑; KEEP 须过成本后净额+压力表+跨期+placebo, 否则降 UNCERTAIN
+
+ledger_version: v1
+frozen_utc: "2026-09-17T11:05:00Z"
+owner_agent: "@default"
+arbiter: "@default (组G 终裁; 否决权依任务书 §十四)"
+correction_method_default: "BH-FDR (family-wise, 族内累计 n 为分母基准)"
+correction_method_alternatives_requires_declaration: ["permutation", "block_bootstrap"]
+holdout_rule:
+  design: "单侧锁定 (one-sided, 事前固定)"
+  mutability: "登记后不得移动; 移动 = 新 Experiment ID, 前次结果仍计入累计 n"
+cumulative_accounting: true          # 指令 §九: 过去测过的假设不得从记账里消失
+pooled_denominator_rule: "分母按族内累计计划检验数, 不用单次运行数"
+effective_n_rule_ref: "V3_RESOLUTION_AUDIT.md §4 (非空窗口数 = 上界, 重叠标签须再折减)"
+unresolvable_rule_ref: "V3_RESOLUTION_AUDIT.md §3 (G-CONV-01)"
+
+# ---------------------------------------------------------------- 冻结规则
+freeze_rules:
+  R-G1: "任何实验产出数字前，须在本台账有登记行，且 admission 状态 = ADMISSIBLE"
+  R-G2: "登记行一旦 ADMISSIBLE，其 threshold / horizon / holding / 样本期 不得再改"
+  R-G3: "同族第 2 次及以后测试，分母计入该族 historical_tests，不接受『这次只测了几个』"
+  R-G4: "产物身份 = 自身 sha256 + 数据版本 sha256；mtime 与叙述不作身份 (既有纪律)"
+  R-G5: "任一 KEEP 未过 成本后净额 ∧ 压力表 ∧ 跨期两独立时段 ∧ placebo/permutation ⇒ 强制降 UNCERTAIN"
+  R-G6: "UNRESOLVABLE 档位禁止填 0，禁止插值制造高频数据 (任务书 §十二 §十三)"
+  R-G7: "reopen 必须写 REOPENED_FROM_<编号>，并逐条答: 为何关闭 / 什么新证据满足条件 / 新数据与旧数据差别"
+
+# ---------------------------------------------------------------- 第一批实验族 (任务书 §七: 8 × 6, 不过度扩张)
+# horizon_ms 严格照任务书 §七; feature families 严格照任务书 §七 编号
+first_batch:
+  horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+  horizon_count: 6
+  feature_family_count: 8
+  planned_tests: 48
+  status: "SCOPE_FROZEN / NOT_RUN"
+  expansion_rule: "48 未出齐前不得扩到几百指标 (任务书 §七)"
+
+families:
+  - family_id: F1
+    name: "Tick imbalance"
+    class: "A_可算 (L1 报价, 无成交流)"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: 27          # Phase 9 失衡族 27/27 零候选 (既有记录, 现读现锁于 claim_registry)
+    historical_candidates: 0
+    cumulative_test_denominator: 33
+    reopen: "REOPENED_FROM_DE-05"
+    reopen_evidence:
+      closed_reason: "≥5m 聚合微观方向 (OFI/imbalance) 被否，方向层在已测空间 NO_FEASIBLE_ALPHA"
+      reopen_condition_met: "重开条件原文 =『≤3m tick 事件时间层，需 DUKA tick』; DUKA tick 已到位 (KD-U01)"
+      data_difference: "旧数据为聚合/分钟级; 新数据为 DUKA L1 tick, 活跃间隔 p50=152ms (见 V3_RESOLUTION_AUDIT §2)"
+    admission: ADMISSIBLE_PENDING_FIELDS
+    missing_fields: ["mechanism_owner", "entry_definition", "exit_definition", "placebo_design"]
+  - family_id: F2
+    name: "Quote imbalance"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup   # 未现读确认，禁止估填
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+  - family_id: F3
+    name: "Quote OFI (非 Trade OFI)"
+    class: "A_可算 —— 必须与 Trade OFI 严格区分 (任务书 §五 特别规定)"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+    note: "aggressor-side / signed trade flow 属 C 类结构性不可算; 若被当 A 类跑出数字 ⇒ 结论当场作废"
+  - family_id: F4
+    name: "Spread shock"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+    note: "既有 CL-02 (spread→vol 负相关) 属非方向; 不得由此推方向 Alpha"
+  - family_id: F5
+    name: "Quote update intensity"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+    note: "activity→vol 已有双源 CL-01 (E5, IC 0.60-0.89) —— 非方向; 方向版本仍须独立登记"
+  - family_id: F6
+    name: "Micro-price displacement"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+  - family_id: F7
+    name: "Short-term momentum"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+  - family_id: F8
+    name: "Short-term reversal"
+    class: "A_可算"
+    horizons_ms: [1000, 5000, 10000, 30000, 60000, 180000]
+    planned_tests_this_batch: 6
+    historical_tests: pending_ledger_lookup
+    cumulative_test_denominator: pending_ledger_lookup
+    admission: PENDING_HISTORICAL_LOOKUP
+
+# ---------------------------------------------------------------- 特例登记行
+special_registrations:
+  - experiment_id: "A000_2s_momentum_z25"
+    family_id: F7
+    status: INADMISSIBLE
+    reason: "任务书 §八: 未正式登记前不得作为有效实验结果; 该口径载体此前存在于工具内未登记 (§21.11 未闭合项)"
+    reopen: "REOPENED_FROM_DE-05"
+    accounted_planned_tests: 1
+    accounted_denominator_note: "分母计入 F7 累计 n; 由于 F7 historical_tests 仍待查, 本行暂不可 ADMISSIBLE"
+    owner_must_fill: ["hypothesis", "mechanism", "feature_definition", "threshold", "horizon",
+                      "holding_period", "cost", "latency", "train_period", "holdout_period",
+                      "statistical_test", "multiple_testing_family"]
+    arbiter_note: "填齐 12 项后由 @default 变更 status 为 ADMISSIBLE; 在此之前任何 z>2.5 输出不受理"
+
+# ---------------------------------------------------------------- 历史结余 (指令 §九: 不得消失)
+historical_carryover:
+  - ref: DE-05
+    kind: "dead_end_index 条目"
+    closed_reason: "≥5m 聚合微观方向族被否"
+    reopen_condition: "≤3m tick 事件时间层 (需 DUKA tick)"
+    reopen_condition_now_met: true
+    evidence_ref: "KD-U01"
+  - ref: "Phase9_imbalance_family"
+    tests: 27
+    candidates: 0
+    state: "已计入 F1 累计分母 (33 = 27 + 6)"
+  - ref: "两期双源方向层"
+    tests: unknown_needs_registry_lookup
+    supported: 0
+    state: "方向层 NO_FEASIBLE_ALPHA_IN_TESTED_SPACE; 本次为同族再测, 累计分母须含此项"
+  - ref: CL-10 / CONTRA-08
+    claim: "DXY→黄金 lead-lag"
+    verdict: CONTRADICTED
+    reopen_condition: "DATA_UNLOCK: COMEX/GLD 或同源 XAG tick 接入, 且第二市场时间戳精度与 DUKA 同量级"
+    state: "组D 暂缓 (任务书 §十); 未满足前不占用检验预算"
+
+# ---------------------------------------------------------------- 冻结范围外 (禁止偷偷进入分母)
+out_of_scope_until_registered:
+  - "2s 动量 z>2.5 的任何真实数据运行"
+  - "任何跨资产 lead-lag (Δt 100ms-1s 档在当前数据 = UNRESOLVABLE)"
+  - "任何 ML / 特征组合 (前置 = 至少 1 个方向 KEEP; 当前 0)"
+  - "任何波动率族的方向化用法 (DE-06 重开条件 = 禁止)"
+
+empty_state: "本台账登记完成时, 48 项计划检验中 0 项已跑; directional KEEP = 0 (既有基准, 见 V3_ALPHA_MAP.md)"
+boundary: "本文件为方法学/统计口径产物, 不含任何市场数字, 不构成投资建议, 不承诺收益。"

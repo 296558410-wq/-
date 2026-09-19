@@ -1,0 +1,272 @@
+[
+ {
+  "op": "rolling_std",
+  "n": 1000000,
+  "cpu_ms": 30.86,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 1000000,
+  "cpu_ms": 23.65,
+  "gpu_e2e_ms": 79.25,
+  "speedup": 0.3,
+  "vram_peak_mb": 65.1,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 1000000,
+  "cpu_ms": 994.37,
+  "gpu_e2e_ms": 41.1,
+  "speedup": 24.19,
+  "vram_peak_mb": 772.0,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1372.83,
+  "gpu_e2e_ms": 131.78,
+  "speedup": 10.42,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 16258.98,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "rolling_std",
+  "n": 5000000,
+  "cpu_ms": 155.69,
+  "gpu_e2e_ms": 251.51,
+  "speedup": 0.62,
+  "vram_peak_mb": 320.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 5000000,
+  "cpu_ms": 124.57,
+  "gpu_e2e_ms": 77.54,
+  "speedup": 1.61,
+  "vram_peak_mb": 325.3,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 5000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": 118.04,
+  "speedup": null,
+  "vram_peak_mb": 2168.5,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1387.8,
+  "gpu_e2e_ms": 89.84,
+  "speedup": 15.45,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 16078.53,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "rolling_std",
+  "n": 10000000,
+  "cpu_ms": 303.14,
+  "gpu_e2e_ms": 423.73,
+  "speedup": 0.72,
+  "vram_peak_mb": 640.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 10000000,
+  "cpu_ms": 247.82,
+  "gpu_e2e_ms": 146.69,
+  "speedup": 1.69,
+  "vram_peak_mb": 650.7,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 10000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": 179.46,
+  "speedup": null,
+  "vram_peak_mb": 2187.5,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1394.53,
+  "gpu_e2e_ms": 92.74,
+  "speedup": 15.04,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 16185.88,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "rolling_std",
+  "n": 20000000,
+  "cpu_ms": 599.66,
+  "gpu_e2e_ms": 332.04,
+  "speedup": 1.81,
+  "vram_peak_mb": 1280.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 20000000,
+  "cpu_ms": 485.36,
+  "gpu_e2e_ms": 260.47,
+  "speedup": 1.86,
+  "vram_peak_mb": 1302.3,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 20000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": 287.1,
+  "speedup": null,
+  "vram_peak_mb": 2227.5,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1393.62,
+  "gpu_e2e_ms": 90.01,
+  "speedup": 15.48,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 16211.83,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "rolling_std",
+  "n": 50000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 50000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 50000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": 890.07,
+  "speedup": null,
+  "vram_peak_mb": 2347.5,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1401.12,
+  "gpu_e2e_ms": 90.45,
+  "speedup": 15.49,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 15996.92,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "rolling_std",
+  "n": 100000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "microbar",
+  "n": 100000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ },
+ {
+  "op": "monte_carlo",
+  "n": 100000000,
+  "cpu_ms": null,
+  "gpu_e2e_ms": 1493.52,
+  "speedup": null,
+  "vram_peak_mb": 2548.0,
+  "error": null
+ },
+ {
+  "op": "bootstrap",
+  "n": 200000,
+  "cpu_ms": 1399.34,
+  "gpu_e2e_ms": 89.62,
+  "speedup": 15.61,
+  "vram_peak_mb": 2400.9,
+  "error": null
+ },
+ {
+  "op": "permutation",
+  "n": 200000,
+  "cpu_ms": 16721.7,
+  "gpu_e2e_ms": null,
+  "speedup": null,
+  "vram_peak_mb": 0.0,
+  "error": null
+ }
+]

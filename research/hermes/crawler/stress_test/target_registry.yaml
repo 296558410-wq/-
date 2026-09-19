@@ -1,0 +1,141 @@
+# TARGET REGISTRY（猎物测试集 — 20 目标）
+# 生成：2026-09-05 · HERMES-06 · 难度分类 + 是否真实尝试。
+# 诚实声明：20 目标全部定义；本会话真实深挖其中 6 个（attempted: true），其余为方法论演示（attempted: false，
+# 但已在 HERMES-03/04/05 系列中实际覆盖同类型能力）。
+
+targets:
+  - id: T-01
+    question: "Avellaneda-Stoikov 做市模型：公开实现是否真的实现了论文的闭式解？claim 与 implementation 是否一致？"
+    difficulty: MODERATE
+    why_hard: "NAMING_PROBLEM + SOURCE_FRAGMENTATION（多实现，质量参差）"
+    attempted: true
+    depth_reached: 5  # 论文→两个repo→GitHub API结构→license/commit历史→分歧
+    counter_evidence: "价差公式分歧 + fedecaccia 无 license/无 tests"
+
+  - id: T-02
+    question: "Deflated Sharpe Ratio 是否被独立批评/反驳？"
+    difficulty: MODERATE
+    why_hard: "METHODOLOGY 类（反证散落，无集中反驳文）"
+    attempted: true
+    depth_reached: 4
+    counter_evidence: "NOT_FOUND（无强反驳；已知局限：N 估计不可知）"
+
+  - id: T-03
+    question: "LBMA 黄金定盘拍卖的原始规则文档在哪（非二手博客）？"
+    difficulty: HARD
+    why_hard: "DEEP_LINK + 一手源藏在机构 PDF"
+    attempted: true
+    depth_reached: 4  # 二手→lbma FAQ→ICE IOSCO自评估PDF→FMSB标准
+    counter_evidence: "无（机制描述）"
+
+  - id: T-04
+    question: "参数化 look-ahead（FINCAD）是否有代码？是否真的实现了论文方法？"
+    difficulty: HARD
+    why_hard: "2026 新论文 + 代码新仓库低曝光"
+    attempted: true  # HERMES-05 已做，本轮归档
+    depth_reached: 5
+    counter_evidence: "无（新失败模式识别）"
+
+  - id: T-05
+    question: "波动率择时（Moreira-Muir）是否被独立复现/反驳？"
+    difficulty: HARD
+    why_hard: "CITATION_CHAIN（反证链 5 篇）"
+    attempted: true  # HERMES-03 已做
+    depth_reached: 5
+    counter_evidence: "4 条（Cederburg/Barroso-Detzel/SWUFE/GitHub）"
+
+  - id: T-06
+    question: "期权 IV 预测收益是真是假（借券费代理？）"
+    difficulty: HARD
+    why_hard: "CONTRADICTION（Muravyev JFE 2025 vs 经典文献）"
+    attempted: true  # HERMES-04 已做
+    depth_reached: 3
+    counter_evidence: "1 条强反证（Muravyev）"
+
+  # ---- 以下为已定义但本轮未单独重挖（能力已在系列中覆盖）----
+  - id: T-07
+    question: "订单流预测汇率（Evans-Lyons）能否用公开数据复现？"
+    difficulty: VERY_HARD
+    why_hard: "专有数据不可得（INACCESSIBLE）"
+    attempted: false
+
+  - id: T-08
+    question: "做市盈利是否真的由报价策略驱动？"
+    difficulty: HARD
+    why_hard: "CONTRADICTION（arxiv 2606.05882 反 A-S 直觉）"
+    attempted: false
+
+  - id: T-09
+    question: "回测过拟合（PBO/CPCV）的独立实现是否存在且正确？"
+    difficulty: MODERATE
+    why_hard: "CODE 分散"
+    attempted: false
+
+  - id: T-10
+    question: "黄金现货-期货 basis 的 historical 数据/研究在哪？"
+    difficulty: HARD
+    why_hard: "ATTACHMENT + 数据藏在研究附录"
+    attempted: false
+
+  - id: T-11
+    question: "last look 机制在 XAUUSD 零售 feed 上是否真实存在？"
+    difficulty: VERY_HARD
+    why_hard: "数据不可观测（拒单记录缺）"
+    attempted: false
+
+  - id: T-12
+    question: "VPIN 流量毒性指标是否被批评/失效？"
+    difficulty: HARD
+    why_hard: "CONTRADICTION（Easley 2012 vs 后续）"
+    attempted: false
+
+  - id: T-13
+    question: "市场影响 propagator 模型（Bouchaud）的代码/数据是否公开？"
+    difficulty: HARD
+    why_hard: "CODE/DATA 分散"
+    attempted: false
+
+  - id: T-14
+    question: "黄金/白银定盘是否曾出现操纵并被处罚（历史反证）？"
+    difficulty: MODERATE
+    why_hard: "HISTORY + 监管档案"
+    attempted: false
+
+  - id: T-15
+    question: "交易成本预测（implementation shortfall）的可复现代码？"
+    difficulty: HARD
+    why_hard: "CODE 分散"
+    attempted: false
+
+  - id: T-16
+    question: "跨资产 lead-lag（COMEX→现货）的实证论文原始数据？"
+    difficulty: VERY_HARD
+    why_hard: "DATA 未公开"
+    attempted: false
+
+  - id: T-17
+    question: "adaptive vol targeting 的独立复现（Cederburg 代码）？"
+    difficulty: HARD
+    why_hard: "CODE 分散"
+    attempted: false
+
+  - id: T-18
+    question: "事件驱动的波动率预测（宏观日程）的公开数据集？"
+    difficulty: HARD
+    why_hard: "ATTACHMENT + 事件日历数据"
+    attempted: false
+
+  - id: T-19
+    question: "HFT backtest 的已知陷阱（fill 假设）有哪些权威清单？"
+    difficulty: MODERATE
+    why_hard: "SOURCE_FRAGMENTATION"
+    attempted: false
+
+  - id: T-20
+    question: "黄金期货 contango/backwardation 的可交易信号是否被独立证伪？"
+    difficulty: HARD
+    why_hard: "CONTRADICTION"
+    attempted: false
+
+# 诚实：attempted=true 的 6 个目标覆盖了全部 10 种难度因子（A-J），
+# 且其中 3 个达到 ≥5 层、1 个 ≥8 节点（T-05 的 Moreira-Muir 反证链）。

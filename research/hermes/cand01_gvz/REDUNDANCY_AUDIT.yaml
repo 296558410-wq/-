@@ -1,0 +1,7 @@
+# REDUNDANCY_AUDIT — 冗余/混淆测试（CAND-01）
+redundancy_audit:
+  corr_logGVZ_vs_local_rv21: 0.50
+  corr_logGVZ_vs_local_rv63: 0.65
+  confusion_test_result: "原始增益(B vs A) +0.25..+0.34 中约 60-75% 由'平滑本地 vol'解释 → GVZ level 主体 = 平滑 vol 状态表示, 非期权特有前瞻信息"
+  residual: "控平滑后残余 OOS ΔR² +0.07(5d)/+0.10(10d)/+0.12(20d) → 非纯冗余, 但期权特有性未建立"
+  verdict: "GVZ 与本地已实现波动高度同源(corr 0.5-0.65 对平滑 RV); 混淆测试核心结论: 大部分增益是表示, 小部分是真残余(机制不明)"

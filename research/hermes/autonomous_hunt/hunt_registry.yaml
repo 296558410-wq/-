@@ -1,0 +1,88 @@
+# HUNT REGISTRY（自主猎物注册表 — 15 候选 + 本轮 3 个已猎）
+# 生成：2026-09-05 · HERMES-07 · 自主建立、自主排序（不按"最容易找"排，按 高价值+低重复+可及）。
+
+meta:
+  ranking_rule: "HIGH_VALUE + LOW_DUPLICATION + POSSIBLE_ACCESSIBILITY（非易找度）"
+
+hunt_list:
+  - id: H-01
+    target: "黄金波动率风险溢价(VRP)是否可收割"
+    why_selected: "此前只碰期权 IV 预测，未碰 VRP 收割本身"
+    initial_evidence: "E2（Wiley 2017 商品 ETF VRP）"
+    research_value: "中（卖 vol = 尾部风险 carry）"
+    expected_difficulty: MODERATE
+    accessibility: "DATA GAP（无期权数据）"
+    xauusd_relevance: MEDIUM
+    status: HUNTED → DATA_GAP
+
+  - id: H-02
+    target: "宏观新闻前后价格发现的微观结构"
+    why_selected: "与 Phase 7 宏观日程 E4 衔接"
+    initial_evidence: "E2/E3（ECB wp1901 + Andersen-Bollerslev AER 2003）"
+    research_value: "中"
+    expected_difficulty: HARD
+    accessibility: "部分可观测，快反应 INACCESSIBLE"
+    xauusd_relevance: HIGH
+    status: HUNTED → 价值存疑（D + 未验证假设）
+
+  - id: H-03
+    target: "跨资产 lead-lag（DXY→黄金）是否可预测"
+    why_selected: "我此前列为 KD-U05 数据缺口，需验证是否值得等"
+    initial_evidence: "E1（普遍假设）+ 反证 E2（rahulsp 2026）"
+    research_value: "高（若成立）/ 负（若否，则省下 KD-U05 投入）"
+    expected_difficulty: MODERATE
+    accessibility: "数据需跨资产（缺），但反证已可得"
+    xauusd_relevance: HIGH
+    status: HUNTED → CONTRADICTED
+
+  # ---- 已覆盖候选（H-04..15，非本轮重猎，去重）----
+  - id: H-04
+    target: "波动率择时争议（Moreira-Muir）"
+    status: COVERED（HERMES-03，CONTRA-01）
+
+  - id: H-05
+    target: "做市盈利来源（informedness 环境）"
+    status: COVERED（HERMES-04，INACCESSIBLE）
+
+  - id: H-06
+    target: "订单流→汇率（Evans-Lyons）"
+    status: COVERED（HERMES-04，INACCESSIBLE）
+
+  - id: H-07
+    target: "期权 IV 预测收益（借券费代理）"
+    status: COVERED（HERMES-04，CONTRA-05）
+
+  - id: H-08
+    target: "last look / 流毒性"
+    status: COVERED（HERMES-03/04，执行层 DATA GAP）
+
+  - id: H-09
+    target: "黄金 basis/backwardation 压力信号"
+    status: COVERED（HERMES-04，DATA GAP）
+
+  - id: H-10
+    target: "LBMA 定盘拍卖机制"
+    status: COVERED（HERMES-03/06，一手源已取）
+
+  - id: H-11
+    target: "参数化 look-ahead / LLM 泄漏"
+    status: COVERED（HERMES-04/05/06，方法论）
+
+  - id: H-12
+    target: "交易成本 regime 依赖（成本择时>收益择时）"
+    status: COVERED（HERMES-03，R1 机制支撑）
+
+  - id: H-13
+    target: "A-S 做市实现质量"
+    status: COVERED（HERMES-06，代码考古）
+
+  - id: H-14
+    target: "Deflated Sharpe 反证"
+    status: COVERED（HERMES-06，NOT_FOUND）
+
+  - id: H-15
+    target: "activity→vol / spread→vol 信息"
+    status: COVERED（本地 E5，已证）
+
+# 本轮真正"新猎"的是 H-01/02/03 三个未定论方向；
+# H-04..15 已在前几轮覆盖，列为 COVERED 去重（避免重复劳动 = 自主判断的一部分）。

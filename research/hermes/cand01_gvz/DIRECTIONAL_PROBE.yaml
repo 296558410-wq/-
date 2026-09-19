@@ -1,0 +1,6 @@
+# DIRECTIONAL_PROBE — 慢因子方向探针（CAND-01, 预注册内）
+directional_probe:
+  method: "月频; GVZ level / VRP proxy vs 下月 XAUUSD 收益 Spearman"
+  n_months: 35
+  results: {spearman_gvz_next_month_ret: -0.069, spearman_vrp_proxy_next_month_ret: 0.279}
+  verdict: "REJECTED（GVZ 方向 ≈ 0; VRP +0.28 在 n=35 下无推断力且未预注册为正式检验 → 均不构成方向信息; 不复开方向研究）"

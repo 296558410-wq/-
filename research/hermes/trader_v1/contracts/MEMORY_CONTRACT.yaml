@@ -1,0 +1,26 @@
+# MEMORY CONTRACT — Hermes 交易记忆
+> 记忆分层: 每轮决策(decision log) / 计划 ledger / 交易结果(trade results) /
+> 复盘(reviews) / 统计(statistics, 含机会频率) / 研究记忆(hermes 既有 memory 体系, 不重复建)。
+
+## 写入规则
+- decision: 每轮一条(含 WAIT), 写 run_state/decisions/<cycle>.json —— WAIT 是合法记忆, 不是失败。
+- plan: 注册即写 ledger(不可篡改 sha256 链), 状态迁移(triggered/cancelled/filled/closed)追加事件。
+- trade: 每笔 paper 交易完整记录(request/order/fill/reject/slippage/latency/spread/pnl/exit reason)。
+- review: 平仓后生成(REVIEW_CONTRACT)。
+- stats: 引擎每轮更新 statistics.json(见下), 周复盘归档到 memory/reviews/weekly_*.md。
+- 研究侧记忆: 新机制/新研究问题走 research/hermes/memory + knowledge_upgrade(KU-C 格式), 本目录不重复。
+
+## statistics.json 字段(每轮更新, Dashboard 读取)
+- counters: {observations, decisions, waits, plans_registered, plans_cancelled,
+             triggers, trades, filled, exits, reviews}
+- waits: {consecutive_waits, last_wait_ts, wait_reasons: {top3}}
+- pnl: {paper_realized_usd, paper_realized_R_sum, n_trades, win_rate, avg_EV_R, total_cost_bps_paid}
+- frequency: {per_type: {opportunity_type: {n_seen, n_traded, last_seen_utc}},
+              per_session: {session: n}, avg_per_day, window_days}
+- execution_quality: {avg_slippage_bps, reject_count, spread_skip_count, vol_skip_count}
+- integrity: {ledger_head_hash, ledger_len, last_cycle, data_gaps: [...]}
+- 注: paper 阶段所有 pnl 字段带 paper:true 前缀, Dashboard 不得显示为真实盈利。
+
+## 数据质量(DATA GAP 记录)
+- 每轮记录 data_quality(状态包内): 缺哪些周期/字段 → data_gaps 列表。
+- 禁止: 用假数据填补; 把 paper P&L 当真实; 删除/改写失败交易记录。

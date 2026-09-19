@@ -1,0 +1,9 @@
+# ACCESS LOG（来源访问审计 — 只记实际可及程度，不夸大）
+# 生成：2026-09-05
+
+access_log:
+  - {source: SRC-0001, id: Kaminski-Lo, access: "FULL（abstract+摘要细节确认；正文部分）", full_text: true, tables: UNKNOWN, figures: UNKNOWN, appendix: UNKNOWN, code: false, data: UNKNOWN, note: "关键 conditional 结论已确证"}
+  - {source: SRC-0002, id: "arXiv 2511.08571", access: "FULL（abstract 完整）", full_text: UNKNOWN, tables: UNKNOWN, figures: UNKNOWN, appendix: UNKNOWN, code: UNKNOWN, data: UNKNOWN, note: "红旗判断基于 abstract 指标自洽性（0.91% vol / 名义杠杆）"}
+  - {source: SRC-0003, id: "CTA convexity", access: "PARTIAL（institutional context）", full_text: false, note: "聚合指数语境，非单一研究"}
+  - {source: SRC-0004, id: "MDPI gold MACD", access: "PARTIAL（abstract+方法要点）", full_text: UNKNOWN, note: "方法论点已提取"}
+  - {source: SRC-0005, id: "chartmini MFE", access: "FULL", note: "纪律点已提取"}

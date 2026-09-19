@@ -1,0 +1,92 @@
+{
+  "v2_version": "0.1.0-phase1",
+  "created_utc": "2026-09-11T11:15:00Z",
+  "symbol": "XAUUSD",
+  "isolation": {
+    "note": "V2 自成一体; V1 (research/hermes/trader_v1) 只读、绝不修改/停止/共用状态",
+    "allow_real_trading": false,
+    "reuse_v1_mt5_terminal": false,
+    "reuse_v1_ledger": false,
+    "reuse_v1_account": false
+  },
+  "paths": {
+    "root": "C:/AIQuant/research/hermes/trader_v2",
+    "ledger": "ledger/hermes_v2_ledger.jsonl",
+    "state": "state",
+    "reviews": "reviews",
+    "logs": "logs",
+    "data_cache": "data_cache",
+    "research": "research"
+  },
+  "cadence": {
+    "agent1_minutes": 15,
+    "agent2_minutes": 60,
+    "hermes_minutes": 15,
+    "engine_minutes": 15,
+    "daily_review_utc": "23:30"
+  },
+  "instrument_marking": {
+    "instrument": "XAUUSD",
+    "reference_market": "GC=F",
+    "note": "P0-01(2026-09-17): V2 真实交易标的一律 XAUUSD（router 主序列=local_fxtm XAUUSD tick）。参考市场 GC=F 仅供交叉校验（可选、须 PIT）；严禁作为 signal/execution instrument。"
+  },
+  "market_data": {
+    "china_network_ok": true,
+    "primary_instrument": "XAUUSD",
+    "primary_source": "mt5",
+    "reference_instrument": "GC=F",
+    "primary_note": "P1-D 数据层: 主行情走 V2 独立 MT5 实例(fxtm_demo_01,只读) → 本地 tick 备用; 现价/宏观全部国内源(sina/tencent); Yahoo/CFTC/BLS 不可达已移除。",
+    "cross_checks": ["sina:hf_XAU(现货现价)", "sina:XAU(daily 现货日线)"],
+    "multi_source_fallback": ["sina", "tencent", "eastmoney", "yahoo"],
+    "symbols": {
+      "gold_spot":   { "sina": "hf_XAU", "tencent": "hf_XAU" },
+      "gold_comex":  { "sina": "hf_GC", "eastmoney": "101.GC00Y", "yahoo": "GC=F" },
+      "silver":      { "sina": "hf_SI", "tencent": "hf_SI" },
+      "dxy":         { "eastmoney": "100.UDI", "yahoo": "DX-Y.NYB" },
+      "ust10y":      { "yahoo": "^TNX", "treasury": "home.treasury.gov" },
+      "vix":         { "yahoo": "^VIX" },
+      "gld":         { "tencent": "usGLD", "yahoo": "GLD" }
+    },
+    "history": "yahoo_chart",
+    "timeframes": ["5m", "15m", "60m", "4h", "1d"],
+    "point_in_time": true,
+    "note": "中国大陆直连可跑(已实测); 价格多源回退 sina->tencent->eastmoney->yahoo; 独立于 V1 的 MT5 采集"
+  },
+  "data_sources_extra": {
+    "macro": ["home.treasury.gov", "ecb.europa.eu", "data.eastmoney.com/cjsj", "rili.jin10.com"],
+    "flows": ["cftc.gov(COT)", "spdrgoldshares.com", "ishares.com(GLD)", "sge.com.cn"],
+    "news": ["api-one.wallstcn.com(华尔街见闻)", "search.cnbc.com RSS", "fxstreet.com", "jin10.com"],
+    "unreachable": ["fred.stlouisfed.org(超时, 用 Treasury/Yahoo 替代)"]
+  },
+  "execution": {
+    "backend": "fxtm_demo",
+    "execution_mode": "BROKER_DEMO",
+    "live_trading": false,
+    "broker_demo_enabled": true,
+    "backends_available": ["paper_local", "fxtm_demo", "oanda_v20"],
+    "cost_model": { "spread_bps_typical": 0.35, "slippage_bps": 0.30, "latency_ms": 250, "commission_per_lot_usd": 0.0 },
+    "contract": { "min_lot": 0.01, "max_lot": 0.05, "contract_size_oz": 100, "price_dp": 2, "lot_dp": 2, "leverage": 500 },
+    "risk": { "per_trade_pct": 1.0, "max_daily_loss_pct": 3.0, "max_consecutive_losses": 4, "single_position": true, "max_notional_usd": 25000 }
+  },
+  "broker": {
+    "broker": "FXTM",
+    "environment": "DEMO",
+    "enabled": true,
+    "credentials_source": "env:FXTM_DEMO_LOGIN/FXTM_DEMO_PASSWORD/FXTM_DEMO_INVESTOR/FXTM_DEMO_SERVER",
+    "note": "凭据永不写入 config/git/日志; 仅环境变量; execution_mode 必须=BROKER_DEMO 且 enabled=true 才允许连接(当前禁止)"
+  },
+  "account": {
+    "initial_balance": 10000.0,
+    "currency": "USD",
+    "note": "V2 独立 paper 账户; 与 V1 完全隔离"
+  },
+  "agents": {
+    "agent1": { "enabled": true, "llm": true, "model": "deepseek/deepseek-v4-flash" },
+    "agent2": { "enabled": true, "llm": true, "model": "deepseek/deepseek-v4-flash" }
+  },
+  "hermes": { "model": "deepseek/deepseek-v4-flash", "voting_forbidden": true, "prompt_version": "hermes2-prompt/0.1.0" },
+  "notes": [
+    "Phase-1 目标: 系统可运行 + 数据可记录 + 信息链完整; 不追求收益最大化.",
+    "执行通道可插拔: 用户注册 OANDA demo 后切 oanda_v20."
+  ]
+}

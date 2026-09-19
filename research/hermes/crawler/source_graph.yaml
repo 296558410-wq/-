@@ -1,0 +1,102 @@
+# SOURCE GRAPH（研究图谱 — 连接 HERMES-01..05 已挖实体）
+# 生成：2026-09-05 · HERMES-05 · 节点=实体，边=关系。这是"藏宝图"而非"链接列表"。
+
+meta:
+  node_types: [SOURCE, AUTHOR, PAPER, REPOSITORY, DATASET, CLAIM, MECHANISM, FAILURE, CONTRADICTION]
+  edge_types: [AUTHORED_BY, CITES, REFERENCES, IMPLEMENTS, USES_DATA, REPLICATES, CONTRADICTS, EXTENDS, DERIVED_FROM, MENTIONS]
+
+nodes:
+  # ---- 方法论/泄漏簇 ----
+  - id: P-finCAD
+    type: PAPER
+    name: "Summoning the Oracle to Slay It (FinCAD, arXiv:2605.24564, EMNLP 2026)"
+  - id: A-waylonli
+    type: AUTHOR
+    name: "waylonli (FinCAD 作者)"
+  - id: R-finCAD
+    type: REPOSITORY
+    name: "waylonli/FinCAD (MIT)"
+  - id: M-parametric-lookahead
+    type: MECHANISM
+    name: "参数化 look-ahead（权重级泄漏）"
+  - id: F-FL23
+    type: FAILURE
+    name: "FL-23 参数化 look-ahead"
+  - id: P-spurious
+    type: PAPER
+    name: "Spurious Predictability in Financial ML (arXiv:2604.15531)"
+  - id: P-openpm
+    type: PAPER
+    name: "OpenPM (arXiv:2608.09988)"
+  - id: P-clqt
+    type: PAPER
+    name: "CLQT (arXiv:2606.29771)"
+  - id: P-strategy-leak
+    type: PAPER
+    name: "What survives honest evaluation (arXiv:2608.27734)"
+  - id: R-purgedcv
+    type: REPOSITORY
+    name: "eslazarev/purged-cross-validation"
+
+  # ---- 波动率择时簇 ----
+  - id: P-moreira
+    type: PAPER
+    name: "Moreira & Muir 2017 (JF)"
+  - id: P-cederburg
+    type: PAPER
+    name: "Cederburg et al. 2020 (JFE)"
+  - id: P-barroso
+    type: PAPER
+    name: "Barroso & Detzel 2021"
+  - id: P-volsmooth
+    type: PAPER
+    name: "Smoothing vol targeting (arXiv:2212.07288)"
+  - id: C-contra01
+    type: CONTRADICTION
+    name: "CONTRA-01 波动率择时争议"
+  - id: P-collindufresne
+    type: PAPER
+    name: "NBER w24222 Liquidity Regimes (Collin-Dufresne)"
+
+  # ---- 执行/微观结构簇 ----
+  - id: P-muravyev
+    type: PAPER
+    name: "Muravyev-Pearson-Pollet (JFE 2025)"
+  - id: C-contra05
+    type: CONTRADICTION
+    name: "CONTRA-05 期权 IV = 借券费代理"
+  - id: P-evanslyons
+    type: PAPER
+    name: "Evans & Lyons (订单流→汇率)"
+  - id: P-mmprofit
+    type: PAPER
+    name: "Market Informedness & MM Profitability (arXiv:2606.05882)"
+  - id: R-microalpha
+    type: REPOSITORY
+    name: "H2nryHe/Microstructure_Alpha_Execution_Lab"
+  - id: F-FL25
+    type: FAILURE
+    name: "FL-25 子基点 edge 死于费用"
+
+edges:
+  - {from: P-finCAD, to: R-finCAD, rel: IMPLEMENTS}
+  - {from: R-finCAD, to: A-waylonli, rel: AUTHORED_BY}
+  - {from: P-finCAD, to: M-parametric-lookahead, rel: DERIVED_FROM}
+  - {from: M-parametric-lookahead, to: F-FL23, rel: MENTIONS}
+  - {from: P-spurious, to: M-parametric-lookahead, rel: MENTIONS}  # 同族：泄漏识别
+  - {from: P-openpm, to: P-strategy-leak, rel: EXTENDS}
+  - {from: P-clqt, to: P-openpm, rel: EXTENDS}
+  - {from: R-purgedcv, to: P-spurious, rel: IMPLEMENTS}
+  - {from: P-cederburg, to: P-moreira, rel: CONTRADICTS}
+  - {from: P-barroso, to: P-moreira, rel: CONTRADICTS}
+  - {from: P-volsmooth, to: P-moreira, rel: EXTENDS}
+  - {from: P-cederburg, to: C-contra01, rel: MENTIONS}
+  - {from: P-collindufresne, to: C-contra01, rel: MENTIONS}
+  - {from: P-muravyev, to: C-contra05, rel: MENTIONS}
+  - {from: P-evanslyons, to: C-contra05, rel: MENTIONS}  # 可及性矛盾（不同维度）
+  - {from: P-mmprofit, to: C-contra05, rel: MENTIONS}
+  - {from: R-microalpha, to: F-FL25, rel: DERIVED_FROM}
+
+# 关键洞察：这张图有两个高密度簇 —— (1) 方法论/泄漏（6 节点互连，指向 RQ-05）；
+# (2) 执行/微观结构（指向『成本是决定项』+『INACCESSIBLE』）。
+# 方向 alpha 簇是空的——与 Phase 1-9A + R1' 结论一致。

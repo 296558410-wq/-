@@ -1,0 +1,46 @@
+{
+  "FXTM_2026_H1": {
+    "n_days": 239,
+    "n_bars": 4505,
+    "bench": {
+      "ann_ret": 0.08307139017554643,
+      "ann_vol": 0.34288759835477645,
+      "sharpe": 0.4,
+      "max_dd": -0.279,
+      "var95": -0.0291
+    },
+    "strat": {
+      "ann_ret": 0.04333745928402721,
+      "ann_vol": 0.10809542294707353,
+      "sharpe": 0.45,
+      "max_dd": -0.129,
+      "var95": -0.0097,
+      "mdd_improve_pct": 53.8,
+      "vol_reduction_pct": 68.5
+    },
+    "vol_forecast_ic_spearman_daily": 0.221,
+    "turnover_cost_total_bp": 15.14
+  },
+  "DUKA_2023_24_H1": {
+    "n_days": 159,
+    "n_bars": 3816,
+    "bench": {
+      "ann_ret": 0.786267737636497,
+      "ann_vol": 0.1579472064486105,
+      "sharpe": 3.75,
+      "max_dd": -0.065,
+      "var95": -0.0101
+    },
+    "strat": {
+      "ann_ret": 0.5517355215578545,
+      "ann_vol": 0.15850229054273,
+      "sharpe": 2.85,
+      "max_dd": -0.065,
+      "var95": -0.0099,
+      "mdd_improve_pct": 0.0,
+      "vol_reduction_pct": -0.4
+    },
+    "vol_forecast_ic_spearman_daily": 0.327,
+    "turnover_cost_total_bp": 166.38
+  }
+}

@@ -1,0 +1,61 @@
+# DEAD END INDEX + REOPEN CONDITIONS（研究死胡同索引 + 重开条件）
+# 生成：2026-09-05 · HERMES-08 · 记录"已被充分否定、无新数据不应再研究"的方向。
+# 每个 dead end 必须有 REOPEN_CONDITION（新数据/新市场/新执行机制/新证据）。
+
+dead_end_index:
+  - id: DE-01
+    direction: "无条件方向动量（M1+ 15-240m）"
+    rejected_by: "F-R1/F-R17，两期双源 0 SUPPORTED"
+    reopen_condition: "全新信息维度（真实 order book/深度）或 ≤3m tick 事件时间层证据（属补测非重开）"
+  - id: DE-02
+    direction: "无条件均值回复（M1+ zscore/dist）"
+    rejected_by: "F-R2"
+    reopen_condition: "条件于结构/事件的 MR（衰竭/失败动作）在未覆盖层有证据"
+  - id: DE-03
+    direction: "session/小时条件方向"
+    rejected_by: "F-R6"
+    reopen_condition: "仅允许作分层变量，禁止单独作 alpha 源"
+  - id: DE-04
+    direction: "K线/蜡烛形态增量预测"
+    rejected_by: "F-R16（ΔIC=-0.0047 CI 含 0）"
+    reopen_condition: "仅描述性使用；P4 用蜡烛代理速度=自动 REJECT"
+  - id: DE-05
+    direction: "≥5m 聚合微观方向（OFI/imb）"
+    rejected_by: "F-R11 / KD-C07"
+    reopen_condition: "≤3m tick 事件时间层（需 DUKA tick）；≥5m 同构=自动 REJECT"
+  - id: DE-06
+    direction: "波动率/活动度直接当方向信号"
+    rejected_by: "F-R4/F-R12/F-R13（只 SUPPORTED 非方向）"
+    reopen_condition: "禁止（vol/activity 只能进 risk/execution 层）"
+  - id: DE-07
+    direction: "无条件日级 vol/activity 降险 gate"
+    rejected_by: "R1'-B（机会成本 116.5bp > 保护 60.6bp）"
+    reopen_condition: "'形态条件化'（先 autopsy 定风险形态）—— 这是 R1 的存活路径，非原样重开"
+  - id: DE-08
+    direction: "做市 spread capture"
+    inaccessible: "无 maker 通道 + 无 L2"
+    reopen_condition: "INFRA_UNLOCK（maker 接入 + L2 数据）—— 短期不可能"
+  - id: DE-09
+    direction: "订单流→汇率（Evans-Lyons 型）"
+    inaccessible: "专有 dealer 客户流不可得"
+    reopen_condition: "无（数据根本不可公开获取）—— 永久 dead end"
+
+reopen_conditions:
+  - trigger: DATA_UNLOCK
+    examples:
+      - "DUKA tick 到位 → 重开 ≤1m 方向族终审（KD-U01）+ N1 事前识别 + 执行层"
+      - "期权数据接入 → 重开黄金 VRP（CL-11）"
+      - "COMEX/GLD 数据接入 → 重开跨市场套利链（非 DXY lead-lag）"
+  - trigger: INFRA_UNLOCK
+    examples:
+      - "maker 通道 + L2 → 重开做市/逆向选择（DE-08）"
+      - "tick 执行模拟器落地 → 重开执行层真实成本（RQ-02/07）"
+  - trigger: METHODOLOGY_REVIEW
+    examples:
+      - "参数化 look-ahead 审计工具落地 → 复审所有'模型参与历史推断'的结论"
+  - trigger: NEW_EVIDENCE
+    examples:
+      - "任何 DE-01..07 方向出现全新信息维度"
+
+# 纪律：DEAD END ≠ 永久禁止；REOPEN_CONDITION 满足后才允许重开。
+#       且重开须走 V2 注册 + Gate（不绕过 OpenClaw）。

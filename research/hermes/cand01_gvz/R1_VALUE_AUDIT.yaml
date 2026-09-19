@@ -1,0 +1,6 @@
+# R1_VALUE_AUDIT — 风险态价值（CAND-01）
+r1_value_audit:
+  task: "识别未来 5d 高波动态(top tercile); logistic(IS 60% 拟合, 冻结特征) → OOS AUC"
+  auc_oos: {A_pointlag_baseline: 0.736, A2_plus_smoothed_local_rv: 0.769, B_plus_GVZ: 0.797}
+  reading: "本地平滑 vol 已提供大部分风险态价值(0.736→0.769); GVZ 在其上 +0.029 AUC"
+  verdict: "LEVEL 2 轻微支持: GVZ 可作为 R1 风险态附加输入(边际增益小); 不作为主输入; 不因此升级为 alpha/交易价值"

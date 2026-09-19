@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>V2 黄金交易系统</title>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<div class="aurora"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand">
+      <div class="logo">V2</div>
+      <div class="bt"><h1>V2 黄金交易系统</h1><div class="sub">XAUUSD · 只读监控 · 独立于 V1</div></div>
+    </div>
+    <div class="hstat"><div class="hcol">
+      <span id="live" class="live off"><span class="dot"></span><span id="liveTxt">连接中…</span></span>
+      <div class="clock mono" id="clock">--:--:--</div>
+      <div class="muted" id="refreshState" style="font-size:11px"></div>
+    </div></div>
+  </header>
+
+  <!-- 1 现在系统怎么样 -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>现在系统怎么样</h2><span class="tag" id="modeTag"></span></div>
+    <div id="status"></div>
+  </section>
+
+  <!-- 2 现在到底有没有交易 -->
+  <section class="card" id="decCard">
+    <div class="hd"><h2><span class="bar"></span>现在到底有没有交易</h2><span class="tag" id="decTag"></span></div>
+    <div id="decision"></div>
+  </section>
+
+  <div class="grid g2">
+    <!-- 3 账户 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>账户</h2><span class="tag" id="acctTag"></span></div>
+      <div id="account"></div>
+    </section>
+    <!-- 5 系统表现 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>系统表现</h2><span class="tag" id="perfTag"></span></div>
+      <div id="perf"></div>
+    </section>
+  </div>
+
+  <!-- 4 最近交易 -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>最近交易</h2><span class="tag" id="trTag"></span></div>
+    <div class="scroll" style="max-height:220px"><div id="trades"></div></div>
+  </section>
+
+  <div class="grid g2">
+    <!-- 6 数据状态 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>数据是否正常</h2><span class="tag" id="dataTag"></span></div>
+      <div id="data"></div>
+    </section>
+    <!-- 7 系统健康 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>系统健康</h2><span class="tag" id="healthTag"></span></div>
+      <div id="health"></div>
+    </section>
+  </div>
+
+  <!-- 8 工作流程 -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>V2 工作流程</h2><span class="tag">V2 是否真的在工作</span></div>
+    <div class="pipe" id="wf"></div>
+  </section>
+
+  <div class="grid g2">
+    <!-- 当前行情 + 多周期 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>当前黄金行情</h2><span class="tag" id="mktTag"></span></div>
+      <div id="market"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>多周期行情</h2><span class="tag">来自真实计算</span></div>
+      <div id="multi"></div>
+    </section>
+  </div>
+
+  <div class="grid g3">
+    <!-- 18 Shadow -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>当前运行（Shadow）</h2><span class="tag" id="shadowTag"></span></div>
+      <div id="shadow"></div>
+    </section>
+    <!-- 19 Forward -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>正式前向验证</h2><span class="tag" id="fgTag"></span></div>
+      <div id="forward"></div>
+    </section>
+    <!-- 21 自动运行 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>自动运行</h2><span class="tag" id="schedTag"></span></div>
+      <div id="sched"></div>
+    </section>
+  </div>
+
+  <div class="grid g2">
+    <!-- 20 V1 安全 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>V1 安全</h2><span class="tag" id="v1Tag"></span></div>
+      <div id="v1"></div>
+    </section>
+    <!-- 最近问题 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>最近发生的问题</h2><span class="tag" id="probTag"></span></div>
+      <div id="problems" class="scroll" style="max-height:180px"></div>
+    </section>
+  </div>
+
+  <details class="card" style="margin-top:14px">
+    <summary class="hd" style="cursor:pointer"><h2><span class="bar"></span>技术详情（高级）</h2></summary>
+    <div id="tech" style="margin-top:10px"></div>
+  </details>
+
+  <div class="muted" id="foot"></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

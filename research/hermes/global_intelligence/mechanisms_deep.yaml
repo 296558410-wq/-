@@ -1,0 +1,72 @@
+# MECHANISMS DEEP（HERMES-04 深挖机制 — 相对 HERMES-03 mechanisms.yaml 的增量）
+# 生成：2026-09-05 · 编号续 MECH-12 起。status: NEW / EXTENSION / REDUNDANT。
+
+mechanisms:
+  - id: MECH-12
+    name: "参数化 look-ahead（权重级泄漏）"
+    description: "LLM 权重在训练时已编码历史价格结果；回测窗口重叠训练 cutoff 时，模型从记忆推理，
+      偏差活在权重里、数据管线审计看不见。匿名化实体后 agent 行为剧变（拒交易）证明信号来自 ticker 记忆。"
+    evidence: [E2/E3, "arxiv:2605.24564 (FINCAD); arxiv:2605.28359"]
+    contradictions: "无（新识别的失败模式）"
+    markets: "通用（任何 LLM 驱动研究）"
+    xauusd_relevance: HIGH  # deepseek 训练 cutoff 与 XAUUSD 历史重叠 → 直接适用
+    data_requirement: "无（方法论）；验证需 post-cutoff 窗口 + 匿名化对照"
+    status: NEW
+    merge_with: "FL-23"
+
+  - id: MECH-13
+    name: "诱导零环境审计（induced-null audit）"
+    description: "在保留金融数据特征但移除条件均值可预测性的『诱导零』环境上评估完整建模工作流，
+      区分真可预测性与选择偏差/泄漏/时序违反造成的虚假可预测性。随机 CV 破坏时序→lookahead；
+      波动预测的验证选择在 null 下会机械改善表现。"
+    evidence: [E2, "arxiv:2604.15531"]
+    contradictions: "无"
+    markets: "通用（金融 ML 审计框架）"
+    xauusd_relevance: HIGH  # 可执行的 Research Leakage Audit 候选（LINE A 目标）
+    data_requirement: "无需新数据（在现有数据上构造诱导零）"
+    status: NEW
+    merge_with: "RQ05 审计候选"
+
+  - id: MECH-14
+    name: "黄金 basis / backwardation = 实物压力信号"
+    description: "现货-期货 basis 由资金成本+实物需求+投机持仓+压力事件决定；backwardation（期货<现货）
+      是实物需求压力信号；basis 错位（如 2020 EFP >$100）是压力先兆。GOFO 是旧远期利率代理。"
+    evidence: [E2/E3, "derivativesjournal/goldify/metalcharts（机制一致）；2020 EFP 错位为实证"]
+    contradictions: "无（描述性机制）"
+    markets: "黄金（伦敦现货/COMEX 期货）"
+    xauusd_relevance: MEDIUM  # 非方向压力信号（D/B）；但需期货数据（缺）
+    data_requirement: "COMEX 期货 + LBMA 现货（缺 → KD-U05）"
+    status: NEW
+
+  - id: MECH-15
+    name: "期权 IV 预测收益 = 借券费代理（非真信息）"
+    description: "期权 IV spread/skew 预测股票收益，但剔除高借券费股票后预测力降 ≥2/3 → 大部分是
+      『卖空约束/借券费』代理，而非价格对期权信息的缓慢反映。"
+    evidence: [E2/E3, "Muravyev-Pearson-Pollet, JFE 2025"]
+    contradictions: "与经典『期权信息领先价格』文献冲突（CONTRA-05）"
+    markets: "股票（理论可外推到有卖空约束的资产）"
+    xauusd_relevance: MEDIUM  # 降级对黄金 CVOL/implied 的期待；黄金无卖空约束，机制可能不同
+    data_requirement: "黄金期权 IV（缺）"
+    status: NEW
+
+  - id: MECH-16
+    name: "做市盈利的 informedness regime 依赖"
+    description: "做市商盈利主要由市场信息度(informedness)环境驱动，而非报价策略（spread 与
+      informedness R²<0.05）；盈利是环境特征，不是策略优化可复制。"
+    evidence: [E2/E3, "arxiv:2606.05882（计算市场环境+异质学习 agent）"]
+    contradictions: "与 A-S 最优报价的『策略优化产生盈利』隐含期待冲突（CONTRA-07）"
+    markets: "计算市场（理论通用）"
+    xauusd_relevance: LOW  # INACCESSIBLE（无做市通道）；理解价值
+    data_requirement: "无"
+    status: NEW
+
+  - id: MECH-17
+    name: "point-in-time 审计基准（OpenPM/CLQT）"
+    description: "LLM 交易 agent 评估须强制 point-in-time 语义（availability time 非 event time）、
+      成本感知、策略一致性；把 lookahead 当作失败前置条件（TimeGate），用可重算 hash 链保证可审计。"
+    evidence: [E2/E3, "arxiv:2608.09988 (OpenPM); arxiv:2606.29771 (CLQT)"]
+    contradictions: "无"
+    markets: "通用（LLM 交易 agent 评估）"
+    xauusd_relevance: HIGH  # RQ05 审计候选的成熟参考实现
+    data_requirement: "无（方法论/基准）"
+    status: NEW

@@ -1,0 +1,38 @@
+# ROUTE CHANGE LOG（路线切换日志 — 失败不终止任务的实证）
+# 生成：2026-09-05 · HERMES-06
+
+route_changes:
+  - id: RC-01
+    target: "FINCAD 代码（HERMES-05）"
+    path_a: "web_extract GitHub HTML"
+    result_a: "FAIL（exa keyless CRAWL_LIVECRAWL_TIMEOUT）"
+    path_b: "curl api.github.com/repos/waylonli/FinCAD"
+    result_b: "SUCCESS（JSON：license/结构/commit）"
+    lesson: "公开 API > HTML 抓取"
+
+  - id: RC-02
+    target: "A-S 做市 repo 结构（本会话）"
+    path_a: "web_extract GitHub 页面"
+    result_a: "（预期 HTML 可能失败，直接跳过）"
+    path_b: "curl api.github.com 两个 repo"
+    result_b: "SUCCESS（license/commits/contents 全取到）"
+    lesson: "主动优先 API，不再重复踩 RC-01 的坑"
+
+  - id: RC-03
+    target: "LBMA 定盘原始规则"
+    path_a: "HERMES-03 用二手博客（watchgold/metalorix）"
+    result_a: "SUCCESS（但仅二手，E1-E2）"
+    path_b: "本会话定向搜『IOSCO self assessment』"
+    result_b: "SUCCESS（ICE IOSCO 自评估 PDF + lbma FAQ + FMSB 标准，一手）"
+    lesson: "二手→一手：换关键词命中『监管自评估』这个一手入口"
+
+  - id: RC-04
+    target: "HuggingFace 下载（HERMES-02）"
+    path_a: "curl huggingface.co"
+    result_a: "FAIL（000 不可达）"
+    path_b: "ollama.com registry"
+    result_b: "SUCCESS（200，绕开 HF 阻塞）"
+    lesson: "同一能力换分发通道"
+
+# 4 次路线切换，3 次成功绕开障碍，1 次（RC-03）从二手升级到一手。
+# 证明：失败不导致任务结束。

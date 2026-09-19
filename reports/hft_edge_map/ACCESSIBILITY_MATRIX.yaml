@@ -1,0 +1,176 @@
+# =====================================================================
+# XAUUSD HFT ACCESSIBILITY MATRIX — 可及性矩阵 (v2)
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# Version: 2026-09-06-hft-map-v2
+# Rule: 机构在做 ≠ 我们能做。INACCESSIBLE ≠ NO VALUE。DATA GAP ≠ REJECTED。
+# 分类: THEORETICALLY_VALUABLE / POSSIBLY_ACCESSIBLE / PARTIALLY_ACCESSIBLE / INACCESSIBLE
+# 原因码: DATA L2 ORDER_FLOW LATENCY VENUE BROKER OPTIONS FUTURES MAKER_ACCESS CAPITAL EXECUTION TECHNICAL_INFRA
+# v2 修正: 可及限于 INFORMATION/PROXY 层的机制不得表述为可及"盈利 edge"（HERMES-10: vol/成本择时盈利 WEAKENED）
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  current_access_surface:
+    - "FXTM MT5 retail: bid/ask/last, tick(W1 23 日)+M1/M5/H1(2025-11..2026-09), 固定点差, taker-only, 无深度"
+    - "DUKA HTTP: M1/M5/H1 2023-09..2024-03 (W5/W6/W7), 可变点差可见; tick 未下载"
+    - "无: L2/深度/队列/maker/期权/期货/事件日历/外部资产/真实执行通道"
+
+matrix:
+  - id: M01
+    name: "Information latency"
+    classification: INACCESSIBLE
+    reasons: [TECHNICAL_INFRA, LATENCY, DATA, CAPITAL]
+    note: "需事件源直连+共址+微秒栈；零售链路无窗口"
+
+  - id: M02
+    name: "Event reaction"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "事件日历可获（需接入）；反应在 feed 上可观测；执行速度限制秒-分钟级"
+
+  - id: M03
+    name: "Order flow"
+    classification: INACCESSIBLE
+    reasons: [ORDER_FLOW, DATA, BROKER]
+    note: "专有 dealer 客户流永不可公开获取（DE-09）"
+
+  - id: M04
+    name: "Liquidity provision"
+    classification: INACCESSIBLE
+    reasons: [L2, MAKER_ACCESS, VENUE, EXECUTION]
+    note: "无 maker 通道 + 无 L2；INFRA_UNLOCK 前不可开（DE-08）"
+
+  - id: M05
+    name: "Market making"
+    classification: INACCESSIBLE
+    reasons: [L2, MAKER_ACCESS, VENUE, EXECUTION, CAPITAL]
+    note: "同 M04；另需对冲与资本"
+
+  - id: M06
+    name: "Spread capture"
+    classification: INACCESSIBLE
+    reasons: [MAKER_ACCESS, L2, VENUE]
+    note: "零售点差是成本不是捕获对象"
+
+  - id: M07
+    name: "Adverse selection avoidance"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [DATA, EXECUTION]
+    note: "proxy 可推断；真实验证需执行通道（缺失）→ 只能做描述/风险层（VPIN 不作 standalone alpha, HERMES-10）"
+
+  - id: M08
+    name: "Short-term momentum"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [EXECUTION]
+    note: "数据/观测全通；本地已 REJECTED（成本后无价值）→ 可及但无验证价值"
+
+  - id: M09
+    name: "Short-term reversal"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [EXECUTION]
+    note: "同上；无条件 REJECTED，条件化留 P2/P4 预注册"
+
+  - id: M10
+    name: "Volatility clustering"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "完全可观测；作为风险/成本输入已 SUPPORTED（非方向）"
+
+  - id: M11
+    name: "Volatility risk premium"
+    classification: INACCESSIBLE
+    reasons: [OPTIONS, DATA, EXECUTION, CAPITAL]
+    note: "无期权数据+无期权执行通道"
+
+  - id: M12
+    name: "Cross-venue lead-lag"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [DATA, VENUE, FUTURES, LATENCY]
+    note: "现货-现货（FXTM vs DUKA）时间不对齐只能做比较研究；真 lead-lag 需 COMEX/LBMA"
+
+  - id: M13
+    name: "Futures/spot basis"
+    classification: INACCESSIBLE
+    reasons: [FUTURES, DATA, CAPITAL, EXECUTION]
+    note: "无期货数据；实物交割通道无"
+
+  - id: M14
+    name: "Options information"
+    classification: INACCESSIBLE
+    reasons: [OPTIONS, DATA]
+    note: "无黄金期权 IV/成交数据"
+
+  - id: M15
+    name: "Macro information transmission"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "事件日历（分钟级）+ feed 反应可观测；Phase 7 已有日程簇聚证据"
+
+  - id: M16
+    name: "Market impact prediction"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [DATA, EXECUTION]
+    note: "小资金无自身冲击；可做外部冲击响应描述性研究（tick 缺失限制）"
+
+  - id: M17
+    name: "Transaction-cost forecasting"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "DUKA 可变 spread 可观测（M1/H1）；FXTM 固定点差不可；当前即可测；定位 = 成本信息层（POSSIBLE INFORMATION LAYER）, 盈利声称 WEAKENED（HERMES-10 CONTRA-09）"
+
+  - id: M18
+    name: "Regime transition"
+    classification: POSSIBLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "价格+spread proxy 可观测；REP Phase2 状态稳定已建档（切换动力未验）；活动→vol 信息 CONFIRMED(E5) ≠ 择时盈利——可及的是信息/风险输入层（HERMES-10 特别修正）"
+
+  - id: M19
+    name: "Relative value"
+    classification: INACCESSIBLE
+    reasons: [DATA, EXECUTION]
+    note: "无跨资产数据；金银/利率腿均缺"
+
+  - id: M20
+    name: "Statistical arbitrage"
+    classification: INACCESSIBLE
+    reasons: [DATA, EXECUTION]
+    note: "单腿已测（REJECTED）；多腿需跨资产数据"
+
+  - id: M21
+    name: "Execution alpha"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [EXECUTION, TECHNICAL_INFRA]
+    note: "成本状态层可研究；真实成交反馈/模拟器缺失（RQ-07）→ 只做预注册研究不声称 alpha"
+
+  - id: M22
+    name: "Queue / microstructure effects"
+    classification: INACCESSIBLE
+    reasons: [L2, ORDER_FLOW, MAKER_ACCESS]
+    note: "无队列/L2 观测"
+
+  - id: M23
+    name: "Liquidity shocks"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [DATA]
+    note: "proxy（spread 宽化/vol 尖峰）可观测；真冲击需 tick+执行验证"
+
+  - id: M24
+    name: "Auction / fix mechanisms"
+    classification: PARTIALLY_ACCESSIBLE
+    reasons: [DATA, VENUE]
+    note: "fix 时间窗可获；FXTM tick W1 覆盖 24h 可做描述性 autopsy；参与 fix 执行不可"
+
+  - id: M25
+    name: "Cross-asset information"
+    classification: INACCESSIBLE
+    reasons: [DATA, EXECUTION]
+    note: "外部数据未入库；接入后重评（优先级中低 KD-U05）"
+
+summary:
+  THEORETICALLY_VALUABLE_count: 0   # 本矩阵无独立"理论价值"行；价值拆解见 MECHANISM_UNIVERSE
+  POSSIBLY_ACCESSIBLE: [M02, M08, M09, M10, M15, M17, M18]
+  PARTIALLY_ACCESSIBLE: [M07, M12, M16, M21, M23, M24]
+  INACCESSIBLE: [M01, M03, M04, M05, M06, M11, M13, M14, M19, M20, M22, M25]
+  note: "可及 ≠ 有 edge（M08/M09 可及但 REJECTED）；不可及 ≠ 无价值（M11/M13/M14 机制真实但拿不到）。"
+  v2_note: "POSSIBLY/PARTIALLY_ACCESSIBLE 的中间层条目（M07/M17/M18/M21/M23）当前只开放 INFORMATION/PROXY
+    层研究（成本/风险/执行调度输入），不开放'盈利 edge'声称——盈利须经预注册实验 + 成本建模 + 执行模拟（HERMES-10
+    纪律: VOLATILITY INFORMATION → PROFITABLE TIMING = UNPROVEN/WEAKENED）。"

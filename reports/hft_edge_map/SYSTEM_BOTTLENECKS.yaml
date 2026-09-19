@@ -1,0 +1,171 @@
+# =====================================================================
+# SYSTEM BOTTLENECKS — 系统瓶颈清单（v2, 2026-09-06）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# Version: 2026-09-06-hft-map-v2
+# HARD RULE #3: SYSTEM BOTTLENECK 的战略价值 > 机会数量。
+#   每项标注八大瓶颈类; 末尾区分 OPPORTUNITY vs BOTTLENECK（机会=钱在哪, 瓶颈=为什么拿不到）。
+#   排序按对"可验证价值获取"的阻塞程度, 非按修复难度。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  ranking_principle: "按对'可验证价值获取'的阻塞程度排序，非按修复难度"
+  eight_classes: [KNOWLEDGE, DATA, OBSERVABILITY, LATENCY, EXECUTION, COST, INFRASTRUCTURE, RESEARCH_METHODOLOGY]
+
+# 八类瓶颈总表（显式逐一识别）
+classes:
+  KNOWLEDGE:
+    definition: "不知道价值在哪/机制如何运作的知识缺口（答不出'该研究什么'）"
+    current_state: "方向层已系统性排除（E5-负）; 价值分布收敛至中间层（成本/vol/事件时间）——但成本状态前瞻可预测性、
+      切换先行统计、事件反应形态从未被直接检验（RQ-H1/H2/H3 = 知识瓶颈的直接靶点）"
+    severity: HIGH
+    note: "与 DATA/OBSERVABILITY 不同——这是'问题还没被正确提出'的缺口, 实验设计即可部分解决"
+  DATA:
+    definition: "有可研究的问题与协议, 但数据缺失/不足"
+    current_state: "DUKA tick 未下载(KD-U01); D2 252 日同源历史缺; 事件日历未接入; 期权/期货/跨资产未入库; FXTM 单窗 23 独立日"
+    severity: HIGH
+    items: [BN-2, BN-3, BN-4, BN-6]
+  OBSERVABILITY:
+    definition: "目标变量在原理上不可观测（结构性, 数据买不到）"
+    current_state: "无 L2/深度/队列/成交流/maker 身份 → M03/M04/M05/M06/M22 整层不可观测; FXTM 固定点差 → spread 动态不可观测"
+    severity: "CRITICAL（第一瓶颈）"
+    items: [BN-1]
+  LATENCY:
+    definition: "反应速度链路不足以进入某类价值池"
+    current_state: "retail MT5 ~100ms+; 无共址/事件源直连 → M01 与微秒层整体不可达; 事件抢跑不可做（只能做分钟级结构）"
+    severity: MEDIUM-HIGH（对特定池子致命, 但可绕行）
+    items: [BN-7]
+  EXECUTION:
+    definition: "无法把信号变成真实成交/无法验证执行后价值"
+    current_state: "只读 MT5; 执行模拟器未建(RQ-07); 无 paper/真实通道; last look/流毒性使真实成本 > 半价差(RQ-02)"
+    severity: HIGH（中间层研究的闭环验证缺口）
+    items: [BN-5]
+  COST:
+    definition: "单笔成本吞噬毛 edge（经济性瓶颈, 非数据瓶颈）"
+    current_state: "单边 0.5-2.4bp vs 已测方向信号毛 IC ~0.01-0.04; R1'-B 机会成本 116.5bp > 保护 60.6bp;
+      外部 vol-timing 盈利成本后归零(JFE)/2000 后消失(Elsevier) → 任何薄 edge 须成本建模先行"
+    severity: HIGH（对盈利声称的终极过滤器）
+    items: [BN-9]
+  INFRASTRUCTURE:
+    definition: "硬件/通道/接入层面的硬门槛"
+    current_state: "无 maker/L2 通道; 无期权/期货执行通道; GPU 4GB 限 ML 规模; 本地无共址"
+    severity: MEDIUM-HIGH（对 TIER 3 簇整体封锁）
+    items: [BN-1, BN-6, BN-7]
+  RESEARCH_METHODOLOGY:
+    definition: "研究方式本身会污染结论（泄漏/搜索强度/复现性）"
+    current_state: "重叠样本伪显著(FL-02); 参数化 look-ahead(FL-23, 2026 代模型全泄漏); 搜索强度泄漏(FL-20b,
+      Sharpe 2.1 由 trial 数解释); LLM 隐式多回测(FL-20) → RLAP/RQ-08 已建门禁, 未覆盖新模型代际"
+    severity: MEDIUM（对结论可信度, 已有部分结构性防护）
+    items: [BN-8]
+
+bottlenecks:
+  - id: BN-1
+    name: "观测面缺失（L2/成交流/队列/maker）"
+    type: OBSERVABILITY
+    type_classes: [OBSERVABILITY, INFRASTRUCTURE]
+    blocks: [M03, M04, M05, M06, M22]
+    impact: "理论价值最高层的观测永久缺失 → 该层任何'edge'不可验证也不可声称"
+    mitigation: "接受 proxy 上限；研究面收敛至 proxy 足够的问题（vol/成本/事件时间）；报告一律 proxy 语言"
+    unlock: INFRA_UNLOCK（maker 通道 + L2 数据，短期不可能）
+    investment: "不投入（TIER 3）"
+
+  - id: BN-2
+    name: "DUKA tick 未下载（KD-U01）+ FXTM 固定点差 feed 无 spread 动态"
+    type: DATA
+    type_classes: [DATA, OBSERVABILITY]
+    blocks: [≤3m 方向族终审, RQ-H4, spread 动态描述, N1 事前识别, 执行层校准]
+    impact: "事件时间层与 spread 状态研究的直接数据基础缺失；NBQ-T1 前置识别仍 NOT EVALUABLE"
+    mitigation: "W1 FXTM tick 先行数据审计（23 日已到手）；DUKA tick 下载列为解锁项"
+    unlock: DATA_UNLOCK（DUKA tick）
+    investment: "TIER 2 最高优先级数据项"
+
+  - id: BN-3
+    name: "FXTM/DUKA 无并发对齐窗口 + D2(252 日同源历史) 缺失"
+    type: DATA
+    type_classes: [DATA]
+    blocks: [M12 跨源验证, R1'-A-DUKA, 跨期稳定性检查, KD-U09 外推性]
+    impact: "跨源/跨期结论无法完成最后确认环；任何 FXTM 结论的外推都被 KD-U09 限制"
+    mitigation: "D2 下载（静态 DUKA 窗口扩展至 2023-09 前 252 日）"
+    unlock: DATA_UNLOCK（D2）
+    investment: "TIER 2 解锁项（预注册已完成的研究依赖它）"
+
+  - id: BN-4
+    name: "事件日历数据未接入（语义标注缺失）"
+    type: DATA
+    type_classes: [DATA, KNOWLEDGE]
+    blocks: [M02/M15 事件窗研究（RQ-H2）, KD-U02 因果问题]
+    impact: "唯一外生时间锚不可用；Phase 7 停在'簇聚'无法前进到'反应结构'"
+    mitigation: "公开日历接入（低复杂度新组件）"
+    unlock: 数据采集（可获取，分钟级时间戳 + 等级标注）
+    investment: "TIER 1 前置（RQ-H2 唯一前置）"
+
+  - id: BN-5
+    name: "执行验证层缺失（模拟器 RQ-07 未建；无真实/paper 通道）"
+    type: EXECUTION
+    type_classes: [EXECUTION, INFRASTRUCTURE]
+    blocks: [M07/M16/M21 闭环验证, 任何'成本后价值'的最终确认]
+    impact: "中间层研究只能停在'成本/风险输入'；执行后价值不可知; last look/流毒性使纸上增益不可信(RQ-02)"
+    mitigation: "RQ-07 执行模拟器立项（开源 ordersim/hftbacktest 参考）；tick 校准依赖 BN-2"
+    unlock: 工程投入（非 alpha；依赖 BN-2 的 tick 校准）
+    investment: "TIER 1 实验之后立项"
+
+  - id: BN-6
+    name: "期权/期货/跨资产数据缺失"
+    type: DATA
+    type_classes: [DATA, INFRASTRUCTURE]
+    blocks: [M11, M13, M14, M19, M25, M20 多腿]
+    impact: "VRP/basis/期权信息/相对价值全部 DATA GAP（≠ REJECTED）"
+    mitigation: "外部数据接入（授权）；当前优先级中低（KD-U05）"
+    unlock: 数据源采购/授权（机构级，短期不可得）
+    investment: "不投入（TIER 2/3 边界，等数据机会）"
+
+  - id: BN-7
+    name: "延迟/链路（retail MT5 API, ~100ms+ 级）"
+    type: LATENCY
+    type_classes: [LATENCY, INFRASTRUCTURE]
+    blocks: [M01, 微秒层执行, 事件抢跑]
+    impact: "信息延迟与抢跑类机制整体不可达（范围纪律已声明：不做微秒声称）; HERMES-10 §10 确认为 HFT 根本成本"
+    mitigation: "研究定位限缩到分钟级结构（RQ-H2 已内置 latency 声明）"
+    unlock: 基础设施重构（与当前研究目标不匹配）
+    investment: "不投入"
+
+  - id: BN-8
+    name: "表示→预测的语义鸿沟（REP 描述稳定 ≠ 切换可预测）"
+    type: RESEARCH_METHODOLOGY
+    type_classes: [KNOWLEDGE, RESEARCH_METHODOLOGY]
+    blocks: [RQ-H3 前提, 任何'状态驱动'研究]
+    impact: "把描述性稳定误读为'状态正确'是已知风险模式（Phase 2 已声明）; 参数化 look-ahead(FL-23)与
+      搜索强度泄漏(FL-20b)是同一类方法学瓶颈的模型侧——现有门禁覆盖程序层, 未覆盖 2026 代模型权重记忆"
+    mitigation: "预注册 + C06 事件时间标签纪律 + 3 块 OOS（沿用 REP/RLAP 链）; RQ-08 模型时间资格门禁已设计"
+    unlock: 无（方法论已冻结在门禁链内; C10b 实现待批准）
+    investment: "作为 RQ-H3 的实验设计约束 + RQ-08 实现, 非独立实验瓶颈"
+
+  - id: BN-9
+    name: "成本经济性（薄 edge 被单笔成本吞噬）"
+    type: COST
+    type_classes: [COST]
+    blocks: ["所有盈利声称的最终判定", "R1'-B/C 变体", "外部 vol-timing 类主张（HERMES-10）"]
+    impact: "已测方向信号毛 IC 0.01-0.04 vs 单边成本 0.5-2.4bp → 1x 即亏; 无条件日级 gate 机会成本 > 保护;
+      外部证据: 8 个 VMP 因子成本后无一正 alpha, 6 种降本策略普遍失败(JFE); VT 盈利 2000 后消失(Elsevier)
+      → 成本是'盈利 edge'的终极瓶颈, 信息层研究不受此限"
+    mitigation: "1x/2x/3x 成本压力 + 换手纪律 + 预注册成本模型（宪章 §11）; 信息层与研究层分开声称"
+    unlock: 无（结构性）——只能筛选出足够厚的 edge 或定位为信息/风险输入
+    investment: "作为所有 TIER 1 实验的内置 kill 条件, 不单独立项"
+
+# 机会 vs 瓶颈（HARD RULE #3 区分）
+opportunity_vs_bottleneck:
+  opportunities:   # 钱可能存在的地方（按 25 机制宇宙）
+    - "方向层（M08/M09/M03-proxy）: 已测空间无成本后价值——机会已被排除（不是瓶颈, 是已答问题）"
+    - "中间层信息（M10 E5 确认; M17/M18/M02/M23/M24 未充分研究）: 价值 = 成本/风险/执行调度的输入, 非直接收益"
+    - "微观结构层（M03/M04/M05/M22）: 理论价值最高——但被 OBSERVABILITY/INFRASTRUCTURE 瓶颈整体封锁"
+    - "跨资产/期权/期货（M11-M14/M19/M20/M25）: 机制真实但 DATA 瓶颈封锁"
+  bottlenecks_ranking:   # 哪个瓶颈真正限制进入哪个池子
+    - "BN-1 OBSERVABILITY → 封锁微观结构价值池（最大池, 永久性）: 对策=放弃该池, 不投入"
+    - "BN-9 COST → 封锁'薄方向 edge→盈利'（所有已测方向死于此处）: 对策=只研究信息层或足够厚的 edge"
+    - "BN-2/BN-3/BN-4 DATA → 封锁中间层终审（≤3m 族/R1'-A-DUKA/事件窗/RQ-H4）: 对策=数据解锁优先（TIER 2）"
+    - "BN-5 EXECUTION → 封锁中间层'闭环验证': 对策=RQ-07 工程立项（TIER 1 实验后）"
+    - "BN-7 LATENCY → 封锁微秒/抢跑池: 对策=范围纪律（分钟级结构定位）"
+    - "BN-8 METHODOLOGY → 威胁所有结论可信度（泄漏/搜索强度/模型代际）: 对策=RLAP/RQ-08 门禁（已有+待实现）"
+    - "KNOWLEDGE（类级）→ 中间层问题从未被正确提出（RQ-H1/H2/H3 靶点）: 对策=预注册实验设计（TIER 1）"
+  headline: "最大的价值池（微观结构）被最硬的瓶颈（OBSERVABILITY）封锁; 当前唯一能推进的是被 DATA/EXECUTION
+    瓶颈部分封锁的中间层——瓶颈优先级: OBSERVABILITY > COST > DATA > EXECUTION > LATENCY > METHODOLOGY/KNOWLEDGE（后者可
+    靠实验设计与门禁缓解, 前两者结构性不可逆）。机会数量不改变此排序（HARD RULE #3）。"

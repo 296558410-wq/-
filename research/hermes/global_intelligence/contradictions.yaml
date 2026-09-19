@@ -1,0 +1,54 @@
+# CONTRADICTION REGISTRY（矛盾/反证注册表）
+# 生成：2026-09-05 · HERMES-03 · 每条 claim 记录支持/反对/依赖 → 输出 CONFLICTED/UNCERTAIN
+# 纪律：不挑支持自己的；证据不足就标 UNCERTAIN。这是对既有 global_intelligence 层的净新增。
+
+contradictions:
+  - id: CONTRA-01
+    claim: "波动率择时（volatility-managed portfolios）稳定提升风险调整收益"
+    status: CONFLICTED  # 有强支持 + 强反对
+    supporting:
+      - "Moreira & Muir (2017, JF)：市场组合 alpha 4.86%，beta 0.61；称可实时实现、经成本后仍存"
+      - "Multifactor (jofi.13395)：多因子+净额交易+成本优化后 OOS 净成本下仍优于无条件"
+    contradicting:
+      - "Cederburg et al. (2020, JFE)：直接交易实现多数 vol-managed 因子 OOS 失败（估计误差）"
+      - "Barroso & Detzel (2021)：交易成本完全侵蚀收益"
+      - "SWUFE PDF『Real Market Timing with a False Theory?』：Moreira-Muir 存在 look-ahead（full-sample 归一化常数 c）"
+      - "GitHub 复制（tanishhky）：『vol timing 真实但窄——先是对动量崩溃的对冲，非通用增强』；市场因子 t=1.37 不显著"
+    nuance: "单因子 vs 多因子、是否净额交易、是否成本优化 三者决定结论方向"
+    xauusd_implication: "直接映射 R1'-B/C：XAUUSD 日级 vol/activity 降险被否（机会成本>保护）与『成本侵蚀 vol-timing』的外部证据一致；但『窄而真』（动量崩溃对冲）提示 R1 未来应走向『形态条件化』而非无条件日级 gate"
+    status_final: "UNCERTAIN —— 非普遍成立，条件极窄"
+
+  - id: CONTRA-02
+    claim: "订单流失衡(OFI)预测短期价格方向"
+    status: CONFLICTED
+    supporting:
+      - "Cont-Kukanov-Stoikov (2014)：order book 事件价格冲击"
+      - "Fed FEDS Note (2025)：OFI 放大价格波动（美债）"
+    contradicting:
+      - "本地 KD-C07：≥5m 聚合 imb 方向 REJECTED（重叠标签 p=0.0000 假象 → 非重叠 p≥0.096）"
+      - "P7 探测器（tick 层）：27/27 零候选，11 REJECT + 16 EDGE UNCERTAIN"
+    nuance: "『OFI 与波动/流动性风险相关』（非方向）成立；『OFI 预测方向』在 XAUUSD ≥5m 已否，≤3m 仍 EDGE UNCERTAIN"
+    xauusd_implication: "方向用法不重开；OFI 作为 vol/流动性风险代理（非方向）仍可进 risk 层"
+    status_final: "UNCERTAIN（方向层）"
+
+  - id: CONTRA-03
+    claim: "黄金与美元(DXY)是稳定负相关"
+    status: CONFLICTED
+    supporting:
+      - "经典：黄金以美元计价，numeraire 效应；真实利率共同驱动"
+    contradicting:
+      - "WatchGold 2026：滚动相关在 -0.3~-0.6 摆动，2020-03 流动性挤兑时短暂翻正、2023-24 央行购金期脱敏"
+    nuance: "机制恒在，但『谁是边际定价者』决定是否显现；相关断裂本身是信号"
+    xauusd_implication: "避免把『DXY 驱动黄金』当常数；regime 依赖（对应 ADAPTIVE_MARKET_PRINCIPLE）"
+    status_final: "CONFLICTED（regime-dependent）"
+
+  - id: CONTRA-04
+    claim: "波动率目标定仓能改善组合（vol targeting 有益）"
+    status: CONFLICTED
+    supporting:
+      - "Moreira-Muir、部分 multifactor 视角"
+    contradicting:
+      - "arxiv:2212.07288：标准 RV vol-target 换手/杠杆极端，成本后收益消失；仅平滑后恢复"
+      - "R1'-C（本地）：adaptive risk scaling 相对 fixed vol-target 无增量且更差（REDUNDANT）"
+    xauusd_implication: "『机制合理≠有增量』的外部印证；复杂度/参数变化不产生价值（原则 #17）"
+    status_final: "CONFLICTED（成本是关键，平滑/净额是条件）"

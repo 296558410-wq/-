@@ -1,0 +1,26 @@
+# ECONOMIC_VALUE / OBSERVABILITY_AUDIT / KILL_TESTS — CAND-01
+economic_value:
+  hierarchy_level: "LEVEL 1-2（统计信息 + 轻度风险态信息）; 非 LEVEL 3/4"
+  information_value: "中低（残余 OOS ΔR² +0.07..+0.12 @5-20d; 主体为平滑表示）"
+  risk_value: "轻微（R1 AUC +0.029 over 本地平滑 vol）"
+  execution_value: none
+  cost_value: none
+  trading_value: none（方向 REJECTED; 无期权执行通道 → VRP 收割 INACCESSIBLE）
+  final: "UNPROVEN（增量信息候选）; 最高可支持 = RISK_VALUE_ONLY(轻度) 若未来确证"
+observability_audit:
+  exists: "GVZ (日频 index)"
+  accessible: true
+  automatable: true（fredgraph.csv 已实现; 本地网络需 gateway 通道）
+  research_usable: true
+  missing: ["XAUUSD 专属 IV", "完整曲面", "skew", "term structure", "日内 IV", "事件邻近 IV 重定价"]
+  note: "GVZ 不解决缺失项; 曲面维度信息(若存在)不可观测 → DATA_GAP 层"
+kill_tests:
+  KILL-01_reproduce: "未命中（GVZ→未来 RV 关系稳定复现）"
+  KILL-02_no_increment_after_controls: "部分命中（控平滑本地 vol 后残余 +0.07..+0.12 仍 >0, 但大幅缩水）"
+  KILL-03_oos: "部分（OOS 保持正号但弱; 重叠窗推断未全量块自举）"
+  KILL-04_regime: "UNKNOWN（样本不足）"
+  KILL-05_unstable: "未命中（跨 1-20d 与多规格方向一致）"
+  KILL-06_redundant_representation: "部分命中（60-75% 增益 = 平滑表示; 残余非冗余但期权特有性未建立）"
+  KILL-07_direction_null: "命中（方向 ≈ 0）"
+  KILL-08_no_decision_value: "部分（R1 边际 +0.029 AUC 存在, 小）"
+  summary: "未被杀死(残余增量一致), 亦未确证(幅度小+表示主体+方向空) → UNPROVEN"

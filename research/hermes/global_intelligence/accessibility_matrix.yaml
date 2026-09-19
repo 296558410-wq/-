@@ -1,0 +1,78 @@
+# MECHANISM ACCESSIBILITY MATRIX（机制可及性矩阵）
+# 生成：2026-09-05 · HERMES-04 LINE B · 核心纪律：『别人能做』≠『我们能做』
+# 可及性分级：ACCESSIBLE（可研究）/ LIMITED（部分可研究，需理想化假设）/
+#   INACCESSIBLE（数据/基础设施/执行能力无法触及，只能作理解价值）
+# 注意：INACCESSIBLE ≠ 无价值；标它正是为了防止『把机构/HFT 的 edge 误当成我们能复现的 alpha』。
+
+matrix:
+  - mechanism: "spread capture / 做市（Avellaneda-Stoikov）"
+    economics: "spread/2 须 > 逆向选择成本 + 库存成本"
+    accessibility: INACCESSIBLE
+    why: "需 maker 通道（我们只有 taker 零售 feed）；无 L2 深度/队列（KD-U06）；XAUUSD spot 无中心 LOB"
+    data_req: "L2/L3 + 队列位置（缺）"
+    infra_req: "交易所/ECN maker 接入 + 低延迟（缺）"
+    value: "理解价值 D（解释价差为何存在）；不可交易"
+
+  - mechanism: "execution alpha / spread 状态感知限价执行"
+    economics: "可变点差 feed 上择时挂单，节省 0.041bp/笔（Phase 5 DUKA 实证）"
+    accessibility: LIMITED
+    why: "DUKA M1 可变点差数据已有；但需 tick 级执行模拟器（Phase 5 预留未完成）；FXTM 固定点差无空间"
+    data_req: "DUKA M1（已有）+ 成交级 tick（D2 缺）"
+    infra_req: "tick 执行模拟器（maker/taker/fill/queue/adverse-selection）—— 未完成"
+    value: "B/C（风险/执行层）；是 R1 之外最现实的执行层候选"
+
+  - mechanism: "订单流失衡(OFI)方向预测"
+    economics: "OFI→短期价格方向"
+    accessibility: LIMITED
+    why: "≥5m 方向已 REJECTED（KD-C07）；≤3m 需 DUKA tick（缺）；且 OFI 需 L2 盘口（我们只有 bid/ask 报价，无深度）"
+    data_req: "L2 盘口（缺，KD-U06）→ 只能用 quote-rhythm 代理（P7 已预注册）"
+    infra_req: "无特殊"
+    value: "方向层已否；仅 vol/流动性风险代理有意义"
+
+  - mechanism: "跨资产 lead-lag（COMEX→现货 / DXY→黄金 / SGE）"
+    economics: "价格发现源头领先"
+    accessibility: DATA_GAP
+    why: "需 COMEX/GLD/SGE/DXY 数据（当前未接入，KD-U05）"
+    data_req: "跨资产同步 tick（缺）"
+    infra_req: "无特殊"
+    value: "理解价值 D + 潜在非方向信号"
+
+  - mechanism: "黄金 basis/EFP 套利（现货-期货）"
+    economics: "现金套利钉住 basis；backwardation=实物需求压力信号"
+    accessibility: INACCESSIBLE
+    why: "需实物交割 + bullion bank 身份 + COMEX 账户；纯机构套利"
+    data_req: "COMEX 期货 + LBMA 现货（部分可获取但执行不可达）"
+    infra_req: "实物交割通道（缺）"
+    value: "理解价值 D；backwardation 作为『实物压力』的非方向信号可间接观测（但需期货数据）"
+
+  - mechanism: "期权 IV 信息（CVOL/implied skew）"
+    economics: "期权隐含波动领先价格"
+    accessibility: DATA_GAP
+    why: "需黄金期权数据（未接入）；且 Muravyev 2025 显示 IV 预测收益大部分是借券费代理（见 contradiction_updates）"
+    data_req: "黄金期权 IV/CVOL（缺）"
+    infra_req: "无特殊"
+    value: "潜在 B（非方向风险信号）；但需先解决『IV 预测是借券费代理还是真信息』"
+
+  - mechanism: "订单流→汇率（Evans-Lyons 型）"
+    economics: "客户订单流预测汇率与宏观基本面"
+    accessibility: INACCESSIBLE
+    why: "依赖 Citibank 专有客户流数据（6.5 年）；我们无任何 dealer 客户流数据；且样本短、OOS 显著性弱"
+    data_req: "dealer 客户订单流（不可获取）"
+    infra_req: "无"
+    value: "理解价值 D；提醒：『订单流预测汇率』的可复现性依赖我们拿不到的数据"
+
+  - mechanism: "做市盈利的 informedness regime 依赖"
+    economics: "做市商盈利主要由市场信息度环境驱动，非报价策略（arxiv 2606.05882）"
+    accessibility: INACCESSIBLE
+    why: "结论本身来自仿真+计算环境；且做市通道不可达"
+    data_req: "无（理论/仿真）"
+    infra_req: "做市接入（缺）"
+    value: "理解价值 D；关键洞察：做市盈利是『环境』不是『信号』——降低我们对『学会做市就能赚钱』的错误期待"
+
+  - mechanism: "tick 级执行模拟（queue/latency/fill）"
+    economics: "（不是 alpha，是研究基础设施）"
+    accessibility: ACCESSIBLE
+    why: "开源实现成熟（ordersim/hftbacktest/MicroExchange）；可自建"
+    data_req: "成交级 tick（D2 缺，但可先用已有 FXTM tick 结构）"
+    infra_req: "Python/C++ 本地运行（已有）"
+    value: "方法论价值；补齐 Phase 5 未完成的执行模拟器"

@@ -1,0 +1,28 @@
+# CONTRADICTION REGISTRY + LINEAGE + EVIDENCE HISTORY（合并索引）
+# 生成：2026-09-05 · HERMES-08 · 合并 CONTRA-01..08 / LIN-01..05 / E 升级史。
+
+contradiction_registry:
+  - {id: CONTRA-01, claim: "波动率择时普遍有效", status: CONFLICTED, parties: "Moreira-Muir vs Cederburg/Barroso-Detzel/SWUFE"}
+  - {id: CONTRA-02, claim: "OFI 预测方向", status: CONFLICTED, parties: "Cont-Kukanov-Stoikov vs 本地 KD-C07"}
+  - {id: CONTRA-03, claim: "黄金-DXY 稳定负相关", status: CONFLICTED, note: "regime 依赖，相关断裂是信号"}
+  - {id: CONTRA-04, claim: "vol-target 有益", status: CONFLICTED, parties: "Moreira-Muir vs arxiv:2212.07288 + 本地 R1'-C"}
+  - {id: CONTRA-05, claim: "期权 IV 预测收益=真信息", status: CONFLICTED, parties: "经典 vs Muravyev JFE 2025"}
+  - {id: CONTRA-06, claim: "订单流预测汇率", status: "CONFLICTED + INACCESSIBLE", parties: "Evans-Lyons vs 专有数据不可复现"}
+  - {id: CONTRA-07, claim: "做市盈利靠策略", status: CONFLICTED, parties: "A-S 框架 vs arxiv:2606.05882"}
+  - {id: CONTRA-08, claim: "DXY→黄金 lead-lag", status: CONTRADICTED, parties: "普遍假设 vs rahulsp 2026"}
+  - {id: CONTRA-09, claim: "vol/成本择时可盈利（timing edge 可接近）", status: CONFLICTED, parties: "Moreira-Muir(2017) vs JFE limits-to-arbitrage(成本后全归零) + Elsevier disappearing profitability(2000后消失)", note: "关键区分：vol 信息可预测(E5 CONFIRMED) ≠ vol 择时可盈利(WEAKENED/时间依赖)。R1 定位=风险管理输入，非盈利 edge"}
+  - note: "矛盾不自动判定谁对；保留 METHODOLOGY_DIFF/DATA_DIFF/TIME_DIFF/MARKET_DIFF，STATUS=OPEN 等待独立研究"
+
+research_lineage:
+  - {id: LIN-01, topic: "波动率择时", chain: "Moreira-Muir(2017)→Cederburg(2020)→Barroso-Detzel(2021)→SWUFE→multifactor→本地R1'", state: "CONFLICTED，条件极窄"}
+  - {id: LIN-02, topic: "OFI 方向预测", chain: "Cont(2014)→Cartea(2014)→Eisler-Bouchaud(2016)→Fed(2025)→本地P7", state: "≥5m REJECTED，≤3m EDGE UNCERTAIN"}
+  - {id: LIN-03, topic: "期权 IV 预测收益", chain: "Black(1975)→多实证→Muravyev(2025)", state: "CONFLICTED（借券费代理）"}
+  - {id: LIN-04, topic: "订单流预测汇率", chain: "Evans-Lyons(2002)→(2008)→专有数据不可复现", state: "INACCESSIBLE"}
+  - {id: LIN-05, topic: "LLM 交易 agent 评估", chain: "Bailey(2014)→LdP(2018)→2608.27734→2604.15531→OpenPM/CLQT→FINCAD", state: "审计工具成熟，参数化 look-ahead 是新盲区"}
+
+evidence_history:
+  - {subject: "LBMA 定盘机制", trail: "E1 二手博客(watchgold) → E2 一手 IOSCO 自评估 PDF", upgraded_at: "HERMES-06"}
+  - {subject: "参数化 look-ahead", trail: "E2 论文 → E4 论文+代码(FinCAD repo)", upgraded_at: "HERMES-05"}
+  - {subject: "波动率择时", trail: "E1 社区 → E3 多源收敛(5篇)", upgraded_at: "HERMES-03"}
+  - {subject: "activity→vol", trail: "E4 单源 → E5 双源双期", upgraded_at: "本地 Phase 3-6"}
+  - note: "旧记录不删除；保留 EVIDENCE_HISTORY 全链"

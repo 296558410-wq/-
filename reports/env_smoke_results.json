@@ -1,0 +1,85 @@
+{
+  "suite": "env_baseline",
+  "run_utc": "2026-09-04T15:44:40.359530+00:00",
+  "python": "C:\\AIQuant\\.venv\\Scripts\\python.exe",
+  "modules": {
+    "env_info": {
+      "status": "PASS",
+      "n_checks": 0,
+      "seconds": 6.7,
+      "stderr_tail": ""
+    },
+    "gpu_bench": {
+      "status": "PASS",
+      "n_checks": 11,
+      "seconds": 5.1,
+      "stderr_tail": ""
+    },
+    "stats_smoke": {
+      "status": "PASS",
+      "n_checks": 12,
+      "seconds": 1.4,
+      "stderr_tail": ""
+    },
+    "ml_smoke": {
+      "status": "PASS",
+      "n_checks": 6,
+      "seconds": 2.6,
+      "stderr_tail": ""
+    },
+    "ts_leak": {
+      "status": "PASS",
+      "n_checks": 12,
+      "seconds": 0.6,
+      "stderr_tail": ""
+    },
+    "backtest_smoke": {
+      "status": "PASS",
+      "n_checks": 7,
+      "seconds": 0.6,
+      "stderr_tail": ""
+    },
+    "tick_smoke": {
+      "status": "PASS",
+      "n_checks": 11,
+      "seconds": 1.9,
+      "stderr_tail": ""
+    },
+    "duka_smoke": {
+      "status": "WARN",
+      "n_checks": 9,
+      "seconds": 5.2,
+      "stderr_tail": ""
+    },
+    "mt5_smoke": {
+      "status": "WARN",
+      "n_checks": 8,
+      "seconds": 0.5,
+      "stderr_tail": ""
+    },
+    "git_smoke": {
+      "status": "PASS",
+      "n_checks": 6,
+      "seconds": 0.4,
+      "stderr_tail": ""
+    },
+    "deepseek_smoke": {
+      "status": "PASS",
+      "n_checks": 1,
+      "seconds": 4.0,
+      "detail": "exact reply OPENCLAW_RESEARCH_ENV_OK"
+    }
+  },
+  "summary": {
+    "PASS": 9,
+    "WARN": 2,
+    "FAIL": 0,
+    "SKIP": 0
+  },
+  "total_checks_flagged": {
+    "PASS": 9,
+    "WARN": 2,
+    "FAIL": 0,
+    "SKIP": 0
+  }
+}

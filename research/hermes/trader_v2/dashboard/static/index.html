@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>V2 黄金交易系统 · 控制面板</title>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ======== 顶栏 ======== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">V2</div>
+      <div class="bt">
+        <h1>黄金交易系统</h1>
+        <div class="sub">XAUUSD · 只读监控 · 独立于 V1</div>
+      </div>
+    </div>
+    <div class="topright">
+      <span id="modeBadge" class="badge">—</span>
+      <span id="live" class="live off"><span class="dot"></span><span id="liveTxt">连接中…</span></span>
+      <span class="clock mono" id="clock">--:--:--</span>
+      <span id="refreshState" class="muted" style="font-size:11px"></span>
+    </div>
+  </header>
+
+  <!-- ======== 系统状态（主） ======== -->
+  <section class="hero">
+    <div class="hero-left">
+      <span id="sysDot" class="bigdot"></span>
+      <div>
+        <div class="hero-status" id="sysText">未知</div>
+        <div class="hero-sub muted" id="sysSub">—</div>
+      </div>
+    </div>
+    <div class="hero-meta" id="heroMeta"></div>
+    <div class="hero-right">
+      <div class="count-label">距下一周期</div>
+      <div class="count mono" id="heroNext">—</div>
+    </div>
+  </section>
+
+  <!-- ======== KPI ======== -->
+  <section class="kpis" id="kpis"></section>
+
+  <!-- ======== 运行闭环总览 ======== -->
+  <section class="card loopcard">
+    <div class="hd"><h2><span class="bar"></span>运行闭环总览</h2><span class="tag" id="loopTag"></span></div>
+    <div class="loop" id="loop"></div>
+    <div class="loopfoot" id="loopFoot"></div>
+  </section>
+
+  <!-- ======== 交易决策 ======== -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>最新交易决策</h2><span class="tag" id="decTag"></span></div>
+    <div id="decision"></div>
+  </section>
+
+  <!-- ======== 决策层 ======== -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>决策层 · Agent1 / Agent2 / Hermes</h2><span class="tag" id="dlTag"></span></div>
+    <div class="grid g3" style="margin-bottom:12px">
+      <div class="agentbox" id="dlA1"></div>
+      <div class="agentbox" id="dlA2"></div>
+      <div class="agentbox" id="dlH"></div>
+    </div>
+    <div class="sec-t">决策时间线（近 12 轮 · 各 Agent 产出与 Hermes 决策）</div>
+    <div class="scroll" style="max-height:260px"><table id="dlTbl"></table></div>
+  </section>
+
+  <div class="grid g2">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>账户与持仓</h2><span class="tag" id="acctTag"></span></div>
+      <div id="account"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>系统健康</h2><span class="tag" id="healthTag"></span></div>
+      <div id="health"></div>
+    </section>
+  </div>
+
+  <div class="grid g2">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>数据状态</h2><span class="tag" id="dataTag"></span></div>
+      <div id="data"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>运行调度</h2><span class="tag" id="schedTag"></span></div>
+      <div id="sched"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>当前行情</h2><span class="tag" id="mktTag"></span></div>
+    <div id="market"></div>
+  </section>
+
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>最近交易（已平仓）</h2><span class="tag" id="trTag"></span></div>
+    <div id="trades"></div>
+  </section>
+
+  <!-- ======== 高级 ======== -->
+  <details class="card adv">
+    <summary class="hd"><h2><span class="bar"></span>技术详情（高级）</h2><span class="tag">展开</span></summary>
+    <div class="adv-body">
+      <div class="grid g2">
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>账户净值曲线</h2><span class="tag" id="eqTag">—</span></div>
+          <canvas id="eqChart" height="200"></canvas><div class="legend" id="eqLegend"></div></section>
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>决策构成</h2><span class="tag" id="donutTag"></span></div>
+          <div class="donutwrap"><canvas id="donut" width="180" height="180"></canvas><div class="legend" id="donutLegend"></div></div></section>
+      </div>
+      <section class="card sub"><div class="hd"><h2><span class="bar"></span>仓位遥测（sizing）</h2><span class="tag">FLOOR_TO_STEP · max_lot 硬拒</span></div>
+        <div class="scroll"><table id="sizingTbl"></table></div></section>
+      <section class="card sub"><div class="hd"><h2><span class="bar"></span>账本事件流</h2><span class="tag" id="ledTag"></span></div>
+        <div class="scroll"><table id="ledTbl"></table></div></section>
+      <div class="grid g2">
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>市场分析 · Agent1</h2><span class="tag" id="a1Tag"></span></div><div id="a1"></div></section>
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>宏观分析 · Agent2</h2><span class="tag" id="a2Tag"></span></div><div id="a2"></div></section>
+      </div>
+      <section class="card sub"><div class="hd"><h2><span class="bar"></span>全部 Run</h2><span class="tag" id="runsTag"></span></div>
+        <div class="scroll"><table id="runsTbl"></table></div></section>
+      <div class="grid g2">
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>最近问题</h2><span class="tag" id="probTag"></span></div>
+          <div class="scroll" id="problems"></div></section>
+        <section class="card sub"><div class="hd"><h2><span class="bar"></span>V1 隔离</h2><span class="tag" id="v1Tag"></span></div><div id="v1"></div></section>
+      </div>
+    </div>
+  </details>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

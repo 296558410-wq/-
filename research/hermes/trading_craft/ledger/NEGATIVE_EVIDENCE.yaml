@@ -1,0 +1,36 @@
+# NEGATIVE EVIDENCE（Trading Craft 负面证据 — 可查询，不埋进报告）
+# 生成：2026-09-05
+
+negative_evidence:
+  - id: NEG-0001
+    claim: "无底层 edge 可放大（方向死 E5）"
+    source: "本地 E5（两期双源 0 SUPPORTED）"
+    impact: "经典交易手艺全部无对象"
+  - id: NEG-0002
+    claim: "止损在无动量环境减值"
+    source: SRC-0001 (Kaminski-Lo)
+    impact: "止损非普遍有益；条件依赖"
+  - id: NEG-0003
+    claim: "出场规则不能拯救次优信号"
+    source: SRC-0004 (MDPI gold MACD)
+    impact: "手艺不制造 edge"
+  - id: NEG-0004
+    claim: "多周期方向无独立机制（换皮）"
+    source: 本地 + 本轮考古
+    impact: "MTF 方向=低周期换标签"
+  - id: NEG-0005
+    claim: "MFE/MAE 是 hindsight，不能实时使用"
+    source: SRC-0005 + 本地 FL-01/11
+    impact: "出场优化含 lookahead 风险"
+  - id: NEG-0006
+    claim: "黄金趋势 OOS 声称（Sharpe 2.88）未复现/红旗"
+    source: SRC-0002 (arXiv 2511.08571)
+    impact: "不采信；矛盾 E5"
+  - id: NEG-0007
+    claim: "做市/订单流/执行层不可及"
+    source: 前研究（INACCESSIBLE）
+    impact: "手艺可及域收窄到风险/执行 overlay"
+  - id: NEG-0008
+    claim: "成本敏感的让赢家跑/凸性"
+    source: vol-timing 成本失败文献
+    impact: "凸性需低成本 + 真趋势双前提"

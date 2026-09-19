@@ -1,0 +1,22 @@
+{
+ "version": "v3/0.1.0",
+ "mode": "RESEARCH_READONLY",
+ "note": "V3 独立 MT5 环境 — 行情/tick/spread/latency 研究；禁止 order_send / LIVE / 自动交易。",
+ "symbol": "XAUUSD",
+ "magic": 90004,
+ "mt5": {
+  "instance": "fxtm_demo_v3",
+  "terminal": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3\\terminal64.exe",
+  "data_dir": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3",
+  "portable": true,
+  "server_expected": "ForexTimeFXTM-Demo01",
+  "creds_env_file": "C:\\AIQuant\\.env.mt5_demo"
+ },
+ "safety": {
+  "V3_LIVE_ALLOWED": "NO",
+  "V3_ORDER_SEND_ALLOWED": "NO",
+  "V3_FORWARD_ALLOWED": "NO"
+ },
+ "capabilities_allowed": ["quote", "ticks_read", "tick_collect", "bidask", "spread", "bars_m1", "latency_probe"],
+ "capabilities_forbidden": ["order_send", "auto_trading", "live", "strategy_loop"]
+}

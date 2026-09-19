@@ -1,0 +1,105 @@
+# HERMES MODEL CANDIDATE REGISTRY（候选注册表）
+# 生成：2026-09-05 · HERMES-02 · 每个候选含完整 MODEL INTELLIGENCE RECORD
+# 状态词汇：TIER_A(唯一值得实测) / TIER_B / TIER_C / REJECT
+# 注：所有"2026 实测口径"数字来自公开检索，本机实测见 HERMES_MODEL_BENCHMARK.md
+
+candidates:
+  - id: CAND-01
+    model: "Qwen3 8B"
+    developer: "Alibaba Qwen"
+    version: "Qwen3 (2025)"
+    release_date: "2025-04"
+    parameters: "8B dense"
+    architecture: "dense transformer"
+    context: "128K native"
+    quantization: "Q4_K_M (~4.4GB GGUF)"
+    license: "Apache 2.0"
+    training: "通用+代码+多语言+推理强化"
+    finance_specialization: "无（通用）"
+    coding_ability: "强（76% HumanEval，本地小模型最佳之一）"
+    reasoning_ability: "强（小模型梯队靠前）"
+    tool_use: "可，但 Q4 下结构化输出掉崖风险"
+    agent_suitability: "中（受限于本机速度/量化）"
+    known_weaknesses: "Q4 下数学/结构化输出掉崖；长文档推理随 context 增长衰减"
+    known_hallucination: "中等（小模型普遍）"
+    hardware_requirements: "8GB VRAM 舒适；本机 4GB → CPU"
+    gguf_available: true
+    llamacpp_compat: true
+    ollama_compat: true
+    hermes_compat: "custom OpenAI-compatible endpoint"
+    community_activity: "高"
+    maintenance_status: "活跃"
+    download_size_gb: 4.4
+    est_ram_gb: 6
+    est_vram_gb: 0 (CPU) / 溢出
+    potential_role: "窄任务辅助（分类/路由/摘要）；非 Primary"
+    security_concerns: "低（Apache 2.0，官方发布）"
+    tier: TIER_A
+
+  - id: CAND-02
+    model: "Phi-4-mini"
+    developer: "Microsoft"
+    version: "Phi-4-mini (2025)"
+    release_date: "2025"
+    parameters: "3.8B"
+    architecture: "dense transformer（phi recipe 高质量合成推理数据）"
+    context: "128K"
+    quantization: "Q4 (~2.3GB)"
+    license: "MIT"
+    training: "高质量合成推理数据"
+    finance_specialization: "无"
+    coding_ability: "中"
+    reasoning_ability: "强（3-4B 梯队之王：GSM8K 88.6%、MATH 64%）"
+    tool_use: "基本可"
+    agent_suitability: "低-中（绝对能力受限）"
+    known_weaknesses: "绝对知识/推理深度低于 7-8B"
+    known_hallucination: "中"
+    hardware_requirements: "可部分入 4GB VRAM"
+    gguf_available: true
+    llamacpp_compat: true
+    ollama_compat: true
+    hermes_compat: "custom endpoint"
+    community_activity: "高"
+    maintenance_status: "活跃"
+    download_size_gb: 2.3
+    est_ram_gb: 4
+    est_vram_gb: 部分 (~2GB)
+    potential_role: "极轻辅助；速度优先"
+    security_concerns: "低（MIT）"
+    tier: TIER_B
+
+  - id: CAND-03
+    model: "Qwen3 4B / Gemma 3 4B"
+    developer: "Alibaba / Google"
+    parameters: "4B"
+    context: "32K-128K"
+    quantization: "Q4 (~2.5GB)"
+    license: "Apache 2.0"
+    reasoning_ability: "弱-中（不达 quant 推理门槛）"
+    potential_role: "极轻分类/路由"
+    tier: TIER_C
+
+  - id: CAND-04
+    model: "Llama 3.2 3B"
+    developer: "Meta"
+    parameters: "3B"
+    license: "Llama community"
+    reasoning_ability: "基线（MMLU 63.4%）"
+    potential_role: "兼容性兜底"
+    tier: TIER_C
+
+  - id: REJECT-01
+    model: "一切 >14B（Qwen3 14B+ / Qwen3.5-27B / Gemma 4 26B / Llama 70B）"
+    reject_reason: "本机 4C/8T CPU <2 tok/s；>8GB RAM 仅权重即超预算；不可用"
+
+  - id: REJECT-02
+    model: "FinGPT / 金融微调小模型"
+    reject_reason: "标签崇拜陷阱：提供金融 NLP/情感/QA，不提供 microstructure/统计推理/研究审计；且多为大基座"
+    note: "本结论针对'作为 quant 主脑'；若未来只做'财报文档提取'等窄 NLP 任务可另行评估"
+
+# 金融模型 vs 通用模型（任务书 §16）逐项结论：
+#   金融术语/知识       → 金融模型 +（但对本研究的 research audit 无意义）
+#   量化推理/统计       → 无增量（通用推理决定）
+#   market microstructure→ 无增量
+#   code/statistics     → 无增量（通用能力）
+# 结论：金融标签在"Quant Research 主脑"维度提供 0 增量，见 HERMES_MODEL_COMPARISON.md

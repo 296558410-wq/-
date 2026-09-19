@@ -1,0 +1,113 @@
+# SOURCE LEDGER（Trading Craft 来源账本）
+# 生成：2026-09-05 · 忠实记录影响 Trading Craft 结论的来源。未核实元数据 = UNKNOWN，不编造。
+
+sources:
+  - id: SRC-0001
+    title: "When Do Stop-Loss Rules Stop Losses?"
+    authors: "Kathryn M. Kaminski, Andrew W. Lo"
+    year: 2014
+    source_type: academic_paper
+    publisher: "Journal of Financial Markets / MIT Sloan"
+    url: "dspace.mit.edu/handle/1721.1/114876"
+    access_status: abstract_full_available
+    primary_secondary: primary
+    asset: futures_index
+    market: index futures
+    timeframe: daily
+    methodology_available: true
+    data_available: UNKNOWN
+    code_available: false
+    source_quality: high
+    gold_transferability: "WEAK_PARTIAL（机制通用：止损 vs 动量依赖；无黄金特定证据）"
+    independence_group: IG-0001
+    lineage: "primary source"
+    notes: "随机游走下止损总降期望收益；仅动量存在时止损可增值（stopping premium）"
+    access_detail: {full_text: true, tables: UNKNOWN, figures: UNKNOWN, appendix: UNKNOWN, code: false, data: UNKNOWN}
+
+  - id: SRC-0002
+    title: "Forecast-to-Fill: Benchmark-Neutral Alpha and Billion-Dollar Capacity in Gold Futures (2015-2025)"
+    authors: UNKNOWN
+    year: 2025
+    source_type: preprint
+    publisher: "arXiv"
+    url: "doi.org/10.48550/arxiv.2511.08571"
+    access_status: full_available
+    primary_secondary: primary
+    asset: "GOLD_FUTURES"
+    market: "COMEX gold futures"
+    timeframe: daily
+    methodology_available: true
+    data_available: UNKNOWN
+    code_available: UNKNOWN
+    source_quality: "unverified_preprint"
+    gold_transferability: "DIRECT（黄金期货）"
+    independence_group: IG-0002
+    lineage: "single paper, no replication"
+    notes: "RED FLAG：claim gold trend OOS Sharpe 2.88；实际 vol 0.91%(近空仓)、43%=名义杠杆、搜索强度特征；矛盾本地 E5"
+    access_detail: {full_text: true, tables: UNKNOWN, figures: UNKNOWN, appendix: UNKNOWN, code: UNKNOWN, data: UNKNOWN}
+
+  - id: SRC-0003
+    title: "CTA convexity / trend-following profit-extraction literature"
+    authors: "multiple (SG Trend, Barclay CTA context)"
+    year: UNKNOWN
+    source_type: institutional_literature
+    publisher: UNKNOWN
+    url: UNKNOWN
+    access_status: partial
+    primary_secondary: secondary
+    asset: CROSS_ASSET
+    market: multiple
+    timeframe: monthly
+    methodology_available: false
+    data_available: false
+    code_available: false
+    source_quality: institutional_context
+    gold_transferability: "WEAK_PARTIAL（机制：正gamma让赢家跑，但需真实趋势 edge）"
+    independence_group: IG-0003
+    lineage: "context, not single study"
+    notes: "CTA 凸性=方向性趋势 edge 的放大器，非独立 alpha"
+    access_detail: {full_text: UNKNOWN, tables: false, figures: false, appendix: false, code: false, data: false}
+
+  - id: SRC-0004
+    title: "A Framework for Gold Price Prediction Combining Classical and (ML) — MACD with stop/take-profit"
+    authors: UNKNOWN
+    year: 2025
+    source_type: journal
+    publisher: "MDPI (IJFS)"
+    url: "mdpi.com/2227-7072/13/2/102"
+    access_status: abstract_full
+    primary_secondary: primary
+    asset: GOLD
+    market: gold
+    timeframe: intraday/multi
+    methodology_available: true
+    data_available: UNKNOWN
+    code_available: false
+    source_quality: moderate
+    gold_transferability: "DIRECT（gold）"
+    independence_group: IG-0004
+    lineage: "primary source"
+    notes: "关键方法论点：出场规则不能拯救次优信号；出场与参数选择强耦合。MACD 方向=换皮（本地已REJECTED）"
+    access_detail: {full_text: true, tables: UNKNOWN, figures: UNKNOWN, appendix: UNKNOWN, code: false, data: UNKNOWN}
+
+  - id: SRC-0005
+    title: "MFE/MAE hindsight caution (profit-taking practice note)"
+    authors: "chartmini (practitioner)"
+    year: 2026
+    source_type: practitioner_blog
+    publisher: chartmini
+    url: "chartmini.com/blog/profit-taking-mastery"
+    access_status: full_available
+    primary_secondary: secondary
+    asset: CROSS_ASSET
+    market: multiple
+    timeframe: UNKNOWN
+    methodology_available: true
+    data_available: false
+    code_available: false
+    source_quality: practitioner
+    gold_transferability: "WEAK_PARTIAL（MFE/MAE=事后数据是通用纪律）"
+    independence_group: IG-0005
+    lineage: "secondary, echoes FL-01/11 lookahead"
+    notes: "MFE/MAE 是 hindsight 数据，不能作实时出场输入（与本地 lookahead 纪律一致）"
+    access_detail: {full_text: true, tables: false, figures: false, appendix: false, code: false, data: false}

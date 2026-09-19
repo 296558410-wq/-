@@ -1,0 +1,301 @@
+{
+ "schema": "v1_recent3d/1",
+ "ts_utc": "2026-09-17T12:57:04.207740+00:00",
+ "days": {
+  "2026-09-15": [
+   {
+    "trade_id": "POS-20260915T0032Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -6.54,
+    "mfe": null,
+    "mae": null,
+    "holding_s": 1914,
+    "d1000": null,
+    "d2000": null,
+    "d5000": null,
+    "d10000": null,
+    "d30000": null,
+    "d60000": null,
+    "d180000": null,
+    "d300000": null,
+    "d900000": null,
+    "path_class": [
+     "DATA_GAP"
+    ]
+   },
+   {
+    "trade_id": "POS-20260915T0002Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -6.74,
+    "mfe": null,
+    "mae": null,
+    "holding_s": 2605,
+    "d1000": null,
+    "d2000": null,
+    "d5000": null,
+    "d10000": null,
+    "d30000": null,
+    "d60000": null,
+    "d180000": null,
+    "d300000": null,
+    "d900000": null,
+    "path_class": [
+     "DATA_GAP"
+    ]
+   },
+   {
+    "trade_id": "POS-20260915T0217Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": 20.24,
+    "mfe": 1.39,
+    "mae": -3.43,
+    "holding_s": 11559,
+    "d1000": 0.14,
+    "d2000": -0.1,
+    "d5000": -0.13,
+    "d10000": 0.28,
+    "d30000": 0.54,
+    "d60000": -0.15,
+    "d180000": -1.2,
+    "d300000": -1.63,
+    "d900000": -1.82,
+    "path_class": [
+     "NO_CLEAR_ENTRY_EDGE"
+    ]
+   },
+   {
+    "trade_id": "POS-20260915T0632Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": 8.52,
+    "mfe": null,
+    "mae": null,
+    "holding_s": 1786,
+    "d1000": null,
+    "d2000": null,
+    "d5000": null,
+    "d10000": null,
+    "d30000": null,
+    "d60000": null,
+    "d180000": null,
+    "d300000": null,
+    "d900000": null,
+    "path_class": [
+     "DATA_GAP"
+    ]
+   },
+   {
+    "trade_id": "POS-20260915T0917Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -12.81,
+    "mfe": 5.83,
+    "mae": -0.025,
+    "holding_s": 8265,
+    "d1000": 0.12,
+    "d2000": 0.36,
+    "d5000": 0.955,
+    "d10000": 0.74,
+    "d30000": 1.83,
+    "d60000": 2.215,
+    "d180000": 3.295,
+    "d300000": 0.885,
+    "d900000": 5.63,
+    "path_class": [
+     "PROFIT_AVAILABLE_BUT_NOT_REALIZED"
+    ]
+   },
+   {
+    "trade_id": "POS-20260915T1317Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -8.42,
+    "mfe": 0.33,
+    "mae": -4.62,
+    "holding_s": 16170,
+    "d1000": 0.28,
+    "d2000": -0.18,
+    "d5000": 0.3,
+    "d10000": 0.12,
+    "d30000": -1.34,
+    "d60000": -1.16,
+    "d180000": -1.03,
+    "d300000": -3.4,
+    "d900000": -4.41,
+    "path_class": [
+     "NO_CLEAR_ENTRY_EDGE"
+    ]
+   }
+  ],
+  "2026-09-16": [
+   {
+    "trade_id": "POS-20260915T230323",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -9.88,
+    "mfe": 2.03,
+    "mae": -1.55,
+    "holding_s": 11734,
+    "d1000": -0.06,
+    "d2000": 0.19,
+    "d5000": -0.1,
+    "d10000": 0.18,
+    "d30000": -0.19,
+    "d60000": -0.46,
+    "d180000": -0.42,
+    "d300000": 0.24,
+    "d900000": 1.13,
+    "path_class": [
+     "PROFIT_AVAILABLE_BUT_NOT_REALIZED",
+     "NO_CLEAR_ENTRY_EDGE"
+    ]
+   },
+   {
+    "trade_id": "POS-20260916T0302Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -18.16,
+    "mfe": 0.79,
+    "mae": -4.78,
+    "holding_s": 35967,
+    "d1000": -0.16,
+    "d2000": -0.37,
+    "d5000": -0.45,
+    "d10000": -0.93,
+    "d30000": -0.42,
+    "d60000": -1.2,
+    "d180000": -1.85,
+    "d300000": -0.0,
+    "d900000": -4.01,
+    "path_class": [
+     "ENTRY_WRONG_PATH",
+     "PROFIT_AVAILABLE_BUT_NOT_REALIZED"
+    ]
+   },
+   {
+    "trade_id": "POS-20260916T1417Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -13.07,
+    "mfe": 0.56,
+    "mae": -6.855,
+    "holding_s": 3523,
+    "d1000": 0.34,
+    "d2000": 0.23,
+    "d5000": 0.345,
+    "d10000": 0.17,
+    "d30000": -0.105,
+    "d60000": -0.66,
+    "d180000": 0.135,
+    "d300000": -0.51,
+    "d900000": -4.17,
+    "path_class": [
+     "ENTRY_RIGHT_THEN_REVERSED",
+     "PROFIT_AVAILABLE_BUT_NOT_REALIZED"
+    ]
+   }
+  ],
+  "2026-09-17": [
+   {
+    "trade_id": "POS-20260916T1917Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -20.82,
+    "mfe": 5.515,
+    "mae": -0.32,
+    "holding_s": 17098,
+    "d1000": 0.005,
+    "d2000": 0.295,
+    "d5000": 0.475,
+    "d10000": 0.025,
+    "d30000": 0.575,
+    "d60000": 0.085,
+    "d180000": 2.495,
+    "d300000": 2.5,
+    "d900000": 2.07,
+    "path_class": [
+     "PROFIT_AVAILABLE_BUT_NOT_REALIZED"
+    ]
+   },
+   {
+    "trade_id": "POS-20260917T0017Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -21.25,
+    "mfe": null,
+    "mae": null,
+    "holding_s": 21595,
+    "d1000": null,
+    "d2000": null,
+    "d5000": null,
+    "d10000": null,
+    "d30000": null,
+    "d60000": null,
+    "d180000": null,
+    "d300000": null,
+    "d900000": null,
+    "path_class": [
+     "DATA_GAP"
+    ]
+   },
+   {
+    "trade_id": "POS-20260917T0847Z",
+    "direction": "LONG",
+    "entry": null,
+    "exit": null,
+    "pnl": 10.58,
+    "mfe": 12.45,
+    "mae": 0.015,
+    "holding_s": 4625,
+    "d1000": 0.31,
+    "d2000": 0.09,
+    "d5000": 0.37,
+    "d10000": 1.105,
+    "d30000": 2.09,
+    "d60000": 2.89,
+    "d180000": 3.74,
+    "d300000": 6.84,
+    "d900000": 11.265,
+    "path_class": [
+     "NO_CLEAR_ENTRY_EDGE"
+    ]
+   },
+   {
+    "trade_id": "POS-20260917T1047Z",
+    "direction": "SHORT",
+    "entry": null,
+    "exit": null,
+    "pnl": -20.6,
+    "mfe": -2.21,
+    "mae": -5.0,
+    "holding_s": 1948,
+    "d1000": null,
+    "d2000": null,
+    "d5000": null,
+    "d10000": null,
+    "d30000": null,
+    "d60000": null,
+    "d180000": null,
+    "d300000": null,
+    "d900000": -3.11,
+    "path_class": [
+     "DATA_GAP"
+    ]
+   }
+  ]
+ }
+}

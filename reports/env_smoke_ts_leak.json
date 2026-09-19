@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "tz_convert_dst",
+      "status": "PASS",
+      "detail": "NY span 2026-03-07 19:00:00-05:00..2026-03-08 01:00:00-05:00 crosses 2026-03-08 DST jump"
+    },
+    {
+      "name": "utc_normalize",
+      "status": "PASS",
+      "detail": "UTC normalize -> all midnights, tz preserved"
+    },
+    {
+      "name": "tz_roundtrip",
+      "status": "PASS",
+      "detail": "NY->UTC roundtrip identical"
+    },
+    {
+      "name": "rolling_expanding",
+      "status": "PASS",
+      "detail": "rolling(5).mean + expanding().max computed"
+    },
+    {
+      "name": "resample_hourly",
+      "status": "PASS",
+      "detail": "67 hourly buckets (66 full x60 + trailing 40)"
+    },
+    {
+      "name": "groupby",
+      "status": "PASS",
+      "detail": "6 4h groups"
+    },
+    {
+      "name": "asof_merge_asof",
+      "status": "PASS",
+      "detail": "asof + merge_asof backward ok"
+    },
+    {
+      "name": "point_in_time_clean",
+      "status": "PASS",
+      "detail": "rolling feature reproduces from past-only formula at every decision time"
+    },
+    {
+      "name": "lookahead_detector",
+      "status": "PASS",
+      "detail": "detector flagged 100 contaminated decision rows (past-only formula cannot reproduce)"
+    },
+    {
+      "name": "multi_tf_no_incomplete_h1",
+      "status": "PASS",
+      "detail": "decision 12:00: clean=H1 11:00:00 close=99.727 | buggy=H1 12:00:00 close=149.859 (leak=True)"
+    },
+    {
+      "name": "dup_detection",
+      "status": "PASS",
+      "detail": "duplicated timestamps detected"
+    },
+    {
+      "name": "multi_tf_feature_clean",
+      "status": "PASS",
+      "detail": "539 M1 rows got completed-H1 feature (asof complete_at)"
+    }
+  ],
+  "info": {},
+  "n_checks": 12
+}

@@ -1,0 +1,66 @@
+{
+ "schema": "v1_early_recent/1",
+ "ts_utc": "2026-09-17T12:57:04.207740+00:00",
+ "periods": {
+  "EARLY": [
+   "2026-09-08",
+   "2026-09-14"
+  ],
+  "RECENT": [
+   "2026-09-15",
+   "2026-09-17"
+  ]
+ },
+ "EARLY": {
+  "trades": 44,
+  "wins": 27,
+  "losses": 17,
+  "win_rate": 0.614,
+  "pnl_total": 127.17,
+  "avg_pnl": 2.89,
+  "median_pnl": 6.16,
+  "avg_mfe": 4.247,
+  "avg_mae": -5.386,
+  "mfe_gt0_n": 39,
+  "mfe_gt0_pct": 1.0,
+  "mfe_gt0_but_loss": 15,
+  "avg_hold_s": 4802.6,
+  "median_hold_s": 2705.5,
+  "path_class_counts": {
+   "DATA_GAP": 5,
+   "NO_CLEAR_ENTRY_EDGE": 19,
+   "ENTRY_RIGHT_THEN_REVERSED": 8,
+   "PROFIT_AVAILABLE_BUT_NOT_REALIZED": 12,
+   "ENTRY_WRONG_PATH": 4
+  }
+ },
+ "RECENT": {
+  "trades": 13,
+  "wins": 3,
+  "losses": 10,
+  "win_rate": 0.231,
+  "pnl_total": -98.95,
+  "avg_pnl": -7.612,
+  "median_pnl": -9.88,
+  "avg_mfe": 2.965,
+  "avg_mae": -2.952,
+  "mfe_gt0_n": 8,
+  "mfe_gt0_pct": 0.889,
+  "mfe_gt0_but_loss": 6,
+  "avg_hold_s": 10676.1,
+  "median_hold_s": 8265,
+  "path_class_counts": {
+   "DATA_GAP": 5,
+   "NO_CLEAR_ENTRY_EDGE": 4,
+   "PROFIT_AVAILABLE_BUT_NOT_REALIZED": 5,
+   "ENTRY_WRONG_PATH": 1,
+   "ENTRY_RIGHT_THEN_REVERSED": 1
+  }
+ },
+ "mfe_thresholds_preregistered": [
+  0,
+  0.5,
+  1,
+  2
+ ]
+}

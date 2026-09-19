@@ -1,0 +1,18 @@
+# DECISION — CAND-01 终判（2026-09-06, 预注册 c23b046）
+final_answers:
+  1_incremental_beyond_activity_vol: "弱是: 控 activity + 平滑本地 RV(21/63d)后残余 OOS ΔR² +0.07(5d)/+0.10(10d)/+0.12(20d)"
+  2_robust_oos: "部分（正号跨 1-20d 一致; 幅度小; A2 对照未做全量块自举——注记）"
+  3_independent_of_local_rv: "否（corr 0.50/0.65 vs rv21/rv63; 60-75% 增益为平滑表示）"
+  4_independent_of_regime: "UNKNOWN（regime 内样本不足）"
+  5_proxy_or_increment: "主体 = 平滑 vol 状态表示; 残余小增量真实但期权特有性未建立"
+  6_direction: "无（月频 GVZ -0.07; VRP +0.28 @ n=35 无推断力）→ REJECTED"
+  7_direction_economic: "不适用"
+  8_r1_risk_state: "轻微（LEVEL 2）: AUC 0.797 vs 本地平滑 0.769（+0.029）→ 可作附加风险态输入"
+  9_execution_value: "无"
+  10_monetizable: "无（无期权通道; VRP 收割 INACCESSIBLE）"
+  11_reopen: "单点 GVZ 研究不重开; 曲面/事件维度维持 DATA_GAP(开放)"
+  12_data_gap: "XAUUSD 专属 IV / 曲面 / skew / term / 日内 IV / 事件邻近重定价"
+  13_hermes: "否"
+  14_next_action: "机会/风险分离结构检验(与 GIA/D1R 队列合并); D5/D7 评估; GVZ 止步于此数据层"
+classification: "UNPROVEN（中央主张: GVZ 增量 vol 信息）; 方向 REJECTED; 经济层级 LEVEL 1-2"
+map_change: "Gold Options 任务结论细化: 早前 t1/t2 'regime 集中 UNPROVEN' 现在增加机制解释——主体为平滑表示; 残余小; 支持'GVZ 作为 R1 附加风险态输入'而非信息金矿"

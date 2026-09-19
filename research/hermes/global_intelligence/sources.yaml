@@ -1,0 +1,110 @@
+# SOURCES（本轮全球扫描的来源登记）
+# 生成：2026-09-05 · HERMES-03 · 每条含 source quality 评级 + 证据等级（对 XAUUSD 未验证）
+# source_status: UNKNOWN | LOW_CONFIDENCE | USEFUL_CONTEXT | RESEARCH_GRADE | HIGH_CONFIDENCE
+
+sources:
+  - id: SRC-01
+    title: "WatchGold — The Microstructure of Gold Pricing"
+    type: "行业研究/微观结构拆解（非学术）"
+    url: "https://watchgold.org/en/gold-pricing-microstructure"
+    author: "WatchGold（机构级科普）"
+    accessed: "2026-09-05"
+    evidence_level: "E1-E2（机制描述清晰但非同行评审）"
+    source_quality: USEFUL_CONTEXT
+    topics: [gold, microstructure, LBMA fixing, COMEX lead-lag, event transmission]
+
+  - id: SRC-02
+    title: "NBER w24222 — Liquidity Regimes and Optimal Dynamic Asset Allocation"
+    type: "NBER working paper"
+    url: "https://www.nber.org/system/files/working_papers/w24222/revisions/w24222.rev0.pdf"
+    author: "Collin-Dufresne, Daniel, Sağlam"
+    published: "2018"
+    accessed: "2026-09-05"
+    evidence_level: "E3（美股机构交易成本实证）"
+    source_quality: RESEARCH_GRADE
+    topics: [regime-switching, trading-cost, vol-timing]
+
+  - id: SRC-03
+    title: "Smoothing volatility targeting (arXiv:2212.07288)"
+    type: "arXiv working paper"
+    url: "https://arxiv.org/html/2212.07288"
+    author: "（多作者）"
+    published: "2022"
+    accessed: "2026-09-05"
+    evidence_level: "E3（158 美股策略）"
+    source_quality: RESEARCH_GRADE
+    topics: [vol-targeting, transaction-cost, turnover]
+
+  - id: SRC-04
+    title: "Moreira & Muir (2017) + 争议链（Cederburg 2020 / Barroso-Detzel 2021 / multifactor）"
+    type: "期刊论文 + 复制"
+    url: "https://doi.org/10.1111/jofi.12513 等"
+    author: "Moreira/Muir; Cederburg et al.; 等"
+    published: "2017-2023"
+    accessed: "2026-09-05"
+    evidence_level: "E3"
+    source_quality: RESEARCH_GRADE
+    topics: [vol-timing, contradiction]
+
+  - id: SRC-05
+    title: "BIS Quarterly Review 2025-12 — FX trade execution landscape (Triennial)"
+    type: "央行权威调查"
+    url: "https://www.bis.org/publications/fx-trade-execution-landscape-through-prism-2025-bis-triennial-survey"
+    author: "BIS"
+    published: "2025-12"
+    accessed: "2026-09-05"
+    evidence_level: "E3（权威结构数据）"
+    source_quality: HIGH_CONFIDENCE
+    topics: [FX, OTC, internalisation, last-look, fragmentation]
+
+  - id: SRC-06
+    title: "What survives honest evaluation? (arXiv:2608.27734)"
+    type: "arXiv（2026）"
+    url: "https://arxiv.org/pdf/2608.27734v1"
+    author: "（LLM 策略发现评估）"
+    published: "2026"
+    accessed: "2026-09-05"
+    evidence_level: "E2/E3（方法论）"
+    source_quality: RESEARCH_GRADE
+    topics: [LLM strategy discovery, leakage, search-intensity]
+
+  - id: SRC-07
+    title: "Backtesting (Bailey & López de Prado, SSRN 2606462)"
+    type: "SSRN working paper（经典）"
+    url: "https://doi.org/10.2139/ssrn.2606462"
+    author: "Bailey, Borwein, López de Prado, Zhu"
+    published: "2014"
+    accessed: "2026-09-05"
+    evidence_level: "E2（方法论共识）"
+    source_quality: RESEARCH_GRADE
+    topics: [backtest-overfitting, deflated-sharpe]
+
+  - id: SRC-08
+    title: "Fed FEDS Note — Order Flow Imbalances and Amplification (Treasury)"
+    type: "央行研究笔记"
+    url: "https://www.federalreserve.gov/econres/notes/feds-notes/order-flow-imbalances-and-amplification-of-price-movements-evidence-from-u-s-treasury-markets-20251103.html"
+    author: "Federal Reserve"
+    published: "2025-11"
+    accessed: "2026-09-05"
+    evidence_level: "E3（美债）"
+    source_quality: HIGH_CONFIDENCE
+    topics: [OFI, liquidity-risk]
+
+  - id: SRC-09
+    title: "Information Chasing vs Adverse Selection in OTC (Zou)"
+    type: "学术 working paper"
+    url: "https://www.junyuanzou.com/uploads/1/2/2/9/122930176/chasing_adverse_selection.pdf"
+    author: "Junyuan Zou"
+    accessed: "2026-09-05"
+    evidence_level: "E2"
+    source_quality: RESEARCH_GRADE
+    topics: [OTC, adverse-selection, dealer]
+
+  - id: SRC-10
+    title: "divitaeassets — Forex Market Microstructure (quant perspective)"
+    type: "机构量化研究博客"
+    url: "https://divitaeassets.com/insights/forex-market-microstructure.html"
+    accessed: "2026-09-05"
+    evidence_level: "E1（非同行评审，但 last-look/流毒性描述专业）"
+    source_quality: USEFUL_CONTEXT
+    topics: [FX, last-look, flow-toxicity, execution]

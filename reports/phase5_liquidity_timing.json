@@ -1,0 +1,30 @@
+{
+  "FXTM_2026": {
+    "oos_n_entries": 833,
+    "n_sim": 49999,
+    "n_days": 44,
+    "ic_spread_persistence_pearson": 0.8606,
+    "ic_spread_persistence_spearman": 0.9234,
+    "mean_saving_bp": 0.002,
+    "saving_t_daily": 1.43,
+    "pos_saving_days": 2,
+    "fill_rate_when_wait": 0.0,
+    "mean_wait_min": 1.0,
+    "cost_imm_bp": 0.187,
+    "cost_wait_bp": 0.187
+  },
+  "DUKA_2023_24": {
+    "oos_n_entries": 1907,
+    "n_sim": 114479,
+    "n_days": 80,
+    "ic_spread_persistence_pearson": 0.9872,
+    "ic_spread_persistence_spearman": 0.8468,
+    "mean_saving_bp": 84.229,
+    "saving_t_daily": 11.72,
+    "pos_saving_days": 69,
+    "fill_rate_when_wait": 0.187,
+    "mean_wait_min": 9.2,
+    "cost_imm_bp": 1.232,
+    "cost_wait_bp": 1.191
+  }
+}

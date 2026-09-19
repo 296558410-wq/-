@@ -1,0 +1,42 @@
+# COUNTER EVIDENCE（反证登记 — 主动找到的反例，汇总）
+# 生成：2026-09-05 · HERMES-05 · 合并 HERMES-03/04/05 的反证。
+# 原则：高价值 claim 至少 1 反证；只找到支持 → INCOMPLETE。
+
+counter_evidence:
+  - id: CE-01
+    claim: "波动率择时普遍提升收益"
+    counter: "Cederburg 2020 OOS 失败；Barroso-Detzel 2021 成本侵蚀；SWUFE look-ahead"
+    status: CONFLICTED（CONTRA-01）
+
+  - id: CE-02
+    claim: "期权 IV 预测收益 = 价格低效"
+    counter: "Muravyev JFE 2025：剔除高借券费股票后预测力降 ≥2/3"
+    status: CONFLICTED（CONTRA-05）
+
+  - id: CE-03
+    claim: "订单流预测汇率（Evans-Lyons）"
+    counter: "依赖专有数据；4 月样本 OOS 不显著"
+    status: CONFLICTED + INACCESSIBLE（CONTRA-06）
+
+  - id: CE-04
+    claim: "做市盈利可通过报价优化实现"
+    counter: "arxiv:2606.05882：盈利由 informedness 环境驱动，非策略（R²<0.05）"
+    status: CONFLICTED（CONTRA-07）
+
+  - id: CE-05
+    claim: "OFI 预测价格方向"
+    counter: "本地 KD-C07：≥5m imb 方向 REJECTED；重叠标签 p=0.0000 → 非重叠 p≥0.096"
+    status: CONFLICTED（方向层，CONTRA-02）
+
+  - id: CE-06
+    claim: "本地 XAUUSD 方向 alpha（早期 EDGE 候选）"
+    counter: "跨期反号（2026 趋势 vs 2023-24 震荡）；25 EDGE 全部跨期未确认"
+    status: CONFLICTED（FL-12 regime overfitting）
+
+  - id: CE-07
+    claim: "LLM 交易 agent 的 alpha"
+    counter: "arxiv:2605.28359：泄漏控制下收益大部分是被动暴露，无持续选股 alpha"
+    status: CONFLICTED（FL-24）
+
+# 反证优先级成效：7 条高价值 claim 中 6 条找到反证，1 条（FINCAD 参数化 look-ahead）
+# 是新识别失败模式（非可交易 claim，故无反证需求）。

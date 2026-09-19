@@ -1,0 +1,69 @@
+# =====================================================================
+# HFT RESEARCH PORTFOLIO — 研究方向组合（TIER 0-4, v2）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# Version: 2026-09-06-hft-map-v2
+# 规则: 保留 VALUE / ACCESS / VERIFIABILITY / EXECUTABILITY 四维独立（禁止合成黑箱分）；
+#       UNKNOWN 维度如实记录；TIER 3 理论价值高也不投入当前资源。
+# v2 修正: (1) HERMES-10 并入——vol/成本择时条目全部按 POSSIBLE INFORMATION LAYER 表述,
+#   盈利声称 WEAKENED（RQ-H1/H3 输出 = 信息/风险输入, 非盈利 edge）; (2) 机制簇去重
+#   （做市簇 M04/M05/M06 只计一次）; (3) 每条附 EVIDENCE_CONVERGENCE 引用。
+# 词汇: 无主观词（interesting/promising 禁用）。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  dimension_scale: ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]
+  tier_rule: "TIER 由四维联合判定（非黑箱加权）；EXECUTABILITY 含成本纪律（R1'-B 教训 + HERMES-10 成本侵蚀）"
+  evidence_file: "EVIDENCE_CONVERGENCE.yaml"
+
+portfolio:
+  - tier: TIER 0
+    label: "Do not research again（已测空间/已封死）"
+    entries:
+      - {item: "无条件方向动量/反转/突破/趋势/形态族 (M1+ 15-240m)", ref: "KD-C01..C13 / F-R1..R17 / Phase9 27-27 / M08-M09", evidence: "#M08 #M09", value: LOW, access: HIGH, verifiability: HIGH, executability: LOW, reopen: "全新信息维度或 ≤3m tick 层补测(KD-O01, 属补测非重开)"}
+      - {item: "无条件日级 vol/activity 降险 gate", ref: "R1'-B REJECTED / CL-15 / M18", evidence: "#M18", value: LOW, access: HIGH, verifiability: HIGH, executability: LOW, reopen: "形态条件化(R1 存活路径, 见 TIER 1 RQ-H3) + HERMES-10: 盈利主张 WEAKENED"}
+      - {item: "蜡烛/几何形态增量方向预测", ref: "F-R16 / DE-04", evidence: "#M09", value: LOW, access: HIGH, verifiability: HIGH, executability: LOW}
+      - {item: "≥5m 聚合微观方向 (OFI/quote imbalance)", ref: "KD-C07 / DE-05 / M03", evidence: "#M03", value: LOW, access: MEDIUM, verifiability: HIGH, executability: LOW}
+      - {item: "vol/activity 直接当方向信号", ref: "DE-06 / M10", evidence: "#M10", value: LOW, access: HIGH, verifiability: HIGH, executability: LOW}
+      - {item: "做市/spread capture/队列/订单流(Evans-Lyons 型)", ref: "CL-08/09 / DE-08/09 / M03-M06/M22", evidence: "#M03 #M04 #M05 #M06 #M22", value: "HIGH(理论) → UNKNOWN(可及)", access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, note: "INFRA_UNLOCK 前永久搁置；INACCESSIBLE ≠ NO VALUE；做市簇已去重（一次经济机制）"}
+
+  - tier: TIER 1
+    label: "High-value + accessible + testable（当前投入 —— 全部为信息/风险/成本输入层研究, 非盈利声称）"
+    entries:
+      - {item: "RQ-H1 成本状态预测（信息层）", ref: "M17", evidence: "#M17", value: MEDIUM-HIGH, access: HIGH, verifiability: HIGH, executability: MEDIUM, note: "DUKA M1/H1 现有数据即可测；成本纪律 kill 内置；定位 = POSSIBLE INFORMATION LAYER（HERMES-10）"}
+      - {item: "RQ-H3 状态切换先行统计（风险管理输入）", ref: "M18 + R1' 存活路径", evidence: "#M18", value: MEDIUM-HIGH, access: HIGH, verifiability: MEDIUM, executability: MEDIUM, note: "REP 冻结公式直接复用；非方向风险层；盈利声称 WEAKENED——输出是'何时进入高成本/高风险状态'的输入, 不是'可盈利择时'"}
+      - {item: "RQ-H2 事件窗反应结构", ref: "M02/M15", evidence: "#M02 #M15", value: MEDIUM, access: MEDIUM(需日历), verifiability: HIGH, executability: MEDIUM, note: "日历接入为唯一前置(BN-4)"}
+      - {item: "RQ-H5 fix 窗 autopsy", ref: "M24", evidence: "#M24", value: LOW-MEDIUM, access: HIGH, verifiability: HIGH, executability: LOW(描述性), note: "零成本描述条目, 产出风险/成本窗地图"}
+
+  - tier: TIER 2
+    label: "Potential value + missing data（数据到位即升 TIER 1）"
+    entries:
+      - {item: "RQ-H4 tick 层流动性风险窗描述", ref: "M07 + KD-U07", evidence: "#M07", value: MEDIUM, access: "LOW(DUKA tick 缺)", verifiability: MEDIUM, executability: MEDIUM, data_unlock: "DUKA tick (KD-U01) → W1 FXTM 先行数据审计"}
+      - {item: "≤3m 事件时间层方向族终审 + N1 事前识别", ref: "KD-O01 / KD-U08/U09", evidence: "#M03 #M09", value: MEDIUM, access: LOW, verifiability: HIGH, executability: LOW, data_unlock: "DUKA tick / 130 日独立 tick 窗 (KD-U09)"}
+      - {item: "R1'-A-DUKA 跨源补测（预注册完成, feed 受限）", ref: "KD-R1A / D2", evidence: "#M21", value: MEDIUM, access: "LOW(D2 缺)", verifiability: HIGH, executability: MEDIUM, data_unlock: "DUKA 252-day 同源历史 (D2)"}
+      - {item: "影响曲线/AS 成本描述（冲击响应）", ref: "KD-O08", evidence: "#M16", value: LOW-MEDIUM, access: LOW, verifiability: MEDIUM, executability: LOW, data_unlock: "tick + 执行模拟器(RQ-07)"}
+      - {item: "期权 IV/skew 信息（降级期待）", ref: "M14 / CL-07", evidence: "#M14", value: "UNKNOWN(机制可能不同: 黄金无卖空约束)", access: LOW(无数据), verifiability: UNKNOWN, executability: UNKNOWN, data_unlock: "黄金期权数据(机构级, 短期不可得)"}
+
+  - tier: TIER 3
+    label: "Potential value + infrastructure barrier（不投入当前研究资源）"
+    entries:
+      - {item: "做市/流动性提供 (真实 maker, 含 M05/M06 同簇)", ref: "M04/M05/M06", evidence: "#M04 #M05 #M06", value: HIGH, access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, barrier: "maker 通道 + L2 + 资本 + 环境 informedness 依赖(arxiv 2606.05882)"}
+      - {item: "期货-现货 basis / EFP", ref: "M13 / RQ-06", evidence: "#M13", value: MEDIUM-HIGH, access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, barrier: "期货+现货+实物通道; bullion bank 生态"}
+      - {item: "跨场所套利链 (COMEX↔伦敦)", ref: "M12 (套利链, 非 DXY lead-lag)", evidence: "#M12", value: MEDIUM, access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, barrier: "多场所通道 + 对齐数据 + 资本"}
+      - {item: "VRP/期权结构", ref: "M11", evidence: "#M11", value: MEDIUM-HIGH, access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, barrier: "期权通道 + 数据"}
+      - {item: "信息延迟军备", ref: "M01", evidence: "#M01", value: HIGH, access: INACCESSIBLE, verifiability: UNKNOWN, executability: UNKNOWN, barrier: "事件源直连 + 共址 + 微秒栈"}
+      - note: "TIER 3 理论价值高不构成投入理由；全部标记 INFRA_UNLOCK 条件。HERMES-10 再次确认: 延迟与成本是 HFT 的根本壁垒。"
+
+  - tier: TIER 4
+    label: "Low value / saturated（确认饱和或增益被成本吞噬）"
+    entries:
+      - {item: "宏观共识相对价值 (金银/实际利率)", ref: "M19/M25", evidence: "#M19", value: LOW, access: LOW, verifiability: LOW, executability: LOW, note: "拥挤+锚漂移风险; 数据还缺 → 双重否定"}
+      - {item: "DXY→黄金 lead-lag", ref: "M25 / CL-10", evidence: "#M25", value: LOW, access: MEDIUM, verifiability: LOW(OOS 负), executability: LOW, note: "外部反证已记录(rahulsp 2026)"}
+      - {item: "无条件 vol-target 相对 fixed 的增量", ref: "R1'-C / CONTRA-04", evidence: "#M18", value: LOW, access: HIGH, verifiability: HIGH(已测), executability: LOW, note: "REJECTED/REDUNDANT 判定; 外部 vol-timing 盈利消失证据(Elsevier)再确认"}
+      - {item: "vol-timing 作为独立盈利策略（无条件）", ref: "HERMES-10 CONTRA-09", evidence: "#M18", value: LOW, access: HIGH, verifiability: MEDIUM, executability: LOW, note: "JFE 成本后全归零 + 2000 后消失 → 不研究无条件版; 只保留信息层用法(TIER 1 RQ-H1/H3)"}
+      - {item: "LLM 直接交易 agent 方向输出", ref: "CL-14 / FL-23", evidence: "#M18", value: LOW, access: MEDIUM, verifiability: LOW(参数化泄漏), executability: LOW, note: "方法论上先解决泄漏审计(RQ-05/RQ-08)"}
+
+summary:
+  current_investment_focus: "TIER 1 (RQ-H1/H3/H2/H5 —— 全部信息/风险/成本输入层) + TIER 2 数据解锁项 (DUKA tick / D2 / 日历)"
+  explicit_non_investment: "TIER 3 全部（infra 未解锁）; TIER 0 全部（已测/已封）; TIER 4 无条件 vol-timing（外部反证）"
+  resource_allocation_principle: "算力/工程优先 TIER 1 实验与 TIER 2 数据解锁；不因 TIER 3 理论价值高而分流；不因 HERMES-10 削弱而放弃信息层研究——只放弃'盈利'声称的提前升级"
+  honest_state: "组合内无任何条目达到 E6（XAUUSD OOS+成本+执行后）。TIER 1 = 值得一问的研究候选; '没有足够证据进入立即研究'对盈利 edge 层成立——本组合不与之矛盾（研究问题 ≠ 盈利证明）。"

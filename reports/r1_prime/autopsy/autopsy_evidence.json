@@ -1,0 +1,310 @@
+{
+  "n_d_days": 143,
+  "shape_counts": {
+    "high_vol": 29,
+    "calm": 36,
+    "whipsaw_no_dir": 4,
+    "trend_dir": 36,
+    "highvol_opportunity": 19,
+    "shock_repricing": 1,
+    "calm_then_storm": 1
+  },
+  "shape_overlap_note": "multi-label allowed",
+  "B_STOPPED": {
+    "days": 20,
+    "fvt_cum_bp": 113.85955636289229,
+    "protected_days": 10,
+    "protected_sum_bp": -407.38671631030405,
+    "missed_days": 10,
+    "missed_sum_bp": 521.2462726731964,
+    "shape_dist": {
+      "high_vol": 12,
+      "calm": 2,
+      "whipsaw_no_dir": 2,
+      "trend_dir": 10,
+      "highvol_opportunity": 7,
+      "shock_repricing": 1,
+      "calm_then_storm": 0
+    },
+    "biggest_protect": [
+      [
+        "2026-01-30",
+        -83.8
+      ],
+      [
+        "2026-01-29",
+        -74.3
+      ],
+      [
+        "2026-03-26",
+        -65.7
+      ],
+      [
+        "2026-03-20",
+        -62.5
+      ],
+      [
+        "2026-03-22",
+        -52.9
+      ]
+    ],
+    "biggest_miss": [
+      [
+        "2026-01-28",
+        167.8
+      ],
+      [
+        "2026-01-27",
+        80.0
+      ],
+      [
+        "2026-03-24",
+        55.6
+      ],
+      [
+        "2026-01-06",
+        52.3
+      ],
+      [
+        "2026-01-04",
+        51.2
+      ]
+    ]
+  },
+  "B_REDUCED": {
+    "days": 21,
+    "fvt_cum_bp": 147.32059924053087,
+    "protected_days": 9,
+    "protected_sum_bp": -517.7971786378173,
+    "missed_days": 12,
+    "missed_sum_bp": 665.1177778783482,
+    "shape_dist": {
+      "high_vol": 5,
+      "calm": 5,
+      "whipsaw_no_dir": 1,
+      "trend_dir": 8,
+      "highvol_opportunity": 3,
+      "shock_repricing": 0,
+      "calm_then_storm": 0
+    },
+    "biggest_protect": [
+      [
+        "2026-03-19",
+        -119.8
+      ],
+      [
+        "2026-05-15",
+        -105.0
+      ],
+      [
+        "2026-03-03",
+        -91.6
+      ],
+      [
+        "2026-03-08",
+        -74.9
+      ],
+      [
+        "2026-04-08",
+        -50.0
+      ]
+    ],
+    "biggest_miss": [
+      [
+        "2026-01-20",
+        114.8
+      ],
+      [
+        "2026-04-07",
+        109.1
+      ],
+      [
+        "2026-01-22",
+        91.8
+      ],
+      [
+        "2026-01-18",
+        71.5
+      ],
+      [
+        "2026-03-01",
+        58.3
+      ]
+    ]
+  },
+  "A_WAIT": {
+    "days": 69,
+    "at_cum_foregone_bp": -318.82394054786323,
+    "at_win_days": 36,
+    "at_loss_days": 33,
+    "shape_dist": {
+      "high_vol": 27,
+      "calm": 12,
+      "whipsaw_no_dir": 3,
+      "trend_dir": 27,
+      "highvol_opportunity": 18,
+      "shock_repricing": 1,
+      "calm_then_storm": 0
+    },
+    "biggest_miss": [
+      [
+        "2026-01-28",
+        655.6
+      ],
+      [
+        "2026-02-03",
+        485.2
+      ],
+      [
+        "2026-03-24",
+        451.7
+      ],
+      [
+        "2026-02-06",
+        417.7
+      ],
+      [
+        "2026-03-31",
+        399.2
+      ]
+    ],
+    "biggest_avoid": [
+      [
+        "2026-01-30",
+        -1002.1
+      ],
+      [
+        "2026-02-05",
+        -489.1
+      ],
+      [
+        "2026-03-19",
+        -402.6
+      ],
+      [
+        "2026-03-03",
+        -394.6
+      ],
+      [
+        "2025-12-29",
+        -354.6
+      ]
+    ]
+  },
+  "risk_opportunity": {
+    "top8_loss_days": [
+      [
+        "2026-01-30",
+        -0.1002
+      ],
+      [
+        "2026-02-05",
+        -0.0489
+      ],
+      [
+        "2026-03-19",
+        -0.0403
+      ],
+      [
+        "2026-03-03",
+        -0.0395
+      ],
+      [
+        "2025-12-29",
+        -0.0355
+      ],
+      [
+        "2026-03-26",
+        -0.0349
+      ],
+      [
+        "2026-03-18",
+        -0.0329
+      ],
+      [
+        "2026-03-20",
+        -0.0326
+      ]
+    ],
+    "top8_gain_days": [
+      [
+        "2026-01-28",
+        0.0656
+      ],
+      [
+        "2026-02-03",
+        0.0485
+      ],
+      [
+        "2026-03-24",
+        0.0452
+      ],
+      [
+        "2026-02-06",
+        0.0418
+      ],
+      [
+        "2026-03-31",
+        0.0399
+      ],
+      [
+        "2026-04-07",
+        0.0372
+      ],
+      [
+        "2026-01-22",
+        0.0343
+      ],
+      [
+        "2026-01-27",
+        0.0274
+      ]
+    ],
+    "corr_absret_next_absret": 0.15412986589973707,
+    "shape_mean_at_bp": {
+      "high_vol": -37.87,
+      "calm": 5.28,
+      "whipsaw_no_dir": 0.11,
+      "trend_dir": -22.7,
+      "highvol_opportunity": -57.79,
+      "shock_repricing": -184.85,
+      "calm_then_storm": -76.92
+    },
+    "shape_tail": {
+      "high_vol": {
+        "loss_days_ge_q10": 10,
+        "gain_days_ge_q90": 7
+      },
+      "calm": {
+        "loss_days_ge_q10": 1,
+        "gain_days_ge_q90": 0
+      },
+      "whipsaw_no_dir": {
+        "loss_days_ge_q10": 0,
+        "gain_days_ge_q90": 0
+      },
+      "trend_dir": {
+        "loss_days_ge_q10": 15,
+        "gain_days_ge_q90": 15
+      },
+      "highvol_opportunity": {
+        "loss_days_ge_q10": 10,
+        "gain_days_ge_q90": 7
+      },
+      "shock_repricing": {
+        "loss_days_ge_q10": 0,
+        "gain_days_ge_q90": 0
+      },
+      "calm_then_storm": {
+        "loss_days_ge_q10": 0,
+        "gain_days_ge_q90": 0
+      }
+    }
+  },
+  "q9_diagnosis": {
+    "stop_days_fvt_neg_frac": 0.5,
+    "full_days_fvt_neg_frac": 0.49,
+    "missed_shape_frac_top": 0.45,
+    "note": "if stop-day loss-hit-rate ~ full-day rate -> risk-definition problem; if misses concentrated in trend/opportunity shapes -> risk-opportunity confusion"
+  }
+}

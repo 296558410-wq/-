@@ -1,0 +1,26 @@
+# REVIEW CONTRACT — 平仓后 Trade Review（+ 周期复盘）
+> 目的: 按真实结果持续改进。无过滤: 失败交易完整保留。
+
+## 平仓后立即生成(确定性统计部分, review.py)
+review:
+  - utc_ts, plan_id, decision_id_ref, direction
+  - entry: {price, utc_ts, spread_bps_at_entry}
+  - exit: {price, utc_ts, reason: "target|stop|time|manual_override|risk_kill|event"}
+  - realized: {pnl_usd, pnl_R, hold_bars_m15, max_favorable_R, max_adverse_R}
+  - execution: {slippage_bps, latency_ms(paper 模型), reject: null|reason}
+  - plan_accuracy: {win_prob_est, realized_outcome: 0/1, calibration_note}
+  - deterministic_summary: 1-3 句(数据比较, 无评判)
+
+## Hermes 评注(下一轮/复盘批次, 必须回答)
+  - 计划逻辑是否成立(机制视角)
+  - 触发/失效判定是否合理(机械判定 vs 市场实际)
+  - 状态包哪些特征有用/误导
+  - 对机会频率/EV 估计的修正建议(引用统计, 不凭感觉)
+  - 是否产生新研究问题(→ hermes knowledge_upgrade 通道, 按 KU-C 纪律)
+
+## 周期复盘(周)
+  - 计划质量: 注册数/触发率/取消率(按原因分)/胜率/实现 EV vs 预估 EV(校准)
+  - WAIT 质量: WAIT 后市场是否确实无好机会(条件分布对比)
+  - 执行质量: spread filter 跳过率/滑点/paper fill 偏差
+  - 机会频率: 每类机会每周出现次数(→ 频率统计 I)
+  - 输出: 对计划模板/过滤器/状态包的建议 → 走预注册验证生效(禁止直接改规则上线)

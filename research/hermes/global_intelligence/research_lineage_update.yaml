@@ -1,0 +1,37 @@
+# RESEARCH LINEAGE UPDATE（谱系更新 — HERMES-04）
+# 生成：2026-09-05 · 续 LIN-01/02。
+
+lineages:
+  - id: LIN-03
+    topic: "期权隐含信息预测收益"
+    chain:
+      - "Black (1975) / Easley-O'Hara 等 — 期权含信息，IV 预测收益"
+      - "多篇实证：IV spread/skew 预测收益，解释为价格低效"
+      - "Muravyev-Pearson-Pollet (JFE 2025) — 反驳：剔除高借券费股票后预测力降 ≥2/3，是借券费代理"
+    current_state: "CONFLICTED —— 期权信息预测收益被高估；真信息 vs 摩擦代理的分解是开放问题"
+    xauusd_takeaway: "黄金 CVOL/implied 的期待降级；黄金无卖空约束，摩擦代理机制可能不同，需独立检验"
+    superseded: "『期权信息领先价格=可套利低效』的强解读已被 Muravyev 削弱"
+
+  - id: LIN-04
+    topic: "订单流预测汇率（Evans-Lyons 谱系）"
+    chain:
+      - "Evans-Lyons (2002) — 订单流解释 40-80% 日度汇率变动"
+      - "Evans-Lyons (2008) — 客户流预测宏观基本面优于汇率本身"
+      - "后续 — 依赖专有 dealer 客户流，公开数据不可复现；样本短 OOS 弱"
+    current_state: "机制真实但可及性 INACCESSIBLE（专有数据）"
+    xauusd_takeaway: "XAUUSD 无 dealer 客户流 → 这条线对我们只有理解价值；勿当可研究 alpha"
+    superseded: "无（机制成立，可及性问题）"
+
+  - id: LIN-05
+    topic: "LLM 交易 agent 评估（泄漏/搜索强度）"
+    chain:
+      - "Bailey-López de Prado (2014) — deflated Sharpe/PBO"
+      - "López de Prado (2018) — purged/embargo CPCV"
+      - "arxiv:2608.27734 (2026) — LLM 策略发现 search-intensity 泄漏"
+      - "arxiv:2604.15531 (2026) — induced-null 审计（spurious predictability）"
+      - "OpenPM (2608.09988) / CLQT (2606.29771) — point-in-time 审计基准"
+      - "FINCAD (2605.24564) — 参数化 look-ahead（权重级）"
+    current_state: "从『数据管线泄漏』→『搜索强度』→『权重级参数化泄漏』逐层收窄；审计工具已成熟"
+    xauusd_takeaway: "RQ05 的审计候选已具备现成参考实现（OpenPM/CLQT/induced-null）；参数化 look-ahead 是
+      我们现有 no-lookahead 守卫（截断重算）无法覆盖的新盲区"
+    superseded: "『文本提示避免 lookahead』已被证明是弱护栏"

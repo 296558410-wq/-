@@ -1,0 +1,108 @@
+# CLAIM REGISTRY（统一 claim 注册表 — 永久研究状态）
+# 生成：2026-09-05 · HERMES-08 · 合并 HERMES-01..07 全部 claim 到统一状态词汇表。
+# 状态词汇：CONFIRMED / SUPPORTED / PARTIALLY_SUPPORTED / UNCERTAIN / CONTRADICTED /
+#   REJECTED / DATA_GAP / INACCESSIBLE / METHODOLOGY_RISK / SUPERSEDED / DUPLICATE
+# 纪律：VALID_AT_TIME / SUPERSEDED_BY / CONTRADICTED_BY / LAST_REVIEWED 必须保留；
+#       时间过去不自动删除旧结论；CURRENTLY_BEST-SUPPORTED ≠ UNIVERSALLY_TRUE。
+
+claims:
+  - id: CL-01
+    claim: "activity→未来波动可预测（非方向）"
+    status: CONFIRMED
+    evidence_level: E5  # FXTM 2026 + DUKA 2023-24 双源双期 IC 0.60-0.89
+    valid_at_time: "2026-09（持续）"
+    source: "本地 Phase 3/4/5/6 + hypothesis_registry F-R4"
+    last_reviewed: 2026-09-05
+
+  - id: CL-02
+    claim: "spread→未来波动负相关（非方向）"
+    status: CONFIRMED
+    evidence_level: E5  # DUKA -0.55~-0.59 / FXTM -0.22~-0.29
+    source: "本地 Phase 4/5 + F-R12"
+
+  - id: CL-03
+    claim: "方向 alpha 在已测空间不可行（M1+ 15-240m 动量/MR/突破/趋势/session/微观）"
+    status: REJECTED
+    evidence_level: E5  # 两期双源 0 SUPPORTED + Phase9 27/27 零候选
+    source: "F-R1..F-R11, F-R13, F-R16, F-R17 + KD-C01..C11"
+    valid_at_time: "2026-09（限于已测搜索空间，非全域）"
+    reopen_condition: "见 dead_end_index"
+
+  - id: CL-04
+    claim: "宏观日程（非开盘时刻）驱动 activity 簇聚"
+    status: CONFIRMED
+    evidence_level: E4
+    source: "Phase 7 + F-R15"
+
+  - id: CL-05
+    claim: "波动率择时普遍提升风险调整收益（Moreira-Muir）"
+    status: SUPERSEDED
+    superseded_by: "Cederburg 2020 / Barroso-Detzel 2021 / SWUFE look-ahead"
+    contradicted_by: "OOS 失败 + 成本侵蚀"
+    status_at_time:
+      - "2017: SUPPORTED"
+      - "2020: UNCERTAIN"
+      - "2021: CONTRADICTED"
+      - "2026: 条件极窄（多因子+净额+成本优化才存活）"
+
+  - id: CL-06
+    claim: "交易成本 regime 依赖（成本/波动择时 > 收益择时）"
+    status: SUPPORTED
+    evidence_level: E3  # NBER w24222（美股，单源，未独立复现）
+    caveat: "XAUUSD 未验证；feed 成本结构不同（AD-1）"
+
+  - id: CL-07
+    claim: "期权 IV 预测收益 = 真信息"
+    status: CONTRADICTED
+    contradicted_by: "Muravyev JFE 2025（借券费代理）"
+
+  - id: CL-08
+    claim: "订单流预测汇率（Evans-Lyons）"
+    status: INACCESSIBLE  # 专有 dealer 客户流不可得
+    caveat: "机制真实，但不可复现（≠ NO VALUE）"
+
+  - id: CL-09
+    claim: "做市盈利可通过报价策略优化获得"
+    status: CONTRADICTED
+    contradicted_by: "arxiv:2606.05882（环境驱动，R²<0.05）"
+    accessibility: INACCESSIBLE  # 无 maker 通道
+
+  - id: CL-10
+    claim: "跨资产 lead-lag（DXY→黄金）可预测"
+    status: CONTRADICTED
+    contradicted_by: "rahulsp 2026（同时性非预测性，OOS R² 全负）"
+    note: "修正 HERMES-03/04 的 KD-U05 期待；COMEX 套利链可能仍成立（不同机制）"
+
+  - id: CL-11
+    claim: "黄金 VRP 可收割"
+    status: DATA_GAP  # 无期权数据 + 卖 vol 是尾部风险 carry
+    note: "真实机制（Wiley 2017），但不可及"
+
+  - id: CL-12
+    claim: "宏观新闻前价格漂移（~30min）"
+    status: UNCERTAIN  # 可观测，但快反应 INACCESSIBLE，慢反应未验证
+    source: "ECB wp1901 + JFQA"
+
+  - id: CL-13
+    claim: "参数化 look-ahead 是现有守卫盲区"
+    status: METHODOLOGY_RISK
+    source: "FINCAD（arxiv:2605.24564，EMNLP 2026）"
+    note: "deepseek cutoff 与 XAUUSD 历史重叠 → 直接适用"
+
+  - id: CL-14
+    claim: "LLM 交易 agent 的 alpha = 被动暴露"
+    status: SUPPORTED
+    source: "arxiv:2605.28359"
+    caveat: "A 股证据，方法论通用"
+
+  - id: CL-15
+    claim: "无条件日级 vol/activity 降险有净价值（R1'-B）"
+    status: REJECTED
+    source: "R1' RESULTS（机会成本 116.5bp > 保护 60.6bp）"
+    note: "指向'形态条件化'而非无条件 gate"
+
+# 关键区分（§14 纪律）：
+#   CL-01/02 CONFIRMED ≠ 唯一真理（仍限定 FXTM+DUKA 双源）
+#   CL-05 有 STATUS_AT_TIME 时间序列（研究知识非静态）
+#   CL-08/09 INACCESSIBLE ≠ 无价值（理解价值保留）
+#   CL-11/12 DATA_GAP ≠ REJECTED（数据到位可重开）

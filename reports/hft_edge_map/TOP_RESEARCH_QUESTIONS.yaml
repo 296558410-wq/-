@@ -1,0 +1,183 @@
+# =====================================================================
+# TOP RESEARCH QUESTIONS — XAUUSD HFT（预注册前候选, v2）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# File: reports/hft_edge_map/TOP_RESEARCH_QUESTIONS.yaml
+# Version: 2026-09-06-hft-map-v2（替代 v1 的 TOP5_RESEARCH_QUESTIONS.yaml）
+# 共同纪律: 全部为中间层/非方向或描述→预注册路径；任何进入实验者必须先走
+#   kickoff→manifest→research_gate→rlap_audit（无 skip/force 路径）。
+# HARD RULE #1: TOP 5 是上限不是配额——本版 5 条全过 9 项筛选, 未硬塞;
+#   若反证使任一条降到门槛以下, 只保留合格者。
+# HARD RULE #2: 每条附 EVIDENCE_CONVERGENCE 摘要（独立证据计数纪律见 EVIDENCE_CONVERGENCE.yaml）。
+# HERMES-10 修正: vol/成本择时盈利 WEAKENED → 本文件所有候选的声称边界 =
+#   INFORMATION/RISK/COST INPUT（研究问题）, 不是 PROFITABLE EDGE（盈利证明）。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  selection_criteria_met: ["非重复研究", "明确经济机制", "外部证据或机制依据", "至少部分可观测", "明确实验路径", "成本可建模", "潜在高频价值", "非 past-return re-encoding", "当前或可获得数据可验证"]
+  count_note: "5 条合格（上限 5）。若 H2 日历接入被拒或 H4 W1 审计失败 → 相应降级, 不补位。"
+  vocabulary_note: "以下为 RESEARCH QUESTION 候选（待 adjudication + 预注册），不是已证明 edge，不是策略；声称边界 = 信息/风险/成本输入层。"
+
+questions:
+  - id: RQ-H1
+    title: "交易成本状态是否可预测（spread/vol 状态 → 未来执行成本 regime）——信息层问题"
+    mechanism: M17
+    edge_type: [COST, EXECUTION, TIMING]
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence:
+      primary_sources: ["NBER w24222（成本 regime 依赖, 他市场机构数据）", "本地 CL-02 spread→vol E5", "本地 REP C6_spread_state 描述性稳定"]
+      independent_replications: "2（NBER 单源线 + 本地线）; 外部单源未独立复现（CL-06 caveat）"
+      counter_evidence: ["FXTM 固定点差不可观测", "R1'-B: 增益须 > 等待机会成本", "HERMES-10: 成本后盈利归零(JFE) → 定位信息层"]
+      local_evidence: "E4/E5 信息层（spread 状态持续 IC 0.85-0.99 DUKA; spread→vol 负相关）"
+      hermes_evidence: ["CL-06 SUPPORTED (E3)", "RQ-01 HOT", "CONTRA-09"]
+      evidence_grade: "成本状态可预测性本身: E0-E3（从未在 XAUUSD 直接检验）; 输入信息: E4/E5"
+    why_this: "成本预测是纯中间层：不预测方向，直接服务执行调度与所有未来层；本地从未直接检验成本状态的可预测性本身；成本/风险信息层是当前少数可及且未被外部反证击穿的位置（但只作为信息层——HERMES-10）。"
+    what_we_know: "spread↔vol 负相关双源成立（CL-02 E5）；vol 聚集非方向成立（CL-01）；R1' 已建立成本锚（点差+机会成本 116.5bp 级）；REP Phase2 C6_spread_state 描述性稳定（KEEP）；外部: 成本 regime 依赖（NBER w24222, E3 单源）。"
+    what_we_dont_know: "成本状态的前瞻可预测性（h 步 spread/成本分位数）是否超过成本无关基线；预测层 ≠ 描述层稳定；DUKA 报价 spread 与真实 taker 全成本（滑点/last look）的差距（RQ-02）。"
+    why_it_may_work: "做市商行为使 spread 有状态持续（宽→宽、窄→窄）；vol 聚集提供条件信息；'何时执行便宜'对任何信号都是乘数（成本输入层, 不需要方向预测成立）。"
+    why_it_may_fail: "零售 feed spread 结构（FXTM 固定点差）不可观测；DUKA 单一经纪商 spread 不代表市场成本；可预测但预测增益 < 等待机会成本（R1'-B 教训）; HERMES-10: 即使信息可预测, 转成净盈利仍需成本建模（本问题只答信息层, 不答盈利）。"
+    data_required: "DUKA M1/H1 (W5/W6/W7 已有) 可变 spread；DUKA tick(可选增强)；无需新外部数据"
+    infra_required: "无新增（现有 pipeline + 预注册/门禁链）"
+    minimum_experiment: "预注册: 目标=未来 h∈{15m,1h,4h} spread 分位数/成本 regime；特征=状态向量（REP Phase2 KEEP 子集, 冻结公式）；基线=历史中位数/无条件分布；3 时间块 OOS；IC + 分位数命中率 + 成本差（进入好坏窗的期望全成本差）。"
+    kill_condition: "3 块 OOS 中位 IC 无可辨正预测且最佳窗成本优势 < 0.2×点差 或任一前向窗口反转 → REJECT 并记录（信息层关闭; 不做方向/不做交易声称）。"
+    adversarial:
+      - "FAILED REPLICATION: NBER w24222 美股单源未独立复现 → 保留 E3 级不确定性, 不降级（问题是信息层可测性, 非盈利）"
+      - "COST FAILURE: R1'-B 机会成本教训 + HERMES-10 成本归零 → 最小实验强制要求增益 > 等待成本（内置 kill）; 盈利声称另行预注册"
+      - "DATA FAILURE: FXTM 固定点差不可观测 → 主测场限定 DUKA（范围声明纪律）"
+      - "verdict: NO_DOWNGRADE（kill 条件内置成本纪律; 声称边界 = 信息层）"
+
+  - id: RQ-H2
+    title: "宏观日程窗内 XAUUSD 的反应结构（vol/spread/活动放大形态与反应速度分布）"
+    mechanism: M02
+    edge_type: [TIMING, VOLATILITY, LIQUIDITY]
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence:
+      primary_sources: ["本地 Phase 7 日程簇聚（E4 非因果, 双源同形 RR 2.9-4.2）", "FX 公告效应文献（Andersen-Bollerslev 系, 他市场 E3）"]
+      independent_replications: "2（FX 公告效应他市场线 + 本地双窗线）"
+      counter_evidence: ["事件完全预定价时段", "快反应拥挤", "分类噪音（人工标注）"]
+      local_evidence: "E4 簇聚（CL-04）; 反应形态从未刻画"
+      hermes_evidence: ["CL-04 CONFIRMED", "CL-12 UNCERTAIN（漂移未在 XAUUSD 验证）"]
+      evidence_grade: "他市场 E3 / 本地簇聚 E4 / 反应形态 E0"
+    why_this: "Phase 7 只证明日程时间→activity 簇聚（E4 非因果）；反应形态（哪类日程、多快、多宽、多持久）从未刻画；这是'事件时间'层唯一已具时间锚、仅缺日历标注的方向。定位 = 结构/成本层（'哪些时刻别交易/哪些时刻成本爆炸'），非抢跑。"
+    what_we_know: "日程簇聚成立（CL-04 E4）；外部文献宏观新闻前漂移 ~30min（ECB wp1901/JFQA, 非 XAUUSD 直接证据）；Autopsy 引擎（G13）待建可复用。"
+    what_we_dont_know: "XAUUSD 上事件反应的速度/幅度/恢复的结构；日程类别×反应的非对称性；反应结构是否稳定跨期（FXTM 2026 vs DUKA 2023-24）。"
+    why_it_may_work: "事件是外生时间锚：可干净对齐、可预注册、天然避免多重比较漂移；反应结构是执行/风险层输入。"
+    why_it_may_fail: "零售 feed 滞后使反应形态被抹平；日程预期已被定价（无反应）；分类噪音；跨期漂移（regime）。"
+    data_required: "公开宏观/央行事件日历（分钟级时间戳+等级；需入库, 可获取）；FXTM M1 (W2/W4) + DUKA M1 (W5)；日历对齐"
+    infra_required: "事件日历采集/清洗（新组件, 低复杂度）；Autopsy 引擎复用"
+    minimum_experiment: "预注册: 事件窗 {t-5m..t+60m} 的 vol/spread/activity 相对基线（同周相同钟点控制）放大曲线；按日历等级分层；描述性输出（形状/峰值时间/恢复半衰期）→ 任何方向用法另走预注册。"
+    kill_condition: "≥80% 事件类别无显著放大（置换检验 p 未校正通过率）或峰值反应时间中位数 > 5m（feed 太慢无执行意义）→ 降级为纯描述条目，不进 TIER 1。"
+    adversarial:
+      - "REGIME FAILURE: 事件反应结构可能跨期漂移 → 强制 FXTM/DUKA 双期对照（内置）"
+      - "COMPETITION FAILURE: 事件反应快者拥挤 → 本问题定位为'何时避开/成本'非'抢跑'（范围纪律; 延迟瓶颈 BN-7 已声明）"
+      - "LATENCY FAILURE: 零售链路 ~100ms+ → 不做微秒抢跑声称，只做分钟级结构（已声明）"
+      - "verdict: NO_DOWNGRADE（定位已限缩为结构/成本层）"
+
+  - id: RQ-H3
+    title: "平静→活跃状态切换是否存在可测先行统计（作为风险管理输入, 非盈利择时）"
+    mechanism: M18
+    edge_type: [VOLATILITY, RISK, TIMING]
+    accessibility: POSSIBLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence:
+      primary_sources: ["本地 F-R14: rvol_pct→vol-regime AUC 0.60 (q<0.01)", "本地 REP Phase2: 13 KEEP 描述性稳定", "外部 regime-switching 文献（他市场）"]
+      independent_replications: "3（本地 vol 切换线 + 本地 REP 线 + 外部 regime 线）"
+      counter_evidence: ["转换后 30m 方向可预测性≈0", "R1'-B 无条件 gate 净价值为负", "HERMES-10: vol-timing 盈利成本归零(JFE)/2000 后消失(Elsevier) → 盈利用法 WEAKENED"]
+      local_evidence: "E4/E5（vol 层切换信息）; 门控经济性 E5-负（无条件）"
+      hermes_evidence: ["CL-15 REJECTED（无条件日级降险）", "CONTRA-09 / CL-05 CONFLICTED", "HERMES-10 特别修正"]
+      evidence_grade: "切换 vol 信息 E4-E5（本地）; 择时盈利 E3-CONFLICTED→削弱"
+    why_this: "REP Phase2 证明状态表示描述性稳定（13 KEEP）——但表示≠状态≠预测；切换预测是表示框架的自然下一步且从未被测试；定位 = 风险管理输入（何时进入高成本/高风险状态的提前量）, 不是盈利 edge（HERMES-10 特别修正: 不写'最可接近盈利 edge'）。"
+    what_we_know: "状态表示稳定（KEEP 子集冻结公式）；vol 聚集非方向（CL-01）；切换预测携带 vol 信息无方向信息（F-R14）；taxonomy 显示 regime 依赖。"
+    what_we_dont_know: "切换点（如 C7 持续性/run-length 结构）是否先行于 vol 放大；hazard 是否非平坦；状态标签构造是否引入 look-ahead；先行提前量是否 > 执行延迟（风险管理价值的前提）。"
+    why_it_may_work: "若 vol 聚集由离散活跃期驱动，则活动/spread 结构在切换前应有可测变化；风险层只需提前量 > 执行延迟即可产生规避价值（成本/风险输入, 无需方向预测）。"
+    why_it_may_fail: "切换近泊松无先行信号（风险层价值≈0）；表示构造与标签循环论证（需严格事件时间标签防泄漏）；REP 高分稳定性未必转化为切换可预测性；若把结果升级为'盈利择时' → 撞上 HERMES-10 成本归零/时间消失反证（声称边界纪律）。"
+    data_required: "FXTM W2-W4 M1/H1 + DUKA W5-W7 M1/H1（现有）；无新外部数据"
+    infra_required: "无新增（run_phase2 引擎扩展为时间序列状态路径）"
+    minimum_experiment: "预注册: 状态路径（冻结成员与公式）；标签=未来 vol 放大事件（无条件阈值, 冻结）；统计=切换前窗口特征 vs 基线 hazard（Cox/置换）；3 块 OOS；报告仅非方向风险层指标（提前量/命中率/成本规避差, 无收益声称）。"
+    kill_condition: "3 块 OOS 中先行特征区分度（AUC 相对 0.5 无显著提升）或提前量中位数 < 2×feed 执行延迟 → REJECT/UNCERTAIN 并冻结记录。"
+    adversarial:
+      - "METHODOLOGY FAILURE: 状态标签泄漏风险（REP Phase1 C06 冻结纪律沿用）→ 门禁链强制; 参数化 look-ahead(FL-23) → RQ-08 模型时间门禁"
+      - "REPLICATION: 无已发表 XAUUSD 切换预测文献可复现 → 视为 OPEN 而非 SUPPORTED（证据声明纪律）"
+      - "PROFIT-CLAIM FAILURE: HERMES-10 → 本问题输出禁止写成'可盈利 vol-timing'；盈利声称需独立预注册 + 成本建模 + 执行模拟（成本瓶颈 BN-9）"
+      - "REGIME FAILURE: taxonomy 已示 regime 依赖 → 跨期对照内置"
+      - "verdict: NO_DOWNGRADE（无既有反证命中; 声称边界 = 风险管理输入）"
+
+  - id: RQ-H4
+    title: "tick 层 quote-activity 冲击后的 spread 宽化-恢复不对称（流动性风险窗描述）"
+    mechanism: M07
+    edge_type: [LIQUIDITY, COST, RISK]
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: WEAK_PROXY
+    evidence_convergence:
+      primary_sources: ["微观结构冲击-恢复文献（他市场）", "本地 Autopsy/Taxonomy（描述, regime 依赖）", "P7 quote-pressure/burst 探测器工程"]
+      independent_replications: "2（他市场冲击响应线 + 本地描述线）"
+      counter_evidence: ["FXTM 固定点差无 spread 动态（KD-U01）", "VPIN/流毒性 proxy 批判（Andersen-Bondarenko）", "HERMES-10: activity 代理噪声警示"]
+      local_evidence: "E4 描述（不稳）; NBQ-T1 前置识别 NOT EVALUABLE"
+      hermes_evidence: ["RQ-02（真实成本 > 半价差）", "HERMES-10 VPIN 批判"]
+      evidence_grade: "他市场 E3; 本地 E0-E1（FXTM 23 日可先行审计）"
+    why_this: "adverse-selection/流动性骤降（KD-U07/U08, NBQ-T1 前置识别）卡在 tick 缺失；FXTM W1 tick(23 日)已在手，可先做描述性冲击响应——回答'用 quote-activity proxy 能否看到流动性恶化前兆'，不声称方向。VPIN 批判已记录 → 流毒性 proxy 只作风险层描述, 不作 standalone alpha。"
+    what_we_know: "NBQ-T1 OOS REVERSAL n=0 NOT EVALUABLE；≥5m OFI 族 REJECTED（KD-C07）；P7 quote-pressure/burst 探测器已有工程基础；vol/activity 非方向关系成立（信息层）。"
+    what_we_dont_know: "FXTM W1 报价 tick 上冲击后 spread/活动路径形状（W1 固定点差 feed 是否含 spread 变化？需 audit）；恢复不对称是否存在；能否外推至可变点差市场。"
+    why_it_may_work: "tick 级活动尖峰（报价 burst）在微观结构文献中是信息到达 proxy；冲击-恢复不对称是流动性风险窗的经典形态，可用于执行/风险层避让。"
+    why_it_may_fail: "FXTM 固定点差 feed 无真实 spread 动态 → 描述受限；23 日样本事件量不足；proxy 与真实 AS 成本无关联（HERMES-10: activity 是噪声代理候选）。"
+    data_required: "FXTM W1 tick（现有, 23 日）+ 事件时间对齐；DUKA tick（增强/主测场, KD-U01 缺）"
+    infra_required: "tick 事件时间分析组件（小）；DUKA tick 下载（数据解锁项）"
+    minimum_experiment: "预注册描述协议: 冲击定义（报价活动 z 分位数事件）→ 冲击后 spread/活动/路径 vol 的 {1s,5s,30s,5m} 响应 vs 对照；恢复半衰期；结果=流动性风险窗描述（禁止方向/收益声称）。"
+    kill_condition: "冲击后响应与对照无差异（置换 p 未校正未通过）或 FXTM 数据审计显示 feed 无法承载该问题（→ 降为 DATA_GAP 条目，等 DUKA tick）"
+    adversarial:
+      - "DATA FAILURE: FXTM 固定点差可能使问题不可答 → kill 条件内置'数据审计先行'"
+      - "REPLICATION: OFI→方向 ≥5m 已 REJECTED → 本问题明确限定'冲击后成本/流动性路径'非方向（范围纪律）"
+      - "PROXY FAILURE: VPIN/activity 代理批判（HERMES-10）→ 结果只用 proxy 语言, 不作流毒性/AS 直接测量声称"
+      - "CAPACITY: 描述结果可能无交易价值 → 明确定位为风险层输入，非独立 alpha"
+      - "verdict: CONDITIONAL_NO_DOWNGRADE（依赖 W1 数据审计结果；否则降 DATA_GAP）"
+
+  - id: RQ-H5
+    title: "LBMA fix/定盘窗（10:30/15:00 伦敦）的微观结构 autopsy（锚定/波动/成本窗描述）"
+    mechanism: M24
+    edge_type: [TIMING, LIQUIDITY, COST]
+    accessibility: PARTIALLY_ACCESSIBLE
+    observability: PROXY_OBSERVABLE
+    evidence_convergence:
+      primary_sources: ["IBA/IOSCO 机制文档（E2 一手）", "WatchGold 微观拆解（E1-E2）", "2015 fix 改革研究（他数据）"]
+      independent_replications: "2（一手机制文档线 + 改革实证线）; 无 XAUUSD feed 痕迹研究"
+      counter_evidence: ["2015 电子化改革 → 旧痕迹消失", "经纪商 feed 可能无 fix 痕迹（待审计）"]
+      local_evidence: "从未研究 (KD-U03); FXTM tick W1 覆盖 24h → 可做 autopsy（E0→E2 潜在线）"
+      hermes_evidence: ["evidence trail E1→E2 已建档（HERMES-06）", "RQ-03 WARM"]
+      evidence_grade: "机制 E2（一手文档）; XAUUSD feed 痕迹 E0（未测）"
+    why_this: "KD-U03 从未研究但数据在手（W1 tick 24h + M1）；fix 是黄金市场唯一制度化的流动性事件窗；描述性 autopsy 成本极低且为任何未来 fix 条件化研究铺路。"
+    what_we_know: "fix 机制文档（IOSCO 自评估, E2）已建档；feed 覆盖 fix 时间（FXTM tick 24h）；vol 聚集/活动簇聚非方向成立。"
+    what_we_dont_know: "XAUUSD 零售 feed 上 fix 窗是否有可测的 spread/vol/活动异常；fix 前后价格路径形态；跨期稳定性（FXTM 2026 vs DUKA 2023-24 窗口错位, 需注意）。"
+    why_it_may_work: "fix 流程产生可预测的失衡与对冲流（机制性, 有制度锚）；若 feed 上可见痕迹则可作为'何时成本高/何时波动'的日历型输入。"
+    why_it_may_fail: "fix 失衡在零售 feed 上不可见（被抹平）；时间错位（经纪商 feed 时区/报价截断）；机制改革后痕迹消失。"
+    data_required: "FXTM W1 tick（现有）+ W2/W4 M1；fix 时间表（公开固定, 需入库）；无需新数据源"
+    infra_required: "无新增"
+    minimum_experiment: "描述性 autopsy: fix 窗 {t-30m..t+30m} 的 vol/activity/spread 轨迹 vs 24h 基线 + 非 fix 同钟点对照；输出=风险/成本窗描述（无方向、无策略）。"
+    kill_condition: "fix 窗与对照无差异（置换检验）或 FXTM feed 在 fix 时段数据密度不足（audit 先行）→ 记录为 CLOSED 描述条目（零成本结论）。"
+    adversarial:
+      - "REGIME FAILURE: fix 机制 2015 改革后已电子化 → 描述需对照机制文档的时间适配（E2 建档）"
+      - "DATA FAILURE: 经纪商 feed 可能无 fix 痕迹 → kill 条件内置"
+      - "verdict: NO_DOWNGRADE（最低成本问题, kill 条件极清晰）"
+
+# 反证汇总
+adversarial_summary:
+  downgraded: []
+  conditional: ["RQ-H4 (W1 数据审计先行, 否则降 DATA_GAP)"]
+  intact: [RQ-H1, RQ-H2, RQ-H3, RQ-H5]
+  method: "每条经 Hermes 索引(claim_registry/dead_end_index/contradiction_registry) 查询 FAILED REPLICATION/COST/LATENCY/CAPACITY/REGIME/COMPETITION/DATA/PROXY FAILURE；命中即降级或内置 kill。"
+  hermes10_note: "HERMES-10 反证（CONTRA-09）未降级任何候选——因为本文件候选的声称边界本就是 INFORMATION/RISK/COST INPUT, 与'vol 信息可预测(E5) ≠ 择时盈利(WEAKENED)'一致; 若任何候选被改写为'可盈利择时' → 立即撞反证降级。"
+
+# 与中间层清单对照
+intermediate_edge_coverage:
+  cost_prediction: RQ-H1
+  execution_quality: RQ-H1 (成本 regime 输入)
+  spread_state: RQ-H1
+  volatility_timing: RQ-H3 (风险管理输入定位)
+  liquidity_deterioration: RQ-H4
+  event_window_timing: RQ-H2
+  auction_fix_window: RQ-H5
+  fill_probability: "无（需 L2/队列 → 非当前可测, 不进 Top5）"
+  latency_sensitivity: "描述性限制记录于 RQ-H2 (retail 链路, 不做微秒声称)"
+  risk_opportunity_separation: RQ-H3 (+NBQ-T1 前置识别搁置项, DUKA tick 解锁)
+  adverse_selection: RQ-H4 (proxy 描述; VPIN 批判已记录)
+  note: "中间层 = 何时交易更贵/更险的状态预测, 目标变量是 vol/spread/成本, 不是收益（HARD RULE: 不把状态预测包装成收益预测; 不把 volatility information 当 profitable timing）。"

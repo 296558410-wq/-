@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "spread_model",
+      "status": "PASS",
+      "detail": "half-spread cost 1.00bps == 1.0bps"
+    },
+    {
+      "name": "backtest_runs",
+      "status": "PASS",
+      "detail": "90 round-trip trades, mean_net=-3.44bps, wins=34"
+    },
+    {
+      "name": "next_bar_execution",
+      "status": "PASS",
+      "detail": "signal@2026-01-01 01:52:00+00:00 entry@2026-01-01 01:54:00+00:00 (>=2 bars later)"
+    },
+    {
+      "name": "no_overlap_positions",
+      "status": "PASS",
+      "detail": "single-position engine; no concurrent trades by construction"
+    },
+    {
+      "name": "signal_decision_entry_order",
+      "status": "PASS",
+      "detail": "signal t -> latency 1 -> next-bar open enforced by next_bar_open()"
+    },
+    {
+      "name": "lookahead_rejected",
+      "status": "PASS",
+      "detail": "detector flagged 300/300 rows where signal[t] reproduces the t+1 outcome"
+    },
+    {
+      "name": "leaking_strategy_blocked",
+      "status": "PASS",
+      "detail": "future-dependent signal rejected before trading"
+    }
+  ],
+  "info": {
+    "backtest_result": {
+      "n_trades": 90,
+      "mean_net_bps": -3.4357422368192942,
+      "sum_net_bps": -309.2168013137365,
+      "wins": 34
+    }
+  },
+  "n_checks": 7
+}

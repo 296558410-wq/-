@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "tick_fields",
+      "status": "PASS",
+      "detail": "60000 ticks"
+    },
+    {
+      "name": "tick_monotonic",
+      "status": "PASS",
+      "detail": "timestamps sorted & unique"
+    },
+    {
+      "name": "arrival_intensity",
+      "status": "PASS",
+      "detail": "mean 8.3 ticks/s, max 21"
+    },
+    {
+      "name": "price_impact_proxy",
+      "status": "PASS",
+      "detail": "corr(side, next-mid-ret)=0.444 (buy aggression precedes up-move)"
+    },
+    {
+      "name": "agg_1s",
+      "status": "PASS",
+      "detail": "7194 buckets, sampled window checks bad=0 (no future-tick contamination)"
+    },
+    {
+      "name": "agg_5s",
+      "status": "PASS",
+      "detail": "1440 buckets, sampled window checks bad=0 (no future-tick contamination)"
+    },
+    {
+      "name": "agg_10s",
+      "status": "PASS",
+      "detail": "720 buckets, sampled window checks bad=0 (no future-tick contamination)"
+    },
+    {
+      "name": "agg_1min",
+      "status": "PASS",
+      "detail": "120 buckets, sampled window checks bad=0 (no future-tick contamination)"
+    },
+    {
+      "name": "agg_ohlc_sane",
+      "status": "PASS",
+      "detail": "high>=max(first,last) & low<=min(first,last) across 120 1m buckets"
+    },
+    {
+      "name": "bucket_coverage",
+      "status": "PASS",
+      "detail": "all ticks assigned to a bucket"
+    },
+    {
+      "name": "tick_parquet_roundtrip",
+      "status": "PASS",
+      "detail": "60000 rows roundtrip"
+    }
+  ],
+  "info": {
+    "ticks": 60000,
+    "span": "0 days 01:59:59.736885589"
+  },
+  "n_checks": 11
+}

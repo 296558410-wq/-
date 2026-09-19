@@ -1,0 +1,106 @@
+{
+  "FXTM": {
+    "windows": {
+      "D": {
+        "n": 143,
+        "abs_C_n": 42,
+        "abs_C_frac": 0.294,
+        "abs_C_mean_bp": 52.9,
+        "abs_R_n": 16,
+        "abs_R_frac": 0.112,
+        "abs_R_mean_bp": -106.1,
+        "voln_C_n": 25,
+        "voln_C_frac": 0.175,
+        "voln_C_mean_bp": 45.1,
+        "voln_R_n": 3,
+        "voln_R_frac": 0.021,
+        "voln_R_mean_bp": -304.4,
+        "pathn_C_n": 19,
+        "pathn_C_frac": 0.133,
+        "pathn_C_mean_bp": 142.3,
+        "pathn_R_n": 21,
+        "pathn_R_frac": 0.147,
+        "pathn_R_mean_bp": -6.1
+      },
+      "V": {
+        "n": 48,
+        "abs_C_n": 15,
+        "abs_C_frac": 0.312,
+        "abs_C_mean_bp": -40.0,
+        "abs_R_n": 7,
+        "abs_R_frac": 0.146,
+        "abs_R_mean_bp": -61.8,
+        "voln_C_n": 9,
+        "voln_C_frac": 0.188,
+        "voln_C_mean_bp": -97.0,
+        "voln_R_n": 1,
+        "voln_R_frac": 0.021,
+        "voln_R_mean_bp": 109.1,
+        "pathn_C_n": 4,
+        "pathn_C_frac": 0.083,
+        "pathn_C_mean_bp": 5.9,
+        "pathn_R_n": 11,
+        "pathn_R_frac": 0.229,
+        "pathn_R_mean_bp": 2.3
+      },
+      "OOS": {
+        "n": 48,
+        "abs_C_n": 22,
+        "abs_C_frac": 0.458,
+        "abs_C_mean_bp": 37.8,
+        "abs_R_n": 0,
+        "abs_R_frac": 0.0,
+        "abs_R_mean_bp": null,
+        "voln_C_n": 17,
+        "voln_C_frac": 0.354,
+        "voln_C_mean_bp": 23.7,
+        "voln_R_n": 0,
+        "voln_R_frac": 0.0,
+        "voln_R_mean_bp": null,
+        "pathn_C_n": 11,
+        "pathn_C_frac": 0.229,
+        "pathn_C_mean_bp": -23.1,
+        "pathn_R_n": 3,
+        "pathn_R_frac": 0.062,
+        "pathn_R_mean_bp": 11.4
+      }
+    },
+    "overlap": {
+      "abs_C->voln_C": 0.62,
+      "abs_C->pathn_C": 0.43,
+      "abs_R->voln_R": 0.174,
+      "abs_R->pathn_R": 0.304
+    }
+  },
+  "DUKA": {
+    "windows": {
+      "ALL": {
+        "n": 159,
+        "abs_C_n": 18,
+        "abs_C_frac": 0.113,
+        "abs_C_mean_bp": 81.6,
+        "abs_R_n": 4,
+        "abs_R_frac": 0.025,
+        "abs_R_mean_bp": 33.8,
+        "voln_C_n": 23,
+        "voln_C_frac": 0.145,
+        "voln_C_mean_bp": 55.1,
+        "voln_R_n": 7,
+        "voln_R_frac": 0.044,
+        "voln_R_mean_bp": 28.1,
+        "pathn_C_n": 20,
+        "pathn_C_frac": 0.126,
+        "pathn_C_mean_bp": 59.3,
+        "pathn_R_n": 29,
+        "pathn_R_frac": 0.182,
+        "pathn_R_mean_bp": -5.6
+      }
+    },
+    "overlap": {
+      "abs_C->voln_C": 0.667,
+      "abs_C->pathn_C": 0.889,
+      "abs_R->voln_R": 1.0,
+      "abs_R->pathn_R": 0.25
+    }
+  }
+}

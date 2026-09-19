@@ -1,0 +1,14 @@
+{
+  "_note": "V2 price-space conversion. DISABLED 2026-09-17 during full-system repair: P0-01 proved the declared GC=F model != runtime (local_fxtm XAUUSD), so this layer is pending redefinition under instrument=XAUUSD. Kept for reference; do NOT enable before re-certification.",
+  "enabled": false,
+  "signal_instrument": "XAUUSD",
+  "execution_instrument": "XAUUSD",
+  "reference_market": "GC=F",
+  "price_dp": 2,
+  "tick_size": 0.01,
+  "min_stop_distance_usd": 0.0,
+  "max_basis_age_seconds": 300,
+  "max_abs_basis_usd": 60.0,
+  "max_basis_jump_usd": 30.0,
+  "jump_window_hours": 6
+}

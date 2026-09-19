@@ -1,0 +1,13 @@
+{
+  "name": "deepseek_min_smoke",
+  "status": "PASS",
+  "n_checks": 1,
+  "checks": [{"name": "deepseek_minimal_call", "status": "PASS", "detail": "model replied exactly: OPENCLAW_RESEARCH_ENV_OK"}],
+  "info": {
+    "model": "deepseek/deepseek-v4-flash",
+    "provider": "deepseek",
+    "status": "ok",
+    "roundtrip_seconds": 4,
+    "verified": "isolated minimal request through OpenClaw gateway; exact-token reply received; no secrets exposed"
+  }
+}

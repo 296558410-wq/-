@@ -1,0 +1,40 @@
+# FAILURE MEMORY（失败记忆 — 长期保存，分类：统计/成本/数据/执行/方法学）
+# 生成：2026-09-05 · HERMES-08 · 合并 FL-01..25，按失败类型分类，供"已知失败模式"自动提醒。
+
+failure_memory:
+  statistical:
+    - {id: FL-02, name: "重叠标签伪显著", note: "n=9000 p=0.0000 → n=140-690 p=0.10-0.80"}
+    - {id: FL-03, name: "大样本功效陷阱", note: "n=40k 下 IC0.01 也 p<1e-4；显著≠经济"}
+    - {id: FL-07, name: "bootstrap CI 全样本口径"}
+    - {id: FL-12, name: "regime 过拟合", note: "25 EDGE 跨期全反号"}
+    - {id: FL-19, name: "搜索强度未缩减", note: "deflated Sharpe 缺位"}
+  cost:
+    - {id: FL-04, name: "gross vs net 口径", note: "显著性跑毛收益，成本单独看净"}
+    - {id: FL-05, name: "mid-PnL 幻觉", note: "无 bid/ask/spread/slippage"}
+    - {id: FL-21, name: "last look 半价差幻觉"}
+    - {id: FL-25, name: "子基点 edge 死于费用", note: "0.5bp 下净正天数 2/6"}
+  data:
+    - {id: FL-13, name: "feed 混淆", note: "FXTM 固定点差 vs DUKA 可变价差"}
+    - {id: FL-14, name: "样本深度不足", note: "23 日窗无法裁决"}
+    - {id: FL-15, name: "结构性零事件", note: "阈值不可达 ≠ 证伪"}
+    - {id: FL-08, name: "索引错配/静默排除"}
+  execution:
+    - {id: FL-06, name: "session 混杂", note: "pooling 抵消反号"}
+    - {id: FL-09, name: "calendar 伪状态", note: "hod_sin/cos 退化为日历"}
+  methodology:
+    - {id: FL-01, name: "跨周期 lookahead", note: "截断重算抓不到跨周期 asof 泄漏"}
+    - {id: FL-10, name: "temporal precedence=因果"}
+    - {id: FL-11, name: "事后 regime 命名冒充事前状态"}
+    - {id: FL-16, name: "换名不构成差异化"}
+    - {id: FL-17, name: "post-hoc 阈值放宽"}
+    - {id: FL-18, name: "复杂度不产生价值", note: "R1'-C adaptive 无增量"}
+    - {id: FL-20, name: "LLM 隐式多回测", note: "agent 生产力=偏差放大器"}
+    - {id: FL-23, name: "参数化 look-ahead", note: "★ 权重级，现有守卫抓不到。代际依赖：2024 代模型(1B-70B)干净，2026 代模型(低至3B)全泄漏（HindsightBench 2607.18867）；现可黑盒探针级审计。deepseek-v4-pro 属 2026 代 → 大概率泄漏"}
+    - {id: FL-20b, name: "搜索强度泄漏（独立确认）", note: "jonathankinlay 2026-09：无结构数据下 agent 产出 in-sample Sharpe 2.1，88% 由『回测次数+混入赢家数』两整数解释；跨 run 相关 0.62（crowding）"}
+    - {id: FL-24, name: "被动暴露幻觉", note: "alpha 实为 beta"}
+
+# 已知失败模式自动提醒示例（§4）：
+#   若未来出现"高波动=高风险→应降险"类假设 → 提醒 FL-15 + R1'-B（无条件日级 gate 已被否）
+#   若未来出现"新方向动量" → 提醒 CL-03 REJECTED + FL-12（跨期反号）
+#   若未来出现"期权 IV 预测" → 提醒 CL-07 CONTRA-05（借券费代理）
+#   若未来出现"cross-asset lead-lag" → 提醒 CL-10（已否）

@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Hermes V2 路 鎺у埗闈㈡澘</title>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<div class="aurora"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand">
+      <div class="logo">V2</div>
+      <div class="bt">
+        <h1>Hermes V2 路 鎺у埗闈㈡澘</h1>
+        <div class="sub">榛勯噾 XAUUSD 路 鍙鐩戞帶 路 鐙珛浜?V1</div>
+      </div>
+    </div>
+    <div class="hstat">
+      <div class="hcol">
+        <span id="live" class="live off"><span class="dot"></span><span id="liveTxt">杩炴帴涓€?/span></span>
+        <div class="clock mono" id="clock">--:--:--</div>
+        <div class="muted" id="refreshState" style="font-size:11px"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 涓€锛歏2 褰撳墠鐘舵€侊紙涓€鐪肩湅鎳傦級 -->
+  <section class="card">
+    <div class="hd"><h2><span class="bar"></span>V2 褰撳墠鐘舵€?/h2><span class="tag" id="topTag"></span></div>
+    <div id="top"></div>
+  </section>
+
+  <div class="grid g2">
+    <!-- 浜岋細鏁版嵁鐘舵€?-->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>鏁版嵁鐘舵€?/h2><span class="tag" id="dataTag"></span></div>
+      <div id="data"></div>
+    </section>
+    <!-- 涓夛細褰撳墠浜ゆ槗鍒ゆ柇 -->
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>褰撳墠浜ゆ槗鍒ゆ柇</h2><span class="tag" id="decTag"></span></div>
+      <div id="decision"></div>
+    </section>
+  </div>
+
+  <div class="grid g3">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>褰撳墠鎸佷粨</h2><span class="tag" id="posTag"></span></div>
+      <div id="position"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>璐︽埛璧勯噾</h2><span class="tag" id="acctTag"></span></div>
+      <div id="account"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>绯荤粺鍋ュ悍</h2><span class="tag" id="healthTag"></span></div>
+      <div id="health"></div>
+    </section>
+  </div>
+
+  <div class="grid g3">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>褰撳墠杩愯闃舵</h2><span class="tag" id="stageTag"></span></div>
+      <div id="stage"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>V1 瀹夊叏鐘舵€?/h2><span class="tag" id="v1Tag"></span></div>
+      <div id="v1"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>鏈€杩戝彂鐢熺殑闂</h2><span class="tag" id="probTag"></span></div>
+      <div id="problems" class="scroll" style="max-height:220px"></div>
+    </section>
+  </div>
+
+  <!-- 鎶€鏈鎯咃紙鎶樺彔锛?-->
+  <details class="card" style="margin-top:14px">
+    <summary class="hd" style="cursor:pointer"><h2><span class="bar"></span>鎶€鏈鎯咃紙楂樼骇锛?/h2></summary>
+    <div id="tech" style="margin-top:10px"></div>
+  </details>
+
+  <div class="muted" id="foot"></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

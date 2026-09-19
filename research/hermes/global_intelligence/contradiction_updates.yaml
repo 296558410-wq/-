@@ -1,0 +1,37 @@
+# CONTRADICTION UPDATES（矛盾更新 — 并入 contradiction registry）
+# 生成：2026-09-05 · HERMES-04 · 新增/更新反证。
+
+contradictions:
+  - id: CONTRA-05
+    claim: "期权市场信息（IV spread/skew）预测股票收益 = 价格低效的证据"
+    status: CONFLICTED
+    supporting:
+      - "经典文献：IV 变换预测收益（Easley/O'Hara 等，Black 1975 起）"
+    contradicting:
+      - "Muravyev-Pearson-Pollet (JFE 2025)：IV spread/skew 的预测力在剔除高借券费股票后下降 ≥2/3；
+        结论：期权信息预测收益主要是『借券费代理』，非真信息缓慢扩散"
+    nuance: "『期权 IV 有信息』成立；但『IV 预测收益=可套利的低效』大部分被借券费/卖空约束解释"
+    xauusd_implication: "对黄金 CVOL/implied 的期待须降级：若黄金期权 IV 看似预测现货方向，需先检验是否 proxy 其它摩擦（黄金无卖空约束，但期权-现货的套利链不同）"
+    status_final: "CONFLICTED（期权信息预测力被高估）"
+
+  - id: CONTRA-06
+    claim: "订单流预测汇率（Evans-Lyons 经典结果）"
+    status: CONFLICTED（可及性上 INACCESSIBLE）
+    supporting:
+      - "Evans-Lyons 2002-2008：订单流解释 40-80% 日度汇率变动，预测宏观基本面优于汇率本身"
+    contradicting:
+      - "依赖 Citibank 专有客户流（不可获取）；4 个月样本 OOS RMSE 改善 30-40% 但统计不显著；单 dealer 数据外推存疑"
+    nuance: "机制真实，但『可复现性』依赖我们拿不到的数据 → 对我们不是可研究 alpha"
+    xauusd_implication: "XAUUSD 无任何 dealer 客户流数据；这条线对我们 = INACCESSIBLE，只作理解价值"
+    status_final: "CONFLICTED + INACCESSIBLE"
+
+  - id: CONTRA-07
+    claim: "做市盈利可通过优化报价策略实现"
+    status: CONFLICTED
+    supporting:
+      - "Avellaneda-Stoikov 最优报价框架（理论）"
+    contradicting:
+      - "arxiv:2606.05882：做市商盈利主要由市场信息度(informedness)环境驱动，非报价策略（spread 与 informedness R²<0.05）"
+    nuance: "报价策略对盈利的边际贡献 < 市场环境；且我们无做市通道"
+    xauusd_implication: "降低对『学会 A-S 做市就能赚』的错误期待；做市盈利是环境/基础设施 edge"
+    status_final: "CONFLICTED + INACCESSIBLE"

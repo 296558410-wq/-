@@ -1,0 +1,30 @@
+# HERMES CAND-01 EVIDENCE / CONTRADICTIONS / DATA GAP（合并）
+# 生成：2026-09-05 · 边界审计。证据表 + 矛盾 + 数据缺口。
+
+evidence_table:
+  - {claim: "黄金 LJP+VRP 预测黄金期货收益（1m-2y，IS+OOS）", source: "SSRN 3074549 'The Risk Premium of Gold'", asset: "黄金期货期权→期货收益", horizon: "月-年", observable: "期权曲面（LJP=左尾）", evidence_level: E3, transfer_risk: "低（黄金特定）；但用完整曲面非 GVZ"}
+  - {claim: "黄金 VRP 预测贵金属收益（post-2008）", source: "BIS wp619", asset: "黄金期权/期货→贵金属", horizon: "月", observable: "VRP（期权曲面）", evidence_level: E3, transfer_risk: "中（period-specific；仅贵金属）"}
+  - {claim: "黄金 IV-收益正关系（demand skew）异于股票", source: "JFM 2014 (fut.21592)", asset: "GLD/商品 ETF 期权", horizon: "日-月", observable: "IV-收益关系", evidence_level: E3, transfer_risk: "低（结构差异）"}
+  - {claim: "GVZ（ATM IV 时间序列）", source: "FRED GVZCLS（CBOE）", asset: "GLD 期权→GLD", horizon: "日", observable: "ATM IV", evidence_level: E4(可本地拉取), transfer_risk: "proxy（GLD→spot XAUUSD）"}
+
+contradictions:
+  - {id: CAND01-CONTRA-1, claim: "VRP 预测商品/贵金属收益", support: "BIS wp619（post-2008）", contradict: "JFM 综合 VRP 回顾：商品无 OOS 可预测", status: "CONFLICTED", note: "BIS 自限 post-2008；此 claim 不能作 CAND-01 基础"}
+  - {id: CAND01-CONTRA-2, claim: "黄金期权信息 = 借券费代理（Muravyev 转移）", support: "Muravyev JFE 2025（股票）", contradict: "黄金无同构短卖约束；LJP 证据方向相反（需求）", status: "INVALID_TRANSFER", note: "用股票摩擦代理批评降级黄金期权 = 错误跨市场转移"}
+  - {id: CAND01-CONTRA-3, claim: "GVZ 是黄金期权信息的充分观测", support: "无直接", contradict: "LJP/skew 最强证据在曲面，非 ATM 单点", status: "GVZ=PARTIAL PROXY", note: "GVZ 归零不杀死黄金期权假设（skew 维度未测）"}
+
+data_gap_map:
+  - {object: "ATM IV", observable: "YES（GVZ/FRED 免费 2008+）", best_proxy: "GVZ", gap: "无（免费可用）"}
+  - {object: "VRP（粗，GVZ-RV）", observable: "YES（可自算）", best_proxy: "GVZ−已实现", gap: "无（免费可算）"}
+  - {object: "LJP / skew / 左尾", observable: "NO（需曲面 risk-neutral 左尾）", best_proxy: "无免费", gap: "DATA_GAP（付费曲面才可测）"}
+  - {object: "risk reversal", observable: "NO", best_proxy: "无免费", gap: "DATA_GAP"}
+  - {object: "term structure", observable: "部分（volradar/flashalpha 当前快照）", best_proxy: "付费历史", gap: "DATA_GAP（无免费历史）"}
+  - {object: "surface shape", observable: "NO（需曲面）", best_proxy: "付费", gap: "DATA_GAP"}
+  - {object: "event-near repricing", observable: "NO（日收盘抹平）", best_proxy: "需 tick/曲面", gap: "DATA_GAP（未测，不 claim）"}
+  - {object: "XAUUSD OTC IV", observable: "存在（付费 vendors）", best_proxy: "GVZ(proxy)", gap: "PARTIAL（GVZ proxy；直接数据付费）"}
+  - {object: "GC 期权 IV", observable: "存在（付费）", best_proxy: "无免费历史", gap: "DATA_GAP（若要测 LJP/skew 才值得买）"}
+  - {object: "dealer positioning", observable: "部分（COT 周频）", best_proxy: "COT", gap: "周频+滞后（持仓非流）"}
+
+# 记忆更新说明：CAND-01 从 HERMES-13 的"gold IV non-friction"候选，精化为：
+#   CASE B：GVZ 测 ATM 水平维度（窄、合法）；skew/LJP 维度 = DATA_GAP；
+#   黄金 VRP→returns 证据 CONFLICTED（非确立）；Muravyev 转移 INVALID。
+# 仅此更新；本地 E5 vol 结论未动。

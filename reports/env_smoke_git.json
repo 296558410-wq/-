@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "is_git_repo",
+      "status": "PASS",
+      "detail": "C:\\AIQuant\\.git exists"
+    },
+    {
+      "name": "gitignore_covers",
+      "status": "PASS",
+      "detail": "missing patterns: none"
+    },
+    {
+      "name": "no_remotes",
+      "status": "PASS",
+      "detail": "no remotes configured (no accidental push possible)"
+    },
+    {
+      "name": "tree_state",
+      "status": "PASS",
+      "detail": "13 uncommitted path(s) (expected during baseline setup)"
+    },
+    {
+      "name": "no_secrets_tracked",
+      "status": "PASS",
+      "detail": "flagged tracked paths: none"
+    },
+    {
+      "name": "git_lfs_available",
+      "status": "PASS",
+      "detail": "git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)"
+    }
+  ],
+  "info": {
+    "gitignore_bytes": 881,
+    "remotes": [],
+    "dirty_files": 13,
+    "tracked_count": 277
+  },
+  "n_checks": 6
+}

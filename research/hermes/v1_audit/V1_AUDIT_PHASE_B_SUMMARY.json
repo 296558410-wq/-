@@ -1,0 +1,167 @@
+{
+ "schema": "v1_phaseB/1",
+ "ts_utc": "2026-09-17T12:34:53.840536+00:00",
+ "n_trades": 57,
+ "status_counts": {
+  "PARTIAL": 9,
+  "PASS": 45,
+  "DATA_GAP": 2,
+  "UNRESOLVABLE": 1
+ },
+ "tick_quality": {
+  "files": [
+   {
+    "file": "ticks_20260907.parquet",
+    "rows": 166470,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1788743100047,
+    "max_ms": 1788830204368,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 12900463,
+    "interval_p50_ms": 274.0
+   },
+   {
+    "file": "ticks_20260908.parquet",
+    "rows": 203959,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1788830144158,
+    "max_ms": 1788916147344,
+    "gap_gt_60s_n": 2,
+    "gap_gt_60s_max_ms": 6314630,
+    "interval_p50_ms": 265.0
+   },
+   {
+    "file": "ticks_20260909.parquet",
+    "rows": 210343,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1788916087296,
+    "max_ms": 1789002546520,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 4201357,
+    "interval_p50_ms": 266.0
+   },
+   {
+    "file": "ticks_20260910.parquet",
+    "rows": 233558,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789002486216,
+    "max_ms": 1789088946551,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 4200303,
+    "interval_p50_ms": 261.0
+   },
+   {
+    "file": "ticks_20260911.parquet",
+    "rows": 227498,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789088886537,
+    "max_ms": 1789348146993,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 177001045,
+    "interval_p50_ms": 263.0
+   },
+   {
+    "file": "ticks_20260914.parquet",
+    "rows": 214223,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789348086021,
+    "max_ms": 1789434545851,
+    "gap_gt_60s_n": 2,
+    "gap_gt_60s_max_ms": 4201553,
+    "interval_p50_ms": 264.0
+   },
+   {
+    "file": "ticks_20260915.parquet",
+    "rows": 184111,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789434485144,
+    "max_ms": 1789520946826,
+    "gap_gt_60s_n": 2,
+    "gap_gt_60s_max_ms": 11216975,
+    "interval_p50_ms": 267.0
+   },
+   {
+    "file": "ticks_20260916.parquet",
+    "rows": 223031,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789520886283,
+    "max_ms": 1789607346974,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 4200173,
+    "interval_p50_ms": 265.0
+   },
+   {
+    "file": "ticks_20260917.parquet",
+    "rows": 93509,
+    "dup_ts": 0,
+    "nonmonotonic": 0,
+    "same_ts_multi": 0,
+    "ask_lt_bid": 0,
+    "zero_price": 0,
+    "min_ms": 1789607287132,
+    "max_ms": 1789647847959,
+    "gap_gt_60s_n": 1,
+    "gap_gt_60s_max_ms": 2172588,
+    "interval_p50_ms": 270.0
+   }
+  ],
+  "total_rows": 1756702
+ },
+ "gap_0911_0913": {
+  "ticks_in_window": 233817,
+  "max_gap_ms": 177001045,
+  "weekend_gap": true,
+  "affected_trades": [
+   "POS-20260911T0132Z",
+   "POS-20260911T0432Z",
+   "POS-20260911T0547Zb",
+   "POS-20260911T0802Z",
+   "POS-20260911T1117Z",
+   "POS-20260911T1302Z",
+   "POS-20260911T1432Z",
+   "POS-20260911T1632Z",
+   "POS-20260913T2217Z",
+   "POS-20260914T001808",
+   "POS-20260914T0117Z"
+  ],
+  "verdict": "GAP_WEEKEND"
+ },
+ "decision_input_snapshot": "decisions/*.json 仅含 state_summary(文本) 且 state_package 仅 latest → 历史交易时刻的完整可见输入 = DATA_GAP（不得用 latest 解释历史）",
+ "source_identity": {
+  "A_v1_own": "data/live_fxtm/ticks_*.parquet (V1 collector 当时保存)",
+  "B_v1_mt5_terminal": "Program Files FXTM 终端可读历史（未在本阶段使用）",
+  "C_alternate": "data/staging_mt5, staging_fxtm（未使用）"
+ }
+}

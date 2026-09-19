@@ -1,0 +1,72 @@
+{
+  "status": "WARN",
+  "checks": [
+    {
+      "name": "no_order_calls",
+      "status": "PASS",
+      "detail": "read-only API only; order_send/position_open never invoked"
+    },
+    {
+      "name": "connect",
+      "status": "PASS",
+      "detail": "terminal 500.6163 build 4 Sep 2026"
+    },
+    {
+      "name": "account_mode",
+      "status": "WARN",
+      "detail": "REAL account server='ForexTimeFXTM-Live01' -> READ-ONLY research pull only (no order/position functions, no account mutation)"
+    },
+    {
+      "name": "symbol_xauusd",
+      "status": "PASS",
+      "detail": "XAUUSD digits=2 point=0.01"
+    },
+    {
+      "name": "rates_M1",
+      "status": "PASS",
+      "detail": "300 bars, last=2026-09-04 18:45:00+00:00, asc=True, cols_ok=True"
+    },
+    {
+      "name": "rates_M5",
+      "status": "PASS",
+      "detail": "300 bars, last=2026-09-04 18:45:00+00:00, asc=True, cols_ok=True"
+    },
+    {
+      "name": "rates_H1",
+      "status": "PASS",
+      "detail": "300 bars, last=2026-09-04 18:00:00+00:00, asc=True, cols_ok=True"
+    },
+    {
+      "name": "ticks_available",
+      "status": "WARN",
+      "detail": "copy_ticks_from_pos not in this MetaTrader5 package build -> tick-level pull unavailable (bars OK)"
+    }
+  ],
+  "info": {
+    "version": [
+      500,
+      6163,
+      "4 Sep 2026"
+    ],
+    "account": {
+      "trade_mode": 2,
+      "server": "ForexTimeFXTM-Live01",
+      "login_hint": "212***",
+      "currency": "USD"
+    },
+    "symbol": {
+      "name": "XAUUSD",
+      "digits": 2,
+      "point": 0.01,
+      "trade_mode": 4,
+      "visible": true
+    },
+    "M1_last": "2026-09-04 18:45:00+00:00",
+    "M1_rows": 300,
+    "M5_last": "2026-09-04 18:45:00+00:00",
+    "M5_rows": 300,
+    "H1_last": "2026-09-04 18:00:00+00:00",
+    "H1_rows": 300
+  },
+  "n_checks": 8
+}

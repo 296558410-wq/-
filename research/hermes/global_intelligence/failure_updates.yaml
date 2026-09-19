@@ -1,0 +1,34 @@
+# FAILURE UPDATES（失败情报更新 — 并入 HERMES_FAILURE_LIBRARY）
+# 生成：2026-09-05 · HERMES-04 · 新增失败模式，与既有 FL-01..22 去重。
+
+failures:
+  - id: FL-23
+    name: "参数化 look-ahead（parametric look-ahead bias）★ 全新且关键"
+    failure: "LLM 的权重本身在训练时已记忆历史结果（2025 cutoff 的模型知道 2010-2020 股票怎么走）；
+      长区间回测重叠训练窗口时，模型从记忆而非数据推理，产生数据管线审计看不见的偏差"
+    why: "偏差活在权重里，不是活在数据管线里 → 截断重算/purged-CV 都抓不到"
+    detected_by: "arxiv:2605.24564 (FINCAD)；arxiv:2605.28359（匿名化 ticker 后 agent 拒交易 → 驱动信号是 ticker 非数据）"
+    prevent: "评估窗口用 post-cutoff 数据；ticker/实体匿名化对照；FINCAD 式衰减记忆贡献"
+    xauusd_relevance: HIGH  # 直接针对 OpenClaw/Hermes：deepseek 模型的训练 cutoff 与 XAUUSD 历史重叠
+    merge_with: "FL-01（data 管线 lookahead）的补充——这是『权重级』lookahead，FL-01 是『数据级』"
+    status: NEW
+
+  - id: FL-24
+    name: "LLM 交易 agent 的被动暴露幻觉（passive-exposure illusion）"
+    failure: "泄漏控制评估下，LLM agent 的累计收益大部分由被动市场/风格暴露解释，几乎无持续选股 alpha"
+    why: "agent 的『alpha』实为 beta；端到端回报主导于市场路径"
+    detected_by: "arxiv:2605.28359（10 个前沿 LLM agent，A 股 2024-26）"
+    prevent: "泄漏控制评估 + 因子归因（剥离被动暴露）后再判 alpha"
+    xauusd_relevance: HIGH  # 方法论：任何 agent 产出的『alpha』必须先剥离市场/风格暴露
+    merge_with: "FL-18（复杂度不产生价值）"
+    status: NEW
+
+  - id: FL-25
+    name: "子基点 edge 死于真实费用（sub-bps edge death）"
+    failure: "微观结构 alpha 在 0ms 下 breakeven fee ~0.687bp，0.5bp 费用下净正天数 2/6；QI+OFI 未稳健改善净经济"
+    why: "预测 edge 是子基点级，被真实 spread/slippage/fee 抹平"
+    detected_by: "H2nryHe/Microstructure_Alpha_Execution_Lab 的诚实负结果（BTC-USDT 六日样本）"
+    prevent: "执行先于经济学（信号是 desired state 非 fill）；成本显式、不与 spread/slippage 重复计"
+    xauusd_relevance: HIGH  # 直接印证 FL-05/Phase 5：执行成本是决定项，非事后项
+    merge_with: "FL-05（mid-PnL）/ FL-21（last look）"
+    status: EXTENSION

@@ -1,0 +1,155 @@
+# =====================================================================
+# LOCAL RESEARCH MAPPING — 本地历史研究 → 机制宇宙映射 (v2)
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP
+# Version: 2026-09-06-hft-map-v2（v2 并入 HERMES-10: vol/成本择时盈利 WEAKENED, 见 hermes_crossref）
+# 覆盖: Phase 1-9A / Phase 5 / 6 / 7 / 8 / 9A / R1' / High-Vol Taxonomy / Market State Representation
+# 目标: CLOSED / OPEN / UNCERTAIN / DATA_GAP / INACCESSIBLE + 浪费/未研究/缺数据/值得投入
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  evidence_scope: "FXTM 2026 单窗口 + DUKA 2023-09..2024-03 静态窗；结论不外推到全市场（scope 纪律）"
+
+phases_glossary:
+  phase1: "基础统计/数据审计（合成验证）"
+  phase2_4: "方向族 funnel（动量/MR/突破/趋势/回归/形态）→ F-R1..R17"
+  phase5: "vol-targeting + 流动性 timing 对照"
+  phase6: "跨期/跨源确认（FXTM↔DUKA）"
+  phase7: "宏观日程簇聚 + 微观结构 P7 探测器"
+  phase8: "方向探测器扩展"
+  phase9_9a: "P1-P7 全量 27/27 探测器（FXTM 2026 单窗, 零候选）"
+  r1_prime: "adaptive risk/decision edge（Trade-Wait A / Reduce B / Scaling C）"
+  autopsy: "Market Autopsy（风险形态）"
+  taxonomy: "High-Volatility Shape Taxonomy（描述性; regime 依赖降级）"
+  rep: "Market State Representation Phase1(框架冻结) + Phase2(描述性稳定 13 KEEP/2 REJECT)"
+
+mechanism_coverage:
+  - id: M01
+    local: "从未研究（无事件源/低延迟方向）"
+    state: INACCESSIBLE
+  - id: M02
+    local: "Phase 7 日程簇聚(E4, 非因果); KD-O06 开放; 事件×微观条件化未执行"
+    state: OPEN
+  - id: M03
+    local: "P7 quote pressure/burst + ≥5m 聚合 OFI 型族 KD-C07 REJECTED; ≤3m tick 层 DATA GAP"
+    state: "REJECTED(≥5m) / DATA_GAP(≤3m)"
+  - id: M04
+    local: "从未研究（无 L2/maker）"
+    state: INACCESSIBLE
+  - id: M05
+    local: "从未研究（无 maker）"
+    state: INACCESSIBLE
+  - id: M06
+    local: "从未研究（固定点差 feed 无捕获对象）"
+    state: INACCESSIBLE
+  - id: M07
+    local: "KD-U07(10-30s adverse selection 未知) + KD-O08(影响曲线描述性, tick 缺) + R1'-A(声称边界)"
+    state: UNCERTAIN
+  - id: M08
+    local: "Phase2-9 方向族全灭: F-R1/R17 双源双期 0 SUPPORTED; KD-C01 CLOSED"
+    state: CLOSED
+  - id: M09
+    local: "无条件 MR REJECTED (F-R2/KD-C02); 条件 MR 预注册 P2/P4 (KD-O01/O03)"
+    state: "REJECTED(无条件) / OPEN(条件)"
+  - id: M10
+    local: "SUPPORTED-NON_DIRECTIONAL: Phase3-6 vol/activity→未来 vol（IC 0.60-0.89 双源）"
+    state: OPEN_NON_DIRECTIONAL
+  - id: M11
+    local: "从未研究（无期权）"
+    state: DATA_GAP
+  - id: M12
+    local: "跨源比较（FXTM vs DUKA 结构差异）有; 时间对齐 lead-lag 无（窗口不重叠）"
+    state: DATA_GAP
+  - id: M13
+    local: "从未研究（无期货数据 KD-U05）"
+    state: DATA_GAP
+  - id: M14
+    local: "从未研究（无期权数据）"
+    state: DATA_GAP
+  - id: M15
+    local: "Phase 7: 日程时间簇聚 CONFIRMED(E4); 因果性/传导强度 UNKNOWN (KD-U02)"
+    state: "PARTIAL (簇聚) / UNCERTAIN (因果)"
+  - id: M16
+    local: "KD-O08 描述性影响曲线（未执行, tick 缺）"
+    state: DATA_GAP
+  - id: M17
+    local: "成本 regime 依赖 (Hermes CL-06 E3, 美股); 本地: REP Phase2 C6_spread_state 描述性稳定; R1' 成本建模(机会成本116.5bp/保护60.6bp); 成本状态可预测性未直接测"
+    state: OPEN (未充分研究)
+  - id: M18
+    local: "REP Phase1 框架 + Phase2: 状态表示描述性稳定(13 KEEP); 高波动 taxonomy regime 依赖降级; 切换/先行信号未验"
+    state: "OPEN (描述层完成; 预测层未测)"
+  - id: M19
+    local: "从未研究（无跨资产数据）"
+    state: DATA_GAP
+  - id: M20
+    local: "单腿统计关系=MR 已 REJECTED; 多腿无数据"
+    state: "REJECTED(单腿) / DATA_GAP(多腿)"
+  - id: M21
+    local: "R1'-A FXTM 对照研究(不声称 execution alpha); 执行模拟器未建 (RQ-07 候选)"
+    state: OPEN (工程缺口)
+  - id: M22
+    local: "从未研究（无 L2/队列 KD-U06）"
+    state: INACCESSIBLE
+  - id: M23
+    local: "Autopsy + Taxonomy 风险形态描述（regime 依赖）; 前置识别测试 = NBQ-T1 (OOS REVERSAL n=0 NOT EVALUABLE, ON HOLD)"
+    state: "DESCRIPTIVE_DONE / PREDICTIVE_NOT_EVALUABLE"
+  - id: M24
+    local: "从未研究 (KD-U03); FXTM tick W1 覆盖 24h 可做 autopsy"
+    state: OPEN (未研究但可观测)
+  - id: M25
+    local: "从未研究（无外部资产数据 KD-U05）"
+    state: DATA_GAP
+
+hermes_crossref:
+  alignment:
+    - "方向层: 本地 CLOSED ↔ Hermes CL-03 REJECTED/DE-01..07 — 一致"
+    - "vol/activity 非方向: 本地 SUPPORTED ↔ Hermes CL-01/02 CONFIRMED — 一致"
+    - "无条件 vol gate: 本地 R1'-B REJECTED ↔ Hermes CL-15 REJECTED + CL-05 SUPERSEDED — 一致（条件化存活）"
+    - "做市/订单流/执行: 本地 INACCESSIBLE ↔ Hermes CL-08/09/DE-08/09 — 一致"
+    - "跨资产 lead-lag: 本地从未验证 ↔ Hermes CL-10 CONTRADICTED (rahulsp 2026) — 本地无冲突记录，采纳为外部反证"
+    - "期权 IV 信息: 本地 DATA_GAP ↔ Hermes CL-07 CONTRADICTED (Muravyev 2025) — 机制期待应降级"
+    - "风险/成本择时: Hermes 簇1(唯一 ACCESSIBLE) ↔ 本地 KD-O04/R1' 条件化存活路径 — v2 修正: 双源一致的只有
+      '非方向信息层'（CL-01/02 + F-R4/F-R12）；'盈利' 主张被 HERMES-10 反证削弱（CONTRA-09）→ 只保留
+      POSSIBLE INFORMATION LAYER 定位"
+  conflicts:
+    - id: CONF-1
+      a: "Hermes knowledge_graph cluster1: '风险/成本择时 R1 唯一有肉'"
+      b: "本地 R1' 正式判定: A=EDGE UNCERTAIN/FEED-LIMITED(待 DUKA); B/C=REJECTED/REDUNDANT"
+      resolution: "不自动选择。v2 由 HERMES-10 部分裁决: '唯一被双源支持的 = 非方向风险/成本信息层'（保留）,
+        '盈利有肉' = WEAKENED（JFE 成本归零 + Elsevier 时间依赖消失）→ R1 定位 = 风险管理输入, 非盈利 edge;
+        存活路径 = DUKA 上条件化预注册补测 + 形态条件化。"
+    - id: CONF-2
+      a: "Hermes CL-02: spread→未来 vol 负相关 CONFIRMED (E5)"
+      b: "REP Phase2: C6_spread_state 描述性稳定但 '表示≠状态≠预测'"
+      resolution: "CL-02 预测性基于历史 IC；Phase2 未测预测层 → 不冲突，但任何 spread→vol 研究须走预注册。"
+    - id: CONF-3
+      a: "v1 图: 'risk/cost timing = 当前最可接近盈利方向' 的表述（M07/M18 字段）"
+      b: "HERMES-10 (CONTRA-09): vol-timing 盈利成本后归零 + 2000 后消失"
+      resolution: "HERMES-10 胜出 → 全图字段改写为 POSSIBLE INFORMATION LAYER; activity→vol 信息(E5) 保持 CONFIRMED;
+        盈利声称 = UNPROVEN/WEAKENED。这是 v1→v2 的唯一触发点。"
+  hermes_source_note: "Hermes = INTELLIGENCE SOURCE，非 FINAL AUTHORITY；其多数结论源自本地 registry 回写 + 外部文献，独立外部证据仅 E2-E4 级。CONFLICT 不自动消解；CONF-3 例外: HERMES-10 携带的新外部反证直接命中 v1 表述 → 修正表述而非消解研究结论。"
+
+waste_analysis:
+  wasted_or_low_yield:   # 已浪费大量研究的地方
+    - "无条件方向族（M08/M09/M20 单腿）在 M1+ 15-240m 空间的重复变体（F-R1..R17 + Phase9 27/27 + P1-P7）——搜索空间已饱和，边际信息递减"
+    - "以 vol/activity 直接当方向信号的反复试探（DE-06 明令禁止）"
+    - "蜡烛形态/几何形态的增量方向测试（F-R16 ΔIC≈0, DE-04）"
+    - "无条件 vol gate（R1'-B 机会成本 116.5bp > 保护 60.6bp）——已耗尽无条件门控路线"
+    - "（v2 新增, 外部）无条件 vol-timing 盈利策略研究——HERMES-10: 成本后归零(JFE) + 2000 后消失(Elsevier), 不再研究无条件版"
+  never_actually_studied:   # 没有真正被研究的方向
+    - "M17 交易成本预测（成本状态的可预测性本身从未被直接检验）"
+    - "M18 状态切换的先行信号（REP 只做了静态稳定性, 切换动力未测）"
+    - "M24 fix/定盘窗微观结构（KD-U03 从未触碰, 数据在手上）"
+    - "M02/M15 事件窗内的 vol/spread 反应结构（只有日程簇聚, 无反应形态研究）"
+    - "M07 adverse-selection 条件的描述性刻画（KD-U07/O08 未执行）"
+  data_gated_not_rejected:   # 只因数据不够而未被验证
+    - "≤3m tick 事件时间层方向族终审（KD-U01 DUKA tick 缺 → KD-O01 补测 + N1 事前识别）"
+    - "DUKA 252-day 同源历史（D2 缺 → R1'-A-DUKA 与跨源确认）"
+    - "事件日历接入（KD-U02 → M02/M15 因果研究）"
+    - "期货/期权/外部资产数据（M11/M13/M14/M19/M25）"
+    - "真实执行通道/模拟器（M07/M16/M21 验证）"
+  worth_investing:   # 真正值得投入（与 Portfolio TIER 1/2 一致）
+    - "成本/spread 状态预测（M17）——中间层、可及、未研究"
+    - "状态切换与 vol 风险层条件化（M18 + R1' 存活路径）——描述层已完成一半"
+    - "事件窗反应结构（M02/M15 条件化）——可观测 proxy 就绪"
+    - "fix 窗描述性 autopsy（M24）——零成本用现有 W1 tick"
+    - "tick 数据补全（D2/DUKA tick）→ 解锁 ≤3m 层终审与 adverse-selection 描述（M03 补测/M07）"

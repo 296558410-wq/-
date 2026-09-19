@@ -1,0 +1,25 @@
+# CAND-01 PREREGISTRATION（冻结, 2026-09-06）— GVZ 增量信息正式检验
+preregistration:
+  experiment_id: "CAND01-gvz-incremental-vol"
+  phase: "CAND-01"
+  hypothesis: "H1: GVZ proxy（GLD 期权隐含波动, 日频）对 XAUUSD 未来 5/10/20 交易日已实现波动含增量信息（控 activity→vol 本地基线后）; 信息含量问题, 非 alpha 问题"
+  proxy_rule: "GVZ ≠ XAUUSD IV ≠ surface ≠ skew ≠ VRP; 全报告用 'GVZ proxy / gold-options volatility proxy'"
+  source_data: "GVZCLS (FRED, data/staging_fred/gvzcls.csv) + DUKA 1-min candles 日度面板 W11"
+  sample: "2023-01..2026-08（缺口同 W11; GVZ 合并后有效日见结果）"
+  decision_timestamp: "GVZ_d 收盘 ~21:15 UTC → 决策 22:00 UTC d; 只用 RV≤d-1; 目标 = d+1 起未来窗"
+  target_definition: "RV_{d+1..d+h}, h ∈ {5,10,20} 交易日 = sqrt(Σ r² over 未来 h 个有效交易日)（bps）; 窗口内缺日跳过（交易日计数）; 不年化（IC 尺度无关）"
+  gvz_variables: ["log GVZ level (d)", "Δlog GVZ (d vs d-1)"]
+  baseline_controls: ["log RV lag1(日)", "log RV lag5", "log RV lag21", "activity = log(日 1-min 计数) lag1", "dow dummies"]
+  baseline_model: "A = 基线; B = A + {log GVZ, Δlog GVZ}; 嵌套 OOS 比较"
+  primary_metric: "ΔR² OOS（expanding walk-forward, min 250）与 ΔIC; HAC(lag≈h) + block bootstrap(block=h) 推断重叠目标"
+  oos_split: {in_sample: "2023-01..2024-12", oos: "2025-01..2026-08", note: "主判据=expanding OOS; 另报 IS/OOS 固定切分"}
+  regime_definition: "tercile of 21d trailing RV at decision（LOW/MID/HIGH）; 不事后改"
+  redundancy_diagnostics: ["corr(GVZ, RV), corr(GVZ, activity), partial corr 表"]
+  directional_probe: "月频慢因子: GVZ level 与 VRP proxy(Δlog GVZ − Δlog RV_lag1 简化) vs 下月 XAUUSD 收益 Spearman（预注册内; 非日内）"
+  r1_value_audit: "逻辑回归(IS 拟合, 冻结) 识别未来 5d 高波动态(top tercile): AUC(A) vs AUC(B) OOS —— R1 风险态输入检验"
+  missing_data: "GVZ 假日空值 dropna; RV 缺日跳过; 合并取交集"
+  multiple_testing: "主检验 = 3 horizon × 1 模型对 → BH-FDR q<0.05（正式声称）; 其余诊断"
+  kill_criteria: "KILL-01..08 见任务书 §21（不复现/无增量/OOS 消失/regime 解释/不稳定/冗余/方向空/无决策价值）"
+  economic_value_hierarchy: "LEVEL 0 无增量 → LEVEL 1 统计信息 → LEVEL 2 风险态信息 → LEVEL 3 执行/成本 → LEVEL 4 可交易; 明示支持的 level; 禁止跳级"
+  classification_vocabulary: "MONETIZABLE_EDGE/INFORMATION_ONLY/RISK_VALUE_ONLY/EXECUTION_VALUE_ONLY/COST_VALUE_ONLY/UNPROVEN/REJECTED/DATA_GAP/INACCESSIBLE"
+  disciplines: ["不买新数据", "不优化", "不建期权策略(无执行通道)", "不复开方向研究"]

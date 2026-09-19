@@ -1,0 +1,23 @@
+# V2 G3 FAIL — 2026-09-17T04:17:43.568056+00:00
+
+```json
+{
+ "run_id": "V2-SHADOW-20260917-021627-f80e",
+ "ts": "2026-09-17T04:17:43.568056+00:00",
+ "snapshots": 2,
+ "snapshot_ok": 1,
+ "replay_mismatch": [],
+ "provenance_missing": [
+  "DEC-ctx_4cd398fb0547.json",
+  "DEC-ctx_4cd398fb0547.json"
+ ],
+ "instrument_mismatch": [],
+ "timeline_replay_false": [],
+ "cycles": 2,
+ "WAIT": 1,
+ "TRADE": 0,
+ "REJECT": 0,
+ "exec_attempts": 0,
+ "blocked": null
+}
+```

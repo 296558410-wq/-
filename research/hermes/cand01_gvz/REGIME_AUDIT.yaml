@@ -1,0 +1,6 @@
+# REGIME_AUDIT — 波动 regime 审计（CAND-01）
+regime_audit:
+  method: "h10 目标; rv21 tercile 内 60/40 固定拟合; in-regime OOS R²(A2 vs B); n≈184/regime"
+  results: {LOW: {r2_A2: -1.94, r2_B: -0.02}, MID: {r2_A2: -0.16, r2_B: -0.25}, HIGH: {r2_A2: -1.03, r2_B: -1.43}}
+  reading: "小样本内 R² 全负(噪声主导); LOW 态 B 明显优于 A2, MID/HIGH 不优于"
+  verdict: "UNKNOWN（样本不足; 不声称 regime 依赖亦不否认; 不据此升级/降级）"

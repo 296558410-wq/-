@@ -1,0 +1,54 @@
+# RESEARCH QUEUE UPDATE（研究队列更新 — HERMES-04）
+# 生成：2026-09-05 · 相对 HERMES-03 research_queue.yaml 的更新。
+# 新增 RQ-06/07；RQ-01/02/05 状态细化。分类新增 INACCESSIBLE。
+
+queue_updates:
+  - id: RQ-05
+    title: "研究协议升级：泄漏审计（含参数化 look-ahead）"
+    update: "从『候选』升级为『有现成审计工具』——OpenPM/CLQT/induced-null 是成熟参考实现；
+      新增关键盲区：参数化 look-ahead（权重级，截断重算抓不到）"
+    new_evidence: [MECH-12, MECH-13, MECH-17]
+    status: REGISTERED_CANDIDATE
+    priority: HOT
+    recommended_next_step: REVIEW
+
+  - id: RQ-06
+    title: "黄金 basis/backwardation 作为非方向压力信号"
+    mechanism: MECH-14
+    source: "derivativesjournal/goldify/metalcharts（机制一致）"
+    evidence: "E3（机制描述 + 2020 EFP 错位实证）"
+    why_relevant: "backwardation=实物需求压力；basis 错位=压力先兆——是非方向风险信号，契合 E5 vol/activity 层"
+    what_known: "Phase 7 宏观日程窗 activity 簇聚（E4）；无 basis 数据"
+    what_unknown: "basis 错位是否在 XAUUSD 现货 feed 上可观测（无期货数据）"
+    required_data: "COMEX 期货 + LBMA 现货（缺 → KD-U05）"
+    value_score: 50
+    overlap: "延伸 KD-U05"
+    risk: "数据缺口"
+    status: DATA_GAP
+    priority: WARM
+    recommended_next_step: DATA_GAP
+
+  - id: RQ-07
+    title: "执行模拟器落地（补齐 Phase 5 未完成工程）"
+    mechanism: "tick 级执行模拟（queue/latency/fill）"
+    source: "ordersim / hftbacktest / MicroExchange（开源成熟）"
+    evidence: "E3（工程实现，非 alpha）"
+    why_relevant: "RQ-02（执行层真实成本）依赖此基础设施；Phase 5 预留未完成"
+    what_known: "Phase 5 有 voltarget/liquidity 脚本资产；执行模拟器未建"
+    what_unknown: "DUKA tick 到位后 maker/taker/fill 假设如何校准"
+    required_data: "成交级 tick（D2 缺）"
+    value_score: 60
+    overlap: "RQ-02 的前置工程"
+    risk: "低（纯工程）"
+    status: REGISTERED_CANDIDATE
+    priority: WARM
+    recommended_next_step: REVIEW
+
+  - id: INACCESSIBLE-SUMMARY
+    title: "本轮明确标记 INACCESSIBLE 的方向（勿再投入研究精力）"
+    items:
+      - "做市 spread capture（无 maker 通道 + 无 L2）—— 理解价值 D 保留"
+      - "黄金现货-期货 basis 套利（需实物交割 + bullion bank）"
+      - "订单流→汇率（依赖专有 dealer 客户流）"
+      - "做市盈利策略优化（盈利是环境非策略，arxiv 2606.05882）"
+    note: "这些不是『被证伪』，是『我们无法验证/实施』；标记 INACCESSIBLE 防止把机构 edge 误当可复现 alpha"

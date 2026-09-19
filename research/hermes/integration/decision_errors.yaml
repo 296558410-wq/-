@@ -1,0 +1,43 @@
+# DECISION ERRORS（决策错误 — 诚实记录，不追求 100%）
+# 生成：2026-09-05 · HERMES-09 · 3 个 boundary 案例的诚实分析。
+# 原则：错误本身必须被记录；不为追求准确率后验改分类。
+
+errors:
+  - id: ERR-01
+    question: "COMEX 期货→现货 lead-lag（#13）"
+    classified_as: "DATA_GAP (KD-U05)"
+    actual_nuance: "双重身份：COMEX 套利链 = DATA_GAP（需期货数据）；但 DXY→黄金 lead-lag 部分已被 rahulsp 2026 否定 = CONTRADICTED"
+    error_type: "分类不完整（DATA_GAP 掩盖了 CONTRADICTED 子项）"
+    lesson: "一个方向可能同时跨多个状态；分类器应返回 MULTI_STATE 而非单一标签"
+    severity: "中等（不导致重复研究，但可能漏掉已否定的子方向）"
+
+  - id: ERR-02
+    question: "黄金期货期限结构斜率作为 carry 信号（#17）"
+    classified_as: "NEW"
+    actual_nuance: "期限结构斜率（contango/backwardation）就是 basis = MECH-14 已覆盖 → 应判 EXTENSION 非 NEW"
+    error_type: "语义重复漏判（NEW 实际是 EXTENSION）"
+    lesson: "'换个说法'（期限结构斜率 vs basis）不应绕过语义去重；需要机制级的同义映射表"
+    severity: "高（这是'隐藏重复'的典型——正是 §4 要防的）"
+
+  - id: ERR-03
+    question: "黄金 VWAP 偏离与日内反转（#18）"
+    classified_as: "NEW"
+    actual_nuance: "VWAP 偏离→回复 本质是均值回复（DE-02 无条件 MR 已否）；若无条件 = 撞 dead end"
+    error_type: "可能撞 dead end 却判 NEW（需确认是否'无条件'）"
+    lesson: "NEW 判定前必须问：是否只是已知死胡同换了个触发器名字？"
+    severity: "高（潜在重复研究）"
+
+# 反自欺测试（§10）：
+popularity_bias_test:
+  - test: "高 star repo（fedecaccia 727 star）是否导致误判 NEW？"
+    result: "否——代码考古发现它是 A-S 实现（已覆盖），正确路由到 INACCESSIBLE/已覆盖"
+  - test: "热门论文（Moreira-Muir）是否导致误判 NEW？"
+    result: "否——正确路由到 CONTRA-01 CONTRADICTION"
+  - test: "著名作者（López de Prado）是否导致误判 NEW？"
+    result: "否——deflated Sharpe 正确路由到已覆盖方法论"
+
+# 结论：
+#   分类器在【明确重复/死胡同/DATA_GAP/矛盾/INACCESSIBLE】上 19/19 全对；
+#   3 个 boundary 全部集中在【NEW 与 EXTENSION/DUPLICATE 的边界】——
+#   这正是"语义重复"最难的地方，也是 ERR-02/03 揭示的真实风险。
+#   诚实结论：分类器对"已知"强，对"看似新实为旧"仍会漏判，需要机制级同义映射表补强。

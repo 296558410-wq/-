@@ -1,0 +1,1510 @@
+{
+  "dataset_id": "XAUUSD_M1_Dukascopy-HTTP_20260904_v001",
+  "dataset_meta": {
+    "dataset_id": "XAUUSD_M1_Dukascopy-HTTP_20260904_v001",
+    "source": "Dukascopy-HTTP",
+    "symbol": "XAUUSD",
+    "timeframe": "M1",
+    "start": "2023-09-01 00:00:00+00:00",
+    "end": "2024-03-16 23:59:00+00:00",
+    "rows": 228960,
+    "timezone": "UTC",
+    "schema": [
+      "ts_utc",
+      "symbol",
+      "open",
+      "high",
+      "low",
+      "close",
+      "spread"
+    ],
+    "sha256": "03ef8319912024e5008eb901881ff9fcebd9240160173df53773a0c49c976521",
+    "created_at": "2026-09-04T12:30:26.736820+00:00",
+    "file": "C:\\AIQuant\\data_registry\\XAUUSD_M1_Dukascopy-HTTP_20260904_v001\\data.parquet",
+    "extra": {
+      "note": "partial window 2023-09..2024-03; mid OHLC of BID/ASK candles; spread=ask.c-bid.c USD; resume filling",
+      "qc": {
+        "duplicates": 0,
+        "missing_bars": 0,
+        "abnormal_gaps": 6,
+        "ohlc_ok": true
+      }
+    }
+  },
+  "started_at": "2026-09-04T12:38:45.647002+00:00",
+  "n_hypotheses_registered": 69,
+  "cost": {
+    "spread_bps": 2.4,
+    "commission_bps": 0.0,
+    "slippage_bps": 0.3
+  },
+  "alpha_level": 0.05,
+  "info_stage_s": 44.6,
+  "skipped": [],
+  "funnel": {
+    "n_tested": 69,
+    "n_raw_sig": 38,
+    "n_fdr_sig": 35
+  },
+  "n_survivors": 35,
+  "survivors": [
+    {
+      "hypothesis_id": "H1_momentum_01_mom_5_h15",
+      "feature": "mom_5",
+      "label": "forward_return_15m",
+      "ic_oos": -0.01845,
+      "p": 0.00125,
+      "q": 0.00254,
+      "ci95": [
+        -0.025764372984703614,
+        -0.009733309562242994
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H1_momentum_02_mom_10_h15",
+      "feature": "mom_10",
+      "label": "forward_return_15m",
+      "ic_oos": -0.02989,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.03599577932632601,
+        -0.021226760943996954
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H1_momentum_03_mom_20_h15",
+      "feature": "mom_20",
+      "label": "forward_return_15m",
+      "ic_oos": -0.04784,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.054007774305968696,
+        -0.038532925099770785
+      ],
+      "wf_positive_frac": 0.0
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_01_zscore_60_h5",
+      "feature": "zscore_60",
+      "label": "forward_return_5m",
+      "ic_oos": -0.02667,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.03488670279874737,
+        -0.018855531162745694
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_01_zscore_60_h15",
+      "feature": "zscore_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.04233,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.04902888349016253,
+        -0.03447923972971156
+      ],
+      "wf_positive_frac": 0.0
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_02_dist_mean_60_h5",
+      "feature": "dist_mean_60",
+      "label": "forward_return_5m",
+      "ic_oos": -0.02381,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.03014385450225988,
+        -0.01533370736374885
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_02_dist_mean_60_h15",
+      "feature": "dist_mean_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.03613,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.04312370950774343,
+        -0.02730207720298192
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_03_dist_ema_60_h5",
+      "feature": "dist_ema_60",
+      "label": "forward_return_5m",
+      "ic_oos": -0.024,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.030906778976627657,
+        -0.015729306803640618
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_03_dist_ema_60_h15",
+      "feature": "dist_ema_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.03401,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.041863814723821106,
+        -0.02609996815481208
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h5",
+      "feature": "dist_hi_60",
+      "label": "forward_return_5m",
+      "ic_oos": -0.02811,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.03451680526058852,
+        -0.020045266424013976
+      ],
+      "wf_positive_frac": 0.0
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h15",
+      "feature": "dist_hi_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.04233,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.04830346973517125,
+        -0.034097731118795105
+      ],
+      "wf_positive_frac": 0.0
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h60",
+      "feature": "dist_hi_60",
+      "label": "forward_return_60m",
+      "ic_oos": -0.06308,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.06888367037380909,
+        -0.053801260640770836
+      ],
+      "wf_positive_frac": 0.0
+    },
+    {
+      "hypothesis_id": "H3_breakout_03_dist_lo_60_h60",
+      "feature": "dist_lo_60",
+      "label": "forward_return_60m",
+      "ic_oos": 0.06587,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.058156228409709826,
+        0.07192781234016886
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_01_vol_30_h60",
+      "feature": "vol_30",
+      "label": "future_vol_60m",
+      "ic_oos": 0.86631,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.864577490628945,
+        0.868742748198768
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_01_vol_30_h240",
+      "feature": "vol_30",
+      "label": "future_vol_240m",
+      "ic_oos": 0.7961,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.7942075945586581,
+        0.8008591260360367
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_02_atr_14_h60",
+      "feature": "atr_14",
+      "label": "future_vol_60m",
+      "ic_oos": 0.8895,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.8711331371087789,
+        0.8750975928650184
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_02_atr_14_h240",
+      "feature": "atr_14",
+      "label": "future_vol_240m",
+      "ic_oos": 0.78623,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.7981783981386107,
+        0.8044145798247124
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_03_rvol_60_h60",
+      "feature": "rvol_60",
+      "label": "future_vol_60m",
+      "ic_oos": 0.89373,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.8917276629988924,
+        0.8964317758248097
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_03_rvol_60_h240",
+      "feature": "rvol_60",
+      "label": "future_vol_240m",
+      "ic_oos": 0.76387,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.7618888931185969,
+        0.7685787269812845
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_04_vol_ratio_15_60_h15",
+      "feature": "vol_ratio_15_60",
+      "label": "future_vol_15m",
+      "ic_oos": 0.59748,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.5923374841765174,
+        0.6023787711240381
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H4_volatility_04_vol_ratio_15_60_h60",
+      "feature": "vol_ratio_15_60",
+      "label": "future_vol_60m",
+      "ic_oos": 0.54873,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.54423325219509,
+        0.5547756274443938
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_01_sma_dist_60_h15",
+      "feature": "sma_dist_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.03613,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.04312370950774343,
+        -0.02730207720298192
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_02_ema_dist_60_h15",
+      "feature": "ema_dist_60",
+      "label": "forward_return_15m",
+      "ic_oos": -0.03401,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.041863814723821106,
+        -0.02609996815481208
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_03_trend_str_h15",
+      "feature": "trend_str",
+      "label": "future_vol_15m",
+      "ic_oos": 0.04853,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.04151046693956927,
+        0.054724148030421284
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_03_trend_str_h60",
+      "feature": "trend_str",
+      "label": "future_vol_60m",
+      "ic_oos": 0.06204,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.055443713646789704,
+        0.06880650342090988
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_03_trend_str_h240",
+      "feature": "trend_str",
+      "label": "future_vol_240m",
+      "ic_oos": 0.09599,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.09177069570741332,
+        0.10330070925909343
+      ],
+      "wf_positive_frac": 0.8
+    },
+    {
+      "hypothesis_id": "H6_session_01_session_enc_h60",
+      "feature": "session_enc",
+      "label": "forward_return_60m",
+      "ic_oos": 0.02897,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.028861263297596834,
+        0.04088712670915764
+      ],
+      "wf_positive_frac": 0.8
+    },
+    {
+      "hypothesis_id": "H6_session_02_hour_h60",
+      "feature": "hour",
+      "label": "forward_return_60m",
+      "ic_oos": 0.02569,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.021082065503700672,
+        0.032918243747549404
+      ],
+      "wf_positive_frac": 0.8
+    },
+    {
+      "hypothesis_id": "H7_vol_x_momentum_01_mom_10_x_vol30_h15",
+      "feature": "mom_10_x_vol30",
+      "label": "forward_return_15m",
+      "ic_oos": -0.02947,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.035969273770562554,
+        -0.021039680329564634
+      ],
+      "wf_positive_frac": 0.2
+    },
+    {
+      "hypothesis_id": "H9_range_x_momentum_01_mom_10_x_compression_h15",
+      "feature": "mom_10_x_compression",
+      "label": "forward_return_15m",
+      "ic_oos": -0.02959,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.038156492086206195,
+        -0.022209872556648864
+      ],
+      "wf_positive_frac": 0.4
+    },
+    {
+      "hypothesis_id": "H9_range_x_momentum_01_mom_10_x_compression_h60",
+      "feature": "mom_10_x_compression",
+      "label": "forward_return_60m",
+      "ic_oos": -0.01099,
+      "p": 0.005,
+      "q": 0.00986,
+      "ci95": [
+        -0.01919188266548279,
+        -0.0025836099890727366
+      ],
+      "wf_positive_frac": 0.6
+    },
+    {
+      "hypothesis_id": "H10_multi_timeframe_01_h1_mom_4_h60",
+      "feature": "h1_mom_4",
+      "label": "forward_return_60m",
+      "ic_oos": -0.03858,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        -0.04437564658560348,
+        -0.02941254895255622
+      ],
+      "wf_positive_frac": 0.4
+    },
+    {
+      "hypothesis_id": "H10_multi_timeframe_02_h1_vol_ratio_h15",
+      "feature": "h1_vol_ratio",
+      "label": "future_vol_15m",
+      "ic_oos": 0.57591,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.5631853522876665,
+        0.5723734014648144
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H10_multi_timeframe_02_h1_vol_ratio_h60",
+      "feature": "h1_vol_ratio",
+      "label": "future_vol_60m",
+      "ic_oos": 0.56255,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.5539210010124466,
+        0.5628264860819588
+      ],
+      "wf_positive_frac": 1.0
+    },
+    {
+      "hypothesis_id": "H10_multi_timeframe_02_h1_vol_ratio_h240",
+      "feature": "h1_vol_ratio",
+      "label": "future_vol_240m",
+      "ic_oos": 0.4568,
+      "p": 0.0,
+      "q": 0.0,
+      "ci95": [
+        0.46313867200763453,
+        0.47516198066325954
+      ],
+      "wf_positive_frac": 1.0
+    }
+  ],
+  "cost_rows": [
+    {
+      "hypothesis_id": "H1_momentum_01_mom_5_h15",
+      "1x": -25.151,
+      "2x": -47.2621,
+      "3x": -64.3452,
+      "net_total": -0.7942795365414281,
+      "n_trades": 5482,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57238,
+            "sharpe": -0.604,
+            "mean": -7.189190261647997e-06
+          },
+          {
+            "segment": 2,
+            "n": 57239,
+            "sharpe": -0.498,
+            "mean": -6.085933403922983e-06
+          },
+          {
+            "segment": 3,
+            "n": 57239,
+            "sharpe": -0.732,
+            "mean": -6.646442489983767e-06
+          },
+          {
+            "segment": 4,
+            "n": 57239,
+            "sharpe": -0.48,
+            "mean": -7.624802257513502e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.732,
+        "sharpe_max": -0.48,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H1_momentum_02_mom_10_h15",
+      "1x": -24.7174,
+      "2x": -46.893,
+      "3x": -64.0265,
+      "net_total": -0.7885243721740776,
+      "n_trades": 5485,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57237,
+            "sharpe": -0.634,
+            "mean": -7.5518055931318175e-06
+          },
+          {
+            "segment": 2,
+            "n": 57238,
+            "sharpe": -0.486,
+            "mean": -5.9518630638210156e-06
+          },
+          {
+            "segment": 3,
+            "n": 57237,
+            "sharpe": -0.746,
+            "mean": -6.724698518647744e-06
+          },
+          {
+            "segment": 4,
+            "n": 57238,
+            "sharpe": -0.431,
+            "mean": -6.836600188510043e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.746,
+        "sharpe_max": -0.431,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H1_momentum_03_mom_20_h15",
+      "1x": -22.8619,
+      "2x": -42.059,
+      "3x": -57.2973,
+      "net_total": -0.7619276473057425,
+      "n_trades": 4683,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57235,
+            "sharpe": -0.559,
+            "mean": -6.641337775747404e-06
+          },
+          {
+            "segment": 2,
+            "n": 57235,
+            "sharpe": -0.467,
+            "mean": -5.689718320164261e-06
+          },
+          {
+            "segment": 3,
+            "n": 57235,
+            "sharpe": -0.613,
+            "mean": -5.523804349181031e-06
+          },
+          {
+            "segment": 4,
+            "n": 57235,
+            "sharpe": -0.449,
+            "mean": -7.141720935171878e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.613,
+        "sharpe_max": -0.449,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_01_zscore_60_h5",
+      "1x": -24.4698,
+      "2x": -46.3057,
+      "3x": -63.2934,
+      "net_total": -0.7808387805295882,
+      "n_trades": 5223,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 54761,
+            "sharpe": -0.609,
+            "mean": -7.610083537652479e-06
+          },
+          {
+            "segment": 2,
+            "n": 54762,
+            "sharpe": -0.438,
+            "mean": -5.475738805606747e-06
+          },
+          {
+            "segment": 3,
+            "n": 54761,
+            "sharpe": -0.732,
+            "mean": -6.676546231911706e-06
+          },
+          {
+            "segment": 4,
+            "n": 54762,
+            "sharpe": -0.479,
+            "mean": -7.872976618709462e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.732,
+        "sharpe_max": -0.438,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_01_zscore_60_h15",
+      "1x": -15.7704,
+      "2x": -29.6497,
+      "3x": -41.3948,
+      "net_total": -0.6207765507475485,
+      "n_trades": 3143,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 54761,
+            "sharpe": -0.393,
+            "mean": -4.851218369178398e-06
+          },
+          {
+            "segment": 2,
+            "n": 54762,
+            "sharpe": -0.275,
+            "mean": -3.405280757027896e-06
+          },
+          {
+            "segment": 3,
+            "n": 54761,
+            "sharpe": -0.424,
+            "mean": -3.7917548488518114e-06
+          },
+          {
+            "segment": 4,
+            "n": 54762,
+            "sharpe": -0.342,
+            "mean": -5.576037759946168e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.424,
+        "sharpe_max": -0.275,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_02_dist_mean_60_h5",
+      "1x": -25.1499,
+      "2x": -46.8252,
+      "3x": -63.5742,
+      "net_total": -0.7954185292640953,
+      "n_trades": 5385,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.685,
+            "mean": -8.218375701135814e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.461,
+            "mean": -5.636171073639005e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.697,
+            "mean": -6.322162852868788e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.469,
+            "mean": -7.472577226439005e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.697,
+        "sharpe_max": -0.461,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_02_dist_mean_60_h15",
+      "1x": -15.5497,
+      "2x": -29.3984,
+      "3x": -41.0959,
+      "net_total": -0.6209682264778723,
+      "n_trades": 3261,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.435,
+            "mean": -5.128757154166515e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.238,
+            "mean": -2.871999324331106e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.458,
+            "mean": -4.049701571953273e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.305,
+            "mean": -4.825011627680416e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.458,
+        "sharpe_max": -0.238,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_03_dist_ema_60_h5",
+      "1x": -26.9661,
+      "2x": -49.9202,
+      "3x": -67.4739,
+      "net_total": -0.8265021985243176,
+      "n_trades": 5794,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.699,
+            "mean": -8.724868121349024e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.542,
+            "mean": -6.684169371929799e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.717,
+            "mean": -6.899540057315986e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.502,
+            "mean": -8.21579528785054e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.717,
+        "sharpe_max": -0.502,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H2_mean_reversion_03_dist_ema_60_h15",
+      "1x": -13.7484,
+      "2x": -27.2683,
+      "3x": -38.7927,
+      "net_total": -0.5868743264165941,
+      "n_trades": 3143,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.383,
+            "mean": -4.705729612736636e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.177,
+            "mean": -2.1533363580314806e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.41,
+            "mean": -3.858228592780171e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.286,
+            "mean": -4.648368064843824e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.41,
+        "sharpe_max": -0.177,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h5",
+      "1x": -13.977,
+      "2x": -23.8552,
+      "3x": -32.546,
+      "net_total": -0.5816375732948116,
+      "n_trades": 2252,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.279,
+            "mean": -3.2948208357935624e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.28,
+            "mean": -3.378579462899906e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.373,
+            "mean": -3.296738397850523e-06
+          },
+          {
+            "segment": 4,
+            "n": 57225,
+            "sharpe": -0.328,
+            "mean": -5.180364721138898e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.373,
+        "sharpe_max": -0.279,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h15",
+      "1x": -8.0713,
+      "2x": -12.597,
+      "3x": -16.8456,
+      "net_total": -0.3947502610035629,
+      "n_trades": 1009,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.154,
+            "mean": -1.808731654480957e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.154,
+            "mean": -1.8460216844685777e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.236,
+            "mean": -2.0627737371834295e-06
+          },
+          {
+            "segment": 4,
+            "n": 57225,
+            "sharpe": -0.189,
+            "mean": -2.980540133025411e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.236,
+        "sharpe_max": -0.154,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H3_breakout_02_dist_hi_60_h60",
+      "1x": -3.5484,
+      "2x": -5.1546,
+      "3x": -6.7233,
+      "net_total": -0.19949005409329745,
+      "n_trades": 365,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.132,
+            "mean": -1.548967861181781e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": 0.044,
+            "mean": 5.225011303755188e-07
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.05,
+            "mean": -4.337648920431792e-07
+          },
+          {
+            "segment": 4,
+            "n": 57225,
+            "sharpe": -0.15,
+            "mean": -2.3522387091638643e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.25,
+        "sharpe_min": -0.15,
+        "sharpe_max": 0.044,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H3_breakout_03_dist_lo_60_h60",
+      "1x": 2.6715,
+      "2x": 1.385,
+      "3x": 0.1084,
+      "net_total": 0.17339056438086953,
+      "n_trades": 293,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": 0.045,
+            "mean": 5.227882256176113e-07
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": 0.025,
+            "mean": 2.959848836143347e-07
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": 0.047,
+            "mean": 4.093252198541137e-07
+          },
+          {
+            "segment": 4,
+            "n": 57225,
+            "sharpe": 0.105,
+            "mean": 1.641904991637597e-06
+          }
+        ],
+        "sharpe_positive_frac": 1.0,
+        "sharpe_min": 0.025,
+        "sharpe_max": 0.105,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_01_sma_dist_60_h15",
+      "1x": -15.5497,
+      "2x": -29.3984,
+      "3x": -41.0959,
+      "net_total": -0.6209682264778723,
+      "n_trades": 3261,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.435,
+            "mean": -5.128757154166515e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.238,
+            "mean": -2.871999324331106e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.458,
+            "mean": -4.049701571953273e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.305,
+            "mean": -4.825011627680416e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.458,
+        "sharpe_max": -0.238,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H5_trend_regime_02_ema_dist_60_h15",
+      "1x": -13.7484,
+      "2x": -27.2683,
+      "3x": -38.7927,
+      "net_total": -0.5868743264165941,
+      "n_trades": 3143,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57225,
+            "sharpe": -0.383,
+            "mean": -4.705729612736636e-06
+          },
+          {
+            "segment": 2,
+            "n": 57225,
+            "sharpe": -0.177,
+            "mean": -2.1533363580314806e-06
+          },
+          {
+            "segment": 3,
+            "n": 57225,
+            "sharpe": -0.41,
+            "mean": -3.858228592780171e-06
+          },
+          {
+            "segment": 4,
+            "n": 57226,
+            "sharpe": -0.286,
+            "mean": -4.648368064843824e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.41,
+        "sharpe_max": -0.177,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H7_vol_x_momentum_01_mom_10_x_vol30_h15",
+      "1x": -27.0304,
+      "2x": -48.929,
+      "3x": -65.7627,
+      "net_total": -0.8185122567895176,
+      "n_trades": 5492,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57232,
+            "sharpe": -0.641,
+            "mean": -7.69473420841702e-06
+          },
+          {
+            "segment": 2,
+            "n": 57233,
+            "sharpe": -0.643,
+            "mean": -7.892480121982732e-06
+          },
+          {
+            "segment": 3,
+            "n": 57232,
+            "sharpe": -0.718,
+            "mean": -6.5175883936639195e-06
+          },
+          {
+            "segment": 4,
+            "n": 57233,
+            "sharpe": -0.479,
+            "mean": -7.633671854041298e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.718,
+        "sharpe_max": -0.479,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H9_range_x_momentum_01_mom_10_x_compression_h15",
+      "1x": -29.8751,
+      "2x": -56.1657,
+      "3x": -76.4894,
+      "net_total": -0.7942436891173883,
+      "n_trades": 5492,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 40421,
+            "sharpe": -0.782,
+            "mean": -1.1133731527064826e-05
+          },
+          {
+            "segment": 2,
+            "n": 40422,
+            "sharpe": -0.68,
+            "mean": -9.897396898553876e-06
+          },
+          {
+            "segment": 3,
+            "n": 40421,
+            "sharpe": -0.761,
+            "mean": -9.539977731018389e-06
+          },
+          {
+            "segment": 4,
+            "n": 40422,
+            "sharpe": -0.473,
+            "mean": -8.431127584751816e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.782,
+        "sharpe_max": -0.473,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H9_range_x_momentum_01_mom_10_x_compression_h60",
+      "1x": -8.6577,
+      "2x": -16.4487,
+      "3x": -23.6325,
+      "net_total": -0.3587199811092193,
+      "n_trades": 1496,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 40421,
+            "sharpe": -0.259,
+            "mean": -3.5993375035485485e-06
+          },
+          {
+            "segment": 2,
+            "n": 40422,
+            "sharpe": -0.182,
+            "mean": -2.465402603677012e-06
+          },
+          {
+            "segment": 3,
+            "n": 40421,
+            "sharpe": -0.175,
+            "mean": -2.119344379497143e-06
+          },
+          {
+            "segment": 4,
+            "n": 40422,
+            "sharpe": -0.156,
+            "mean": -2.7033595611127507e-06
+          }
+        ],
+        "sharpe_positive_frac": 0.0,
+        "sharpe_min": -0.259,
+        "sharpe_max": -0.156,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    },
+    {
+      "hypothesis_id": "H10_multi_timeframe_01_h1_mom_4_h60",
+      "1x": -1.5114,
+      "2x": -4.8011,
+      "3x": -7.9667,
+      "net_total": -0.08925896299227809,
+      "n_trades": 686,
+      "subperiod": {
+        "n_parts": 4,
+        "parts": [
+          {
+            "segment": 1,
+            "n": 57165,
+            "sharpe": 0.079,
+            "mean": 9.10051708654715e-07
+          },
+          {
+            "segment": 2,
+            "n": 57165,
+            "sharpe": -0.049,
+            "mean": -5.357102433243455e-07
+          },
+          {
+            "segment": 3,
+            "n": 57165,
+            "sharpe": -0.116,
+            "mean": -9.985124808545523e-07
+          },
+          {
+            "segment": 4,
+            "n": 57165,
+            "sharpe": -0.062,
+            "mean": -9.409453562626216e-07
+          }
+        ],
+        "sharpe_positive_frac": 0.25,
+        "sharpe_min": -0.116,
+        "sharpe_max": 0.079,
+        "note": "子段 Sharpe 一致性低 → 结果可能依赖特定时期"
+      }
+    }
+  ],
+  "alpha_registry": {
+    "n": 56,
+    "by_status": {
+      "REJECTED": 28,
+      "EDGE_UNCERTAIN": 28
+    }
+  },
+  "alpha_records": [
+    {
+      "alpha_id": "H1_momentum_01_mom_5_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0185,
+      "q": 0.0025
+    },
+    {
+      "alpha_id": "H1_momentum_02_mom_10_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0299,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H1_momentum_03_mom_20_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0478,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_01_zscore_60_h5_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0267,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_01_zscore_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0423,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_02_dist_mean_60_h5_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0238,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_02_dist_mean_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0361,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_03_dist_ema_60_h5_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.024,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H2_mean_reversion_03_dist_ema_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.034,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H3_breakout_02_dist_hi_60_h5_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0281,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H3_breakout_02_dist_hi_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0423,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H3_breakout_02_dist_hi_60_h60_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0631,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H3_breakout_03_dist_lo_60_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.0659,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_01_vol_30_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.8663,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_01_vol_30_h240_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.7961,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_02_atr_14_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.8895,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_02_atr_14_h240_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.7862,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_03_rvol_60_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.8937,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_03_rvol_60_h240_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.7639,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_04_vol_ratio_15_60_h15_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.5975,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H4_volatility_04_vol_ratio_15_60_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.5487,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H5_trend_regime_01_sma_dist_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0361,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H5_trend_regime_02_ema_dist_60_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.034,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H5_trend_regime_03_trend_str_h15_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.0485,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H5_trend_regime_03_trend_str_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.062,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H5_trend_regime_03_trend_str_h240_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.096,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H6_session_01_session_enc_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.029,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H6_session_02_hour_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.0257,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H7_vol_x_momentum_01_mom_10_x_vol30_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0295,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H9_range_x_momentum_01_mom_10_x_compression_h15_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0296,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H9_range_x_momentum_01_mom_10_x_compression_h60_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.011,
+      "q": 0.0099
+    },
+    {
+      "alpha_id": "H10_multi_timeframe_01_h1_mom_4_h60_v001",
+      "status": "REJECTED",
+      "ic_oos": -0.0386,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H10_multi_timeframe_02_h1_vol_ratio_h15_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.5759,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H10_multi_timeframe_02_h1_vol_ratio_h60_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.5625,
+      "q": 0.0
+    },
+    {
+      "alpha_id": "H10_multi_timeframe_02_h1_vol_ratio_h240_v001",
+      "status": "EDGE_UNCERTAIN",
+      "ic_oos": 0.4568,
+      "q": 0.0
+    }
+  ],
+  "elapsed_s": 210.7,
+  "wall_s": 210.7,
+  "period": "2023-09..2024-03"
+}

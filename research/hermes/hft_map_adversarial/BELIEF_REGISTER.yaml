@@ -1,0 +1,58 @@
+# BELIEF REGISTER（信念登记表 — 攻击 OpenClaw Edge Map 的 8 条判断）
+# 生成：2026-09-05 · HERMES-11 · 每个判断：现状 + 什么会确认/削弱/推翻 + 本轮攻击结果。
+
+beliefs:
+  - id: BELIEF-A
+    claim: "Directional alpha 在当前搜索空间已基本死掉"
+    current_status: "REJECTED（M1+）+ EDGE_UNCERTAIN（≤1m）"
+    what_would_confirm: "更多现代样本/不同市场复现'无方向 edge'"
+    what_would_weaken: "某市场/尺度出现成本后仍存的方向信号"
+    what_would_contradict: "XAUUSD 特定 tick 层出现稳健方向 edge"
+    attack_result: "CONFIRMS（2607.20093 零售信号族 REFUTED；2605.04004 MNQ 14 族无一存活）"
+    exception_found: "equities 日内 TTSM 成本后仍优于（S0927539823000245）—— 但 equities 非 XAUUSD，不转移（§7）"
+    evidence_grade: E3
+
+  - id: BELIEF-B
+    claim: "Volatility information 存在，但 profitable timing 未证明"
+    current_status: "CONFIRMED（E5 信息）+ WEAKENED（择时，HERMES-10）"
+    what_would_confirm: "vol-timing 成本后归零的更多证据"
+    what_would_weaken: "某条件化 vol-timing 成本后仍盈利"
+    attack_result: "本轮新证据：Liquidity Provision as Alpha 发现 vol-条件反转溢价 Sharpe 0.42→1.16 —— 即'条件化'而非'无条件'的 vol 信息有经济价值，与 R1 形态条件化方向一致（REFINES 非推翻）"
+    evidence_grade: E2/E3
+
+  - id: BELIEF-C
+    claim: "Execution / liquidity / cost 是最可能的中间层"
+    current_status: "SUPPORTED（RQ-02/07）"
+    attack_result: "REFINES：不是笼统 execution alpha，而是两个具体可及形式——(1) 执行 overlay（微价门控降滑点 ~13%）；(2) vol-条件流动性提供溢价。做市本身仍 INACCESSIBLE"
+    source: "bryanvine 'Liquidity Provision as Alpha'"
+    evidence_grade: E2
+
+  - id: BELIEF-D
+    claim: "机构级 order flow / market making 大部分不可及"
+    current_status: "INACCESSIBLE"
+    attack_result: "PARTIAL RECLASSIFICATION：持仓(not 流)通过 CFTC COT 公开每周可得 → positioning 层 PARTIALLY_ACCESSIBLE；但高频 signed flow 仍 INACCESSIBLE。见 RECLASSIFICATIONS"
+    evidence_grade: E3
+
+  - id: BELIEF-E
+    claim: "Certain data gaps 真的是数据缺口，而非方法问题"
+    current_status: "DUKA tick 等为 DATA GAP"
+    attack_result: "部分挑战：CFTC COT 提供了一个我此前未计入的公开替代源（周频持仓），说明部分'数据缺口'其实是'未充分搜索公开源'。但 ≤1m tick 仍是真缺口（无替代）"
+    evidence_grade: E2
+
+  - id: BELIEF-F
+    claim: "某些 proxy 可以代表真实机制（activity/volume→flow）"
+    current_status: "已知风险（HERMES-10 proxy failure）"
+    attack_result: "CONFIRMS 风险：volume 归一化破坏信号(2512.18648)；毛量≠净流(HBS)；raw OBI 被 HFT 闪烁污染(2507.22712)。activity/tick_volume 是噪声代理，非知情流代理"
+    evidence_grade: E3
+
+  - id: BELIEF-G
+    claim: "某个 system bottleneck 是真正瓶颈"
+    current_status: "L2/latency 为瓶颈"
+    attack_result: "部分确认：做市确需 queue/rebate/colocation（sub-0.1bp 游戏）；但执行 overlay 不需要 L2，只需 micro-price（bid/ask 即可）→ 'L2 是唯一瓶颈'被削弱：执行层用较低维数据即可"
+    evidence_grade: E2
+
+  - id: BELIEF-H
+    claim: "某个机制只是过去收益的重新包装"
+    current_status: "DE-01..07 死胡同"
+    attack_result: "CONFIRMS：零售信号族（RSI/MACD/蜡烛/量/日历）在数据挖掘+成本下 REFUTED（2607.20093）—— 印证它们是动量/MR 换皮"
+    evidence_grade: E3

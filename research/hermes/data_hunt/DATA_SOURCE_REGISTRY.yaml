@@ -1,0 +1,75 @@
+# DATA SOURCE REGISTRY（已验证数据源注册表）
+# 生成：2026-09-05 · HERMES-12 · 只记录经工具验证存在/可达的来源（HTTP 200 或搜索显示真实数据）。
+# 四状态独立：EXISTS / ACCESSIBLE / AUTOMATABLE / RESEARCH_USABLE。
+
+sources:
+  - id: DS-01
+    name: "FRED GVZCLS（黄金 ETF 波动率指数 IV）"
+    url: "https://fred.stlouisfed.org/series/GVZCLS"
+    owner: "CBOE → FRED（St. Louis Fed）"
+    market: "黄金 ETF(GLD) 期权隐含波动"
+    venue: "CBOE"
+    data_type: "日频 IV 指数（黄金 VIX）"
+    time_range: "2008-06-03 至今"
+    granularity: daily
+    access_method: "FRED API / CSV 下载"
+    automation: "可（FRED 免费 API key，脚本可拉）"
+    cost: "免费"
+    license: "FRED 数据条款（可引用，API 免费）"
+    verified: "HTTP 400（API 在线）；搜索显示真实数据"
+    evidence_grade: E3
+    what_it_unlocks: "黄金 IV 时间序列 → VRP regime + R1 vol-regime 变量"
+
+  - id: DS-02
+    name: "Dukascopy 历史数据导出"
+    url: "https://www.dukascopy.com/swiss/english/marketwatch/historical/"
+    owner: "Dukascopy Bank"
+    market: "FX（含 XAUUSD tick）"
+    data_type: "tick / 各级 bar"
+    time_range: "长历史（社区验证）"
+    access_method: "HTTP 导出 + dukascopy-node 工具"
+    automation: "可（dukascopy-node CLI）"
+    cost: "免费"
+    verified: "HTTP 200"
+    evidence_grade: E3
+    what_it_unlocks: "KD-U01 tick 方向族终审（瓶颈是下载速度非不存在）"
+
+  - id: DS-03
+    name: "TrueFX 历史 tick"
+    url: "https://www.truefx.com/truefx-historical-downloads-2/"
+    owner: "TrueFX"
+    market: "FX 主要货币对"
+    data_type: "tick-by-tick"
+    access_method: "下载（免费）"
+    cost: "免费"
+    caveat: "需确认是否含 XAUUSD；已知 off-tick 质量问题"
+    verified: "HTTP 200"
+    evidence_grade: E3
+
+  - id: DS-04
+    name: "Databento CME GC MDP3"
+    url: "https://databento.com/catalog/cme/GLBX.MDP3/futures/GC"
+    owner: "Databento（CME 数据）"
+    market: "COMEX 黄金期货"
+    data_type: "trade-and-quote（MDP3，纳秒时间戳）"
+    time_range: "约 2022+（Databento 开始采集）"
+    access_method: "Databento API（Python/C++/Rust）"
+    automation: "可"
+    cost: "$125 免费额度后付费"
+    caveat: "tick 历史短（2022+）；额度有限"
+    verified: "搜索确认存在"
+    evidence_grade: E3
+    what_it_unlocks: "COMEX 期货微观结构（KD-U05 的期货数据）"
+
+  - id: DS-05
+    name: "CFTC COT 黄金持仓"
+    url: "https://www.cftc.gov/MarketReports/CommitmentsofTraders/"
+    owner: "CFTC"
+    market: "黄金期货（及期权）"
+    data_type: "周频持仓（投机/商业）"
+    time_range: "长历史"
+    access_method: "公开 CSV + API（HERMES-11 已确认）"
+    cost: "免费"
+    verified: "HERMES-11 确认"
+    evidence_grade: E3
+    what_it_unlocks: "持仓/情绪层（非流）"

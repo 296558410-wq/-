@@ -1,0 +1,29 @@
+{
+ "schema": "v1_market_regime/1",
+ "ts_utc": "2026-09-17T12:51:03.461590+00:00",
+ "source": "A(live_fxtm)",
+ "early": {
+  "spread_bp_p50": 0.319,
+  "spread_bp_p90": 0.412,
+  "ticks": 372900,
+  "tick_rate_per_h": 8649.2,
+  "realized_vol_bp_per_tick": 0.4039,
+  "range_usd": 99.51
+ },
+ "mid": {
+  "spread_bp_p50": 0.345,
+  "spread_bp_p90": 0.417,
+  "ticks": 487316,
+  "tick_rate_per_h": 4827.5,
+  "realized_vol_bp_per_tick": 0.4547,
+  "range_usd": 142.27
+ },
+ "recent": {
+  "spread_bp_p50": 0.349,
+  "spread_bp_p90": 0.42,
+  "ticks": 700814,
+  "tick_rate_per_h": 8622.0,
+  "realized_vol_bp_per_tick": 0.4263,
+  "range_usd": 132.9
+ }
+}

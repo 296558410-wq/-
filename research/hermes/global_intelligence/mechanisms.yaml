@@ -1,0 +1,146 @@
+# MECHANISM LIBRARY — XAUUSD 外部机制库（HERMES-03 增量）
+# 生成：2026-09-05 · 每条：name/desc/evidence/contradictions/markets/conditions/limitations/
+#   xauusd_relevance/data_requirement/status
+# 纪律：外部机制最多 E2/E3；一律未在 XAUUSD 验证。与既有 RID-001..010 去重。
+# status: NEW | REDUNDANT | EXTENSION | NEW_UNDERSTANDING
+
+mechanisms:
+  - id: MECH-01
+    name: "LBMA 定盘 = IBA 电子轮次拍卖（round-based auction）"
+    description: "黄金 LBMA 定盘价由 ICE Benchmark Administration 以电子拍卖形式产生：30 秒/轮，
+      约十余家直接参与者提交买卖量，失衡 ≤10,000 盎司则成交，否则朝失衡方向调价进入下一轮。"
+    evidence: [E2/E3, "IBA 官方机制 + WatchGold 微观结构拆解（2026-09 访问）"]
+    contradictions: "无直接反证（机制描述性，非可交易主张）"
+    markets: "黄金现货（伦敦 OTC）"
+    conditions: "10:30 / 15:00 伦敦时间两场；依赖直接参与者提交真实订单"
+    limitations: "XAUUSD 是经纪商 spot 报价（FXTM），非 LBMA 直接成员；定盘时刻的微观影响需经 feed 传导"
+    xauusd_relevance: MEDIUM  # 理解价值 + 潜在定盘窗 microstructure
+    data_requirement: "FXTM tick 覆盖 10:30/15:00 伦敦；事件时间表已知（固定）"
+    status: EXTENSION  # 深化 RID-009
+
+  - id: MECH-02
+    name: "COMEX 期货领先现货；EFP/现金套利钉住三市场"
+    description: "黄金价格 = 三个物理分离市场（COMEX 期货/伦敦现货/GLD）被套利钉成一个价。
+      COMEX 期货领先（尤其美国时段），现货与 GLD 跟随；EFP(cash-and-carry)是套利纽带。"
+    evidence: [E2/E3, "多来源微观结构一致；2020-03 套利崩裂（EFP basis 爆裂）为压力测试实证"]
+    contradictions: "双向传导（非单向因果）；领先关系随时段/流动性变化"
+    markets: "黄金（COMEX/伦敦/GLD）"
+    conditions: "依赖实物可运输性；交割规格匹配（400oz vs 100oz）"
+    limitations: "XAUUSD 是 spot CFD/报价，非 COMEX 期货；但价格发现源头在 COMEX"
+    xauusd_relevance: MEDIUM  # 跨资产 lead-lag → KD-U05 数据缺口
+    data_requirement: "需 COMEX/GLD 数据（当前未接入 → KD-U05）"
+    status: NEW
+
+  - id: MECH-03
+    name: "波动率目标定仓的换手/成本幻觉（vol-targeting turnover illusion）"
+    description: "用已实现方差(1/RV)做 vol-target 会产生极端杠杆与换手；其收益在计入交易成本后消失。
+      平滑波动预测(变分贝叶斯)可正则化换手、恢复经济价值。"
+    evidence: [E2/E3, "arxiv:2212.07288 (Smoothing volatility targeting) 158 策略实证"]
+    contradictions: "见 CONTRA-01（Moreira-Muir 争议链）"
+    markets: "美股因子（158 策略）"
+    conditions: "月频换手；成本 14/50bp 两档"
+    limitations: "美股因子证据；XAUUSD 未验证"
+    xauusd_relevance: HIGH  # 直接对应 R1'-B/C 结论（机会成本>保护；C 冗余）
+    data_requirement: "已有（vol 特征管线 Phase 4-6 资产可复用）"
+    status: EXTENSION  # 外部印证 R1' 的"成本侵蚀"发现
+
+  - id: MECH-04
+    name: "交易成本的 regime 依赖：波动/成本择时 > 收益择时"
+    description: "交易成本随波动 regime 变化（高波动期成本显著更高）；OOS 最大收益来自择时
+      『波动率+交易成本』，而非择时预期收益。"
+    evidence: [E2/E3, "NBER w24222 (Collin-Dufresne/Daniel/Sağlam) regime-switching + 机构真实交易成本"]
+    contradictions: "无强反证；与 Merton(1980)『二阶矩比一阶矩更可估』一致"
+    markets: "美股市场组合（机构交易成本数据）"
+    conditions: "regime-switching 框架；state 依赖的交易速度"
+    limitations: "美股；XAUUSD 未验证"
+    xauusd_relevance: HIGH  # 直接支撑 E5 vol→risk 层 + R1 adaptive 方向的核心机制论证
+    data_requirement: "已有（activity→vol E5 信息 + spread 成本代理）"
+    status: NEW  # 与 RID 无重复；是 R1 方向的机制层外部支撑
+
+  - id: MECH-05
+    name: "Last look + 流毒性（flow toxicity）→ 真实执行成本 > 半价差"
+    description: "FX/gold 非银行流动性普遍带 last look（50-200ms 可拒单）→ 公布价差是『非对称期权』：
+      流动性商赢时紧、输时拒。朴素回测用半价差，真实成本 = 成交单半价差 + 被拒单机会成本。
+      你的流若系统性早于不利 mid 移动到达，流动性商会针对你加宽报价、最终降级（de-tier）。"
+    evidence: [E3, "BIS 2025 Triennial Survey + FX 执行层文献（divitae 等）"]
+    contradictions: "无（这是结构事实，非可交易主张）"
+    markets: "FX spot / OTC 贵金属"
+    conditions: "非银行流；50-200ms last look；dealer/PTF 内部化"
+    limitations: "XAUUSD 零售 feed（FXTM）的 last look 具体参数未测"
+    xauusd_relevance: HIGH  # 执行层（KD-O02）；直接解释 Phase 5 的『成本幻觉』
+    data_requirement: "需成交级 tick + 拒单数据（当前 FXTM feed 无精确 signed flow/拒单记录 → 部分 DATA GAP）"
+    status: NEW
+
+  - id: MECH-06
+    name: "OTC 内部化与碎片化（>80% 交易不可见）"
+    description: "FX/gold 场外市场高度碎片化；dealer 内部化 >80% 客户交易，流不可见；多层级
+      （ECN→prime broker→prime-of-prime→aggregator）各自加延迟/点差/重报价。"
+    evidence: [E3, "BIS 2025 Triennial：电子 59%、内部化 >80%、15+ 多边平台"]
+    contradictions: "无"
+    markets: "FX / OTC 贵金属"
+    conditions: "不同层级 = 不同策略（sub-1ms vs sub-100ms 非同策略）"
+    limitations: "XAUUSD 零售 feed 是聚合层最末端，看不到内部化层"
+    xauusd_relevance: MEDIUM  # 理解价值；解释 feed 差异（FL-13 feed confusion）
+    data_requirement: "无需新数据（理解用）"
+    status: NEW
+
+  - id: MECH-07
+    name: "订单流失衡放大价格波动（OFI 放大机制）"
+    description: "订单流失衡(OFI)不仅预测短期价格，还放大价格波动；放大可解释为固有流动性风险的事后实现。"
+    evidence: [E3, "Fed FEDS Note 2025-11-03（美债市场实证）"]
+    contradictions: "与 KD-C07（≥5m imb 方向 REJECTED）部分重叠 → 方向用法已被本地否定"
+    markets: "美债（dealer 市场）"
+    conditions: "dealer 市场；ofI 与流动性风险状态相关"
+    limitations: "美债证据；XAUUSD 的 ≥5m imb 方向已 REJECTED（KD-C07）"
+    xauusd_relevance: LOW  # 方向层已否；仅 vol/流动性风险层有意义
+    data_requirement: "已有（FXTM tick；P7 已预注册）"
+    status: REDUNDANT  # 与 RID-001/P7 重叠
+
+  - id: MECH-08
+    name: "OTC 信息追逐 vs 逆向选择（dealer 追单动机抵消逆向选择）"
+    description: "多边平台上 dealer 追 informed 订单的动机恰好抵消其逆向选择恐惧；影响 dealer 定价行为。"
+    evidence: [E2, "Zou (junyuanzou.com) 'Information Chasing vs Adverse Selection in OTC'"]
+    contradictions: "与经典 adverse-selection 定价模型（Glosten-Milgrom）部分张力"
+    markets: "OTC dealer 市场"
+    conditions: "多 dealer 平台；dealer 可观察流信号"
+    limitations: "理论/实证于 dealer 市场；XAUUSD 零售 feed 无 dealer 身份数据"
+    xauusd_relevance: LOW  # 理解价值为主；无 dealer 数据无法直接验证
+    data_requirement: "无（dealer 身份数据缺失）"
+    status: NEW
+
+  - id: MECH-09
+    name: "逆向选择/流毒性 → 做市商加宽价差"
+    description: "估计的逆向选择成分上升 → 做市商加宽价差补偿风险；流毒性(VPIN/OFI)可测量。"
+    evidence: [E2/E3, "Cont-Kukanov-Stoikov(2014) + 执行层文献"]
+    contradictions: "无（经典微观结构共识）"
+    markets: "电子市场"
+    conditions: "做市商存在；可测 markout"
+    limitations: "XAUUSD 零售 feed 无盘口深度/队列 → 无法直接测 adverse selection（KD-U06/07）"
+    xauusd_relevance: MEDIUM  # 执行层理论背景；直接测需 L2（缺失）
+    data_requirement: "需盘口深度（KD-U06 缺失）"
+    status: NEW  # 深化 RID-005 的执行层理论
+
+  - id: MECH-10
+    name: "回测过拟合 / 缩减夏普（deflated Sharpe / PBO）"
+    description: "试足够多变体必然『发现』盈利策略（随机序列也能）；必须按 trial 数缩减显著性与夏普。"
+    evidence: [E2, "Bailey-López de Prado 'Backtesting' SSRN 2606462（经典）"]
+    contradictions: "无（方法论共识）"
+    markets: "通用"
+    conditions: "任何多试变体的搜索"
+    limitations: "需要正确统计 trial 数（含文献里他人已试的）"
+    xauusd_relevance: HIGH  # 方法论红线；映射 FL-12/FL-03
+    data_requirement: "无需"
+    status: EXTENSION  # 并入 HERMES_FAILURE_LIBRARY
+
+  - id: MECH-11
+    name: "LLM 策略发现的搜索强度泄漏（search-intensity leakage）"
+    description: "LLM agent 循环提议/评估/精炼策略，在操作者看到第一个数字前已做了几十次隐式回测；
+      若报告结果不按搜索强度缩减，agent 的生产力本身变成偏差放大器。文本『避免 lookahead』是弱护栏。"
+    evidence: [E2/E3, "arxiv:2608.27734 'What survives honest evaluation?'（2026）"]
+    contradictions: "无"
+    markets: "通用（尤其 LLM 驱动研究）"
+    conditions: "LLM/agent 驱动的策略发现循环"
+    limitations: "面向策略发现评估；对 Hermes/OpenClaw 的研究方法直接相关"
+    xauusd_relevance: HIGH  # 直接针对 OpenClaw/Hermes 的 LLM 研究范式
+    data_requirement: "无需"
+    status: NEW  # 极高方法论价值

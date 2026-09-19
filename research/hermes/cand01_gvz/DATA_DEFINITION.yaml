@@ -1,0 +1,13 @@
+# DATA_DEFINITION / BASELINE_SPEC — CAND-01（2026-09-06, 预注册 c23b046）
+data_definition:
+  source: "GVZCLS (FRED, 日频) + XAUUSD 日度 RV 面板 (W11: DUKA 1-min staging candles, ≥600 min/日)"
+  sample: "573 合并日, 2023-01-03..2026-08-03（GVZ×RV 交集; 缺口 7 月同 W11）"
+  decision_timestamp: "GVZ_d 收盘 ~21:15 UTC → 决策 22:00 UTC d; 本地 RV 仅用 ≤d-1"
+  gvz_transform: ["log GVZ level (d)", "Δlog GVZ (d vs d-1)"]
+  target_definition: "log RV over next h 交易日 = 0.5·log(mean(exp(2·logRV_daily))) over next h valid rows, h∈{5,10,20}; 不年化; 缺日按有效行计数"
+  proxy_note: "GVZ = gold-options volatility proxy (GLD options), NOT XAUUSD IV/surface/skew"
+baseline_spec:
+  model_A: "log RV point lags (1/5/21d) + activity log(volume, d-1) + dow dummies"
+  model_A2_confusion: "A + smoothed local RV (trailing 21d & 63d mean log RV, d-1) —— 混淆测试必需对照"
+  model_B: "A2 + {log GVZ, Δlog GVZ}（正式增量 = B vs A2; 原始 B vs A 仅作展示）"
+  metric: "expanding walk-forward OOS ΔR²; ΔIC 辅助; DM-HAC(lag≤5) 于 B vs A; B vs A2 报告无正式推断(注记)"

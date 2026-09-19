@@ -1,0 +1,58 @@
+{
+ "schema": "v1_baseline/1",
+ "ts_utc": "2026-09-17T12:41:19.874410+00:00",
+ "seed": 20260917,
+ "baselines": [
+  "A_v1_actual",
+  "B_reverse",
+  "C_random(fixed seed)"
+ ],
+ "note": "baseline 只为对照，不用于优化；seed 固定不可改",
+ "summary": {
+  "1000": {
+   "v1_mean": 0.0839,
+   "reverse_mean": -0.0839,
+   "random_mean": 0.0039
+  },
+  "2000": {
+   "v1_mean": 0.1184,
+   "reverse_mean": -0.1184,
+   "random_mean": 0.1199
+  },
+  "5000": {
+   "v1_mean": 0.2066,
+   "reverse_mean": -0.2066,
+   "random_mean": 0.0611
+  },
+  "10000": {
+   "v1_mean": 0.2139,
+   "reverse_mean": -0.2139,
+   "random_mean": -0.199
+  },
+  "30000": {
+   "v1_mean": 0.0898,
+   "reverse_mean": -0.0898,
+   "random_mean": 0.0287
+  },
+  "60000": {
+   "v1_mean": -0.2185,
+   "reverse_mean": 0.2185,
+   "random_mean": 0.2683
+  },
+  "180000": {
+   "v1_mean": 0.2098,
+   "reverse_mean": -0.2098,
+   "random_mean": -0.0926
+  },
+  "300000": {
+   "v1_mean": -0.0915,
+   "reverse_mean": 0.0915,
+   "random_mean": -0.0662
+  },
+  "900000": {
+   "v1_mean": -0.645,
+   "reverse_mean": 0.645,
+   "random_mean": -0.01
+  }
+ }
+}

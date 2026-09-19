@@ -1,0 +1,21 @@
+{
+ "schema": "v1_cost/1",
+ "ts_utc": "2026-09-17T12:41:19.874410+00:00",
+ "OBSERVABLE_NET": "review.realized.pnl_usd（仅含已记录 slippage）",
+ "TRUE_NET_STATUS": "DATA_GAP（commission/swap 未记录，禁默认0）",
+ "cost_fields": {
+  "slippage": "RECORDED",
+  "spread_at_entry": "DERIVABLE_NOT_RECORDED",
+  "commission": "DATA_GAP",
+  "swap": "DATA_GAP"
+ },
+ "stress_ladder": [
+  0,
+  0.5,
+  1,
+  1.5,
+  2,
+  3
+ ],
+ "note": "压力分析仅为敏感性，不代表真实净收益"
+}

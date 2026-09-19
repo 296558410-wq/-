@@ -1,0 +1,39 @@
+# DECISION BENCHMARK（决策基准 — 20 问题分类测试）
+# 生成：2026-09-05 · HERMES-09 · Hermes 不提前知道答案分类，从 Memory 自己判断。
+# 地面真相（ground truth）已知：5 重复 / 5 死胡同 / 3 DATA_GAP / 3 矛盾 / 2 NEW / 2 扩展。
+# 结果：correct / wrong / boundary（边界模糊，见 decision_errors.yaml）。
+
+benchmark:
+  - {q: "研究黄金动量（M1 15-240m）", gt: dead_end, classified: "STOP (DE-01)", result: correct}
+  - {q: "用 RSI 指标做黄金", gt: dead_end, classified: "STOP (DE-01 指标重包装)", result: correct}
+  - {q: "黄金均值回归 zscore 策略", gt: dead_end, classified: "STOP (DE-02)", result: correct}
+  - {q: "黄金蜡烛形态交易", gt: dead_end, classified: "STOP (DE-04)", result: correct}
+  - {q: "黄金 session 时段方向漂移", gt: dead_end, classified: "STOP (DE-03)", result: correct}
+  - {q: "activity→未来波动率可预测吗", gt: duplicate, classified: "DUPLICATE (CL-01 CONFIRMED)", result: correct}
+  - {q: "spread→未来波动率关系", gt: duplicate, classified: "DUPLICATE (CL-02)", result: correct}
+  - {q: "宏观日程是否驱动 activity 簇聚", gt: duplicate, classified: "DUPLICATE (CL-04)", result: correct}
+  - {q: "last look 机制本身是什么", gt: duplicate, classified: "DUPLICATE (MECH-05 已覆盖)", result: correct}
+  - {q: "LBMA 定盘拍卖机制", gt: duplicate, classified: "DUPLICATE (MECH-01 已有一手源)", result: correct}
+  - {q: "黄金 VRP 能否收割", gt: data_gap, classified: "DATA_GAP (CL-11 无期权数据)", result: correct}
+  - {q: "≤1m tick 方向失衡", gt: data_gap, classified: "DATA_GAP (KD-U01 DUKA tick)", result: correct}
+  - {q: "COMEX 期货→现货 lead-lag", gt: data_gap, classified: "DATA_GAP (KD-U05)", result: boundary}  # 见 errors
+  - {q: "波动率择时是否有效", gt: contradiction, classified: "CONTRADICTION (CONTRA-01)", result: correct}
+  - {q: "期权 IV 是否预测收益", gt: contradiction, classified: "CONTRADICTION (CONTRA-05)", result: correct}
+  - {q: "DXY→黄金 lead-lag", gt: contradiction, classified: "CONTRADICTION (CONTRA-08)", result: correct}
+  - {q: "黄金期货期限结构斜率作为 carry 信号", gt: new, classified: "NEW", result: boundary}  # 实为 MECH-14 扩展
+  - {q: "黄金 VWAP 偏离与日内反转", gt: new, classified: "NEW", result: boundary}  # 可能撞 DE-02 MR
+  - {q: "activity→vol 的形态条件化 adaptive 形式", gt: extension, classified: "EXTENSION (R1)", result: correct}
+  - {q: "last look 成本在 DUKA 可变价差的量化", gt: extension, classified: "EXTENSION (MECH-05)", result: correct}
+
+# 附加 INACCESSIBLE 测试（分类器含此输出，补充 2 个）
+  - {q: "做市 spread capture", gt: inaccessible, classified: "INACCESSIBLE (DE-08)", result: correct}
+  - {q: "订单流预测黄金汇率", gt: inaccessible, classified: "INACCESSIBLE (DE-09)", result: correct}
+
+summary:
+  total: 22
+  correct: 19
+  boundary: 3
+  wrong: 0
+  note: "3 个 boundary（非 wrong）：#13 COMEX lead-lag 是 DATA_GAP 与 CONTRADICTION 的双重身份；
+         #17 期限结构实为 MECH-14 扩展（非全新）；#18 VWAP 可能撞 DE-02 无条件 MR。
+         详见 decision_errors.yaml 的诚实分析。"

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Hermes V1 · 交易控制中心</title>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<div class="aurora"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand">
+      <div class="logo">V1</div>
+      <div class="bt"><h1>Hermes V1 · 交易控制中心</h1><div class="sub">CONTROL CENTER · MT5 DEMO · READ-ONLY</div></div>
+    </div>
+    <div class="ticker" id="ticker">
+      <div class="tk">
+        <span class="sym">XAUUSD</span>
+        <span class="px mono" id="tkMid">—</span>
+        <span class="chg" id="tkSpread">—</span>
+      </div>
+      <div class="ba mono" id="tkBA">bid — / ask —</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="hstat">
+      <div class="ring"><canvas id="ring" width="120" height="120"></canvas><div class="ringTxt"><b id="ringVal">—</b><span>session</span></div></div>
+      <div class="hcol">
+        <span id="live" class="live off"><span class="dot"></span><span id="liveTxt">连接中…</span></span>
+        <div class="clock mono" id="clock">--:--:--</div>
+        <div class="ses" id="sesTxt">—</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="chips" id="stateChips" style="margin:0 2px 12px"></div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid g-main">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>价格 · XAUUSD M15 (tick 重建)</h2><span class="tag" id="candleTag"></span></div>
+      <canvas id="candle" height="300"></canvas>
+      <div class="legend" id="candleLegend"></div>
+    </section>
+    <div class="stack">
+      <section class="card">
+        <div class="hd"><h2><span class="bar"></span>工作流 · Workflow</h2><span class="tag" id="wfTag"></span></div>
+        <div class="pipe" id="wf"></div>
+      </section>
+      <section class="card">
+        <div class="hd"><h2><span class="bar"></span>多周期状态</h2><span class="tag" id="tfTag"></span></div>
+        <table id="tfTbl"><thead></thead><tbody></tbody></table>
+      </section>
+    </div>
+  </div>
+
+  <div class="grid g-3">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>持仓 · Positions</h2><span class="tag" id="posTag"></span></div>
+      <div id="pos"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>在册计划 · Pending Plans</h2><span class="tag" id="plTag"></span></div>
+      <div class="feed" id="plans"></div>
+    </section>
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>最新决策 · Decisions</h2><span class="tag" id="decTag"></span></div>
+      <div class="feed" id="decisions"></div>
+    </section>
+  </div>
+
+  <div class="grid g-main">
+    <section class="card">
+      <div class="hd"><h2><span class="bar"></span>运行摘要 · trader_summary tail</h2><span class="tag" id="sumTag"></span></div>
+      <div class="term mono" id="summary"></div>
+    </section>
+    <div class="stack">
+      <section class="card">
+        <div class="hd"><h2><span class="bar"></span>系统 / 完整性</h2><span class="tag" id="sysTag"></span></div>
+        <div id="sys"></div>
+      </section>
+      <section class="card">
+        <div class="hd"><h2><span class="bar"></span>WAIT 归因 Top</h2><span class="tag" id="waitTag"></span></div>
+        <div id="waits"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="muted" id="foot"></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

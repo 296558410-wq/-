@@ -1,0 +1,59 @@
+{
+  "status": "WARN",
+  "checks": [
+    {
+      "name": "ticks_roundtrip",
+      "status": "PASS",
+      "detail": "500/500 identical (20B BE ints + lzma)"
+    },
+    {
+      "name": "candles_roundtrip",
+      "status": "PASS",
+      "detail": "240/240 identical (24B BE ints + lzma)"
+    },
+    {
+      "name": "truncated_detected",
+      "status": "PASS",
+      "detail": "raw len % 20 == 2 -> flagged by record-size guard"
+    },
+    {
+      "name": "empty_handled",
+      "status": "PASS",
+      "detail": "empty payload -> zero records (caller treats as no-data)"
+    },
+    {
+      "name": "sha256_available",
+      "status": "PASS",
+      "detail": "sha256 over raw bytes available for file-integrity checks"
+    },
+    {
+      "name": "verify_integrity_ok",
+      "status": "PASS",
+      "detail": "{\"n\": 3600, \"issues\": [], \"t_first\": 0, \"t_last\": 3588203}"
+    },
+    {
+      "name": "verify_finds_dups",
+      "status": "PASS",
+      "detail": "issues=['non-monotonic', 'duplicates']"
+    },
+    {
+      "name": "live_fetch_1day",
+      "status": "WARN",
+      "detail": "HTTP refused/empty (len=0) - network/firewall"
+    },
+    {
+      "name": "resume_markers",
+      "status": "PASS",
+      "detail": "done=4 days -> todo=['2026-09-05'] (resume skips completed)"
+    }
+  ],
+  "info": {
+    "sha256_fixture": "83e331a1fc620103fa3a2500623cef01f25a30d063ceeb65c4c3a090f652a0cc",
+    "live": {
+      "attempted": true,
+      "ok": false,
+      "reason": "HTTP refused/empty (len=0) - network/firewall"
+    }
+  },
+  "n_checks": 9
+}

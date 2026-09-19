@@ -1,0 +1,190 @@
+{
+  "frozen": [
+    [
+      "asia",
+      "tick_imb_r30",
+      15,
+      "+"
+    ],
+    [
+      "asia",
+      "tick_imb_r30",
+      30,
+      "+"
+    ],
+    [
+      "asia",
+      "tick_imb_r120",
+      60,
+      "-"
+    ],
+    [
+      "london",
+      "tick_imb_r120",
+      60,
+      "+"
+    ],
+    [
+      "london_ny_overlap",
+      "tick_imb_r120",
+      60,
+      "+"
+    ],
+    [
+      "london_ny_overlap",
+      "tick_imb_r30",
+      30,
+      "+"
+    ],
+    [
+      "ny",
+      "z_tick_count_120",
+      30,
+      "+"
+    ],
+    [
+      "ny",
+      "z_tick_count_120",
+      60,
+      "+"
+    ],
+    [
+      "ny",
+      "spread",
+      10,
+      "-"
+    ],
+    [
+      "ny",
+      "spread",
+      15,
+      "-"
+    ]
+  ],
+  "results": [
+    {
+      "session": "asia",
+      "feature": "tick_imb_r30",
+      "h": 15,
+      "expected": "+",
+      "ic_oos": 0.01074,
+      "p": 0.55125,
+      "oos_n": 3397,
+      "sign_ok": true,
+      "q": 0.55125,
+      "fdr": false
+    },
+    {
+      "session": "asia",
+      "feature": "tick_imb_r30",
+      "h": 30,
+      "expected": "+",
+      "ic_oos": -0.02803,
+      "p": 0.1225,
+      "oos_n": 3397,
+      "sign_ok": false,
+      "q": 0.13611111111111113,
+      "fdr": false
+    },
+    {
+      "session": "asia",
+      "feature": "tick_imb_r120",
+      "h": 60,
+      "expected": "-",
+      "ic_oos": -0.1274,
+      "p": 0.0,
+      "oos_n": 3361,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "london",
+      "feature": "tick_imb_r120",
+      "h": 60,
+      "expected": "+",
+      "ic_oos": 0.19698,
+      "p": 0.0,
+      "oos_n": 2880,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "london_ny_overlap",
+      "feature": "tick_imb_r120",
+      "h": 60,
+      "expected": "+",
+      "ic_oos": 0.03544,
+      "p": 0.0875,
+      "oos_n": 2277,
+      "sign_ok": true,
+      "q": 0.109375,
+      "fdr": false
+    },
+    {
+      "session": "london_ny_overlap",
+      "feature": "tick_imb_r30",
+      "h": 30,
+      "expected": "+",
+      "ic_oos": 0.21519,
+      "p": 0.0,
+      "oos_n": 2289,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "ny",
+      "feature": "z_tick_count_120",
+      "h": 30,
+      "expected": "+",
+      "ic_oos": 0.06777,
+      "p": 0.0,
+      "oos_n": 2760,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "ny",
+      "feature": "z_tick_count_120",
+      "h": 60,
+      "expected": "+",
+      "ic_oos": 0.08794,
+      "p": 0.0,
+      "oos_n": 2760,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "ny",
+      "feature": "spread",
+      "h": 10,
+      "expected": "-",
+      "ic_oos": -0.08007,
+      "p": 0.0,
+      "oos_n": 2760,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    },
+    {
+      "session": "ny",
+      "feature": "spread",
+      "h": 15,
+      "expected": "-",
+      "ic_oos": -0.08573,
+      "p": 0.0,
+      "oos_n": 2760,
+      "sign_ok": true,
+      "q": 0.0,
+      "fdr": true
+    }
+  ],
+  "bh": {
+    "n_raw": 7,
+    "n_reject": 7
+  }
+}

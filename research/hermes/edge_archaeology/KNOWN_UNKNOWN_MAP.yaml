@@ -1,0 +1,24 @@
+# KNOWN / UNKNOWN / ASSUMED / UNTESTED MAP（搜索前建立的知识地图）
+# 生成：2026-09-05 · HERMES-13 · 只列影响搜索方向的实质项。
+
+map:
+  KNOWN:
+    - "方向 alpha 已尽（M1+ 已测空间，E5）"
+    - "activity→vol 非方向信息硬（E5，IC 0.60-0.89）"
+    - "做市/订单流/spot L2 INACCESSIBLE"
+    - "跨资产 DXY→黄金 lead-lag 已否"
+    - "执行 overlay + vol-条件反转是执行层可及部分"
+  UNKNOWN:
+    - "黄金期权 IV/VRP 是否有非摩擦信息（本轮转向研究）"
+    - "≤1m XAUUSD 方向族（DUKA tick 未终审）"
+    - "GVZ 是否有增量预测（待测）"
+  ASSUMED:
+    - "Muravyev 借券费批评适用于黄金（★ 本轮挑战，可能错误转嫁）"
+    - "股票 vol-timing 结论适用于贵金属（★ 存疑）"
+    - "GVZ 仅描述性（★ 未测假定）"
+  UNTESTED:
+    - "黄金 IV 的 demand skew 是否携带真实信息"
+    - "gold VRP 预测力在 XAUUSD 层面是否可及/可测"
+    - "期货领先现货的时变结构是否可用（跨 venue 速度限制）"
+
+  # 本轮攻击重点：把 3 个 ASSUMED 项之一（Muravyev 适用于黄金）从"假定"推到"被挑战"。

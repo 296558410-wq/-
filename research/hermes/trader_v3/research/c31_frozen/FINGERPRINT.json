@@ -1,0 +1,26 @@
+{
+ "schema": "v3_c31_frozen/1",
+ "frozen_utc": "2026-09-17T11:38:01.175092+00:00",
+ "tool": {
+  "path": "C:\\Users\\surface\\HermesWorkspaces\\v3\\.recheck_r32\\p2_net_edge_gate.py",
+  "sha256": "c364f060f7c6c6555c17f06c94ac42c173ae4a53b883f35e3e73a4542b2114d5"
+ },
+ "historical_tool_hash": "5f51c5ba88072fc41cdd57c7c4ada8e93565465e7f5d927e08cc104e15885b37",
+ "canonical_spec": "f824a792a856b10a68ddea604c8be0af44fb739edbd62e90c70d3702923679fa",
+ "canonicalizer": "6deed97c5f5362a68977691614ab41b1532b9bb9b2329e36e9f553b0a870393e",
+ "canonical_artifacts": {
+  "canon_p2_trades_r31_selftest.csv": "0ef81fad28cb9b7bd76c6b83bd7a8afb8099a2016d3298c2ebb157777942ef0d",
+  "canon_p2_summary_r31_selftest.json": "7fd5f4f0a2e4d5a30da87d029742d279a8a6340bfb858254ce0888666d54933c",
+  "canon_p2_latency_ladder_r31_selftest.csv": "6b2228012c94f71e262001bf5e30dbb1b84aab05a466e3220341d5f4902ccb10"
+ },
+ "section_20_10": "PASS (3 independent reads byte-identical after canonicalization)",
+ "semantic_diff_proof": "only provenance/mtime differed; SEMANTIC_FIELD_DIFFS=0",
+ "rulings": {
+  "3.1": "judgment column=frac changed (root-change rate); keep same as reference",
+  "3.2": "governing ladder-basis=signals; ticks retained for feed diagnostics"
+ },
+ "g_audit": {
+  "G-AUD-001": "RESOLVED_BY_CANONICALIZATION (metadata-only, history kept)",
+  "G-AUD-002": "OPEN (identity drift; history kept)"
+ }
+}

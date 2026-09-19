@@ -1,0 +1,43 @@
+# ACCESSIBILITY + VALUE + COUNTER-EVIDENCE + GRAPH（本轮合并）
+# 生成：2026-09-05 · HERMES-07
+
+accessibility_assessment:
+  - mechanism: "黄金 VRP（卖 vol）"
+    theoretical_value: "高（机构收割 VRP 是真实存在的）"
+    practical_value: "低-中（尾部风险 carry，捡钢镚）"
+    accessibility: INACCESSIBLE  # 无期权数据 + 无期权交易基础设施
+    verifiability: DATA_GAP  # 无期权数据，无法验证
+  - mechanism: "宏观新闻前价格漂移"
+    theoretical_value: "高（信息泄漏/强预测）"
+    practical_value: "存疑（快反应需低延迟）"
+    accessibility: PARTIALLY_ACCESSIBLE  # tick 可观测，但快反应不可及
+    verifiability: PARTIAL
+  - mechanism: "跨资产 lead-lag（DXY→黄金）"
+    theoretical_value: "高（若成立）"
+    practical_value: "低（已被反证否定）"
+    accessibility: "数据需跨资产（缺），但反证已可得"
+    verifiability: CONTRADICTED
+
+research_value_assessment:
+  - {mechanism: "风险/成本择时（vol/activity→vol）", value: "B（非方向）+ C（执行/风险）", accessibility: ACCESSIBLE, verdict: "★ 唯一可及且成本后可能仍有价值"}
+  - {mechanism: "黄金 VRP", value: "D（理解）+ 未来 B", accessibility: DATA_GAP}
+  - {mechanism: "宏观新闻漂移", value: "D（理解）", accessibility: PARTIAL}
+  - {mechanism: "跨资产 lead-lag", value: "D（理解，已被否）", accessibility: CONTRADICTED}
+
+counter_evidence:
+  - id: CE-08  # 本轮新增
+    claim: "DXY→黄金存在可预测的 lead-lag（跨资产信息传播）"
+    counter: "rahulsp 2026-03：XAUUSD 对 DXY/白银/股指无稳健 lead-lag；-0.28 相关是同时性非预测性；OOS R² 全负"
+    status: CONTRADICTED
+    implication: "KD-U05（跨资产 lead-lag 数据缺口）降级——'COMEX 期货→现货'套利链可能仍成立（不同机制），但'DXY→黄金'预测性 lead-lag 基本否定"
+
+evidence_graph:
+  new_nodes:
+    - {id: P-rahulsp, type: PAPER, name: "Cross-Asset Lead-Lag Dynamics (rahulsp, 2026-03)"}
+    - {id: P-ecb-drift, type: PAPER, name: "ECB wp1901 Price drift before US macro news"}
+    - {id: P-vrp, type: PAPER, name: "Variance Risk Premiums of Commodity ETFs (Wiley 2017)"}
+  new_edges:
+    - {from: P-rahulsp, to: KD-U05, rel: CONTRADICTS}
+    - {from: P-ecb-drift, to: Phase7, rel: EXTENDS}
+    - {from: P-vrp, to: "黄金期权 IV", rel: DERIVED_FROM}
+  note: "本轮图新增 3 节点，其中 1 条边 CONTRADICTS 我之前自己登记的方向（KD-U05）—— 这是自主纠错的实证"

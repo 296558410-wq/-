@@ -1,0 +1,21 @@
+# HERMES_ESCALATION / DECISION — CAND-01
+hermes_escalation:
+  needed: false
+  reason: "无 material contradiction: GVZ 残余增量温和、主体为平滑表示、方向空——与黄金文献(JFM 2014 弱于股票; BIS wp619 他商品)无不一致; 与本地架构一致"
+  optional_precise_question: "若未来重开: 'GLD 期权 IV 相对标的已实现波动的平滑状态, 是否存在文献证据表明其携带标的自身历史无法提供的增量(如跨市场/事件前瞻)?'"
+decision:
+  q1_incremental_beyond_activity_vol: "是(弱): 残余 OOS ΔR² +0.07..+0.12 @5-20d(控 activity+平滑本地 RV 后); 主体增益为平滑表示"
+  q2_robust_oos: "部分(正号保持; 幅度小; 重叠窗推断未全量块自举)"
+  q3_independent_of_local_rv: "否(相关 0.50-0.65; 大部分冗余)"
+  q4_independent_of_regime: "UNKNOWN"
+  q5_proxy_or_increment: "主体表示 + 小残余; 期权特有性未建立"
+  q6_direction: "无(REJECTED)"
+  q7_direction_economic: "不适用"
+  q8_r1_risk_state: "轻微(LEVEL 2: AUC +0.029 over 本地平滑)——可作附加输入, 非主输入"
+  q9_execution_value: "无"
+  q10_monetizable: "无"
+  q11_reopen_gold_options_research: "仅限曲面/事件维度(DATA_GAP)与 R1 附加输入; 单点 GVZ 方向性研究不重开"
+  q12_genuine_data_gap: "XAUUSD 专属 IV / 曲面 / skew / term / 日内 IV / 事件邻近重定价"
+  q13_hermes: "否"
+  q14_next_action: "高波动机会/风险分离结构检验 + D5/D7 解锁评估(承接 Gold Options DECISION); GVZ 单点不再投入"
+  final_classification: "UNPROVEN（GVZ 增量 vol 信息: 主体平滑表示 + 小残余; 方向 REJECTED; 经济 LEVEL 1-2）"

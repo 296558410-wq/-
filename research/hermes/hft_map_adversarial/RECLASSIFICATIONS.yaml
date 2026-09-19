@@ -1,0 +1,32 @@
+# RECLASSIFICATIONS（重新分类 — 挑战既有判断的结果）
+# 生成：2026-09-05 · HERMES-11 · 只记真正改变分类的，不记"确认"。
+
+reclassifications:
+  - id: REC-01 ★
+    old_classification: "机构持仓/订单流 = INACCESSIBLE"
+    new_classification: "持仓(not 流) = PARTIALLY_ACCESSIBLE（CFTC COT 公开每周）"
+    evidence: "CFTC Commitments of Traders 报告（cftc.gov，公开免费，含 disaggregated CSV + API）"
+    what_is_accessible: "黄金期货投机(non-commercial) vs 商业对冲(commercial) 净持仓，周频"
+    what_is_still_inaccessible: "高频 signed order flow（日内方向流仍不可得）"
+    caveat: "周频 + 滞后 3 天（周二快照周五发布）；是 sentiment/positioning 层，非 flow 层；
+             极端持仓不预测即时反转（cotdata.net 明示）"
+    impact: "MEDIUM——为 XAUUSD 增加一个此前未计入的'机构持仓/情绪'非方向输入（契合 E5 信息层）"
+    openclaw_action: CONSIDER（是否纳入 R1 的形态/状态变量）
+
+  - id: REC-02
+    old_classification: "execution 层 = 笼统'execution alpha'（RQ-02）"
+    new_classification: "执行 overlay（滑点降~13%）+ vol-条件反转溢价 两个具体形式"
+    evidence: "bryanvine 'Liquidity Provision as Alpha'（24M snapshots, causal, 严格 forward）"
+    what_changed: "把'execution alpha'从模糊方向拆成两个可测、可及的具体机制"
+    impact: "MEDIUM——RQ-02 应聚焦'执行 overlay + vol-条件反转'，而非笼统 execution"
+    openclaw_action: REVIEW
+
+  - id: REC-03
+    old_classification: "L2 是执行研究的硬瓶颈"
+    new_classification: "执行 overlay 不需要 L2（micro-price 即可）；L2 仅做市必需"
+    evidence: "bryanvine：micro-price 门控降滑点 13%，只需 bid/ask；做市才需 queue/rebate/colocation"
+    impact: "LOW-MEDIUM——削弱'无 L2 就无法研究执行'的隐含假设"
+    openclaw_action: CONSIDER
+
+# 诚实边界：REC-01 的"持仓可及"是周频情绪层，不是高频流层；
+# 它不改变"高频 order flow INACCESSIBLE"的核心结论，只补了一个此前漏掉的低频公开源。

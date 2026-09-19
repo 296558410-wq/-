@@ -1,0 +1,47 @@
+{
+  "dataset": "XAUUSD_M1_MT5-FXTM-Live_20260904_v001",
+  "range": [
+    "2026-05-26 03:43:00+00:00",
+    "2026-09-04 11:22:00+00:00"
+  ],
+  "cost": {
+    "spread_bps": 0.6,
+    "commission_bps": 0.0,
+    "slippage_bps": 0.3
+  },
+  "generated": "2026-09-04T11:58:46.801561+00:00",
+  "random_baseline": {
+    "n": 20,
+    "raw_sig_at_05": 0,
+    "median_p": 0.519,
+    "max_abs_ic": 0.009641815848125361,
+    "elapsed_s": 5.7,
+    "backend_used": [
+      "gpu"
+    ]
+  },
+  "buy_hold": {
+    "label": "buy_hold",
+    "net_total": -0.015760472984028384,
+    "sharpe": -0.1411,
+    "max_dd": -0.14097933037648103,
+    "trades": 1,
+    "cost": 5.9999999999999995e-05
+  },
+  "momentum_baseline_mom60": {
+    "label": "mom60_sign",
+    "net_total": -0.4942411895891934,
+    "sharpe": -12.1241,
+    "max_dd": -0.4992121522826235,
+    "trades": 6200,
+    "cost": 0.7393799999999999
+  },
+  "meanrev_baseline_z60": {
+    "label": "zscore60_sign",
+    "net_total": -0.5888942625915691,
+    "sharpe": -15.8468,
+    "max_dd": -0.5953544290663026,
+    "trades": 7002,
+    "cost": 0.84006
+  }
+}

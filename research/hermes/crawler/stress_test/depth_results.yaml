@@ -1,0 +1,73 @@
+# DEPTH RESULTS（深度结果 + 反证结果 + 历史追踪 + 失败 合并）
+# 生成：2026-09-05 · HERMES-06
+
+depth_results:
+  - id: T-01 (A-S 做市)
+    chain: ["搜索命中多 repo", "识别 fedecaccia/nisgemML", "GitHub API 结构", "license/commit 对比", "价差公式分歧识别"]
+    depth: 5
+    nodes: 6
+    no_new_value_at: "价差公式分歧已识别（继续深挖需 clone 逐行，边际低）"
+
+  - id: T-03 (LBMA 定盘)
+    chain: ["二手博客", "lbma.org FAQ", "ICE IOSCO 自评估 PDF", "FMSB 标准", "拍卖规则机制确认"]
+    depth: 4
+    nodes: 5
+    no_new_value_at: "一手规则文档已取得，机制确认"
+
+  - id: T-04 (FINCAD, HERMES-05)
+    chain: ["arxiv 摘要", "arxiv v2", "GitHub repo", "GitHub API 结构考古", "作者/阅读清单生态"]
+    depth: 5
+    nodes: 6
+
+  - id: T-05 (Moreira-Muir, HERMES-03)
+    chain: ["JF 原文", "Cederburg OOS 失败", "Barroso-Detzel 成本", "SWUFE look-ahead", "GitHub 复制"]
+    depth: 5
+    nodes: 8   # ≥8 节点达标
+
+  - id: T-02 (Deflated Sharpe)
+    chain: ["SSRN/bailey PDF", "marti.ai 实现", "LinkedIn 作者", "搜索批评文献"]
+    depth: 4
+    nodes: 4
+
+counter_evidence_results:
+  found:
+    - "CE-01 波动率择时（4 反证）"
+    - "CE-02 期权 IV=借券费代理（Muravyev）"
+    - "CE-04 做市盈利=环境驱动"
+    - "CE-05 OFI 方向已否"
+    - "CE-06 本地方向 alpha 跨期反号"
+    - "CE-07 LLM alpha=被动暴露"
+  not_found_after_search:
+    - "CE-08 Deflated Sharpe 的强反驳（T-02）—— 记录为 COUNTER_EVIDENCE_NOT_FOUND；已知局限=正确估计 N 不可行，但无集中反驳文"
+  note: "6 条真实反证 ≥ 5 达标；1 条诚实记录未找到，不假装'无反证'"
+
+historical_trace_results:
+  - id: HT-01 (FINCAD)
+    finding: "v1(2026-05-23) → v2(2026-08 更新)；EMNLP 2026 主会录用前后修订"
+    consistency: "摘要核心结论稳定（-67.1% 记忆日期削减）"
+  - id: HT-02 (fedecaccia/A-S repo)
+    finding: "4 commits 全在 2020-05-02 单日；pushed 2023 但无后续代码；无 license"
+    consistency: "『热门(727 star)但一次性 dump + 无 license』——与 README 的『实现』声称的可持续性不符"
+  - id: HT-03 (Moreira-Muir 谱系)
+    finding: "2017 原文 → 2020 反驳 → 2021 反驳 → 2023 多因子窄化"
+    consistency: "『普遍有效』结论已被后续推翻（SUPERSEDED）"
+
+crawler_failures:
+  - id: FAIL-01
+    target: "HuggingFace 直连"
+    reason: ACCESS_RESTRICTED（网络不可达）
+  - id: FAIL-02
+    target: "GitHub HTML 抓取"
+    reason: TOOL_LIMIT（exa keyless 超时）
+  - id: FAIL-03
+    target: "期刊全文（JF/JFE paywall）"
+    reason: ACCESS_RESTRICTED（paywall）
+  - id: FAIL-04
+    target: "订单流/做市/L2 数据"
+    reason: INACCESSIBLE（专有数据/无通道）
+  - id: FAIL-05
+    target: "Deflated Sharpe 反证"
+    reason: NOT_DISCOVERED（无集中反驳文，非'不存在'）
+  - id: FAIL-06
+    target: "20 目标全量深挖"
+    reason: 本轮仅深挖 6 个（其余系列已覆盖，未重复）—— 记为 scope 限制，非能力缺失

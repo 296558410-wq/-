@@ -1,0 +1,173 @@
+{
+  "constants_D_estimated_bp": {
+    "cons_abs_ret_q60": 129.3,
+    "rev_path_q60": 450.8,
+    "rev_abs_ret_q50": 92.7,
+    "cons_abs_ret_q55": 105.2,
+    "cons_abs_ret_q65": 155.6,
+    "rev_path_q55": 437.9,
+    "rev_path_q65": 474.1,
+    "rev_abs_ret_q45": 76.2,
+    "rev_abs_ret_q55": 105.2
+  },
+  "variants": {
+    "ABS_1pct_3pct": {
+      "D": {
+        "n_cons": 42,
+        "n_rev": 14,
+        "n_other": 61,
+        "agree_with_base": 0.755
+      },
+      "V": {
+        "n_cons": 15,
+        "n_rev": 7,
+        "n_other": 18,
+        "agree_with_base": 0.729
+      },
+      "OOS": {
+        "n_cons": 22,
+        "n_rev": 0,
+        "n_other": 17,
+        "agree_with_base": 0.75
+      }
+    },
+    "BASE_Dcal": {
+      "D": {
+        "n_cons": 37,
+        "n_rev": 10,
+        "n_other": 70,
+        "agree_with_base": 0.818
+      },
+      "V": {
+        "n_cons": 13,
+        "n_rev": 4,
+        "n_other": 23,
+        "agree_with_base": 0.833
+      },
+      "OOS": {
+        "n_cons": 19,
+        "n_rev": 0,
+        "n_other": 20,
+        "agree_with_base": 0.812
+      }
+    },
+    "V_cons_q55": {
+      "D": {
+        "n_cons": 41,
+        "n_rev": 10,
+        "n_other": 66,
+        "agree_with_base": 0.79
+      },
+      "V": {
+        "n_cons": 14,
+        "n_rev": 4,
+        "n_other": 22,
+        "agree_with_base": 0.812
+      },
+      "OOS": {
+        "n_cons": 22,
+        "n_rev": 0,
+        "n_other": 17,
+        "agree_with_base": 0.75
+      }
+    },
+    "V_cons_q65": {
+      "D": {
+        "n_cons": 35,
+        "n_rev": 10,
+        "n_other": 72,
+        "agree_with_base": 0.804
+      },
+      "V": {
+        "n_cons": 12,
+        "n_rev": 4,
+        "n_other": 24,
+        "agree_with_base": 0.812
+      },
+      "OOS": {
+        "n_cons": 17,
+        "n_rev": 0,
+        "n_other": 22,
+        "agree_with_base": 0.771
+      }
+    },
+    "V_rev_path_q55_ret45": {
+      "D": {
+        "n_cons": 37,
+        "n_rev": 12,
+        "n_other": 68,
+        "agree_with_base": 0.804
+      },
+      "V": {
+        "n_cons": 13,
+        "n_rev": 6,
+        "n_other": 21,
+        "agree_with_base": 0.792
+      },
+      "OOS": {
+        "n_cons": 19,
+        "n_rev": 0,
+        "n_other": 20,
+        "agree_with_base": 0.812
+      }
+    },
+    "V_rev_path_q65_ret55": {
+      "D": {
+        "n_cons": 37,
+        "n_rev": 9,
+        "n_other": 71,
+        "agree_with_base": 0.811
+      },
+      "V": {
+        "n_cons": 13,
+        "n_rev": 4,
+        "n_other": 23,
+        "agree_with_base": 0.833
+      },
+      "OOS": {
+        "n_cons": 19,
+        "n_rev": 0,
+        "n_other": 20,
+        "agree_with_base": 0.812
+      }
+    }
+  },
+  "proportions_same_constants": {
+    "D": {
+      "n": 143,
+      "cons_frac": 0.259,
+      "rev_frac": 0.07
+    },
+    "V": {
+      "n": 48,
+      "cons_frac": 0.271,
+      "rev_frac": 0.083
+    },
+    "OOS": {
+      "n": 48,
+      "cons_frac": 0.396,
+      "rev_frac": 0.0
+    }
+  },
+  "class_mean_ret_bp": {
+    "D": {
+      "CONSISTENT": 57.6,
+      "REVERSAL": -86.7
+    },
+    "V": {
+      "CONSISTENT": -62.8,
+      "REVERSAL": -75.6
+    },
+    "OOS": {
+      "CONSISTENT": 37.0,
+      "REVERSAL": NaN
+    }
+  },
+  "duka_same_constants": {
+    "n": 159,
+    "cons_frac": 0.082,
+    "rev_frac": 0.006,
+    "cons_mean_bp": 123.4,
+    "rev_mean_bp": -135.9
+  }
+}

@@ -1,0 +1,108 @@
+{
+ "schema": "v1_exp_registry/1",
+ "ts_utc": "2026-09-17T12:41:19.874410+00:00",
+ "multiple_testing_family": "D_PRICE_PATH",
+ "family_size": 12,
+ "note": "horizon/side/winloss/baseline 全部登记；主 horizon 不得事后挑选",
+ "experiments": [
+  {
+   "experiment_id": "D_H1000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 1000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 1000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H2000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 2000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 2000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H5000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 5000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 5000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H10000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 10000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 10000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H30000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 30000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 30000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H60000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 60000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 60000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H180000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 180000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 180000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H300000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 300000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 300000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_H900000",
+   "family": "D_PRICE_PATH",
+   "hypothesis": "V1 方向在 900000ms horizon 有非零 directional return",
+   "population": "OUTCOME_RECONSTRUCTABLE(53)",
+   "horizon_ms": 900000,
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_longshort",
+   "family": "D_PRICE_PATH",
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_winloss",
+   "family": "D_PRICE_PATH",
+   "status": "RUN_OBSERVED"
+  },
+  {
+   "experiment_id": "D_baseline",
+   "family": "D_PRICE_PATH",
+   "status": "RUN_OBSERVED"
+  }
+ ],
+ "families": {
+  "E_AUTOPSY": {
+   "note": "逐笔尸检/早期-近期对照（描述统计为主）",
+   "registered": [
+    "autopsy_path_class",
+    "early_vs_recent",
+    "loss_mfe",
+    "recent3d",
+    "entry_vs_exit"
+   ]
+  }
+ }
+}

@@ -1,0 +1,29 @@
+# RESEARCH LINEAGE（研究谱系 — 追踪知识发展到哪）
+# 生成：2026-09-05 · HERMES-03 · 只记录有谱系可追的链；每条给"当前状态"。
+
+lineages:
+  - id: LIN-01
+    topic: "波动率择时（volatility-managed portfolios）"
+    chain:
+      - "Moreira & Muir (2017, JF) — 提出 1/RV 择时，市场 alpha 4.86%"
+      - "Cederburg, O'Doherty, Wang & Yan (2020, JFE) — OOS 失败（估计误差）"
+      - "Barroso & Detzel (2021) — 交易成本侵蚀收益"
+      - "SWUFE working paper — 指出 look-ahead（full-sample c）"
+      - "arxiv:2212.07288 (2022) — 平滑 vol 预测恢复经济价值"
+      - "Multifactor (jofi.13395, 2023+) — 多因子+净额+成本优化才 OOS 净成本存活"
+      - "GitHub 复制 (2026) — '真实但窄：动量崩溃对冲优先'"
+    current_state: "CONFLICTED —— 单因子 OOS+净成本下普遍失败；多因子+净额+成本优化+平滑预测 是存活条件"
+    xauusd_takeaway: "映射 R1'：无条件日级 vol 降险 = 失败模式；'形态条件化' + 成本感知 是唯一存活路径"
+    superseded: "Moreira-Muir 的『普遍有效』解读已被 Cederburg/Barroso-Detzel 取代"
+
+  - id: LIN-02
+    topic: "订单流失衡(OFI)方向预测"
+    chain:
+      - "Cont, Kukanov, Stoikov (2014) — order book 事件价格冲击"
+      - "Cartea & Jaimungal (2014) — 动态 OFI 最优执行"
+      - "Eisler & Bouchaud (2016) — OTC 无 LOB 冲击 propagator"
+      - "Fed FEDS Note (2025) — OFI 放大价格波动（美债）"
+      - "XAUUSD Phase 9 P7 (2026) — 27/27 探测器零候选（11 REJECT + 16 EDGE）"
+    current_state: "XAUUSD ≥5m 方向已 REJECTED(KD-C07)；≤3m 仍 EDGE UNCERTAIN；OFI 作为 vol/流动性风险代理（非方向）仍有效"
+    xauusd_takeaway: "方向用法关闭；risk 层代理可保留"
+    superseded: "无（分尺度结论）"

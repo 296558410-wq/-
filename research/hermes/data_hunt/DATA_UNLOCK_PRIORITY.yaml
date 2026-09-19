@@ -1,0 +1,57 @@
+# DATA UNLOCK PRIORITY（数据解锁优先级 — 按"解锁哪个研究问题"排序，非数据量）
+# 生成：2026-09-05 · HERMES-12 · DATA → OBSERVABILITY → RESEARCH QUESTION → VALUE
+
+unlocks:
+  - id: UNLOCK-01
+    flag: "high"
+    data: "FRED GVZCLS — CBOE Gold ETF Volatility Index（黄金 IV，日频）"
+    source: "fred.stlouisfed.org/series/GVZCLS（CBOE→FRED）"
+    verified: "HTTP 400（API 在线，需 key）；搜索显示 2008-06-03 起真实数据"
+    status: [EXISTS YES, ACCESSIBLE YES, AUTOMATABLE YES(FRED API), RESEARCH_USABLE YES]
+    unlocks_observability: "黄金隐含波动率时间序列（2008+）——之前标 DATA_GAP 的 options/IV 层"
+    unlocks_research_question: "CL-11 黄金 VRP regime；R1 的 vol-regime 状态变量；IV 与 E5 已实现 vol 关系"
+    caveat: "GLD(ETF) IV 日收盘，非完整期权曲面/term structure/skew → 只解 options 缺口的 IV 时间序列部分"
+    proxy_note: "GVZ 是 GLD 期权 IV（非 XAUUSD 直接），但黄金 IV 层 proxy 合理"
+    value: HIGH
+    openclaw_action: DATA_ACQUIRE
+
+  - id: UNLOCK-02
+    flag: "high"
+    data: "Databento CME GC MDP3 — 机构级黄金期货 trade-and-quote"
+    source: "databento.com/catalog/cme/GLBX.MDP3/futures/GC"
+    verified: "搜索确认存在；$125 免费额度"
+    status: [EXISTS YES, ACCESSIBLE YES(账户+credit), AUTOMATABLE YES, RESEARCH_USABLE CONDITIONAL]
+    unlocks_observability: "COMEX 期货微观结构（MDP3 纳秒时间戳 bid/ask/trade）——KD-U05 的期货数据"
+    unlocks_research_question: "期货→现货套利链；黄金期货微观结构（此前缺 COMEX 数据）"
+    caveat: "tick 历史约 2022+（Databento 开始采集）；$125 额度有限；需工程接入"
+    value: MEDIUM-HIGH
+    openclaw_action: DATA_ACQUIRE
+
+  - id: UNLOCK-03
+    flag: "high"
+    data: "DUKA tick 真实诊断 — 存在且免费，瓶颈是 TOOL_LIMIT 非 NOT_EXISTING"
+    source: "dukascopy.com 历史导出 + dukascopy-node 社区工具 + TrueFX"
+    verified: "Dukascopy HTTP 200；TrueFX HTTP 200"
+    diagnosis: "DUKA tick EXISTS + PUBLIC + 可自动（dukascopy-node/HTTP）；瓶颈=下载速度(TOOL_LIMIT)+存储"
+    value: HIGH
+    openclaw_action: REVIEW
+
+  - id: UNLOCK-04
+    data: "TrueFX 历史 tick（免费）"
+    source: "truefx.com（HTTP 200）"
+    status: [EXISTS YES, ACCESSIBLE YES, AUTOMATABLE YES, RESEARCH_USABLE CONDITIONAL]
+    caveat: "FX 主要货币对；需确认是否含 XAUUSD；质量 benchmark 已知（off-tick 问题）"
+    value: MEDIUM
+    openclaw_action: REVIEW
+
+  - id: UNLOCK-05
+    data: "CFTC COT 黄金持仓（历史 + API）"
+    source: "cftc.gov（HERMES-11 已确认公开每周免费）"
+    status: [EXISTS YES, ACCESSIBLE YES, AUTOMATABLE YES, RESEARCH_USABLE YES]
+    value: MEDIUM
+    openclaw_action: CONSIDER
+
+data_gaps_confirmed:
+  - "完整黄金期权曲面（term structure/skew/各 strike）—— 无免费公开源（Databento 部分，成本高）"
+  - "黄金 spot 高频 signed order flow（非聚合报价）—— 无公开源"
+  - "黄金 spot L2/深度 —— 无公开源（OTC 无中心 LOB）"

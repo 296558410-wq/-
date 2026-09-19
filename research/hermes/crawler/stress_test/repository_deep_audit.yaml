@@ -1,0 +1,49 @@
+# REPOSITORY DEEP AUDIT（代码考古压力测试 — 本轮核心新发现）
+# 生成：2026-09-05 · HERMES-06 · claim vs implementation 逐项对照。
+
+repositories:
+  - id: RA-01
+    repo: "fedecaccia/avellaneda-stoikov"
+    stars: 727
+    claim: "Avellaneda-Stoikov HFT market making algorithm implementation"
+    audit:
+      license: "None（无 license —— 红旗）"
+      commits: "4（全部 2020-05-02 单日）"
+      maintained: "否（pushed 2023 但无后续代码）"
+      tests: "无 tests/ 目录"
+      structure: "doc/img/src/README（src 单薄）"
+      open_issues: 4
+    verdict: "热门但低质：单日 dump + 无 license + 无 tests。README 声称『实现』，实际是一次性
+      gist 级代码。『727 star』是流行度信号，非质量信号——正是『不要信 stars』的实证。"
+    divergence: "README 未说明价差公式的闭式解推导与局限；无参数敏感性/无 inventory 风险管理说明"
+
+  - id: RA-02
+    repo: "nisgemML/avellaneda-stoikov"
+    stars: 0
+    claim: "Closed-form optimal market maker from A-S (2008) — stochastic control + LOB + multi-agent"
+    audit:
+      license: "MIT ✓"
+      commits: "3（2026-04）"
+      structure: "avellaneda_stoikov_final/（单目录，非模块化）+ LICENSE + README"
+      tests: "无 tests/（但 README 含完整 HJB 推导 + 显式 Limitations 节）"
+    verdict: "低 star 但更诚实：README 完整推导闭式解价差公式 δ=γσ²(T-t)+(2/γ)ln(1+γ/κ)，
+      并显式列出局限（恒定 σ/κ、Poisson fill 低估 burstiness、未建模逆向选择）。"
+    divergence: "与 fedecaccia 的价差公式存在分歧风险——不同实现对『总价差 vs 单边价差』的处理不一"
+
+  - id: RA-03
+    repo: "waylonli/FinCAD（HERMES-05）"
+    audit: "MIT + EMNLP 2026 + cad/adapters/tests/benchmark/results 结构确证论文声称"
+    verdict: "结构级一致（未逐行）"
+
+  - id: RA-04
+    repo: "eslazarev/purged-cross-validation（HERMES-04）"
+    audit: "synthetic_leakage_proof.ipynb：naive k-fold R²0.83-0.91 vs PurgedKFold 塌到低于 predict-mean"
+    verdict: "可复现泄漏证明（高质量）"
+
+  - id: RA-05
+    repo: "H2nryHe/Microstructure_Alpha_Execution_Lab（HERMES-04）"
+    audit: "execution-before-economics + 诚实负结果"
+    verdict: "诚实负结果仓库（失败案例价值高于漂亮回测）"
+
+# 关键发现（本轮）：『最流行 ≠ 最好』—— fedecaccia 727 star 无 license 无 tests 单日 dump，
+# 而 nisgemML 0 star 却更诚实完整。代码考古的核心价值正是戳破『流行度=可靠性』的幻觉。

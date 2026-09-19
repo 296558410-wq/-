@@ -1,0 +1,46 @@
+# KNOWLEDGE GRAPH（统一知识图谱 — HERMES-01..07 全量实体与关系）
+# 生成：2026-09-05 · HERMES-08 · 这是"藏宝图"的总索引，指向各子注册表。
+
+meta:
+  node_types: [CLAIM, MECHANISM, FAILURE, CONTRADICTION, LINEAGE, SOURCE, PAPER, REPOSITORY]
+  edge_types: [SUPPORTS, CONTRADICTS, SUPERSEDES, EXTENDS, REJECTS, IMPLEMENTS, DERIVED_FROM]
+  truth_source: "各子注册表：claim_registry / failure_memory / contradiction_registry / dead_end_index / mechanisms.yaml / sources.yaml"
+
+clusters:
+  - cluster: "风险/成本择时层（★ 可及，R1 方向）"
+    claims: [CL-01, CL-02, CL-06]
+    mechanisms: [MECH-03, MECH-04]
+    contradictions: [CONTRA-01, CONTRA-04]
+    status: "唯一 ACCESSIBLE + 成本后可能仍有价值的层"
+    forward: "R1 形态条件化 adaptive risk（RQ-01）"
+
+  - cluster: "方向层（已否）"
+    claims: [CL-03]
+    dead_ends: [DE-01..07]
+    status: "REJECTED（已测空间）"
+    forward: "≤1m 需 DUKA tick（DATA GAP）"
+
+  - cluster: "执行/做市/订单流（不可及）"
+    claims: [CL-08, CL-09]
+    status: "INACCESSIBLE"
+    forward: "无（短期）"
+
+  - cluster: "跨资产（已被否）"
+    claims: [CL-10]
+    status: "CONTRADICTED"
+    forward: "仅 COMEX 套利链保留（需期货数据）"
+
+  - cluster: "黄金期权（缺数据）"
+    claims: [CL-11]
+    status: "DATA GAP"
+
+  - cluster: "方法论（★ 可执行，RQ-05）"
+    claims: [CL-13, CL-14]
+    failures: [FL-19, FL-20, FL-23, FL-24]
+    status: "METHODOLOGY_RISK"
+    forward: "泄漏审计（含参数化 look-ahead）"
+
+# 图谱核心洞察（§11 查询会返回）：
+#   这张图有两个"有肉"的簇——风险/成本择时（R1）和方法论（RQ-05），
+#   其余簇（方向/执行/跨资产/期权）是"已否/不可及/缺数据"。
+#   七轮研究收敛的答案就写在这张图里。

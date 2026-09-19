@@ -1,0 +1,45 @@
+# REPOSITORY AUDIT（代码考古 — 本轮真实审查）
+# 生成：2026-09-05 · HERMES-05 · 不轻信 README，claim vs implementation 对照。
+
+repositories:
+  - id: REPO-01
+    repo: "waylonli/FinCAD"
+    url: "https://github.com/waylonli/FinCAD"
+    claim: "论文『Summoning the Oracle to Slay It』的支持代码：inference-time Context-Aware Decoding 抑制参数化 look-ahead"
+    audit:
+      structure_matches: true  # cad/ 目录 + adapters.py 对应 CAD 实现 + 多模型适配
+      has_tests: true          # tests/ 存在（可复现性信号）
+      has_data: true           # data/ 存在
+      has_results: true        # results/ 存在（复现产物）
+      packaging: "pyproject.toml + requirements.txt（规范）"
+      license: "MIT"
+      activity: "created 2025-11-26, pushed 2026-08-29（活跃维护）"
+      stars: 1                 # 新鲜学术 repo，低 star 非质量信号
+      peer_review: "EMNLP 2026 Main（同行评审）"
+    verdict: "结构确证论文声称；代码与 abstract 一致，无 README 夸大"
+    concern: "未拉取源码逐行比对（仅结构级考古）；若需深挖须 clone 后看 cad/ 实现"
+    hidden_future_data: "未发现（inference-time 方法，不涉及训练数据依赖）"
+    status: AUDITED_STRUCTURAL
+
+  - id: REPO-02
+    repo: "H2nryHe/Microstructure_Alpha_Execution_Lab"
+    url: "（HERMES-04 已记）"
+    claim: "泄漏控制微观结构 alpha 管线 + 诚实负结果（子基点 edge 死于费用）"
+    audit:
+      structure_matches: true
+      notable: "execution-before-economics 设计；显式成本；walk-forward"
+      value: "失败案例（FL-25）——比十个漂亮回测更有价值"
+    verdict: "诚实负结果的可复现仓库"
+    status: AUDITED_ABSTRACT_LEVEL  # HERMES-04 未拉取源码
+
+  - id: REPO-03
+    repo: "eslazarev/purged-cross-validation"
+    url: "https://github.com/eslazarev/purged-cross-validation"
+    claim: "scikit-learn purged/embargo/CPCV + deflated Sharpe"
+    audit:
+      structure_matches: true
+      notable: "synthetic_leakage_proof.ipynb：naive k-fold R²=0.83-0.91 vs PurgedKFold 塌到低于 predict-mean"
+      value: "RQ-05 审计的现成工具"
+    status: AUDITED_ABSTRACT_LEVEL
+
+# 审计方法（复用于后续 repo）：结构→source→tests→data→license→activity→issue→隐藏数据依赖

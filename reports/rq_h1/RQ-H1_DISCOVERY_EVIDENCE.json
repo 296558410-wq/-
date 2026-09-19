@@ -1,0 +1,251 @@
+{
+ "protocol_sha": "b858a0ed4891c9a858bd291ddc52c248ad182b4bae9c1f01ab58613b66758453",
+ "run_utc": "2026-09-06T05:11:31.009702+00:00",
+ "qc_open_vs_registered": {
+  "n": 43200,
+  "mean_abs_diff_bps": 0.07202761227688789,
+  "max_abs_diff_bps": 10.910185112312574,
+  "note": "open-based vs registered close-snapshot spread (bps), sample month 2023-10"
+ },
+ "W5": {
+  "tag": "W5-duka-m1",
+  "n_bars": 228960,
+  "median_spr_bps": 1.6786520161596248,
+  "horizons": {
+   "15": {
+    "n_entries": 15167,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -1.9859184190083585,
+    "ic_f1_only": 0.5920620466896345,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 5055
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 5057
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 5055
+     }
+    }
+   },
+   "60": {
+    "n_entries": 3791,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -1.8697022181825589,
+    "ic_f1_only": 0.551900697170834,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 1264
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 1263
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 1264
+     }
+    }
+   },
+   "240": {
+    "n_entries": 947,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -1.7804059529940153,
+    "ic_f1_only": 0.45550365770655254,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 316
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 315
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 316
+     }
+    }
+   }
+  }
+ },
+ "W2": {
+  "tag": "W2-fxtm-m1-control",
+  "n_bars": 100000,
+  "median_spr_bps": 0.35179391443433883,
+  "horizons": {
+   "15": {
+    "n_entries": 6570,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -0.16119874682514312,
+    "ic_f1_only": 0.9114915535937732,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 2190
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 2190
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 2190
+     }
+    }
+   },
+   "60": {
+    "n_entries": 1642,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -0.14740954761382496,
+    "ic_f1_only": 0.8725935061096657,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 547
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 548
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 547
+     }
+    }
+   },
+   "240": {
+    "n_entries": 410,
+    "ic": NaN,
+    "daily": {
+     "n_days": 0,
+     "ic_mean": NaN,
+     "t": NaN,
+     "p": NaN
+    },
+    "bootstrap": {
+     "ic": NaN,
+     "ci95": [
+      NaN,
+      NaN
+     ],
+     "n_iter": 2000
+    },
+    "econ_delta_bps": NaN,
+    "econ_f1_delta_bps": -0.09703433540697765,
+    "ic_f1_only": 0.6759622051987656,
+    "lift": NaN,
+    "blocks": {
+     "B1": {
+      "ic": NaN,
+      "n": 137
+     },
+     "B2": {
+      "ic": NaN,
+      "n": 136
+     },
+     "B3": {
+      "ic": NaN,
+      "n": 137
+     }
+    }
+   }
+  }
+ },
+ "verdict": "REJECTED",
+ "verdict_reason": "K1: primary horizon h=60 daily-clustered p >= 0.05",
+ "kill": {
+  "K1_h60_p_ge_0.05": true,
+  "K2_fdr_q_ge_0.05": true,
+  "K3_no_increment_over_F1": false,
+  "K4_econ_below_threshold_in_2_of_3_blocks": false,
+  "K5_control_ic_ge_0.7x": false,
+  "K6_block_sign_flip": false
+ },
+ "fdr_q_by_horizon": {}
+}

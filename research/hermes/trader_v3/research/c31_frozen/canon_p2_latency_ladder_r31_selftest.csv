@@ -1,0 +1,13 @@
+label,basis,declared_lat_total_ms,anchor_upper_bound,tick_gap_p50_ms,n_signals,n_valid_fill_tick,realized_p50_ms,realized_p90_ms,realized_p99_ms,realized_max_ms,frac_realized_gt_declared,frac_realized_gt_2x_tick_p50,n_fill_tick_unchanged,n_fill_tick_compared,frac_same_fill_tick_vs_prev_rung,frac_fill_tick_changed_vs_prev_rung,resolution_verdict,resolution_adjudicable,resolution_verdict_reason,taker_mean_bp,passive_mean_bp
+seg1,signals,0.0,True,100.0,656,656,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,False,ANCHOR_UPPER_BOUND_NOT_ADJUDICABLE（declared=0 的撮合落在信号自身那根 tick，realized=0.0，是理论可达性上界、不是可执行测量；拿它与 50ms 比必然得 100% 换根）,-1.086323104226043,-1.2220463073064711
+seg1,signals,50.0,False,100.0,656,656,100.0,100.0,100.0,100.0,1.0,0.0,0.0,656.0,0.0,1.0,,False,LOWER_RUNG_IS_ANCHOR_UPPER_BOUND（下邻档是 declared=0 锚点，该对账被 R-31.E 排除；不得据此宣布本档 RESOLVABLE）,-1.0925112251715285,-1.2245155102690302
+seg1,signals,100.0,False,100.0,656,656,100.0,100.0,100.0,100.0,0.0,0.0,656.0,656.0,1.0,0.0,UNRESOLVABLE,True,换根率 0.0000（换根率 ≤ 0.50：多数交易与上一档取到同一根 tick，测的是栅格不是延迟）,-1.0925112251715285,-1.2245155102690302
+seg1,signals,250.0,False,100.0,656,656,300.0,300.0,300.0,300.0,1.0,1.0,0.0,656.0,0.0,1.0,RESOLVABLE,True,换根率 1.0000（换根率 ≥ 0.90：撮合 tick 确随声明延迟移动）,-1.0948129178255888,-1.23700418536878
+seg1,signals,500.0,False,100.0,656,656,500.0,500.0,500.0,500.0,0.0,1.0,0.0,656.0,0.0,1.0,RESOLVABLE,True,换根率 1.0000（换根率 ≥ 0.90：撮合 tick 确随声明延迟移动）,-1.1057219099832578,-1.2571848647394315
+seg1,signals,1000.0,False,100.0,656,656,1000.0,1000.0,1000.0,1000.0,0.0,1.0,0.0,656.0,0.0,1.0,RESOLVABLE,True,换根率 1.0000（换根率 ≥ 0.90：撮合 tick 确随声明延迟移动）,-1.10264578575293,-1.2635455587767273
+seg1,feed_uniform_stride,0.0,True,100.0,200000,200000,0.0,,,,,,,,,,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定。,,
+seg1,feed_uniform_stride,50.0,False,100.0,200000,200000,100.0,,,,,,0.0,200000.0,0.0,1.0,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定；下邻档是锚点，R-31.E 排除。,,
+seg1,feed_uniform_stride,100.0,False,100.0,200000,200000,100.0,,,,,,200000.0,200000.0,1.0,0.0,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定。,,
+seg1,feed_uniform_stride,250.0,False,100.0,200000,200000,300.0,,,,,,1.0,200000.0,5e-06,0.999995,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定。,,
+seg1,feed_uniform_stride,500.0,False,100.0,200000,200000,500.0,,,,,,2.0,200000.0,1e-05,0.99999,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定。,,
+seg1,feed_uniform_stride,1000.0,False,100.0,200000,200000,1000.0,,,,,,3.0,200000.0,1.5e-05,0.999985,,False,对照基（全 tick 流均匀抽样）：只作 feed 侧对照，本工具不对该基出裁定。,,

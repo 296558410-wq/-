@@ -1,0 +1,52 @@
+{
+ "schema": "v1_information_boundary/1",
+ "ts_utc": "2026-09-17T12:38:54.516106+00:00",
+ "classes": {
+  "A_visible_and_saved_before_signal": {
+   "desc": "T_signal 前实际保存且可确认存在的信息",
+   "examples": [
+    "live_fxtm tick(源A, T_signal 前)",
+    "plan_ledger 该 plan 的 registered 事件"
+   ],
+   "allowed_for": [
+    "ENTRY_DECISION_ANALYSIS"
+   ],
+   "status": "部分存在(逐笔覆盖见矩阵)"
+  },
+  "B_decision_state_summary": {
+   "desc": "decisions/*.json 的 state_summary(文本摘要)",
+   "allowed_for": [
+    "描述 V1 记录了哪些字段"
+   ],
+   "not_equal_to": "完整可见输入",
+   "status": "存在(摘要)"
+  },
+  "C_latest_state_package_only": {
+   "desc": "仅 latest state_package 可见的信息",
+   "allowed_for": [],
+   "forbidden_for": [
+    "ENTRY_DECISION_ANALYSIS",
+    "历史解释"
+   ],
+   "status": "禁止用于历史"
+  },
+  "D_post_signal_observable": {
+   "desc": "T_signal 之后才能观察到的信息（价格/spread/新闻/宏观/结果）",
+   "allowed_for": [
+    "POST_ENTRY_OUTCOME_ANALYSIS"
+   ],
+   "forbidden_for": [
+    "ENTRY_DECISION_ANALYSIS"
+   ]
+  }
+ },
+ "hard_rule": "只有 A 可作为『V1 当时实际可见输入』的证据；C 禁止用于历史决策解释；D 只用于 outcome 分析。",
+ "unprovable_statement": "无法从历史保存数据证明『V1 在 T_signal 时完整看到了哪些原始市场输入』。",
+ "costs": {
+  "spread_at_entry_recorded": false,
+  "slippage_recorded": true,
+  "commission_recorded": false,
+  "swap_recorded": false,
+  "note": "spread/slippage 可部分重建(源A+review)；commission/swap=DATA_GAP，禁默认0"
+ }
+}

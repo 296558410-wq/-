@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "imports",
+      "status": "PASS",
+      "detail": "{\"numpy\": \"2.5.2\", \"scipy\": \"1.18.1\", \"pandas\": \"3.0.5\", \"statsmodels\": \"0.15.0\", \"sklearn\": \"1.9.0\"}"
+    },
+    {
+      "name": "bootstrap_ci",
+      "status": "PASS",
+      "detail": "ci=[-0.0479,0.0094] contains true 0"
+    },
+    {
+      "name": "block_bootstrap_repro",
+      "status": "PASS",
+      "detail": "std=0.0188"
+    },
+    {
+      "name": "permutation_h0",
+      "status": "PASS",
+      "detail": "p=0.895 under null"
+    },
+    {
+      "name": "block_perm_alt",
+      "status": "PASS",
+      "detail": "p=0.0000 under shift 0.5"
+    },
+    {
+      "name": "nonoverlap_sampling",
+      "status": "PASS",
+      "detail": "10 blocks, coverage 1000/1000"
+    },
+    {
+      "name": "effective_sample_size",
+      "status": "PASS",
+      "detail": "AR(0.9): 53, AR(0): 1000"
+    },
+    {
+      "name": "bh_fdr_control",
+      "status": "PASS",
+      "detail": "null rejections 0/1000 (<=5% expected)"
+    },
+    {
+      "name": "bh_fdr_power",
+      "status": "PASS",
+      "detail": "mixed rejections 52/1000"
+    },
+    {
+      "name": "placebo_shuffle",
+      "status": "PASS",
+      "detail": "obs=0.92 > p95(placebo)=0.10"
+    },
+    {
+      "name": "walk_forward",
+      "status": "PASS",
+      "detail": "5 expanding folds: train [:1680] before/at test starts (no overlap)"
+    },
+    {
+      "name": "seed_repro",
+      "status": "PASS",
+      "detail": "two default_rng(7) streams identical"
+    }
+  ],
+  "info": {
+    "versions": {
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "pandas": "3.0.5",
+      "statsmodels": "0.15.0",
+      "sklearn": "1.9.0"
+    }
+  },
+  "n_checks": 12
+}

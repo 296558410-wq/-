@@ -1,0 +1,31 @@
+# CAND-01 EXPERIMENT MANIFEST (RLAP 13-field + model_temporal)
+experiment_id: "CAND01-gvz-incremental-vol"
+phase: "CAND-01"
+commit_sha: "c23b046"
+window_ids: ["W11"]
+window_roles:
+  W11: "discovery"
+first_use_status:
+  W11: "reuse_context"
+search_intensity_ids: ["SI-CAND01-001"]
+model_id: "NONE-closed-form (OLS/logistic with frozen feature sets; no selection)"
+model_version: "n/a"
+model_knowledge_cutoff: null
+retrieval_timestamp: "2026-09-06T08:00:00Z"
+hypothesis_registry_sha: "d81ee91b455ccc46d46f4ff6f20fe6c304f2160f2387a3be95fa13424c0613a4"
+protocol_sha: "6498eb0ea170edbd5755b271ec0dce4949524d72bd14e5ff1041ec7b17250978"
+protocol_path: "research/hermes/cand01_gvz/PREREGISTRATION.yaml"
+report_paths: []
+model_temporal:
+  model_source: "none (deterministic statistics; runtime assistant analysis-only)"
+  cutoff_verifiability: "unverifiable"
+  release_date: null
+  model_knowledge_cutoff: null
+  retrieval_timestamp: "2026-09-06T08:00:00Z"
+  retrieval_log: "pre-freeze retrieval only (gold_options_blindspot, HERMES-12/13, GIA)"
+  model_role: "analysis"
+  training_scope_note: "no fitted model in primary test; R1-audit logistic fit on IS only with frozen features"
+  verdict: "CONDITIONAL (analysis-only, disclosure recorded)"
+notes: >
+  W11 not first-use-clean -> no oos/cross declaration; expanding walk-forward is internal
+  temporal robustness. GVZ proxy rule enforced in all outputs.

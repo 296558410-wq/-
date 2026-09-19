@@ -1,0 +1,331 @@
+# =====================================================================
+# EVIDENCE CONVERGENCE — 25 机制 × 证据融合（v2, 2026-09-06）
+# Mission: MASTER MISSION — XAUUSD HIGH-FREQUENCY EDGE MAP（修订版 2）
+# 纪律（HARD RULE #2）:
+#   - 文献数 ≠ 独立证据数。INDEPENDENT_EVIDENCE_COUNT 只计"独立研究线"：
+#     同一原始论文的引用链 = 1 条线；同团队同方法的双源双期 = 1 条本地线。
+#   - EVIDENCE_GRADE 用宪章 E0-E6（E4=XAUUSD 单源实证 / E5=XAUUSD 跨期独立 /
+#     E6=XAUUSD OOS+成本+执行后成立）。
+#   - 机制"真实存在"的证据等级 与 "XAUUSD 可验证"的证据等级分开标注。
+#   - HERMES-10（2026-09-06 08:06 入库）已并入：vol-timing 盈利被削弱。
+# 主表: MECHANISM_UNIVERSE.yaml · 本文件是证据层，不替代任何判定。
+# =====================================================================
+meta:
+  map_version: "2026-09-06-hft-map-v2"
+  revision: "v2 — Hermes-10 contradiction 并入 (CONTRA-09)；activity→vol 信息 CONFIRMED ≠ vol-timing 盈利可接近"
+  counting_rule: "INDEPENDENT_EVIDENCE_COUNT 计数方法: (a) 不同研究团队+不同数据 = 各自独立； (b) 同一团队+不同 feed/窗口 = 1 条本地线； (c) 引用链/综述 = 0 新增； (d) 本地 XAUUSD 线与外部他市场线分开计。"
+
+convergence:
+  - id: M01
+    name: "Information latency"
+    claim: "最先获知事件内容（毫秒-秒级）存在可捕获收益"
+    primary_sources: ["SSRN 1571935（latency arbitrage 机制）", "ECB wp1901 / JFQA（宏观新闻前漂移 ~30min, 他市场）"]
+    independent_replications: ["速度套利学术与业界文献多条，但多为同源引述；独立数据线约 2（美股 tick + FX 新闻漂移）"]
+    counter_evidence: ["新闻分发延迟收敛 / 官方直发 / 监管延迟披露 → 窗口收窄"]
+    local_evidence: ["无（不可观测, NOT_OBSERVABLE）"]
+    hermes_evidence: ["CL-12 UNCERTAIN", "HERMES-10 §10: 延迟是 HFT 根本成本, retail 10ms 级 INACCESSIBLE"]
+    independent_evidence_count: 2
+    evidence_grade: "E3（他市场机制成立）；XAUUSD: E0（从未测, 不可测）"
+    verdict_note: "机制真实但结构性不可及；不值得本地投入（TIER 3 / INACCESSIBLE），理论价值高不升级。"
+
+  - id: M02
+    name: "Event reaction"
+    claim: "宏观日程/事件窗内 vol/activity/spread 反应结构（时间与幅度）可刻画"
+    primary_sources: ["Phase 7 本地日程簇聚（事件周压力分钟 54.8% vs 9.2%, RR 2.9-4.2）", "ECB wp1901 / JFQA（他市场事件漂移）"]
+    independent_replications: ["外部: FX 公告效应文献（Andersen-Bollerslev 系）= 1 条他市场线", "本地: FXTM+DUKA 双窗同形 = 1 条本地线"]
+    counter_evidence: ["事件完全预定价（无反应）的文献与时段", "快反应拥挤 → 慢者无残留"]
+    local_evidence: ["E4: CL-04 日程→activity 簇聚 CONFIRMED（双源双期, 单团队）", "因果性 UNKNOWN (KD-U02)"]
+    hermes_evidence: ["CL-12 UNCERTAIN（快反应 INACCESSIBLE, 慢反应未验证）"]
+    independent_evidence_count: 2
+    evidence_grade: "机制 E3 / 本地簇聚 E4；反应形态本身未测（E0）"
+    verdict_note: "可及、未研究、时间锚外生 → 研究候选（RQ-H2）；只做结构/成本层, 不做抢跑声称。"
+
+  - id: M03
+    name: "Order flow"
+    claim: "真实客户流/成交流预测价格方向（Evans-Lyons 型）"
+    primary_sources: ["Evans & Lyons 2002/2008（专有客户流）", "Cont-Kukanov-Stoikov 2014（订单簿事件冲击）"]
+    independent_replications: ["dealer 客户流复现 = 1 条线（同类专有数据范式）", "订单簿 OFI 文献 = 1 条线（他市场）"]
+    counter_evidence: ["本地 ≥5m 聚合微观方向 REJECTED (KD-C07/F-R11)", "P7 tick 层 11 REJECT + 16 EDGE UNCERTAIN（FXTM 2026 单窗）", "HERMES-10: 毛量≠净流（HBS Rethinking Volume）、OBI 被 HFT flicker 污染（arxiv 2507.22712）"]
+    local_evidence: ["E5（本地判定, 限已测空间）: 方向用法无支持；≤3m 层 DATA GAP"]
+    hermes_evidence: ["CL-08 INACCESSIBLE（专有数据不可复现）", "DE-09 永久 dead end（无数据重开条件）"]
+    independent_evidence_count: 3
+    evidence_grade: "机制 E3（他市场）; XAUUSD 方向用法 E5-负（已测空间）; ≤3m 未测"
+    verdict_note: "两半分开记: 机制真实但 INACCESSIBLE；本地可测的 proxy 方向用法已负。activity ≠ order flow（HARD RULE）——禁止把 quote 活动写成成交流。"
+
+  - id: M04
+    name: "Liquidity provision"
+    claim: "提供流动性赚取价差/回扣（扣除逆向选择与存货成本后）"
+    primary_sources: ["Avellaneda-Stoikov 最优做市", "Glosten-Milgrom 逆向选择框架"]
+    independent_replications: ["做市文献跨市场多条 → 但高度同源理论链 = 1 条线", "实证做市盈利研究 = 1 条线"]
+    counter_evidence: ["arxiv:2606.05882: 盈利由环境 informedness 驱动, 报价策略 R²<0.05 → 策略优化可复制性存疑", "拥挤 + 生态位饱和"]
+    local_evidence: ["无（无 L2/maker）"]
+    hermes_evidence: ["CL-09 CONTRADICTED + INACCESSIBLE", "DE-08: INFRA_UNLOCK 前不可开"]
+    independent_evidence_count: 2
+    evidence_grade: "机制 E2/E3；XAUUSD: 不可观测不可及"
+    verdict_note: "理论价值高但 TIER 3 / INACCESSIBLE——理论吸引力不构成升级理由。"
+
+  - id: M05
+    name: "Market making"
+    claim: "双边持续报价盈利（M04 的报价义务实现形态）"
+    primary_sources: ["同 M04（A-S / G-M）"]
+    independent_replications: ["同 M04 证据线（无新增独立线）"]
+    counter_evidence: ["同 M04: 环境驱动论 + 资本/技术门槛"]
+    local_evidence: ["无"]
+    hermes_evidence: ["CL-09 / DE-08（同 M04）"]
+    independent_evidence_count: 2
+    evidence_grade: "E2/E3；XAUUSD 不可及"
+    verdict_note: "DUPLICATE-PARTIAL of M04（报价义务角度）→ 经济机制合并为一条: 做市/流动性提供。保留 ID 防编号漂移；组合层只出现一次。"
+
+  - id: M06
+    name: "Spread capture"
+    claim: "挂单吃 spread + maker 返佣可系统盈利"
+    primary_sources: ["maker-rebate 生态文献/业界", "queue 位置文献（FIFO/pro-rata）"]
+    independent_replications: ["美股 maker-taker 实证 = 1 条线"]
+    counter_evidence: ["返佣取消/点差压缩历史", "逆向选择吃掉名义返佣（同 M07）"]
+    local_evidence: ["无（固定点差零售 feed: 点差是成本非捕获对象）"]
+    hermes_evidence: ["DE-08 INACCESSIBLE"]
+    independent_evidence_count: 1
+    evidence_grade: "E2/E3；XAUUSD 不可及"
+    verdict_note: "与 M04/M05 同簇（maker 访问前提）。TIER 3 / INACCESSIBLE。"
+
+  - id: M07
+    name: "Adverse selection avoidance"
+    claim: "事前识别信息劣势/毒流时点可降低执行成本"
+    primary_sources: ["Glosten-Milgrom 逆向选择理论", "VPIN 流毒性（Easley et al）", "Zou OTC information-chasing 反证"]
+    independent_replications: ["AS 成分估计文献（Roll/Huang-Stoll 系）= 1 条线", "VPIN 系 = 1 条线"]
+    counter_evidence: ["Andersen-Bondarenko 2014: VPIN 增量预测弱、参数敏感（HERMES-10 确认）", "MECH-08: dealer 追单动机抵消逆向选择恐惧", "本地: 无成交归因 → 毒流识别不可验证"]
+    local_evidence: ["KD-U07 (10-30s AS 成本未知)", "KD-O08 影响曲线描述未执行", "P7 impact 探测器 REJECT/INSUFFICIENT"]
+    hermes_evidence: ["HERMES-10 §7: VPIN 批判 CONTRADICTS 早期主张", "RQ-02: last look + 流毒性 > 半价差（E3 结构事实）"]
+    independent_evidence_count: 3
+    evidence_grade: "机制 E2/E3；XAUUSD proxy 描述 E0-E1"
+    verdict_note: "PARTIALLY_ACCESSIBLE 但仅 WEAK_PROXY；VPIN 作 standalone alpha = IGNORE（HERMES-10 OPENCLAW_ACTION）。"
+
+  - id: M08
+    name: "Short-term momentum"
+    claim: "无条件过去收益延续（M1+ 15-240m）在 XAUUSD 有成本后价值"
+    primary_sources: ["本地 Phase 2/3 双期 funnel（F-R1/F-R17）"]
+    independent_replications: ["外部动量文献（他市场, 多条同源 = 1 条线）——注意: 外部支持的是他市场动量, 不是 XAUUSD"]
+    counter_evidence: ["本地两期 0 SUPPORTED；符号策略 1x 成本即亏", "跨期反号（FL-12 regime 过拟合）", "Phase 9 27/27 零候选（族级）"]
+    local_evidence: ["E5（本地双窗双源, 单团队）: 方向主张 REJECTED"]
+    hermes_evidence: ["CL-03 REJECTED（已测空间）", "DE-01"]
+    independent_evidence_count: 1
+    evidence_grade: "XAUUSD 已测空间 E5-负；外部机制 E3（不适用转移）"
+    verdict_note: "CLOSED（重开须新信息维度或 ≤3m 补测, 属补测非重开）。可观测 ≠ 有价值。"
+
+  - id: M09
+    name: "Short-term reversal"
+    claim: "无条件均值回复（M1+ zscore/dist）有成本后价值"
+    primary_sources: ["本地 F-R2"]
+    independent_replications: ["外部短反转文献（他市场, 1 条线）"]
+    counter_evidence: ["本地成本后无正期望；样本内 EDGE 跨期消失（regime 依赖）", "无条件 MR 已 REJECTED"]
+    local_evidence: ["E5（本地）: 无条件负；条件 MR（衰竭/失败动作）→ P2/P4 预注册补测（未执行, EDGE UNCERTAIN）"]
+    hermes_evidence: ["CL-03 / DE-02（条件化存活路径）"]
+    independent_evidence_count: 1
+    evidence_grade: "无条件 E5-负；条件化未测"
+    verdict_note: "无条件 = CLOSED；条件化（P2/P4, 已预注册冻结）是唯一合法补测——非重开。"
+
+  - id: M10
+    name: "Volatility clustering / activity→vol"
+    claim: "vol 聚集与 activity→未来 vol 可预测（非方向信息）"
+    primary_sources: ["Engle ARCH 传统（他市场, 奠基）", "本地 Phase 3/4/5/6: activity→vol IC 0.60-0.89 双源双期（F-R4, CL-01）", "spread→vol 负 IC -0.24/-0.55~-0.59（F-R12, CL-02）"]
+    independent_replications: ["波动聚集跨市场复现无数 → 但计入独立线 = 3（他市场奠基/他市场大量独立复现/本地双源双期）", "本地 spread→vol 与 activity→vol 同团队同窗口族 → 折为 1 条本地线"]
+    counter_evidence: ["HERMES-10: activity 是成交量代理 → 毛量归一化破坏信号（arxiv 2512.18648）、毛量≠净流 → proxy 加标签风险（非推翻, E5 双源仍立）", "regime 断裂（长期记忆不稳）"]
+    local_evidence: ["E5（CONFIRMED, 非方向）——本地最强证据条目"]
+    hermes_evidence: ["CL-01/02 CONFIRMED (E5)", "HERMES-10: 信息 CONFIRMED ≠ timing 盈利（见 M17/M18 修正）"]
+    independent_evidence_count: 4
+    evidence_grade: "E5（XAUUSD 跨期独立, 非方向信息）"
+    verdict_note: "本图唯一 E5 CONFIRMED 条目。用途限 RISK/EXECUTION/COST 输入；禁止当方向信号（DE-06）。"
+
+  - id: M11
+    name: "Volatility risk premium"
+    claim: "黄金 VRP 可收割（卖 vol 得溢价）"
+    primary_sources: ["Wiley 2017 黄金 VRP（他市场/他工具）", "期权溢价文献（他市场）"]
+    independent_replications: ["VRP 文献多条但多为美股股指 = 1 条他市场线", "黄金 VRP 专项 = 1 条线（Wiley, 未独立复现）"]
+    counter_evidence: ["卖 vol = 尾部风险 carry（负偏度, 尾部一次性吞没多年溢价）", "IV 预测力批判（Muravyev 2025, 股票）"]
+    local_evidence: ["无（无期权数据）"]
+    hermes_evidence: ["CL-11 DATA_GAP（机制真实但不可及）"]
+    independent_evidence_count: 2
+    evidence_grade: "E3（他市场）；XAUUSD: DATA_GAP"
+    verdict_note: "DATA_GAP ≠ REJECTED；无期权数据与通道前不投入。TIER 3 / INACCESSIBLE。"
+
+  - id: M12
+    name: "Cross-venue lead-lag"
+    claim: "COMEX 期货→伦敦现货/GLD 存在可利用领先（HFT 尺度）"
+    primary_sources: ["黄金价格发现文献（COMEX 主导, 他数据）", "2020-03 EFP basis 崩裂压力实证"]
+    independent_replications: ["价格发现实证 = 1 条线", "FX 跨场所 lead-lag = 1 条线（他市场）"]
+    counter_evidence: ["rahulsp 2026: DXY→黄金同时性非预测性（OOS R² 负）——不同机制但警示", "场所同步化/套利收敛"]
+    local_evidence: ["无并发对齐窗（FXTM/DUKA 窗口不重叠）→ 只能比较结构"]
+    hermes_evidence: ["CL-10 CONTRADICTED（DXY lead-lag 线）", "MECH-02: COMEX 套利链可能成立但需期货数据 (KD-U05)"]
+    independent_evidence_count: 2
+    evidence_grade: "E3（他数据/他市场）；XAUUSD: DATA_GAP"
+    verdict_note: "真 lead-lag 需 COMEX/LBMA 对齐数据 + 多场所通道 → INACCESSIBLE（数据与执行双缺口）。"
+
+  - id: M13
+    name: "Futures/spot basis"
+    claim: "黄金 basis/backwardation = 实物压力信号（可交易）"
+    primary_sources: ["basis 机制文献 + 2020 EFP 错位实证", "衍生品期刊/行业机制分析"]
+    independent_replications: ["机制描述多源一致（1 条线, 均非 XAUUSD 交易实证）"]
+    counter_evidence: ["套利基础设施普及 → 错位收敛", "无独立 OOS 交易实证"]
+    local_evidence: ["无（无期货数据 KD-U05）"]
+    hermes_evidence: ["MECH-14（描述性, 非方向）", "RQ-04/06 DATA_GAP"]
+    independent_evidence_count: 1
+    evidence_grade: "E2/E3 描述；XAUUSD: DATA_GAP"
+    verdict_note: "INACCESSIBLE（无期货数据/实物通道）。backwardation 作非方向压力信号间接可观测 —— 但需先有数据。"
+
+  - id: M14
+    name: "Options information"
+    claim: "期权 IV/skew 领先现货价格（含黄金）"
+    primary_sources: ["经典期权信息文献（An et al / Cremers-Weinbaum 等, 股票）"]
+    independent_replications: ["股票期权信息 = 1 条线（已被反证修正）"]
+    counter_evidence: ["Muravyev JFE 2025: IV 预测力大部分 = 借券费代理（CONTRADICTS 经典主张, CONTRA-05）", "黄金无卖空约束 → 机制可能不同但无数据"]
+    local_evidence: ["无（无期权数据 CL-11/15）"]
+    hermes_evidence: ["CL-07 CONTRADICTED（借券费代理）", "HERMES-10 未新增"]
+    independent_evidence_count: 2
+    evidence_grade: "E2/E3（CONFLICTED）；XAUUSD: DATA_GAP"
+    verdict_note: "期待应降级（HERMES-04 已记录）；无数据前不投入。TIER 3 / INACCESSIBLE。"
+
+  - id: M15
+    name: "Macro information transmission"
+    claim: "宏观事件→XAUUSD 传导可观测（时间结构）"
+    primary_sources: ["本地 Phase 7: 日程簇聚双源同形（E4）", "FX 公告效应文献（Andersen-Bollerslev 系, 他市场 E3）"]
+    independent_replications: ["FX 公告效应 = 1 条他市场线（跨币种独立复现）", "本地双窗 = 1 条本地线"]
+    counter_evidence: ["公告预定价时段（无反应）", "分类噪音/人工标注偏差", "快反应拥挤"]
+    local_evidence: ["E4（簇聚 CONFIRMED, 非因果）", "KD-U02: 因果 UNKNOWN"]
+    hermes_evidence: ["CL-04 CONFIRMED (E4)", "CL-12 UNCERTAIN（漂移 ~30min 未在 XAUUSD 验证）"]
+    independent_evidence_count: 2
+    evidence_grade: "他市场 E3（强, 跨币种）；本地 E4（簇聚）"
+    verdict_note: "结构/成本层研究候选（RQ-H2）；事件日历是唯一前置（BN-4）。因果主张禁（FL-10）。"
+
+  - id: M16
+    name: "Market impact prediction"
+    claim: "冲击函数可预测（自身/外部订单的价格影响曲线）"
+    primary_sources: ["Almgren-Chriss 执行框架", "冲击曲线实证文献（他市场）"]
+    independent_replications: ["执行/冲击文献 = 1 条线"]
+    counter_evidence: ["P7 tick: impact_fade/impact_hold 探测器 REJECT（FXTM 2026 单窗, 已测形式无支持）", "冲击模型 regime 突变失效"]
+    local_evidence: ["P7 部分覆盖 → REJECT（该形式）", "KD-O08 描述性影响曲线未执行"]
+    hermes_evidence: ["RQ-02（真实成本 > 半价差）", "HERMES-10: 与延迟/执行层同属 INACCESSIBLE 簇（无真实执行）"]
+    independent_evidence_count: 2
+    evidence_grade: "E3（他市场）；XAUUSD: 已测形式负/未测形式 DATA_GAP"
+    verdict_note: "无自身大单规模 → 只有外部冲击响应描述价值；卡 tick + 执行模拟器（BN-2/BN-5）。"
+
+  - id: M17
+    name: "Transaction-cost forecasting"
+    claim: "未来成本状态（spread/滑点 regime）可预测 → 执行择时价值"
+    primary_sources: ["NBER w24222（成本 regime 依赖: 波动+成本择时 > 收益择时, 美股机构数据）", "本地 CL-02: spread→vol 负相关 E5", "本地 REP Phase2: C6_spread_state 描述性稳定"]
+    independent_replications: ["NBER w24222 = 1 条他市场线（单源未独立复现, CL-06 caveat）", "本地 = 1 条线（spread-vol 信息已 E5, 但成本状态前瞻可预测性从未直接测）"]
+    counter_evidence: ["FXTM 固定点差 → 不可观测（feed 限制）", "R1'-B 教训: 预测增益必须 > 等待机会成本（116.5bp 级）", "DUKA 单一经纪商 spread ≠ 市场全成本"]
+    local_evidence: ["E4/E5（信息层）: spread 状态持续（IC 0.85-0.99 DUKA）+ spread→vol 负相关；成本状态预测实验 = 未做（OPEN）"]
+    hermes_evidence: ["CL-06 SUPPORTED (E3, 美股单源)", "RQ-01 HOT", "HERMES-10: 保留为 POSSIBLE INFORMATION LAYER——不得升级为 PROFITABLE EDGE"]
+    independent_evidence_count: 2
+    evidence_grade: "信息层 E5（本地 spread-vol）；成本可预测性 = E0-E3（未直接验证）"
+    verdict_note: "本图中间层核心候选（RQ-H1）。定位 = 信息/成本输入层；盈利声称须成本建模 + 预注册, 禁止提前升级。"
+
+  - id: M18
+    name: "Regime transition"
+    claim: "平静↔活跃切换存在可测先行统计（vol 层, 非方向）"
+    primary_sources: ["本地 Phase 6: 状态 fwd_vol 单调 / 转换预测 rvol_pct AUC 0.60 (q<0.01)（F-R13/R14）", "本地 REP Phase2: 13 KEEP 描述性稳定", "外部 regime-switching 文献（他市场, 1 条线）"]
+    independent_replications: ["本地双窗（FXTM+DUKA vol 分层复现）= 1 条线", "外部 regime 模型 = 1 条他市场线"]
+    counter_evidence: ["转换后 30m 方向可预测性 ≈ 0（本地）", "R1'-B: 无条件日级 gate 净价值为负（机会成本 > 保护）", "HERMES-10: vol-timing 盈利成本后归零（JFE）+ 2000 后消失（Elsevier）→ 盈利主张 WEAKENED"]
+    local_evidence: ["E4/E5（vol 层）: 切换携带 vol 信息（非方向）；无条件门控经济性 = E5-负"]
+    hermes_evidence: ["CL-15 REJECTED（无条件日级降险）", "CONTRA-09 / CL-05: vol 择时 CONFLICTED → 条件极窄", "HERMES-10: 定位 = 风险管理输入, 非盈利 edge"]
+    independent_evidence_count: 3
+    evidence_grade: "vol 切换信息 E4-E5（本地）；择时盈利 E3-CONFLICTED → 削弱"
+    verdict_note: "关键修正（HERMES-10 特别修正）: 保留为 POSSIBLE INFORMATION LAYER（风险管理输入）。不得写为'当前最可接近盈利 edge'。RQ-H3 依此重定位。"
+
+  - id: M19
+    name: "Relative value"
+    claim: "同族资产价差（金银比/黄金-实际利率）偏离回归可交易"
+    primary_sources: ["RV/配对文献（他市场, 混合结论）"]
+    independent_replications: ["金银比研究 = 1 条线（结论不一致: 锚漂移）"]
+    counter_evidence: ["锚本身 regime 漂移（黄金-实际利率 2022+ 断裂）", "CONTRA-03: 黄金-DXY 相关 regime 依赖"]
+    local_evidence: ["无（无跨资产数据 KD-U05）"]
+    hermes_evidence: ["无独立条目（并入 KD-U05 中低优先级）"]
+    independent_evidence_count: 1
+    evidence_grade: "E3-CONFLICTED；XAUUSD: DATA_GAP"
+    verdict_note: "拥挤 + 锚漂移 + 数据缺 = 三重否定（TIER 4/INACCESSIBLE 当前）。"
+
+  - id: M20
+    name: "Statistical arbitrage"
+    claim: "多腿协整/统计关系偏离回复（XAUUSD 上可建）"
+    primary_sources: ["配对/协整套利文献（他市场）"]
+    independent_replications: ["股票配对 = 1 条线（竞争激烈, 衰减快）"]
+    counter_evidence: ["单腿 MR 本地 REJECTED（F-R2）——统计套利在单资产上退化为 MR", "协整断裂风险"]
+    local_evidence: ["单腿: E5-负；多腿: 无数据"]
+    hermes_evidence: ["并入 CL-03 / DE-02"]
+    independent_evidence_count: 1
+    evidence_grade: "他市场 E3（衰减中）；XAUUSD: 单腿负/多腿 DATA_GAP"
+    verdict_note: "当前数据面下 INACCESSIBLE；不因理论吸引力升级。"
+
+  - id: M21
+    name: "Execution alpha"
+    claim: "执行层可产生真实增益（成本择时/限价策略）"
+    primary_sources: ["本地 Phase 5: DUKA spread 择时 OOS 节省 0.041bp/笔 t=11.7 69/80 正天（薄但真, 条件性）", "执行算法文献（他市场）"]
+    independent_replications: ["本地 DUKA 单源单团队 = 1 条线", "外部执行文献 = 1 条线"]
+    counter_evidence: ["FXTM 固定点差: 无空间（feed 依赖）", "MECH-05: last look/流毒性 → 真实成本 > 半价差（纸上增益风险, RQ-02）", "FL-05/FL-21: mid-PnL/半价差幻觉"]
+    local_evidence: ["E4: DUKA spread 持续可预测 + 薄 execution alpha（条件于可变点差 feed）", "R1'-A 声称边界: 不宣称 execution alpha（FXTM 对照）"]
+    hermes_evidence: ["RQ-02/RQ-07 REGISTERED", "HERMES-10: 延迟成本确认（执行层属 INACCESSIBLE 簇边缘——模拟可做, 真实验证缺通道）"]
+    independent_evidence_count: 2
+    evidence_grade: "本地 E4（薄, 单源）；真实执行后价值: 未验证"
+    verdict_note: "研究候选（成本层, RQ-H1 输入）；闭环需执行模拟器（RQ-07, BN-5）。任何增益声称须 tick 级执行模拟 + 成本纪律。"
+
+  - id: M22
+    name: "Queue / microstructure effects"
+    claim: "队列位置/簿边缘动力学可系统利用"
+    primary_sources: ["queue 位置文献（FIFO/pro-rata, 他市场）"]
+    independent_replications: ["美股 maker-taker 实证 = 1 条线"]
+    counter_evidence: ["队列随机化/机制改革", "无 L2 即无观测（本地）"]
+    local_evidence: ["无（KD-U06 不可观测）"]
+    hermes_evidence: ["DE-08 INACCESSIBLE"]
+    independent_evidence_count: 1
+    evidence_grade: "他市场 E2/E3；XAUUSD: 不可观测"
+    verdict_note: "TIER 3 / INACCESSIBLE（L2+maker 双缺）。理论价值高不升级。"
+
+  - id: M23
+    name: "Liquidity shocks"
+    claim: "流动性骤降（spread 爆宽/深度消失）存在可观测前兆"
+    primary_sources: ["流动性干涸文献（他市场, 危机研究）", "本地 Autopsy + High-Vol Taxonomy（描述性, regime 依赖）"]
+    independent_replications: ["危机流动性文献 = 1 条线", "本地描述 = 1 条线（FXTM 2026, 单窗描述性）"]
+    counter_evidence: ["无预警冲击（前兆不存在）的可能", "Taxonomy: CONSISTENT 均值 V 段翻转（+57.6→-62.8bp）→ 事后形态不稳", "HERMES-10: activity 代理噪声警示同样适用于冲击 proxy"]
+    local_evidence: ["E4 描述（regime 依赖）", "NBQ-T1 前置识别: OOS REVERSAL n=0 NOT EVALUABLE（搁置, 数据前置）"]
+    hermes_evidence: ["CL-15（无条件 gate 负）→ 指向形态条件化", "RQ-01（形态条件化 = 存活路径）"]
+    independent_evidence_count: 2
+    evidence_grade: "他市场 E3；本地描述 E4（不稳）; 事前可识别: 未验证"
+    verdict_note: "描述层有产出, 预测层 NOT EVALUABLE（卡 tick/样本）。R1' 存活路径 = 形态条件化, 非无条件 gate。"
+
+  - id: M24
+    name: "Auction / fix mechanisms"
+    claim: "LBMA fix 窗（10:30/15:00 伦敦）有可测微观结构痕迹"
+    primary_sources: ["IBA/IOSCO 机制文档（E2 一手）", "WatchGold 微观拆解（E1-E2 二手）", "学术: 2015 fix 改革研究（他数据）"]
+    independent_replications: ["fix 改革前后实证 = 1 条线（白银/黄金拍卖）", "IOSCO 自评估 = 1 条一手线（非独立复现, 是原始机制源）"]
+    counter_evidence: ["2015 电子化改革 → 旧痕迹消失", "经纪商零售 feed 可能无 fix 痕迹（待审计）"]
+    local_evidence: ["从未研究 (KD-U03)；FXTM tick W1 覆盖 24h → 可做 autopsy（E0→E2 潜在线）"]
+    hermes_evidence: ["evidence trail E1→E2 已建档（HERMES-06）", "RQ-03 WARM REGISTERED_CANDIDATE"]
+    independent_evidence_count: 2
+    evidence_grade: "机制 E2（一手文档）；XAUUSD feed 痕迹: E0（未测）"
+    verdict_note: "零成本描述候选（RQ-H5）；产出 = 风险/成本窗地图, 非方向主张。"
+
+  - id: M25
+    name: "Cross-asset information"
+    claim: "美元/美债/股指/原油/避险情绪领先或同步驱动黄金（可预测）"
+    primary_sources: ["黄金-美元/实际利率相关文献（CONFLICTED）", "rahulsp 2026（同时性非预测性）"]
+    independent_replications: ["宏观-黄金相关研究 = 1 条线（结论不一）"]
+    counter_evidence: ["CONTRA-03: 相关 regime 依赖（-0.3~-0.6 摆动, 断裂本身是信号）", "CL-10: DXY→黄金 lead-lag OOS 负 → 预测用法被否"]
+    local_evidence: ["无（外部资产未入库 KD-U05）"]
+    hermes_evidence: ["CL-10 CONTRADICTED", "MECH-02/14（COMEX/期权链机制真实但数据缺）"]
+    independent_evidence_count: 2
+    evidence_grade: "E3-CONFLICTED（相关结构, 非预测）；XAUUSD: DATA_GAP"
+    verdict_note: "DXY lead-lag = 不研究（外部反证）；COMEX 套利链 = DATA_GAP（不同机制, 勿混为一谈）。"
+
+summary:
+  strongest_local_evidence:
+    - "E5 CONFIRMED: activity/spread → 未来 vol（非方向, CL-01/02, M10）——本图唯一 E5 信息层"
+    - "E5-负（已测空间）: 无条件方向族（M08/M09/M20 单腿 + M03 proxy 方向）"
+    - "E4-负: R1'-B 无条件日级 gate（机会成本 > 保护）"
+  strongest_external_counterevidence_applied:
+    - "HERMES-10: vol-timing 盈利成本归零（JFE）+ 2000 后消失（Elsevier）→ M18/R1 盈利主张 WEAKENED（CONTRA-09）"
+    - "Muravyev JFE 2025: 期权 IV 预测 = 借券费代理（M14）"
+    - "rahulsp 2026: 跨资产 lead-lag OOS 负（M25）"
+    - "Andersen-Bondarenko: VPIN 批判（M07）"
+    - "arxiv 2512.18648 / HBS Rethinking Volume / arxiv 2507.22712: volume 归一化、毛量≠净流、OBI flicker（M03/M10 proxy 警示）"
+  counting_caveat: "外部文献多为他市场且相互引用成链——计入的独立线数保守偏低；本地线虽双源双期, 但单团队单方法族 → 计 1 条。任何 'n 篇论文支持' 表述一律按独立线折算。"
+  verdict: "无任何机制在当前可及性下达到 E6（XAUUSD OOS+成本+执行后）。'无当前可及机制有足够证据进入立即研究' 对盈利 edge 层成立；对信息层（M10 E5）与中间层候选（M17/M18 信息用法）不成立——两者是 RESEARCH 候选而非 PROFIT 证据。"

@@ -1,0 +1,38 @@
+# SEMANTIC DUPLICATION + REVISIT + CONTRADICTION RESOLVER + HUNT INTERFACE（合并）
+# 生成：2026-09-05 · HERMES-09 · 决策引擎的四个支撑机制。
+
+semantic_duplication:
+  purpose: "检测'同一机制不同名字/假设/资产/参数'的隐藏重复"
+  same_mechanism_map:
+    - {synonyms: ["动量", "RSI", "MACD", "趋势跟踪", "trend_str", "sma_dist"], canonical: "DE-01 无条件方向动量"}
+    - {synonyms: ["均值回归", "zscore", "VWAP 偏离回复", "超调反转"], canonical: "DE-02 无条件 MR"}
+    - {synonyms: ["蜡烛形态", "K线", "candlestick"], canonical: "DE-04"}
+    - {synonyms: ["期限结构斜率", "basis", "contango/backwardation", "GOFO"], canonical: "MECH-14 黄金 basis"}
+    - {synonyms: ["订单流失衡", "OFI", "quote pressure", "imb"], canonical: "DE-05 微观方向"}
+  rule: "相似标题≠重复（须命中机制级同义映射 + EVIDENCE）；换名不构成差异化"
+  gap: "ERR-02/03 揭示：映射表不完整时，NEW 会漏判为 EXTENSION/DUPLICATE 的反面"
+
+revisit_engine:
+  purpose: "DATA/INFRA/REOPEN 满足时，自动生成 REVISIT_CANDIDATE"
+  triggers:
+    - {trigger: "DUKA tick 到位", revisit: "≤1m 方向族终审 + N1 事前识别 + 执行层（RQ-02）", old: "KD-U01 DATA GAP"}
+    - {trigger: "期权数据接入", revisit: "黄金 VRP 收割（CL-11）", old: "DATA GAP"}
+    - {trigger: "COMEX 期货数据", revisit: "COMEX 套利链 lead-lag（非 DXY）", old: "KD-U05 DATA GAP"}
+    - {trigger: "maker 通道 + L2", revisit: "做市/逆向选择（DE-08）", old: "INACCESSIBLE"}
+    - {trigger: "参数化 look-ahead 审计工具落地", revisit: "所有'模型参与历史推断'结论", old: "METHODOLOGY_RISK"}
+  required_fields: [WHY_NOW, WHAT_CHANGED, WHAT_DATA_UNLOCKED, WHAT_OLD_CONCLUSION, WHAT_CAN_NOW_BE_TESTED]
+
+contradiction_resolver:
+  purpose: "CLAIM_A vs CLAIM_B 不自动选边"
+  compare_dimensions: [TRACE, DATA, METHOD, PERIOD, MARKET, COST, EXECUTION]
+  output_classes: [TRUE_CONTRADICTION, CONTEXT_DIFFERENCE, METHODOLOGY_DIFFERENCE, TIME_DEPENDENT, UNRESOLVED]
+  example_resolved:
+    - {case: "CONTRA-01 波动率择时", resolution: "TIME_DEPENDENT + METHODOLOGY_DIFFERENCE（单因子 vs 多因子+净额+成本优化）"}
+    - {case: "CONTRA-05 期权 IV", resolution: "CONTEXT_DIFFERENCE（借券费市场 vs 无卖空约束市场）"}
+
+memory_hunt_interface:
+  purpose: "只有 NEW/EXTENSION/REVISIT/CONTRADICTION 才允许启动 autonomous hunting"
+  inherited_context: "Hunting 必须携带 Memory 上下文，不得从零开始"
+  example:
+    - {memory: "机制 2021 支持 2024 反驳 2026 新数据", wrong_search: "'某机制有效'", right_search: "'2024 反驳是否仍成立？' '2026 新数据改变了什么？'"}
+  gate: "ACTION 不在 [NEW, EXTENSION, REVISIT, CONTRADICTION] → 不启动 hunting"

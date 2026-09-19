@@ -1,0 +1,44 @@
+# FAILURE INTELLIGENCE（外部失败情报 — 并入 HERMES_FAILURE_LIBRARY）
+# 生成：2026-09-05 · HERMES-03 · 全球研究者踩过的坑。与既有 FL-01..18 去重/合并。
+# 规则：已有类似条目则标 MERGE，不重复；全新则新增 FL-*。
+
+failures:
+  - id: FL-19
+    name: "搜索强度泄漏（search-intensity / multiple-trial 未缩减）"
+    failure: "试 N 个变体，报告最好的一个，不按 trial 数缩减显著性与夏普 → 必然假发现"
+    why: "每个 trial 有一次假阳性机会；随机序列上也能『优化』出盈利策略（Backtest Overfitting Simulation）"
+    detected_by: "Deflated Sharpe Ratio / Probability of Backtest Overfitting (Bailey-López de Prado)"
+    prevent: "报告 trial 数（含文献里他人已试的）；用 deflated SR / PBO；CPCV；FWER/FDR 校正"
+    xauusd_relevance: HIGH  # 直接映射 FL-12(regime overfit)/FL-03(大样本)
+    merge_with: "FL-12 / FL-03"
+    status: MERGE
+
+  - id: FL-20
+    name: "LLM 策略发现的隐式多回测偏差（agent 生产力=偏差放大器）"
+    failure: "LLM agent 循环提议/评估/精炼策略，在看到第一个数字前已做几十次隐式回测；报告结果不缩减 → 偏差"
+    why: "文本指令『避免 lookahead』是弱护栏：不阻止生成策略消耗未来信息；search intensity 被隐藏"
+    detected_by: "arxiv:2608.27734 的 leakage-safe/search-aware 评估框架；独立审计 (Yao-Zheng 2026; Li et al 2025)"
+    prevent: "把 lookahead 修正 + search 缩减做成『结构性』而非『程序性』；泄露探测独立于 deflation"
+    xauusd_relevance: HIGH  # 直接针对 OpenClaw/Hermes 的 LLM 研究范式；与 FL-17(post-hoc)/FL-16(renaming) 同类
+    merge_with: "FL-16 / FL-17"
+    status: NEW
+
+  - id: FL-21
+    name: "last look 朴素成本模型（半价差幻觉）"
+    failure: "回测把执行成本=半价差；实际 last look(50-200ms 可拒)使成交单价差+被拒单机会成本 > 半价差"
+    why: "公布价差是非对称期权；流毒性高的策略被流动性商针对性加宽/降级"
+    detected_by: "成交级 tick + 拒单记录 + markout 毒性测量"
+    prevent: "成本模型区分 accepted/conditional-fill + rejected 机会成本；测自身流毒性"
+    xauusd_relevance: HIGH  # 执行层；扩展 FL-05(mid-PnL 幻觉)
+    merge_with: "FL-05"
+    status: EXTENSION
+
+  - id: FL-22
+    name: "全样本归一化常数 lookahead（Moreira-Muir 的 c）"
+    failure: "vol-managed 组合的归一化常数 c 用全样本拟合 → 实时版本须 expanding-window 估计；c 影响杠杆路径"
+    why: "scale-only 参数不影响 Sharpe/t-stat，但影响实现的杠杆路径，且杠杆上限恰在危机期绑定"
+    detected_by: "Cederburg et al. + SWUFE 批评"
+    prevent: "一切归一化/缩放常数必须 expanding-window / trailing-only（对应 FL-01 lookahead 家族）"
+    xauusd_relevance: MEDIUM  # 方法论；与 FL-01 同类
+    merge_with: "FL-01"
+    status: EXTENSION

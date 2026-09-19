@@ -1,0 +1,33 @@
+# AUTONOMOUS HUNT LOG（自主决策/路线/停止 日志 合并）
+# 生成：2026-09-05 · HERMES-07 · 记录"自己决定去哪/何时换路/何时停"。
+
+hunt_decision_log:
+  - decision: "选 H-01/02/03（VRP/新闻漂移/跨资产 lead-lag）而非重复已覆盖方向"
+    why: "H-04..15 已在 HERMES-03..06 覆盖，重复=早停偏差的反面（over-crawl）"
+    bias_check: "无 popularity bias（未选热门'策略'），无 confirmation bias（选了可能否定自己的方向）"
+
+  - decision: "H-03 把'跨资产 lead-lag'列为待验证而非预设成立"
+    why: "我 HERMES-03/04 曾把它当 KD-U05 数据缺口；本轮主动验证'是否值得等'"
+    result: "找到直接反证（rahulsp 2026）→ 降级为 CONTRADICTED"
+
+autonomous_route_log:
+  - {hunt: H-01, route: "学术(VRP 商品 ETF)→实测(volradar/electrum)→可及性判断", change: "无（学术→实测一路顺）"}
+  - {hunt: H-02, route: "FX 价格发现→ECB 漂移工作论文→JFQA→可及性判断", change: "无"}
+  - {hunt: H-03, route: "假设(lead-lag 存在)→实证搜索→找到反证", change: "从'找支持'转向'找反证'（主动）"}
+
+stop_reason_log:
+  - {hunt: H-01, stop: "DATA_GAP", reason: "无期权数据，继续深挖无增量", type: DIMINISHING_RESEARCH_VALUE}
+  - {hunt: H-02, stop: "价值存疑", reason: "快反应 INACCESSIBLE + 慢反应未验证，再挖是 over-crawl", type: DIMINISHING_RESEARCH_VALUE}
+  - {hunt: H-03, stop: "CONTRADICTED", reason: "找到直接反证，继续=确认偏差", type: CONTRADICTED}
+  - note: "三个停止均有明确类型，非人为早停；也未无限爬（每方向 1-2 轮搜索即收敛）"
+
+# 反自欺检查（§14）
+bias_check:
+  search_bias: "无（三方向各有明确为什么选）"
+  confirmation_bias: "无（主动选了可能推翻自己的方向 H-03）"
+  popularity_bias: "无（未选'热门策略'，选的是机制层）"
+  source_bias: "低（学术+央行+独立实证混合）"
+  early_stop_bias: "无（三个停止都有 DIMINISHING/CONTRADICTED 理由）"
+  model_memory_bias: "无（结论均来自公开原始材料，非模型记忆）"
+  over_crawling: "无（每方向 1-2 轮收敛）"
+  under_crawling: "低（H-01/02/03 均到可及性判定层）"

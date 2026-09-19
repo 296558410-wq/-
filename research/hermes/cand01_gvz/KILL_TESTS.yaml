@@ -1,0 +1,19 @@
+# OBSERVABILITY_AUDIT / KILL_TESTS — CAND-01
+observability_audit:
+  exists: true
+  item: "GVZ (CBOE Gold ETF Volatility Index, 日频; GLD options 衍生)"
+  accessible: true
+  automatable: true
+  research_usable: true
+  missing: ["XAUUSD 专属 IV", "完整曲面", "skew", "term structure", "日内 IV", "事件邻近 IV 重定价"]
+  rule: "GVZ 不解决缺失项; 若信息在曲面维度 → DATA_GAP(非 REJECTED); 不购买数据"
+kill_tests:
+  KILL-01_reproduce: "未命中（关系稳定复现, 正方向一致跨规格）"
+  KILL-02_no_increment: "部分命中（控平滑本地 vol 后残余 +0.07..+0.12 ΔR² OOS, 大幅缩水但 >0）"
+  KILL-03_oos: "部分（OOS 正号保持; 重叠窗正式推断未全量建立）"
+  KILL-04_regime: "UNKNOWN（regime 内样本不足）"
+  KILL-05_unstable: "未命中（1-20d 多规格方向一致）"
+  KILL-06_redundant: "部分命中（60-75% 增益=平滑表示; 残余存在但期权特有性未建立）"
+  KILL-07_direction_null: "命中（月频方向 ≈ 0; VRP n=35 无推断力）"
+  KILL-08_no_decision_value: "部分（R1 风险态 AUC +0.029 over 本地平滑, 小但 >0）"
+  summary: "未被杀死亦未确证 → 居中: UNPROVEN"

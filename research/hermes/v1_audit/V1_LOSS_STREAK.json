@@ -1,0 +1,13 @@
+{
+ "schema": "v1_loss_streak/1",
+ "ts_utc": "2026-09-17T12:51:03.461590+00:00",
+ "seed": 20260917,
+ "n": 57,
+ "win_rate_used": 0.526,
+ "observed_max_loss_streak": 7,
+ "observed_recent_loss_streak": 1,
+ "random_max_loss_streak_p50": 5,
+ "random_p95": 8,
+ "observed_percentile": 93.4,
+ "verdict": "WITHIN_RANDOM_RANGE"
+}

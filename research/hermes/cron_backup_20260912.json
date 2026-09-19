@@ -1,0 +1,21 @@
+{
+  "_note": "Rollback backup of trading-cron JOBS before adding market-hours gating (2026-09-12). V1/V2 code untouched.",
+  "hermes-trader-m15-cycle": {
+    "id": "cd47547e-ae38-4b36-a585-8b041ee826bb",
+    "schedule": { "kind": "cron", "expr": "2-59/15 * * * *", "tz": "UTC" },
+    "sessionTarget": "isolated",
+    "payload_kind": "agentTurn",
+    "timeoutSeconds": 480,
+    "toolsAllow": ["read", "write", "apply_patch", "exec", "process"],
+    "message": "Hermes 交易员(主动猎手模式, demo 实盘执行): 1) 运行 C:\\AIQuant\\.venv\\Scripts\\python.exe research\\hermes\\trader_v1\\state_package.py; 2) 读 run_state/state_package_latest.json 的 market_state/data_quality 与蜡烛图 run_state/candle_latest.json(若有); 3) 决策(见下)写 run_state/decisions/<cycle紧凑>.json; 4) 运行 C:\\AIQuant\\.venv\\Scripts\\python.exe research\\hermes\\trader_v1\\engine.py --decide --exec demo 消费(触发+risk通过即自动建仓下单)。\n\n【交易哲学: 主动猎手, 非完美主义】每轮必须: a) 主动给出具体 setup(当前价距哪个 key level 多近、需什么 tick 级/盘中信号即可行动), 不允许只因'无收盘确认'就无限 WAIT; b) 价格进入有利区(区间边界/结构位/前高前低/回撤到 MA)且有盘中行为佐证(拒绝K形态、快速反弹/下探、量能变化) → 立即注册带盘中触发条件的计划(trigger 用 zone_touch/price_cross 实时判定, 不要求等下一根收盘); c) 明确 bias(至少 neutral-lean), 禁止无立场观望; d) 触发条件写具体价, 允许'贴近边界即计划, 触价自动成交'。\n\n【仓位纪律 2026-09-08 定案】qty_lots 只允许 0.01-0.05 手(区间内自选, 默认 0.01); 超出区间会被 engine 机械否决(risk veto)且计划即时作废不留存。持仓中不注册新开仓计划(单仓约束); 触发即自动成交, 止损止盈随单。\n\n输出 JSON: cycle/decision(LONG/SHORT/WAIT)/confidence/opportunity/opportunity_mechanism/mtf_agreement/answers_14(...)/plan(...)/model。\n\n要求: EV 仍须为正才 LONG/SHORT; 亏损不加仓; 每轮必须评估'现在离可交易就差什么'并写明; WAIT 仅当确实无有利 setup 且说明等什么价触发。已有同 cycle 文件则跳过。静默; 摘要一行 trader_summary.txt。禁止真实账户/禁改 registry。"
+  },
+  "hermes-v2-paper-shadow": {
+    "id": "372058cf-d83a-4264-a268-1306a829deb8",
+    "schedule": { "kind": "cron", "expr": "7-59/15 * * * *", "tz": "UTC" },
+    "sessionTarget": "isolated",
+    "payload_kind": "agentTurn",
+    "timeoutSeconds": 420,
+    "toolsAllow": ["read", "exec"],
+    "message": "V2 Paper Shadow Run 单周期(静默, PAPER only)。只做一件事: exec 运行:\nC:\\AIQuant\\.venv\\Scripts\\python.exe C:\\AIQuant\\research\\hermes\\trader_v2\\runtime\\shadow_run.py cycle --minutes 1440\n然后把该命令输出的一行 JSON 原样输出即可。\n硬性禁令: 不修改任何代码/配置/阈值/成本/风控; 不下任何 broker/demo/live 单; 不修改 V1; 不做策略评价; 若返回 blocked 或报错则原样报告该 JSON, 不要自行处理。不要做任何其他事。"
+  }
+}

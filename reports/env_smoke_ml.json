@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "sklearn_ridge",
+      "status": "PASS",
+      "detail": "R2=0.389 (linear baseline on nonlinear target)"
+    },
+    {
+      "name": "sklearn_histgb",
+      "status": "PASS",
+      "detail": "R2=0.923"
+    },
+    {
+      "name": "xgboost_cpu",
+      "status": "PASS",
+      "detail": "R2=0.899"
+    },
+    {
+      "name": "xgboost_gpu",
+      "status": "PASS",
+      "detail": "R2=0.852 in 0.12s"
+    },
+    {
+      "name": "lightgbm_cpu",
+      "status": "PASS",
+      "detail": "R2=0.907"
+    },
+    {
+      "name": "sklearn_deterministic",
+      "status": "PASS",
+      "detail": "same params -> same predictions"
+    }
+  ],
+  "info": {
+    "sklearn": "1.9.0",
+    "xgboost": "3.4.1",
+    "xgboost_gpu": "works",
+    "lightgbm": "4.7.0"
+  },
+  "n_checks": 6
+}

@@ -1,0 +1,45 @@
+# TRADE PLAN CONTRACT — 触发前注册的交易计划
+> 计划必须写入 ledger(append-only + sha256 链)之后才可被触发。禁止事后补计划。
+> 触发判定用 TRIGGER_CONTRACT 机械规则, 不依赖计划文本的人肉解释。
+
+schema: hermes_trade_plan_v1
+
+required:
+  - plan_id               # 生成: "TP-<utc_ts_compact>-<seq>"
+  - utc_ts                # 注册时刻(UTC ISO8601)
+  - decision_id_ref       # 生成该计划的决策 id
+  - market_state          # 注册时的状态摘要(market_state 块的精简引用)
+  - direction             # "LONG|SHORT"
+  - opportunity_type      # "breakout|pullback|range_reversal|exhaustion|other"
+  - mechanism_ref         # KU-C 编号或机制名(若有)
+  - entry_zone            # {low, high} USD 价格区间(marketable/limit 判定的锚)
+  - entry_style           # "market_on_trigger|limit_at_zone|stop_order"
+  - trigger_condition     # 机械可判定条件(见 TRIGGER_CONTRACT 语法)
+  - invalidation_condition# 机械可判定条件(满足 → 计划作废, 记 cancel)
+  - stop_logic            # {type:"structure|atr_mult|percent", level, level_price, reason}
+  - target_logic          # {type:"structure|R_multiple|partial", levels:[{price, frac}], reason}
+  - expected_R            # 正数(以 entry 均价到 target1 计; 保守用 target1)
+  - expected_win_probability  # 0-1; 默认按 0.5 处理, 除非引用 ≥N 次历史同类统计(N=30, 引用路径必填)
+  - probability_source    # "subjective|backtest_<path>|forward_<path>|registry_<id>"
+  - expected_loss         # {units:"R|usd|account_pct", value}
+  - estimated_cost        # {spread_bps, slippage_bps, total_roundtrip_bps, cost_in_R}
+  - expected_net_EV       # 数值(单位同 expected_loss) + 算式 note
+  - maximum_holding_time  # 最大持仓时间(如 "M15*8" 或 ISO 时长), 超时强平(时间止损)
+  - cancel_conditions     # 除 invalidation 外的取消条件清单(如 计划超龄 N 根 M15 未触发)
+  - risk_level            # "low|medium|high" (Hermes 建议; Risk Engine 有独立判定并可否决)
+  - reason                # 计划理由(≤5 句)
+  - model, prompt_version # 追溯
+
+optional:
+  - partial_exit_plan     # 部分止盈规则(如 target1 平 50%, 余下移保本)
+  - trailing_rule         # 移动止损规则(结构/ATR 跟踪)
+  - vol_ceiling_bps       # 触发时 volatility 上限(超过则跳过, 记 skipped_vol)
+  - spread_ceiling_bps    # 触发时 spread 上限(超过则等待, 记 skipped_spread)
+  - time_stop             # 显式时间止损(与 maximum_holding_time 等价, 二选一)
+
+rules:
+  - entry_zone/target/stop 三者价格必须几何自洽: LONG: stop<entry_low<=entry_high<target; SHORT 反向。
+  - expected_R = |target1 - entry_mid| / |entry_mid - stop|  (自洽校验, 误差>10% 判 INVALID)。
+  - estimated_cost.cost_in_R = total_roundtrip_bps / (|entry-stop| in bps)。
+  - 期望净 EV 校验: EV_R = R*Pwin - 1*Ploss - cost_in_R; 若 decision=LONG/SHORT 而 EV_R<=0 → 引擎记 WEAK_EV_PLAN(不自动禁止, 由 Risk/复盘审)。
+  - 计划不可修改; 变更 = 作废 + 新计划。

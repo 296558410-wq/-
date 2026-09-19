@@ -1,0 +1,475 @@
+{
+ "schema": "v1_audit_data_registry/1",
+ "ts_utc": "2026-09-17T12:30:20.180868+00:00",
+ "v1_root": "C:\\AIQuant\\research\\hermes\\trader_v1",
+ "note": "PHASE A 只盘点登记，不做任何分析；不修改 V1/V2/V3",
+ "entries": [
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\plan_ledger.jsonl",
+   "type": "plan_ledger(PIT)",
+   "bytes": 782145,
+   "sha256": "d8898c80e86c187ae345f1987faa7c51addf514ce6b10fda4db05406e8eacce8",
+   "source": "V1 engine",
+   "row_count": 811,
+   "time_range": [
+    null,
+    null
+   ],
+   "schema": [
+    "decision",
+    "plan",
+    "plan_id",
+    "sha256",
+    "type",
+    "utc_ts"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\statistics.json",
+   "type": "stats",
+   "bytes": 41211,
+   "sha256": "8f1f15b2bdb2b8498d7d063d89c68539e8e85862e9549216c07922a3421ada21",
+   "source": "V1 metrics",
+   "schema": [
+    "counters",
+    "integrity",
+    "last_invariants",
+    "waits"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\trader_summary.txt",
+   "type": "human_summary",
+   "bytes": 245577,
+   "sha256": "0bb09d7704e742b1edc551ad2a600b1dc3612e5a14bd1d626ff9b715b4e2918d",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\workflow_history.jsonl",
+   "type": "workflow",
+   "bytes": 34819,
+   "sha256": "2282d77fc8f447d51b790feb4f3b33c6e1a294860d253eeac0409a2d9ec2655b",
+   "source": "V1",
+   "row_count": 96,
+   "time_range": [
+    null,
+    null
+   ],
+   "schema": [
+    "cycle",
+    "decision",
+    "plan_id",
+    "traded",
+    "triggered",
+    "utc_ts",
+    "wait_reason"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\workflow_latest.json",
+   "type": "workflow_latest",
+   "bytes": 1976,
+   "sha256": "ef312aee79dc2b0e9fbe74ab807f649808ba67ddd238a028bf51569185c5a786",
+   "source": "V1",
+   "schema": [
+    "cycle",
+    "generated_utc",
+    "steps"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\state_package_latest.json",
+   "type": "state_package(RUNTIME snapshot)",
+   "bytes": 3168,
+   "sha256": "e3c98f0160dc9ea418f71d65a2e936da08fe58a243dc42c5256fb68e2614e345",
+   "source": "V1",
+   "schema": [
+    "cycle",
+    "data_quality",
+    "generated_utc",
+    "market_state",
+    "symbol"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": "仅最新快照(非逐笔历史)，PHASE C 需确认能否复原逐笔",
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\bars_cache.json",
+   "type": "bars_cache",
+   "bytes": 14389,
+   "sha256": "eda657f9e6224fc35fc0a3444d7b087cbcaecd681138cdbbfd8d25dcdaef7451",
+   "source": "V1",
+   "schema": [
+    "bars",
+    "generated"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": false,
+   "reason_if_excluded": "缓存，非权威",
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\candle_latest.json",
+   "type": "candle_latest",
+   "bytes": 814,
+   "sha256": "6ee76d00292606867b237300b1b6cfd1c7f96363a1c53015cf8a4051289724c8",
+   "source": "V1",
+   "schema": [
+    "failed_breakout",
+    "last",
+    "recent"
+   ],
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": false,
+   "reason_if_excluded": "缓存，非权威",
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\E2E_REPLAY_20260907T1247.md",
+   "type": "replay_report",
+   "bytes": 4742,
+   "sha256": "bb1c99fdef688e1b8d9331b86758c4ca9faad26c302db842b127194ce43b098c",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\opportunity_frequency_study.txt",
+   "type": "study",
+   "bytes": 365,
+   "sha256": "acf3e1ac18d182968dae94a898c26201cdb4fcd379bc6d1b1ba967c5524ab6cf",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": false,
+   "reason_if_excluded": "早期探索",
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\trader_summary.txt",
+   "type": "human_summary(dup?)",
+   "bytes": 30317,
+   "sha256": "e6c8f761d40fe50ad2903e2fd4fa6b2477f149f2a3613e93c5661c023931658f",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": false,
+   "reason_if_excluded": "与 run_state 同名，需判 DUPLICATE",
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\AUDIT_REPORT_20260907.md",
+   "type": "audit_report",
+   "bytes": 6668,
+   "sha256": "db91753690efec25d198c1c18e060ed1d72c8155165165b4fd221939fe23c90f",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\V12_FINAL_REPORT.md",
+   "type": "final_report",
+   "bytes": 6808,
+   "sha256": "a042d027de627996198e7916082272b8ef713bce1872e8fb2e4b0dfe85dd6d9a",
+   "source": "V1",
+   "schema": null,
+   "timezone": "UTC(assumed; verify in PHASE C)",
+   "timestamp_resolution": "per-record ts (ms/s?)",
+   "completeness": "n/a",
+   "whether_used": true,
+   "reason_if_excluded": null,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\decisions",
+   "type": "decisions(per-15m json)",
+   "file_count": 794,
+   "total_bytes": 8094041,
+   "sha256_aggregate": "625d7598b7442728ec895d52d9405dd4088ebe3103523c3fca30a527722f593c",
+   "source": "V1 engine",
+   "time_range": [
+    "20260907T1146Z.json",
+    "plan_example.json"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "794 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\positions",
+   "type": "positions(POS-*.json)",
+   "file_count": 57,
+   "total_bytes": 97459,
+   "sha256_aggregate": "e7f63986cfd08561ffefd361c61c173106b25b1a5d214adb1084ad24c9093c5a",
+   "source": "V1 position",
+   "time_range": [
+    "POS-20260907T2355Z.json",
+    "POS-20260917T1047Z.json"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "57 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "RUNTIME"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\memory\\reviews",
+   "type": "reviews(RV-*.json)",
+   "file_count": 56,
+   "total_bytes": 51877,
+   "sha256_aggregate": "c2a67bc4860dba94519ec07058d978d63396e3c0c8369f3d7571cbc6c1f8b3cb",
+   "source": "V1 review.py",
+   "time_range": [
+    "RV-TP-20260907T2355Z-20260908042648.json",
+    "RV-TP-20260917T0847Z-20260917105028.json"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "56 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\contracts",
+   "type": "contracts(yaml)",
+   "file_count": 5,
+   "total_bytes": 10349,
+   "sha256_aggregate": "e16b3238e28a085fa63b9f93cbf58a113f5688e7a2ffef1f42305e334c7bdce9",
+   "source": "V1",
+   "time_range": [
+    "DECISION_CONTRACT.yaml",
+    "TRIGGER_CONTRACT.yaml"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "5 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "FROZEN"
+  },
+  {
+   "path": "C:\\AIQuant\\research\\hermes\\trader_v1\\run_state\\tmp",
+   "type": "tmp",
+   "file_count": 80,
+   "total_bytes": 214594,
+   "sha256_aggregate": "1eda7600cc6969920d7664794da844551fe9c24728d3d1280fba78f5459a308f",
+   "source": "V1",
+   "time_range": [
+    "_probe_0317.py",
+    "summary_line_1947.txt"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "80 files",
+   "whether_used": false,
+   "duplicate_sha256_groups": {
+    "a266ca7333a9": [
+     "mtf_probe_1817.py",
+     "mtf_probe_1832.py"
+    ],
+    "8c4bd86fbc38": [
+     "probe_0932.py",
+     "probe_mtf.py"
+    ],
+    "e2827a484f40": [
+     "probe_live_0017.py",
+     "probe_live_0032.py"
+    ],
+    "40b8c3fffe73": [
+     "probe_live_1817.py",
+     "probe_live_1832.py",
+     "probe_live_1847.py"
+    ],
+    "4142a40ce3ad": [
+     "probe_live_1917.py",
+     "probe_live_1932.py"
+    ]
+   },
+   "n_duplicate_groups": 5,
+   "classification": "HISTORICAL"
+  }
+ ],
+ "market_data": [
+  {
+   "path": "C:\\AIQuant\\data\\live_fxtm",
+   "type": "ticks(local parquet)",
+   "file_count": 11,
+   "total_bytes": 45271291,
+   "sha256_aggregate": "742d2469f228c0759c0c0cbe245f7e3da54766be126a258ed81b3e3d0bbfe531",
+   "source": "V1 tick collector",
+   "time_range": [
+    "collect_runs.log",
+    "ticks_20260917.parquet"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "11 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\data\\staging_mt5",
+   "type": "mt5 staging",
+   "file_count": 7,
+   "total_bytes": 4451204,
+   "sha256_aggregate": "19e942a22c0f3f63aff28b884ad43603bea6e4a006120b06a0bc0475181142e9",
+   "source": "collector",
+   "time_range": [
+    "XAUUSD_H1_server.parquet",
+    "stooq_test.csv"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "7 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\AIQuant\\data\\staging_fxtm",
+   "type": "fxtm staging",
+   "file_count": 27,
+   "total_bytes": 63492396,
+   "sha256_aggregate": "a24e4c385b4ad14f16c29cd8d4e300009961e135edfb773c6f1fa0723b6389dd",
+   "source": "collector",
+   "time_range": [
+    "micro_m1_bars.parquet",
+    "ticks_20260904.parquet"
+   ],
+   "schema": "dir(*)",
+   "timezone": "UTC(filenames)",
+   "timestamp_resolution": "15m(filename)",
+   "completeness": "27 files",
+   "whether_used": true,
+   "duplicate_sha256_groups": {},
+   "n_duplicate_groups": 0,
+   "classification": "HISTORICAL"
+  },
+  {
+   "path": "C:\\Program Files\\ForexTime (FXTM) MT5",
+   "type": "mt5_terminal",
+   "exists": true,
+   "file_count": 579,
+   "total_bytes": 310728671,
+   "terminal_exe": "C:\\Program Files\\ForexTime (FXTM) MT5\\terminal64.exe",
+   "terminal_exe_sha256": "3dbb5f966441fc043d49bc637a5931686be847e77dc89e295c944eda6b9a08c7",
+   "logs_dir": "C:\\Program Files\\ForexTime (FXTM) MT5\\logs",
+   "source": "V1 main MT5 terminal (Program Files)",
+   "whether_used": false,
+   "reason_if_excluded": "V1 终端数据目录；PHASE B 决定是否用于行情恢复（不写入）",
+   "classification": "RUNTIME"
+  }
+ ],
+ "code_sha256": {
+  "engine.py": "7d95645678cf0615c77c0d1c91177cf1652ca1fa6b1f509ec99e415dba55c25d",
+  "trader_core.py": "49cf0deddceea531158f48a8b9d20923c5dfc89d4b15d3569afbc816f03e274e",
+  "position.py": "94190a9c59637a2833a3c2b7951acce87a9f0b380716a3949b85325954de743e",
+  "position_decision.py": "2611118d727022c841372e01a484e1d1f1dbfb941d3628525c497162c2f9343f",
+  "ledger.py": "8a62ac954ccf4d4c42a4d0cb9db789847bd40487170c8500cb065e8317a08876",
+  "review.py": "a6f386b3225567354c46f40fdabf915a08a42370492591bbeb4ad3178a3eecb5",
+  "metrics.py": "63f9400733bf269a0fce103e76b42cfeb1a2bfb2c077c3968def76e98c67a49a",
+  "state_package.py": "e50c04ab6374f35d5f88bd47116fa51b15dcf2944b491a2c30a841aa0617c3e1",
+  "stop_authority.py": "29cea0f5ec1ed272750d7a7fda560f9460ec5faeb3305b31d1550cefd1d936f9",
+  "trigger.py": "28ba89c9912aa1cb5abf535a615d0fbbd149ab72b834b2cb8e68a6ba4266a5cc",
+  "opportunity.py": "55399cd9584da9526664ef24720f0d538b51be0d6469a8573c537eac9ae733c0",
+  "candlestick.py": "04e5807cfeffbcb4b329c8113e9cda509656844d04480d6f5624bbf2aa841ae8",
+  "invariants.py": "1dedcc132b7fd339d10a477b503743661286dda68a25b429b533f3243291cab2",
+  "broker_mt5_demo.py": "eb5f8a9f2c2050aa4cfb087d62df2a29ef5603cb19f67da0c8d02ab314036515",
+  "replay_study.py": "f71344ee8c5c1296712b3f2ea4e8f294d63815bfd5b68c589885fc18dd8a1ca2"
+ },
+ "gaps": [
+  "V1 逐笔 tick 是否覆盖全部交易时刻：待 PHASE B 核对（data/live_fxtm 起始时间 vs 交易时间）",
+  "T_signal/T_order/T_fill/T_exit 的可用性：待 PHASE C 定义（plan_ledger + decisions + positions）",
+  "真实 spread/slippage/commission/swap 逐笔：待 PHASE B/C 确认",
+  "state_package 仅 latest 快照，历史逐笔上下文可能缺 → 可能 DATA_GAP"
+ ],
+ "v1_config": {
+  "env_file": "C:\\AIQuant\\.env.mt5_demo",
+  "env_keys": [
+   "DEMO_MT5_LOGIN",
+   "DEMO_MT5_PASSWORD",
+   "DEMO_MT5_SERVER"
+  ],
+  "broker_magic_note": "V1 magic=90002 (据 fxtm_demo_adapter 注释)",
+  "secrets_redacted": true
+ },
+ "phaseD_outputs": {
+  "V1_TRADE_REPLAY_PHASE_D.jsonl": "3e54cc4b81fbe3f7b29c46a584dc9a0a7c754ab80ae7165ed5c10c5d6ad86f20",
+  "V1_OUTCOME_ANALYSIS.json": "8d188d47028b7667202439c12cc24b2c51b6560eaa04afb6f48ad552364a0d26",
+  "V1_MFE_MAE.jsonl": "14572a689b0e405b2a05248c0d3a24f471ba690890e63f42d811edf00b2a1079",
+  "V1_BASELINE_ANALYSIS.json": "1d81c6cefd623495f151df6fa763f1ce919d3d95df1cf85f6e2cc402f977c0b0",
+  "V1_COST_ANALYSIS.json": "d9ca66123ca746930f7d5dcdf5acb9ebe47b7991eebaa8b8d3948dcd185705fe"
+ }
+}

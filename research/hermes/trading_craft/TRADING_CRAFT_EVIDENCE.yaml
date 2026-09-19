@@ -1,0 +1,39 @@
+# TRADING CRAFT EVIDENCE（合并：证据 + 矛盾 + 数据缺口 + 候选机制）
+# 生成：2026-09-05 · 只收 material 级。
+
+evidence:
+  - {claim: "止损仅在动量/趋势存在时增值，否则减值", source: "Kaminski & Lo (2014) 'When Do Stop-Loss Rules Stop Losses?'", evidence_level: E3, implication: "无方向 edge 的黄金 → 止损手艺无 edge 可加"}
+  - {claim: "出场规则不能拯救次优信号", source: "MDPI gold MACD with SL/TP (2025)", evidence_level: E3, implication: "手艺放大 edge，不制造 edge"}
+  - {claim: "CTA 凸性（正 gamma via 加仓，负 theta via chop）", source: "CTA convexity literature", evidence_level: E3, implication: "机制真实，但需真实存在的趋势 edge"}
+  - {claim: "黄金趋势+momentum OOS Sharpe 2.88（净成本）", source: "arXiv 2511.08571 'Forecast-to-Fill'", evidence_level: "E3（单篇未复现预印本）", implication: "RED FLAG——实际 vol 0.91%(近空仓)、43%=名义杠杆、Sharpe 2.88 是搜索强度特征；矛盾 E5 本地；需对抗复现"}
+  - {claim: "MFE/MAE 是事后数据，不能作实时出场输入", source: "chartmini + 纪律", evidence_level: E2, implication: "与 FL-01/11 lookahead 一致"}
+
+contradictions:
+  - id: CRAFT-CONTRA-1
+    claim: "黄金趋势可 OOS 盈利（Sharpe 2.88）"
+    support: "arXiv 2511.08571"
+    contradict: "本地 E5（黄金动量两期双源 0 SUPPORTED，F-R1）+ Kaminski-Lo + vol-timing 失败文献"
+    status: "RED_FLAG（未复现，不采信，需对抗复现）"
+  - id: CRAFT-CONTRA-2
+    claim: "止损保护利润（普遍有益）"
+    contradict: "Kaminski-Lo：随机游走下止损总降期望收益；仅动量下增值"
+    status: "CONFIRMED（条件依赖）"
+
+not_applicable:
+  - "让赢家奔跑 / 凸性 / 金字塔 —— 需方向趋势 edge（我们没有）"
+  - "蜡烛 / 多周期趋势一致性 —— 换皮（本地已 REJECTED）"
+  - "利润保护 vs 最大化 trade-off —— 无方向赢家可保护/最大化"
+
+applicable_to_us:
+  - "vol-targeted sizing（非方向）—— R1"
+  - "成本择时（不在不利成本状态交易）—— R1' 教训，形态条件化"
+  - "执行 overlay（micro-price 门控）—— 需一个要被执行的 edge"
+  - "不 over-trading（机会成本纪律）"
+
+data_gaps:
+  - "黄金期权曲面/LJP/skew（若要测 CAND-01 曲面维度）—— 付费；当前 GVZ 免费先测 ATM 维度"
+
+top_candidates:
+  - {id: TC-1, name: "vol/成本择时 overlay（R1 形态条件化）", status: "UNTESTED（无条件已否）", next: "形态条件化 + 成本感知"}
+  - {id: TC-2, name: "黄金期权 IV 层（CAND-01 GVZ 增量）", status: "UNTESTED", next: "免费 GVZ 测试"}
+  - {id: TC-3, name: "黄金趋势 OOS（arXiv）", status: "RED_FLAG", next: "对抗复现（可选，不优先）"}

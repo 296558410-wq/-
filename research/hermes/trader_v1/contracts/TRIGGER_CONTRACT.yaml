@@ -1,0 +1,24 @@
+# TRIGGER CONTRACT — 机械触发与失效判定
+> 触发/失效/取消一律由确定性引擎按本契约机械判定(无 LLM 参与)。判定输出三态:
+> PENDING(继续等) / TRIGGERED(交 Risk) / CANCELLED(作废, 记原因: invalidated|expired|superseded)。
+
+trigger_condition 支持语法(引擎内实现, 全部基于状态包字段与 quote 流):
+  - price_cross_up: X        # 最新 mid/close 上穿 X USD
+  - price_cross_down: X
+  - close_above: X           # 当前 M15 收盘价 > X
+  - close_below: X
+  - zone_touch: [low, high]  # 最新价进入区间
+  - m15_close_in_zone: [low, high]
+  - spread_under_bps: Y      # 触发时 spread 上限(过滤)
+  - vol_under_bps: Z         # 触发时 vol(ATR%)上限(过滤)
+  - and: [cond...]           # 全部满足
+  - or: [cond...]            # 任一满足
+invalidation_condition 同语法: 任一满足 → 计划 CANCELLED(invalidated)。
+
+判定时点:
+  - 每个 M15 收盘(cycle 结束)判定一次 + 计划注册后持续监听的专用触发事件(价格穿透)若引擎支持。
+  - P0 引擎以 M15 收盘判定为主(每轮 engine.py), 注明: 盘中即时触发为 P1 增强。
+
+记录:
+  - 每次判定写 trigger_log: {utc_ts, plan_id, result, matched_cond, quote/mid at check, spread_bps, vol_bps}
+  - TRIGGERED 后 plan 状态 → "triggered_pending_risk"; 交 Risk Engine 检查(独立, 见风险契约)。

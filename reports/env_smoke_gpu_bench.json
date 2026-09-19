@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "cuda_available",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "device_props",
+      "status": "PASS",
+      "detail": "NVIDIA RTX A2000 Laptop GPU CC 8.6 mem 4.29GB"
+    },
+    {
+      "name": "fp32_matmul_correctness",
+      "status": "PASS",
+      "detail": "max_abs_diff=0.0001"
+    },
+    {
+      "name": "fp16_matmul",
+      "status": "PASS",
+      "detail": "rel_max=0.00038 (tol 0.03)"
+    },
+    {
+      "name": "bf16_matmul",
+      "status": "PASS",
+      "detail": "rel_max=0.00434 (tol 0.05)"
+    },
+    {
+      "name": "memory_alloc_free",
+      "status": "PASS",
+      "detail": "peak=292MB, alloc_ok=292MB"
+    },
+    {
+      "name": "h2d_d2h",
+      "status": "PASS",
+      "detail": "h2d=14.0ms d2h=10.3ms (32MB)"
+    },
+    {
+      "name": "bench_matmul4096",
+      "status": "PASS",
+      "detail": "cpu=0.349s gpu=0.066s speedup=5.3x"
+    },
+    {
+      "name": "bench_montecarlo_pi",
+      "status": "PASS",
+      "detail": "cpu=0.388s gpu=0.034s speedup=11.5x"
+    },
+    {
+      "name": "bench_bootstrap_400x100k",
+      "status": "PASS",
+      "detail": "cpu=0.200s gpu=0.027s speedup=7.3x"
+    },
+    {
+      "name": "bench_permutation_400x100k",
+      "status": "PASS",
+      "detail": "cpu=0.648s gpu=0.096s speedup=6.8x"
+    }
+  ],
+  "info": {
+    "torch": "2.14.0+cu126",
+    "cuda_build": "12.6",
+    "device": "NVIDIA RTX A2000 Laptop GPU",
+    "cc": "8.6",
+    "memory_total_mb": 4294.5,
+    "driver": "NVIDIA RTX A2000 Laptop GPU",
+    "benchmarks": {
+      "matmul4096": {
+        "cpu_s": 0.3494,
+        "gpu_s": 0.0655,
+        "speedup": 5.33,
+        "gpu_peak_mb": 291.6
+      },
+      "montecarlo_pi": {
+        "cpu_s": 0.3876,
+        "gpu_s": 0.0338,
+        "speedup": 11.48,
+        "gpu_peak_mb": 685.1
+      },
+      "bootstrap_400x100k": {
+        "cpu_s": 0.1997,
+        "gpu_s": 0.0273,
+        "speedup": 7.31,
+        "gpu_peak_mb": 685.1
+      },
+      "permutation_400x100k": {
+        "cpu_s": 0.648,
+        "gpu_s": 0.0958,
+        "speedup": 6.76,
+        "gpu_peak_mb": 1527.9
+      }
+    }
+  },
+  "n_checks": 11
+}

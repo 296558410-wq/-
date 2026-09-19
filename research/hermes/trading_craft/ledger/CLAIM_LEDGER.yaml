@@ -1,0 +1,97 @@
+# CLAIM LEDGER（Trading Craft claim 账本）
+# 生成：2026-09-05 · 忠实派生自完成的研究，不重新解释。
+
+claims:
+  - id: CLM-0001
+    claim: "止损价值依赖底层可开发的 edge：随机游走下止损降期望收益；仅当真实趋势/动量可重进场时止损才可能增值"
+    status: SUPPORTED（条件性）
+    supporting: [EVD-0001]
+    counter: "无直接反证；仅'止损普遍有益'的零售断言（未收录为证据）"
+    mechanism: "止损截断正 excursion；其价值被动依赖信号结构（option-like stopping premium）"
+    asset_applicability: CROSS_ASSET（机制通用）
+    timeframe_applicability: daily+
+    economic_relevance: "对无方向 edge 的我们，止损手艺边际价值≈0"
+    confidence: HIGH
+    final_interpretation: "条件 claim，绝不推广为'止损永远无效'"
+
+  - id: CLM-0002
+    claim: "交易手艺放大 edge，不制造 edge"
+    status: SUPPORTED
+    supporting: [EVD-0001, EVD-0002]
+    counter: "无"
+    mechanism: "出场/仓位/加仓是信号结构的放大器，非独立信息源"
+    economic_relevance: "核心；无方向 edge → 手艺无对象可放大"
+    confidence: HIGH
+    final_interpretation: "本考古最重要的结论"
+
+  - id: CLM-0003
+    claim: "让赢家奔跑（凸性出场）需要持续有利移动存在；无持久趋势则无赢家群体可奔跑"
+    status: SUPPORTED（机制依赖）
+    supporting: [EVD-0003]
+    counter: "无"
+    mechanism: "CTA 凸性=正 gamma（持续趋势中加仓），前提是趋势存在"
+    economic_relevance: "对无方向趋势的我们 NOT APPLICABLE"
+    confidence: HIGH
+    final_interpretation: "盈利提取技术需底层有利机会才可提取"
+
+  - id: CLM-0004
+    claim: "多周期确认（D1/H4/H1/M15 层次）对我们是冗余/无独立机制——未找到 genuinely different mechanism"
+    status: SUPPORTED（本地）+ 外部未证伪
+    supporting: [EVD-0004]
+    counter: "未找到 credible 反证"
+    mechanism: "更高周期方向 = 低周期方向换皮；非独立信息"
+    economic_relevance: "多周期仅作风险/状态分层（vol-regime）可能有 E5 价值，非方向"
+    confidence: MEDIUM
+    final_interpretation: "不把'高周期有用 context'写成'高周期制造 alpha'"
+
+  - id: CLM-0005
+    claim: "利润管理可放大已存在 edge（subsume CLM-0002）"
+    status: SUPPORTED
+    supporting: [EVD-0001]
+    mechanism: "利润保护/最大化放大正期望，前提是正期望存在"
+    confidence: HIGH
+    final_interpretation: "分句，非独立新机制"
+
+  - id: CLM-0006
+    claim: "波动率目标定仓主要是风险/暴露管理（非方向）"
+    status: SUPPORTED（本地 E5 上下文）
+    supporting: [EVD-0005]
+    mechanism: "vol-targeting 定风险敞口，与方向预测正交"
+    economic_relevance: "R1 正确实现"
+    confidence: HIGH
+    final_interpretation: "非方向层手艺，是 R1 的风险管理形式"
+
+  - id: CLM-0007
+    claim: "成本择时可能改善执行经济性（时机而非方向）"
+    status: SUPPORTED（引用前研究 Collin-Dufresne）
+    supporting: [EVD-0005]
+    economic_relevance: "R1' 教训：形态条件化成本择时，非无条件"
+    confidence: MEDIUM
+    final_interpretation: "非方向执行层"
+
+  - id: CLM-0008
+    claim: "arXiv 2511.08571 声称黄金趋势 OOS Sharpe 2.88，直接矛盾本地 E5"
+    status: RED_FLAG / UNCONFIRMED
+    supporting: [EVD-0006]
+    counter: "本地 E5（黄金动量两期双源 0 SUPPORTED）+ Kaminski-Lo + vol-timing 失败文献"
+    mechanism: "声称趋势可 OOS 盈利"
+    confidence: "红旗（不采信，需对抗复现）"
+    final_interpretation: "单篇未复现预印本；不因它动摇 E5 本地结论"
+
+  - id: CLM-0009
+    claim: "经典交易手艺对无方向 edge 的我们 NOT APPLICABLE"
+    status: SUPPORTED（对本地地图）
+    supporting: [EVD-0001, EVD-0003]
+    counter: "无"
+    economic_relevance: "方向死(E5) → 让赢家跑/凸性/蜡烛/多周期方向 全部无对象"
+    confidence: HIGH
+    final_interpretation: "手艺是 edge 放大器，不是 edge 来源"
+
+  - id: CLM-0010
+    claim: "盈利管理技术不能拯救不存在的底层 edge"
+    status: SUPPORTED
+    supporting: [EVD-0001, EVD-0002]
+    counter: "无"
+    economic_relevance: "核心保护性结论（防未来把手艺当 alpha）"
+    confidence: HIGH
+    final_interpretation: "与 CLM-0002 同源，保留为独立表述"
