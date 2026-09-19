@@ -144,6 +144,13 @@
 - **wiring**：guard **尚未接入 shadow_run/executor** → 引擎级 R6B = DATA_GAP → `RUN_SAFETY_007=INCOMPLETE`。
 - **H01/PIT/策略/V1/V3 未改**；原仓 HEAD/历史未变。详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007A-RESULT.md`。
 
+## V2 Repair 007 STAGE-3 (风险 A/B 修复, 2026-09-19)
+
+- **已修**：`execution_guard.transition` 加跨进程锁（风险B）；`ledger_append_once` 先 append+fsync 后 marker、以账本内容去重（crash-一致，风险A）。
+- **回归**：`tests/test_execution_guard.py` **12/12 PASS**（+R6B-008 ledger crash-一致、+R6B-004b 跨进程迁移单赢家）。
+- **wiring**：guard 尚未接入 `shadow_run` 真实 TRADE 入口 → 引擎级 R6B = DATA_GAP → `RUN_SAFETY_007=INCOMPLETE`。
+- H01/PIT/策略/V1/V3 未改；原仓 HEAD/历史未变。详见 `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V2-REPAIR-007-STAGE3-RESULT.md`。
+
 ---
 
 _更新约定：每次协作层变更/新决策后更新本文件，并保持分类标注。_
