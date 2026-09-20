@@ -33,11 +33,12 @@
     "task": "\\OpenClaw\\v3-calibration-pilot",
     "cmd": "C:\\AIQuant\\research\\hermes\\trader_v3\\run_calibration_pilot.cmd",
     "at_local": "2026-09-21T06:30:00+08:00",
-    "n_roundtrips": 10,
+    "n_roundtrips": 50,
     "volume": 0.01,
     "MAGIC": 90004,
     "CALIBRATION_ORDER": true,
     "guard": "refuses if market closed / login != 160764551 / collides with V1/V2 / PILOT_DONE marker present",
+    "n_roundtrips_note": "raised 10 -> 50 per user 2026-09-20 20:02 (more samples for execution distribution)",
     "log": "trader_v3/logs/calibration_pilot.log"
   },
   "safety": {
