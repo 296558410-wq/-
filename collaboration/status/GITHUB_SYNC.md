@@ -1,9 +1,9 @@
-﻿# GITHUB_SYNC.md — GitHub 同步状态
+# GITHUB_SYNC.md — GitHub 同步状态
 
 ```text
 GitHub:        CONNECTED
-Remote HEAD:   234123c8517e3e1dd1c1ed8205f03368e4331fec
-Local HEAD:    234123c8517e3e1dd1c1ed8205f03368e4331fec
-Sync:          SYNCED
-Last Sync:     2026-09-20 19:41:37 (GMT+8)
+Remote HEAD:   477795c609c8e562c10a68cc65b2330513e5b993
+Local HEAD:    10070c90e6b53767896c5d80bc49a5bf2f36616b
+Sync:          SYNC_PENDING
+Last Sync:     2026-09-20 20:06:50 (GMT+8)
 ```
