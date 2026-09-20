@@ -1,36 +1,47 @@
 {
   "schema": "v3_calibration_pilot_status/1",
   "task_id": "V3-CALIBRATION-PILOT-001",
-  "status": "BLOCKED",
-  "ts_utc": "2026-09-20T11:45:00+00:00",
+  "status": "ARMED (awaiting market open)",
+  "ts_utc": "2026-09-20T12:00:00+00:00",
   "orders_sent": 0,
   "CALIBRATION_ORDERS_SENT": 0,
-  "blockers": [
-    "INDEPENDENT_ACCOUNT_FAIL: V3 initialize() resolved to login 160759434, which is SHARED with v1_host (same login). Task §14 requires a V3 independent demo; account is not independent.",
-    "DATA_PATH_NOT_V3: V3 terminal_info().data_path = C:\\Users\\surface\\AppData\\Roaming\\MetaQuotes\\Terminal\\ACE7B8DAD94518F5AED40F521FA9DC3F (does not contain 'fxtm_demo_v3') -> V3 instance not actually isolated at connect time.",
-    "MARKET_CLOSED: XAUUSD tick age ~128999 s (weekend); no fills possible."
+  "independent_account": {
+    "login": 160764551,
+    "name": "o",
+    "type": "Advantage Demo USD",
+    "server": "ForexTimeFXTM-Demo01",
+    "instance": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
+    "portable": true,
+    "verified": true,
+    "balance": 5000.0,
+    "positions": 0,
+    "creds_file": "C:\\AIQuant\\.env.mt5_v3_calib (GITIGNORED)"
+  },
+  "isolation": {
+    "v1_host_login": 160759434,
+    "v2_login": 160761384,
+    "v3_calib_login": 160764551,
+    "independent": true,
+    "note": "V3 no longer reuses V1's .env.mt5_demo. Dedicated portable instance + dedicated env file."
+  },
+  "root_cause_of_auto_revert": [
+    "v3 original instance was NOT /portable -> used roaming profile auto-logged into 160759434",
+    "V3 adapter/pilot forced login from V1's .env.mt5_demo (DEMO_MT5_LOGIN=160759434) on every connect"
   ],
-  "preflight": {
-    "other_logins": {"v1_host": 160759434, "v2_fxtm_demo_01": 160761384},
-    "v3_login": 160759434,
-    "v3_balance": 1983.26,
-    "v3_equity": 1978.5,
-    "v3_open_positions": 1,
-    "v3_data_path_is_v3": false,
-    "market_open": false
+  "market": {"open": false, "reason": "weekend; XAUUSD reopens ~Sun 22:00Z (Mon 06:00 GMT+8)"},
+  "scheduled": {
+    "task": "\\OpenClaw\\v3-calibration-pilot",
+    "cmd": "C:\\AIQuant\\research\\hermes\\trader_v3\\run_calibration_pilot.cmd",
+    "at_local": "2026-09-21T06:30:00+08:00",
+    "n_roundtrips": 10,
+    "volume": 0.01,
+    "MAGIC": 90004,
+    "CALIBRATION_ORDER": true,
+    "guard": "refuses if market closed / login != 160764551 / collides with V1/V2 / PILOT_DONE marker present",
+    "log": "trader_v3/logs/calibration_pilot.log"
   },
   "safety": {
-    "V3_LIVE_ALLOWED": "NO",
-    "V3_ORDER_SEND_ALLOWED": "NO",
-    "V3_FORWARD_ALLOWED": "NO",
-    "ORDER_SENT": false,
-    "V2_UNTOUCHED": true,
-    "V1_UNTOUCHED": true
-  },
-  "required_to_unblock": [
-    "A genuinely INDEPENDENT MT5 demo account for V3 (login/password/server) NOT equal to V1(160759434) or V2(160761384).",
-    "Or explicit user decision on how to isolate V3 execution."
-  ],
-  "market_note": "XAUUSD reopens ~Sun 2026-09-20T22:00Z (Mon 06:00 GMT+8). Even after account fix, pilot must run at market open.",
-  "next": "Await user decision; do NOT send orders until independent account confirmed."
+    "V3_AUTO_TRADING": false, "V3_ORDER_SEND": false, "V3_LIVE": false,
+    "ORDER_SENT": false, "V1_UNTOUCHED": true, "V2_UNTOUCHED": true
+  }
 }

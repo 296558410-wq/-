@@ -289,3 +289,10 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **FACT** — v2 login=160761384 (独立于 V3 target 160759434)；V1/V2 未改
 - **NEED** — 给 V3 一个真正独立的 demo 账号 (login/password/server) 或用户对隔离方式明示
 - 产物: reports/v3_hft_foundation/V3_CALIBRATION_PILOT_STATUS.json; foundation/calibration_pilot.py
+
+## 2026-09-20 20:00 - V3-CALIBRATION-PILOT-001 (ARMED)
+- **FACT** — 独立 demo 账号绑定成功: login=160764551 (Advo Demo) via /portable 实例 fxtm_demo_v3calib + 独立 env (.env.mt5_v3_calib, gitignored); preflight isolation.independent=TRUE
+- **FACT** — 根因(自动换回): 原 v3 实例非 /portable + 蹭 V1 的 .env.mt5_demo(DEMO_MT5_LOGIN=160759434)。已彻底改掉。V1(160759434)/V2(160761384) 未改。
+- **FACT** — 市场休市; 已排程 Windows 任务 \OpenClaw\v3-calibration-pilot @ 2026-09-21 06:30 GMT+8 (10 roundtrips, 0.01, MAGIC 90004, 含 PILOT_DONE 防重)
+- **FACT** — ORDER_SENT=FALSE 至今; 当前跑 --run 被闸门拒绝(market closed)
+- 产物: foundation/calibration_pilot.py, run_calibration_pilot.cmd, state/V3_CALIBRATION_PILOT_STATUS.json
