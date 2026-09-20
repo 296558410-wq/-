@@ -41,5 +41,6 @@
     "V3_CALIBRATION_PAUSED": true
   },
   "MT5_INSTANCE_ISOLATION": "PASS",
+  "restart_verify": {"task": "MT5-INSTANCE-ISOLATION-RESTART-VERIFY-001", "result": "PASS", "tests": ["R1 tick-collector (fresh proc)", "R2 dashboard restart", "R3 V1 broker path", "R4 V3 terminal restart", "R5 50s soak"], "phantom": 0, "accounts_distinct": true},
   "residual_risk": "no-path mt5.initialize() is fragile; only 60s+90s observation, not a full 15-min cycle window. Recommend a longer soak + keep explicit paths in any new MT5 code."
 }

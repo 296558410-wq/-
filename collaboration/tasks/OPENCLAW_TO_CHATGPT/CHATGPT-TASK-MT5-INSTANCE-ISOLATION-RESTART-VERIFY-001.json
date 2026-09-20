@@ -1,0 +1,24 @@
+{
+  "schema": "mt5_isolation_restart_verify/1",
+  "task_id": "MT5-INSTANCE-ISOLATION-RESTART-VERIFY-001",
+  "status": "PASS",
+  "MT5_INSTANCE_ISOLATION_RESTART_VERIFY": "PASS",
+  "TOTAL_RUNNING_MT5": 3,
+  "UNMAPPED_RUNNING_MT5": 0,
+  "ORPHAN_RUNNING_MT5": 0,
+  "restart_tests": {
+    "R0_baseline": {"count": 3, "result": "PASS"},
+    "R1_tick_collector": {"detail": "COLLECTED new=94", "phantom": 0, "result": "PASS"},
+    "R2_dashboard_restart": {"port_8787": true, "phantom": 0, "result": "PASS"},
+    "R3_v1_broker_path": {"positions_ok": true, "n_positions": 1, "phantom": 0, "result": "PASS"},
+    "R4_v3_terminal_restart": {"stop_returned_nothing_autostart": true, "relaunch_login": 160764551, "result": "PASS"},
+    "R5_soak_50s": {"terminals": 3, "phantom": 0, "result": "PASS"}
+  },
+  "accounts": {"V1": 160759434, "V2": 160761384, "V3": 160764551, "distinct": true},
+  "phantom_present": false,
+  "V3_CALIBRATION_PAUSED": true,
+  "ORDER_SENT": false,
+  "V1_UNTOUCHED": "TRUE (strategy/config/scheduler/ledger; prior 1-line instance pin)",
+  "V2_UNTOUCHED": true,
+  "residual_risk": "no full 15-min cycle awaited; explicit-path discipline required in new code"
+}

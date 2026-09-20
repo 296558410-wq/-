@@ -322,3 +322,9 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - LEDGER ledger/hermes_v2_ledger.jsonl: 12 lines; bad_json=0; dup_event_id=0; dup_seq=0; dup_triples=0; hash-chain OK (prev_hash==prior event_hash, GENESIS->evt12) (last evt 2026-09-11T13:09:29Z demo-calibration); per-run ledgers append-only
 - RUN ACTIVE run_id=V2-PAPER-20260919-145431-c5a1; run_status=RUNNING; market_open=false (weekend); cycle_result=MARKET_CLOSED_SKIP; 0 orders / 0 trades this window; missed_cycles=1; observe window 12:15Z a1/a2 OK (gold_spot 4378.65)
 - FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~21h/48h); V1/V3 untouched (V1 PID1348/V3 PID56544 unchanged); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only
+
+## 2026-09-20 20:52 - MT5-INSTANCE-ISOLATION-RESTART-VERIFY-001 (PASS)
+- **FACT** — 重启验证通过: R1 tick-collector(新进程, pinned)/R2 dashboard 重启/R3 V1 broker 调用/R4 V3 终端优雅停+显式重启/R5 50s soak → 幽灵 fxtm_demo_v3=0, 维持 3 实例
+- **FACT** — 账号两两不同: V1 160759434 / V2 160761384 / V3 160764551; V3 重启后回到 160764551
+- **FACT** — V3_CALIBRATION_PAUSED=TRUE; ORDER_SENT=FALSE; V2_UNTOUCHED=TRUE
+- 产物: CHATGPT-TASK-MT5-INSTANCE-ISOLATION-RESTART-VERIFY-001-RESULT.md(+.json); reports/v3_hft_foundation/MT5_INSTANCE_ISOLATION.json 已并入 restart_verify
