@@ -281,3 +281,11 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **DATA_GAP** — real broker latency; measured commission/slippage; net labels; >=5000 real calibration samples; L2/trade flow; independent V3 account
 - 报告: `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-FOUNDATION-REPAIR-001-RESULT.md` (+ `.json`, `schemas/`)
 - **DECISION** — 不进入自动交易; 下一步须单独建立 `V3-HFT-ALPHA-RESEARCH-001`
+
+## 2026-09-20 19:45 - V3-CALIBRATION-PILOT-001 (preflight · BLOCKED)
+- **FACT** — ORDER_SENT=FALSE; CALIBRATION_ORDERS_SENT=0 (未下任何单)
+- **BLOCKER** — V3 initialize() 解析到 login 160759434，与 v1_host **同一账号** -> 非独立 demo (违反 §14)；data_path 亦非 fxtm_demo_v3 -> V3 实际未隔离
+- **BLOCKER** — 市场休市 (XAUUSD tick age ~128999s)；XAUUSD 约 Sun 22:00Z 重开
+- **FACT** — v2 login=160761384 (独立于 V3 target 160759434)；V1/V2 未改
+- **NEED** — 给 V3 一个真正独立的 demo 账号 (login/password/server) 或用户对隔离方式明示
+- 产物: reports/v3_hft_foundation/V3_CALIBRATION_PILOT_STATUS.json; foundation/calibration_pilot.py

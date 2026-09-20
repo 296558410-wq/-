@@ -1,0 +1,36 @@
+{
+  "schema": "v3_calibration_pilot_status/1",
+  "task_id": "V3-CALIBRATION-PILOT-001",
+  "status": "BLOCKED",
+  "ts_utc": "2026-09-20T11:45:00+00:00",
+  "orders_sent": 0,
+  "CALIBRATION_ORDERS_SENT": 0,
+  "blockers": [
+    "INDEPENDENT_ACCOUNT_FAIL: V3 initialize() resolved to login 160759434, which is SHARED with v1_host (same login). Task §14 requires a V3 independent demo; account is not independent.",
+    "DATA_PATH_NOT_V3: V3 terminal_info().data_path = C:\\Users\\surface\\AppData\\Roaming\\MetaQuotes\\Terminal\\ACE7B8DAD94518F5AED40F521FA9DC3F (does not contain 'fxtm_demo_v3') -> V3 instance not actually isolated at connect time.",
+    "MARKET_CLOSED: XAUUSD tick age ~128999 s (weekend); no fills possible."
+  ],
+  "preflight": {
+    "other_logins": {"v1_host": 160759434, "v2_fxtm_demo_01": 160761384},
+    "v3_login": 160759434,
+    "v3_balance": 1983.26,
+    "v3_equity": 1978.5,
+    "v3_open_positions": 1,
+    "v3_data_path_is_v3": false,
+    "market_open": false
+  },
+  "safety": {
+    "V3_LIVE_ALLOWED": "NO",
+    "V3_ORDER_SEND_ALLOWED": "NO",
+    "V3_FORWARD_ALLOWED": "NO",
+    "ORDER_SENT": false,
+    "V2_UNTOUCHED": true,
+    "V1_UNTOUCHED": true
+  },
+  "required_to_unblock": [
+    "A genuinely INDEPENDENT MT5 demo account for V3 (login/password/server) NOT equal to V1(160759434) or V2(160761384).",
+    "Or explicit user decision on how to isolate V3 execution."
+  ],
+  "market_note": "XAUUSD reopens ~Sun 2026-09-20T22:00Z (Mon 06:00 GMT+8). Even after account fix, pilot must run at market open.",
+  "next": "Await user decision; do NOT send orders until independent account confirmed."
+}
