@@ -13,14 +13,14 @@ import os
 from pathlib import Path
 
 V3_ROOT = Path(__file__).resolve().parents[1]
-EXE = r"C:\AIQuant\mt5_instances\fxtm_demo_v3\terminal64.exe"
-DATA_DIR = r"C:\AIQuant\mt5_instances\fxtm_demo_v3"
-REQUIRED_TAG = "fxtm_demo_v3"
+EXE = r"C:\AIQuant\mt5_instances\fxtm_demo_v3calib\terminal64.exe"
+DATA_DIR = r"C:\AIQuant\mt5_instances\fxtm_demo_v3calib"
+REQUIRED_TAG = "fxtm_demo_v3calib"
 SYMBOL = "XAUUSD"
 MAGIC = 90004
 SERVER_EXPECTED = "ForexTimeFXTM-Demo01"
 STATE = V3_ROOT / "state"
-ENV_FILE = Path(r"C:\AIQuant\.env.mt5_demo")
+ENV_FILE = Path(r"C:\AIQuant\.env.mt5_v3_calib")
 SAFETY_FILES = {"V3_LIVE_ALLOWED": "NO", "V3_ORDER_SEND_ALLOWED": "NO", "V3_FORWARD_ALLOWED": "NO"}
 
 
@@ -59,7 +59,7 @@ def _creds():
                 continue
             k, v = ln.split("=", 1)
             kv[k.strip()] = v.strip().strip('"').strip("'")
-    return (int(kv.get("DEMO_MT5_LOGIN", 0) or 0), kv.get("DEMO_MT5_PASSWORD", ""), kv.get("DEMO_MT5_SERVER", SERVER_EXPECTED))
+    return (int(kv.get("V3_CALIB_LOGIN", 0) or 0), kv.get("V3_CALIB_PASSWORD", ""), kv.get("V3_CALIB_SERVER", SERVER_EXPECTED))
 
 
 def _install_order_guard(mt5):

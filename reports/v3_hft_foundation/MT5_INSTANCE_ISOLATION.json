@@ -1,0 +1,45 @@
+{
+  "schema": "mt5_instance_isolation/1",
+  "task_id": "MT5-INSTANCE-ISOLATION-AUDIT-FIX-001",
+  "ts_utc": "2026-09-20T12:25:00+00:00",
+  "BEFORE_INSTANCE_COUNT": 4,
+  "AFTER_INSTANCE_COUNT": 3,
+  "canonical": {
+    "CANONICAL_V1_MT5": {"exe": "C:\\Program Files\\ForexTime (FXTM) MT5", "account": 160759434, "magic": 90002, "pid": 1348},
+    "CANONICAL_V2_MT5": {"exe": "C:\\AIQuant\\mt5_instances\\fxtm_demo_01", "account": 160761384, "magic": 90003, "pid": 36460},
+    "CANONICAL_V3_MT5": {"exe": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib", "account": 160764551, "magic": 90004, "pid": 45404}
+  },
+  "fourth_instance_root_cause": {
+    "who_started_it": "fxtm_demo_v3calib created by OpenClaw (calibration session) 2026-09-20 19:58; fxtm_demo_v3 was a phantom auto-(re)launched by no-path mt5.initialize()",
+    "why_it_existed": [
+      "2026-09-17 V3 setup created mt5_instances\\fxtm_demo_v3 (non-portable) reusing V1 credentials (.env.mt5_demo, login 160759434) -> served V1's account",
+      "multiple components call mt5.initialize() WITHOUT path (trader_v1/broker_mt5_demo, money_hunter dashboard _quote_loop, self_collect mt5_live_collect + demo_exec_instrument); MT5-python resolves a single non-deterministic default terminal (observed = fxtm_demo_v3)",
+      "V1 broker (no path + V1 login) bound the default terminal to V1's account and (re)launched it -> fxtm_demo_v3 became a V1-account duplicate + phantom respawn",
+      "canonical V3 instance was therefore unusable -> an isolated portable instance fxtm_demo_v3calib (login 160764551) was created ad hoc -> 4th instance"
+    ],
+    "recurrence_prevented_by": [
+      "pin explicit terminal path in money_hunter/dashboard/dashboard.py _quote_loop",
+      "pin explicit terminal path in self_collect/mt5_live_collect.py",
+      "pin explicit terminal path in self_collect/demo_exec_instrument.py",
+      "pin explicit terminal path in trader_v1/broker_mt5_demo.py (1 line, instance-management)",
+      "V3 config/adapter repointed to fxtm_demo_v3calib; V3 never initialize()s the fxtm_demo_v3 path"
+    ]
+  },
+  "actions_taken": {
+    "paused": "\\OpenClaw\\v3-calibration-pilot Disabled; V3_CALIBRATION_PAUSED=TRUE; ORDER_SENT=FALSE",
+    "code_pinned": ["research/money_hunter/dashboard/dashboard.py", "research/self_collect/mt5_live_collect.py", "research/self_collect/demo_exec_instrument.py", "research/hermes/trader_v1/broker_mt5_demo.py"],
+    "restarted": ["money_hunter dashboard (read-only)"],
+    "process_termination": "phantom fxtm_demo_v3 stopped gracefully (taskkill, no /F); held >=90s without respawn",
+    "v3_repointed": ["config/v3_config.json", "mt5/v3_adapter.py"]
+  },
+  "verification": {
+    "v1_account": 160759434, "v2_account": 160761384, "v3_account": 160764551,
+    "distinct_accounts": true,
+    "unmapped_running": 0, "orphan_running": 0,
+    "V1_UNTOUCHED": "no strategy/config/scheduler/ledger change (one instance-management line pinned in broker_mt5_demo.py)",
+    "V2_UNTOUCHED": true,
+    "V3_CALIBRATION_PAUSED": true
+  },
+  "MT5_INSTANCE_ISOLATION": "PASS",
+  "residual_risk": "no-path mt5.initialize() is fragile; only 60s+90s observation, not a full 15-min cycle window. Recommend a longer soak + keep explicit paths in any new MT5 code."
+}

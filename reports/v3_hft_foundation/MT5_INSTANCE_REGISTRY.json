@@ -1,0 +1,36 @@
+{
+  "schema": "mt5_instance_registry/1",
+  "ts_utc": "2026-09-20T12:25:00+00:00",
+  "machine": "DESKTOP-LQ0B8O3",
+  "rule": "ONE project => ONE MT5 instance; TOTAL_PROJECT_MT5_INSTANCES = 3",
+  "instances": [
+    {
+      "id": "INSTANCE_1", "project": "V1", "exe": "C:\\Program Files\\ForexTime (FXTM) MT5\\terminal64.exe",
+      "portable": false, "data_dir": "C:\\Users\\surface\\AppData\\Roaming\\MetaQuotes\\Terminal\\158904DFD898D640E9B813D10F9EB397",
+      "account": 160759434, "server": "ForexTimeFXTM-Demo01", "magic": 90002,
+      "pid": 1348, "state": "RUNNING", "credential_source": ".env.mt5_demo", "mapping": "CANONICAL_V1_MT5"
+    },
+    {
+      "id": "INSTANCE_2", "project": "V2", "exe": "C:\\AIQuant\\mt5_instances\\fxtm_demo_01\\terminal64.exe",
+      "portable": true, "data_dir": "C:\\AIQuant\\mt5_instances\\fxtm_demo_01",
+      "account": 160761384, "server": "ForexTimeFXTM-Demo01", "magic": 90003,
+      "pid": 36460, "state": "RUNNING", "credential_source": "env:FXTM_DEMO_*", "mapping": "CANONICAL_V2_MT5"
+    },
+    {
+      "id": "INSTANCE_3", "project": "V3", "exe": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib\\terminal64.exe",
+      "portable": true, "data_dir": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
+      "account": 160764551, "server": "ForexTimeFXTM-Demo01", "magic": 90004,
+      "pid": 45404, "state": "RUNNING", "credential_source": ".env.mt5_v3_calib (gitignored)", "mapping": "CANONICAL_V3_MT5"
+    },
+    {
+      "id": "INSTANCE_4", "project": "UNMAPPED/RETIRED", "exe": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3\\terminal64.exe",
+      "portable": false, "data_dir": "C:\\Users\\surface\\AppData\\Roaming\\MetaQuotes\\Terminal\\ACE7B8DAD94518F5AED40F521FA9DC3F",
+      "account": 160759434, "server": "ForexTimeFXTM-Demo01", "magic": null,
+      "pid": null, "state": "STOPPED (was V1-account phantom; default-terminal hijack)",
+      "note": "non-portable dir created 2026-09-17 for V3 but bound to V1 creds; auto-launched by no-path mt5.initialize(); retired 2026-09-20. Directory retained (audit evidence), not deleted."
+    }
+  ],
+  "running_before": 4,
+  "running_after": 3,
+  "installed_not_running": ["C:\\AIQuant\\mt5_instances\\fxtm_demo_v3 (retired)"]
+}

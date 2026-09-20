@@ -305,3 +305,12 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **FACT** — 已排程 \OpenClaw\v3-calibration-pilot @ 2026-09-21 06:30 GMT+8 (--n 20)
 - 交物: CHATGPT-TASK-V3-HFT-CALIBRATION-PILOT-001-RESULT.md(+.json, PRELIMINARY/INCOMPLETE); state/V3_CALIBRATION_PILOT_STATUS.json
 - **DECISION** — 真实 20 笔后出 FINAL(REAL_DATA), 然后 WAIT_FOR_AUDIT; 不自动扩到 5000
+
+## 2026-09-20 20:26 - MT5-INSTANCE-ISOLATION-AUDIT-FIX-001 (PASS)
+- **FACT** — BEFORE=4 running terminals -> AFTER=3 (canonical): V1 ProgramFiles/160759434, V2 fxtm_demo_01/160761384, V3 fxtm_demo_v3calib/160764551
+- **FACT** — 4th instance root cause: fxtm_demo_v3(non-portable) 建时蹭 V1 creds(.env.mt5_demo) + 4 处 no-path mt5.initialize() 的“默认终端”劫持 -> 幽灵实例反复自启; calibration 又建了 fxtm_demo_v3calib
+- **FACT** — 修复: pin 显式 terminal path 于 dashboard/_quote_loop, self_collect/mt5_live_collect, demo_exec_instrument, trader_v1/broker_mt5_demo(1行, 语义不变, 见报告§6); 重启 dashboard; 优雅停幽灵(无/F), 90s 未自启; V3 config/adapter 改指 fxtm_demo_v3calib
+- **FACT** — V3_CALIBRATION_PAUSED=TRUE (\\OpenClaw\\v3-calibration-pilot Disabled); ORDER_SENT=FALSE
+- **FACT** — V2_UNTOUCHED=TRUE; V1 strategy/config/scheduler/ledger 未改(仅 1 行实例管理 pin, 可回退)
+- 产物: reports/v3_hft_foundation/MT5_INSTANCE_{REGISTRY,ISOLATION}.json; CHATGPT-TASK-MT5-INSTANCE-ISOLATION-AUDIT-FIX-001-RESULT.md(+.json)
+- **DECISION** — MT5_INSTANCE_ISOLATION=PASS; WAIT_FOR_AUDIT; V3 calibration 暂停待审计

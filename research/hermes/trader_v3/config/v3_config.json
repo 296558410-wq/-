@@ -5,12 +5,13 @@
  "symbol": "XAUUSD",
  "magic": 90004,
  "mt5": {
-  "instance": "fxtm_demo_v3",
-  "terminal": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3\\terminal64.exe",
-  "data_dir": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3",
+  "instance": "fxtm_demo_v3calib",
+  "terminal": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib\\terminal64.exe",
+  "data_dir": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
   "portable": true,
   "server_expected": "ForexTimeFXTM-Demo01",
-  "creds_env_file": "C:\\AIQuant\\.env.mt5_demo"
+  "creds_env_file": "C:\\AIQuant\\.env.mt5_v3_calib",
+  "isolation_note": "MT5-INSTANCE-ISOLATION-AUDIT-FIX-001: switched off fxtm_demo_v3 (was V1-account/shared default) to isolated instance login 160764551"
  },
  "safety": {
   "V3_LIVE_ALLOWED": "NO",
