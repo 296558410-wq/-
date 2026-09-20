@@ -257,3 +257,15 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - LEDGER ledger/hermes_v2_ledger.jsonl: 12 lines; bad_json=0; dup_event_id=0; dup_seq=0; dup_triples=0; hash-chain OK (prev_hash==prior event_hash, GENESIS->evt12) (last evt 2026-09-11T13:09:29Z demo-calibration); per-run ledgers append-only
 - RUN ACTIVE run_id=V2-PAPER-20260919-145431-c5a1; run_status=RUNNING; market_open=false (weekend); cycle_result=MARKET_CLOSED_SKIP; 0 orders / 0 trades this window; missed_cycles=1; observe window 09:15Z a1/a2 OK (gold_spot 4378.65)
 - FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~18h/48h); V1/V3 untouched (V1 PID1348/V3 PID56544 unchanged); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only
+
+## 2026-09-20 19:30 - V3-HFT-FOUNDATION-AUDIT-001 (只读审计 · COMPLETE)
+- **FACT** — V3_HFT_AUDIT=COMPLETE; **V3_HFT_FOUNDATION_STATUS=NOT_READY**
+- **FACT** — V3_ORDER_SENT=FALSE; V3_LIVE_GATE=LOCKED (V3_LIVE/ORDER_SEND/FORWARD_ALLOWED=NO); MT5 只读 (fxtm_demo_v3, magic 90004, order_send 代码层 hard-block)
+- **FACT** — V1_UNTOUCHED=TRUE; V2_UNTOUCHED=TRUE; V3_UNTOUCHED=TRUE; HERMES_UNTOUCHED=TRUE; READ_ONLY=TRUE
+- **FACT** — 当前 V3 = RESEARCH_READONLY (统计可行性研究)，无 scheduler / agent / GPU 路径 / execution / ledger / model / label / feature engine
+- **FACT** — 历史 tick: DUKA 7 月度 parquet, 15,563,968 行, 2023-09-01 .. 2026-08-04, 140 日; dup=0, ooo=0; HFT_TRAINING_DATA_STATUS=PARTIAL
+- **FACT** — 成本: spread 实测 (p50 1.6449bp/0.347 USD-oz); commission/slippage 非实测 -> COST_MODEL=PARTIAL
+- **FACT** — GPU: RTX A2000 Laptop 4GB, CUDA 12.6, torch 2.14.0+cu126, 计算+显存测试 PASS; V3 未使用
+- **DATA_GAP (15)** — entry/exit latency, 实测 commission/slippage/min-move, features, labels, agent链, entry/exit engine, trade ledger, PIT, local_receive_time, tick loss detection, 历史缺口, 独立账号
+- 报告: `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-FOUNDATION-AUDIT-001-RESULT.md` (+ `.json`)
+- **DECISION** — 未进入修复阶段; 等待 `V3-HFT-FOUNDATION-REPAIR-001`
