@@ -1,24 +1,29 @@
 {
   "schema": "v3_hft_calibration_pilot/1",
   "task_id": "V3-HFT-CALIBRATION-PILOT-001",
-  "status": "HALTED",
-  "phase": "FINAL (ran at market open; halted by broker retcode 10027; 0 real samples)",
+  "status": "PASS",
+  "phase": "FINAL (bounded pilot completed 20/20 real demo round-trips at market open)",
   "run_id": "CALIB-PILOT-001",
-  "started_utc": "2026-09-20T22:30:01.184018+00:00",
-  "finished_utc": "2026-09-20T22:30:01.369681+00:00",
-  "halt_reason": "UNKNOWN entry retcode=10027 (NO_AUTO_RETRY)",
+  "started_utc": "2026-09-20T23:05:42.928971+00:00",
+  "finished_utc": "2026-09-20T23:06:13.516469+00:00",
+  "halt_reason": null,
   "base_commit": "d22d9fbd07d5958e327de36c8c2aaa4efefd0401",
-  "foundation_staging_commit": "063a4927570a0857eb1c3152d4f357d73c11e602",
-  "orders_sent": 0,
-  "CALIBRATION_ORDERS_SENT": 0,
+  "orig_repo_head_before": "88f7228",
+  "orig_repo_head_after": "98ef9a74221427d5ef1e3eaa365cdd6d893ccbc1",
+  "pilot_fix_commit": "98ef9a74221427d5ef1e3eaa365cdd6d893ccbc1",
+  "orders_sent_live": 0,
+  "CALIBRATION_ORDERS_SENT": 20,
   "MOCK_EXECUTION": false,
-  "reconciliation": "PARTIAL",
+  "reconciliation": "PASS",
   "spec": {
     "MAX_CALIBRATION_ROUND_TRIPS": 20,
-    "CALIBRATION_AUTO_STOP": false,
+    "CALIBRATION_AUTO_STOP": true,
     "CALIBRATION_VOLUME": "FIXED 0.01",
     "frozen_sequence_hash": "18568a95b99be7f9341bf6881667a8560e79e81498aacd281f83b9e7b44e9e47",
-    "NO_AUTO_RETRY": true
+    "holds_ms": [100, 250, 500, 1000, 2000],
+    "directions": "alternating LONG/SHORT",
+    "NO_AUTO_RETRY": true,
+    "WAIT_FOR_AUDIT": true
   },
   "instance": {
     "path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
@@ -28,38 +33,73 @@
     "independent": true
   },
   "market_open": true,
-  "root_cause": {
-    "code": 10027,
-    "name": "TRADE_RETCODE_CLIENT_DISABLES_AT",
-    "meaning": "Autotrading disabled by client terminal (terminal-level Algo Trading OFF)",
-    "note": "account_info().trade_allowed was true; block is terminal-side, first time the real order_send path was exercised (prior V3 work was MOCK only)"
+  "results": {
+    "n_samples": 20,
+    "valid_entry_fill_samples": 20,
+    "valid_exit_fill_samples": 20,
+    "entry_latency_ms": {
+      "signal_to_request": {"mean": 0.00024, "p50": 0.0002},
+      "request_to_ack": {"mean": 273.8518, "p50": 273.5829},
+      "ack_to_fill": {"mean": 5.5842, "p50": 7.1451},
+      "signal_to_fill": {"mean": 279.4363, "p50": 278.7341, "p95": 294.3927, "max": 294.5891}
+    },
+    "exit_latency_ms": {
+      "exit_signal_to_fill": {"mean": 275.2076, "p50": 276.2112, "p95": 283.067, "max": 286.2234}
+    },
+    "entry_slippage_usd": {"mean": 0.017147, "median": 0.0, "p95": 0.045729, "max": 0.1829},
+    "exit_slippage_usd": {"mean": -0.03201, "median": 0.0, "p95": 0.045723, "min": -0.685928},
+    "spread_bps": {"mean": 0.411524, "median": 0.411526},
+    "net_round_trip_cost_usd": {"mean": 0.1375, "median": 0.14, "min": 0.06, "max": 0.20}
   },
   "account": {
-    "before": {"balance": 5000.0, "equity": 5000.0, "margin_free": 5000.0, "positions": 0},
-    "after":  {"balance": 5000.0, "equity": 5000.0, "margin_free": 5000.0, "positions": 0}
+    "before": {"balance": 5000.0, "equity": 5000.0, "positions": 0},
+    "after": {"balance": 4992.56, "equity": 4992.56, "positions": 0},
+    "net_realized_usd": -7.44,
+    "net_per_round_trip_usd": -0.372,
+    "note": "realized equity delta vs per-row cost-model attribution differ -> DATA_GAP"
   },
+  "deviation": {
+    "required": true,
+    "file": "research/hermes/trader_v3/foundation/calibration_pilot.py",
+    "commit": "98ef9a74221427d5ef1e3eaa365cdd6d893ccbc1",
+    "change": "hardcoded ORDER_FILLING_IOC -> _filling_mode() auto-selecting FOK/IOC/RETURN from symbol_info().filling_mode",
+    "reason": "FXTM demo XAUUSD filling_mode=1 (FOK only); IOC -> retcode 10030 TRADE_RETCODE_INVALID_FILL",
+    "evidence_no_order": "mt5.order_check(): FOK->Done; IOC/RETURN/BOC->10030",
+    "authorization": "explicit user GO 2026-09-21 07:04 GMT+8",
+    "frozen_spec_otherwise_unchanged": true
+  },
+  "prior_attempts": [
+    {"guard": "PILOT_DONE.halted_20260920T223001Z", "retcode": 10027, "meaning": "terminal Algo Trading OFF"},
+    {"guard": "PILOT_DONE.halted_20260920T230018Z", "retcode": 10030, "meaning": "IOC unsupported (pre-fix re-run)"}
+  ],
   "ledger": {
     "path": "research/hermes/trader_v3/data/hft_ledger/v3_calibration_ledger.jsonl",
-    "events": ["CALIBRATION_START", "ORDER_REQUEST", "BROKER_RESPONSE", "CALIBRATION_COMPLETE"],
-    "event_count": 4,
+    "event_count": 131,
     "hash_chain": "OK",
-    "first_order_price": 4376.02,
-    "bid": 4375.79,
-    "spread": 0.23
+    "event_types": ["CALIBRATION_START", "ORDER_REQUEST", "BROKER_RESPONSE", "ENTRY_FILL", "EXIT_REQUEST", "EXIT_FILL", "CALIBRATION_COMPLETE"]
   },
-  "guard": {"PILOT_DONE": "research/hermes/trader_v3/data/calibration/PILOT_DONE", "prevents_rerun": true},
-  "labels": {"REAL_DATA": 0, "MOCK_DATA": "selftest-only", "SYNTHETIC_DATA": 0,
-             "DATA_GAP": ["entry/exit latency", "slippage", "commission/swap", "reconciliation"]},
+  "guard": {"PILOT_DONE": "research/hermes/trader_v3/data/calibration/PILOT_DONE", "status": "PASS", "n": 20, "prevents_rerun": true},
+  "labels": {
+    "REAL_DATA": 20,
+    "MOCK_DATA": 0,
+    "SYNTHETIC_DATA": 0,
+    "DATA_GAP": ["cost-model vs realized-equity attribution", "larger-sample statistics (n=20)", "broker-side latency breakdown", "swap/longer holds"]
+  },
   "safety": {
-    "V3_AUTO_TRADING": false, "V3_LIVE": false, "V3_STRATEGY_AUTO_DECISION": false,
-    "V3_HERMES_AUTO_ORDER": false, "V3_MODEL_AUTO_ORDER": false,
-    "ORDER_SENT": false, "V1_UNTOUCHED": true, "V2_UNTOUCHED": true
+    "V3_AUTO_TRADING": false,
+    "V3_LIVE": false,
+    "V3_STRATEGY_AUTO_DECISION": false,
+    "V3_HERMES_AUTO_ORDER": false,
+    "V3_MODEL_AUTO_ORDER": false,
+    "ORDER_SENT_LIVE": false,
+    "V1_UNTOUCHED": true,
+    "V2_UNTOUCHED": true
   },
   "next": [
-    "enable Algo Trading on fxtm_demo_v3calib terminal (environment action)",
-    "clear data/calibration/PILOT_DONE",
-    "re-arm and re-run at market open (--n 20)",
-    "FINAL REAL_DATA -> STOP / WAIT_FOR_AUDIT (no auto-expansion to 5000)"
+    "independent audit (filling-mode deviation + cost-attribution gap)",
+    "STOP: 20/20 cap reached, CALIBRATION_AUTO_STOP=TRUE",
+    "any expansion -> separate V3-HFT-CALIBRATION-EXPANSION-001 (not started)",
+    "no Alpha / no HFT training / no model optimization / no V2 demo-forward changes"
   ],
-  "requires_user_decision": true
+  "requires_chatgpt_audit": true
 }

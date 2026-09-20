@@ -370,3 +370,14 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - SAFETY: V3_LIVE=false / V3_AUTO_TRADING=false / ORDER_SENT=false / V1_UNTOUCHED=true / V2_UNTOUCHED=true. MT5 hosts intact: V1 160759434 (pid1348) / V2 160761384 (fxtm_demo_01 pid36460) / V3 160764551 (fxtm_demo_v3calib pid49300); UNMAPPED=0; no ghost fxtm_demo_v3.
 - NEXT (needs explicit user GO; no auto-repair): enable Algo Trading on fxtm_demo_v3calib terminal -> clear PILOT_DONE -> re-arm & re-run at market open -> FINAL REAL_DATA -> STOP/WAIT_FOR_AUDIT. Frozen spec unchanged (MAX=20, no expansion to 5000).
 - RESULT files updated: collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-PILOT-001-{RESULT.md,json} (FINAL).
+
+## 2026-09-21 07:06 - V3-HFT-CALIBRATION-PILOT-001 (FINAL, **PASS** 20/20)
+- User enabled Algo Trading on `fxtm_demo_v3calib` (terminal-level trade_allowed: V1 True / V2 True / V3 now True). Re-ran bounded pilot -> **PASS**.
+- RESULT: status=PASS, n_samples=20, VALID_ENTRY_FILL=20, VALID_EXIT_FILL=20, RECONCILIATION=PASS, MOCK_EXECUTION=false, REAL_DATA=20, CALIBRATION_AUTO_STOP=true, WAIT_FOR_AUDIT=true. Run 2026-09-20T23:05:42Z -> 23:06:13Z (~30s).
+- MEASURED (n=20, 0.01 lot XAUUSD): entry signal->fill mean 279.4ms (request->ack 273.9ms = broker RTT dominant; ack->fill 5.6ms); exit signal->fill mean 275.2ms; entry slippage median 0 / mean +0.017 USD (max +0.183); exit slippage median 0 / mean -0.032 (min -0.686); spread ~0.4115 bps; NET_ROUND_TRIP_COST model mean 0.1375 USD.
+- ACCOUNT: 5000 -> **4992.56** (net -7.44 USD / 20 = -0.372 USD per round-trip realized); orders=0 / positions=0 residual. Ledger `data/hft_ledger/v3_calibration_ledger.jsonl` 131 events, hash-chain verify OK.
+- DEVIATION (disclosed, user-GO'd): frozen pilot hardcoded `ORDER_FILLING_IOC` -> broker rejected with retcode **10030 INVALID_FILL** (XAUUSD `filling_mode=1` = FOK only; verified via order_check). Fixed V3-only: `_filling_mode()` auto-selects FOK/IOC/RETURN; entry+exit use it. C:\AIQuant local commit **98ef9a7**. Frozen spec otherwise unchanged (MAX=20, frozen seq hash 18568a95, NO_AUTO_RETRY).
+- SAFETY: V3_LIVE=false / V3_AUTO_TRADING=false / ORDER_SENT_LIVE=false / V1_UNTOUCHED=true / V2_UNTOUCHED=true. MT5 hosts intact: V1 160759434 (pid1348) / V2 160761384 (fxtm_demo_01 pid36460) / V3 160764551 (fxtm_demo_v3calib pid49300); UNMAPPED=0; no ghost.
+- Prior halts preserved: `PILOT_DONE.halted_20260920T223001Z` (10027) / `PILOT_DONE.halted_20260920T230018Z` (10030). Current guard `PILOT_DONE={status:PASS,n:20}`.
+- NEXT: STOP -> **WAIT_FOR_CHATGPT_AUDIT**. No expansion to 5000; any expansion = separate V3-HFT-CALIBRATION-EXPANSION-001 (not started). No Alpha / no HFT training / no model optimization.
+- RESULT files: collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-PILOT-001-{RESULT.md,json} (FINAL PASS).
