@@ -335,3 +335,11 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **FACT** — V3_CALIBRATION_PREFLIGHT(12:59Z): 全部门 PASS, 仅 MARKET_OPEN=false(周末) -> READY_TO_START=false
 - **FACT** — 恢复排程 \\OpenClaw\\v3-calibration-pilot(Enabled) @ 2026-09-21 06:30 GMT+8, --n 20; MAX=20 硬上限
 - **FACT** — V3_CALIBRATION_PAUSED=FALSE(已恢复); ORDER_SENT=FALSE; 20 笔后自动停 -> WAIT_FOR_CHATGPT_AUDIT
+
+## 2026-09-20 23:37 - BROKER-DEMO-FORWARD-48H MONITOR (T+24h, UTC 2026-09-20T15:37Z)
+- SAFETY=PASS: execution_mode=BROKER_DEMO; broker.enabled=true; broker_demo_enabled=true; live_trading=false; allow_real_trading=false; LIVE_ALLOWED=false; execution_mode!=LIVE -> NO VIOLATION
+- MT5 fxtm_demo_01 terminal64.exe PID=36460 (portable, C:\AIQuant\mt5_instances\fxtm_demo_01); MAGIC=90003 (execution/fxtm_demo_adapter.py; V1=90002/V3=90004); server=ForexTimeFXTM-Demo01 (DEMO); creds=.env.mt5_demo (C:\AIQuant\.env.mt5_demo)
+- CONFIG_INTEGRITY: sha256(config)=B0CC254B809DA52844778BBBB8A298DF77DD2D031A8353FEC3F982DAC26BE0E5 == freeze baseline -> CONFIG_UNCHANGED=TRUE; orig repo HEAD d22d9fb unchanged
+- LEDGER ledger/hermes_v2_ledger.jsonl: 12 lines; bad_json=0; dup_event_id=0; dup_seq=0; dup_triples=0; hash-chain OK (prev_hash==prior event_hash, GENESIS->evt12) (last evt 2026-09-11T13:09:29Z demo-calibration); per-run ledgers append-only
+- RUN ACTIVE run_id=V2-PAPER-20260919-145431-c5a1; run_status=RUNNING; market_open=false (weekend); cycle_result=MARKET_CLOSED_SKIP; 0 orders / 0 trades this window; missed_cycles=1; observe window 15:30Z a1/a2 OK (gold_spot 4378.65)
+- FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~24h/48h); V1/V3 untouched (V1 PID1348; V3 PID49300 after MT5 isolation restart-verify); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only
