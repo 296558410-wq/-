@@ -1,0 +1,16 @@
+{
+  "schema": "v1_mt5_connection_safety_pin/1",
+  "flag": "V1_MT5_CONNECTION_SAFETY_PIN",
+  "ts_utc": "2026-09-20T13:00:00+00:00",
+  "file": "C:\\AIQuant\\research\\hermes\\trader_v1\\broker_mt5_demo.py",
+  "change": "mt5.initialize(path=r\"C:\\Program Files\\ForexTime (FXTM) MT5\\terminal64.exe\", login=..., ...)  — explicit terminal path (was no-path)",
+  "decision": "KEEP (do not revert) — user-confirmed 2026-09-20",
+  "verification": {
+    "V1_STRATEGY_UNTOUCHED": true,
+    "V1_TRADING_LOGIC_UNTOUCHED": true,
+    "V1_CONNECTION_PIN_CHANGED": true,
+    "V1_FILE_TREE_UNTOUCHED": false
+  },
+  "discipline": "No change to V1 strategy, signals, risk, or trading parameters. Connection-pin only.",
+  "root_cause_ref": "MT5-INSTANCE-ISOLATION-AUDIT-FIX-001 (no-path mt5.initialize default-terminal hijack)"
+}

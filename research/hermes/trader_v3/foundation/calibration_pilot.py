@@ -18,6 +18,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 import sys
 import time
 
@@ -224,6 +225,66 @@ def _slippage_signs(samples):
     return out
 
 
+def _gacct(mt5):
+    return {**_acct(mt5), "positions": len(_pos(mt5))}
+
+
+def _running_terminals():
+    ps = "Get-Process -Name terminal64 -ErrorAction SilentlyContinue | ForEach-Object { [string]$_.Id + '|' + [string]$_.Path }"
+    try:
+        r = subprocess.run(["powershell", "-NoProfile", "-Command", ps],
+                           capture_output=True, text=True, timeout=30)
+    except Exception:
+        return None
+    rows = []
+    for ln in (r.stdout or "").splitlines():
+        ln = ln.strip()
+        if "|" in ln:
+            pid, path = ln.split("|", 1)
+            if path.strip():
+                rows.append((pid.strip(), path.strip()))
+    return rows
+
+
+V1_EXE = r"C:\Program Files\ForexTime (FXTM) MT5\terminal64.exe"
+V2_EXE = r"C:\AIQuant\mt5_instances\fxtm_demo_01\terminal64.exe"
+PHANTOM_SUFFIX = r"mt5_instances\fxtm_demo_v3\terminal64.exe".lower()
+
+
+def hard_gates(acct=None, market=None):
+    terms = _running_terminals()
+    if terms is None:
+        return {"TERMINAL_ENUM_AVAILABLE": False}
+    g = {"TERMINAL_ENUM_AVAILABLE": True}
+    paths = [p.lower() for _, p in terms]
+
+    def has(exe):
+        return any(p == exe.lower() for p in paths)
+    phantom = [p for p in paths if p.endswith(PHANTOM_SUFFIX)]
+    g["MT5_INSTANCE_COUNT_EQ_3"] = (len(terms) == 3)
+    g["V1_INSTANCE_PRESENT"] = has(V1_EXE)
+    g["V2_INSTANCE_PRESENT"] = has(V2_EXE)
+    g["V3_INSTANCE_PRESENT"] = has(TERMINAL)
+    g["NO_FXTM_DEMO_V3_PHANTOM"] = (len(phantom) == 0)
+    g["NO_UNMAPPED_OR_ORPHAN"] = (len(terms) == 3 and has(V1_EXE) and has(V2_EXE)
+                                  and has(TERMINAL) and len(phantom) == 0)
+    fl = _flags()
+    g["LIVE_GATE_OK"] = (str(fl.get("V3_LIVE_ALLOWED", "NO")).upper() == "NO")
+    if acct is not None:
+        g["V3_ACCOUNT_OK"] = (acct.get("login") == EXPECTED_LOGIN)
+        g["V3_NO_UNEXPECTED_POSITION"] = (acct.get("positions", 0) == 0)
+    if market is not None:
+        g["MARKET_OPEN"] = bool(market)
+    return g
+
+
+def _assert_hard_gates(acct=None):
+    g = hard_gates(acct=acct)
+    fails = [k for k, v in g.items() if not v]
+    if fails:
+        raise Halt("HARD_GATE_FAIL: " + ",".join(fails))
+
+
 # ---- real run ----
 def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
     import MetaTrader5 as mt5
@@ -243,6 +304,7 @@ def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
         mt5.shutdown(); raise SystemExit("REFUSE: data_path not V3 isolated instance")
     if login != EXPECTED_LOGIN or login in FOREIGN_LOGINS:
         mt5.shutdown(); raise SystemExit(f"REFUSE: login {login} != {EXPECTED_LOGIN}")
+    _assert_hard_gates(_gacct(mt5))
 
     spec = _spec(mt5)
     volume = float(spec["volume_min"] or 0.01)  # FIXED = broker minimum
@@ -269,6 +331,7 @@ def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
     started = timeutil.now_iso()
     for i in range(n_roundtrips):
         try:
+            _assert_hard_gates(_gacct(mt5))
             s = _round_trip(mt5, i, float(volume), lg)
         except Halt as h:
             halt_reason = str(h)
@@ -505,6 +568,36 @@ def _round_trip(mt5, i, volume, lg):
     return s
 
 
+def preflight():
+    import MetaTrader5 as mt5
+    rep = {"name": "V3_CALIBRATION_PREFLIGHT", "ts": timeutil.now_iso(),
+           "expected_login": EXPECTED_LOGIN, "expected_magic": MAGIC,
+           "frozen_sequence_hash": SEQ_HASH, "MAX_CALIBRATION_ROUND_TRIPS": MAX_ROUND_TRIPS}
+    rep["safety_flags"] = _flags()
+    connected = _connect_v3(mt5)
+    acct = None
+    if connected:
+        ti = mt5.terminal_info()
+        acct = _gacct(mt5)
+        rep["v3"] = {"data_path": getattr(ti, "data_path", None), "login": acct.get("login"),
+                     "server": acct.get("server"), "balance": acct.get("balance"),
+                     "positions": acct.get("positions"), "spec": _spec(mt5)}
+        market = _market_open(mt5)
+        mt5.shutdown()
+    else:
+        rep["v3"] = {"ok": False, "error": mt5.last_error()}
+        market = False
+    g = hard_gates(acct=acct, market=market)
+    rep["gates"] = g
+    rep["MARKET_OPEN"] = market
+    fails = [k for k, v in g.items() if not v]
+    rep["HARD_GATES_ALL_PASS"] = (len(fails) == 0)
+    rep["FAILED_GATES"] = fails
+    rep["READY_TO_START"] = rep["HARD_GATES_ALL_PASS"]
+    print(json.dumps(rep, ensure_ascii=False, indent=1))
+    return rep
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--preflight", action="store_true")
@@ -515,19 +608,7 @@ if __name__ == "__main__":
     if a.selftest:
         raise SystemExit(0 if selftest() else 1)
     elif a.preflight:
-        # reuse the light preflight from the earlier build
-        import MetaTrader5 as mt5
-        rep = {"ts": timeutil.now_iso(), "expected_login": EXPECTED_LOGIN, "safety_flags": _flags()}
-        if _connect_v3(mt5):
-            ai = mt5.account_info(); ti = mt5.terminal_info()
-            rep["v3"] = {"data_path": getattr(ti, "data_path", None), "login": getattr(ai, "login", None),
-                         "server": getattr(ai, "server", None), "balance": getattr(ai, "balance", None),
-                         "positions": len(_pos(mt5)), "independent": getattr(ai, "login", None) == EXPECTED_LOGIN}
-            rep["spec"] = _spec(mt5)
-            mt5.shutdown()
-        else:
-            rep["v3"] = {"ok": False}
-        print(json.dumps(rep, ensure_ascii=False, indent=1))
+        preflight()
     elif a.run:
         run(a.n)
     else:
