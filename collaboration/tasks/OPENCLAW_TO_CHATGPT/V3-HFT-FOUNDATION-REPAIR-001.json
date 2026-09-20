@@ -1,4 +1,4 @@
-{
+﻿{
   "schema": "v3_hft_foundation_repair/1",
   "task_id": "V3-HFT-FOUNDATION-REPAIR-001",
   "status": "PARTIAL",
@@ -6,7 +6,7 @@
   "base_config_sha256": "8F576ABDF0F62B78DB26AB5B16D27F380FF1A37F6BE6666699670BFE9B57CCB8",
   "base_file_tree_hash": "E3E1EECF4175C8E336DD423D03D00E32B9011D37EC91F51B3D3D2F989BF81D2A",
   "final_commit_local": "f9a06e65c5a988a8b1165236d337a41efa4f8bf7",
-  "final_commit_publish": "<set by GITHUB_SYNC.md>",
+  "final_commit_publish": "943a23081f8cc51e66ae4fa713dcd81d2ad12c3c",
   "config_changed": false,
   "modules": {
     "TICK_ENGINE": "READY",
