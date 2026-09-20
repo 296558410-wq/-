@@ -1,0 +1,59 @@
+{
+  "schema": "v3_hft_foundation_repair/1",
+  "task_id": "V3-HFT-FOUNDATION-REPAIR-001",
+  "status": "PARTIAL",
+  "base_commit": "d22d9fbd07d5958e327de36c8c2aaa4efefd0401",
+  "base_config_sha256": "8F576ABDF0F62B78DB26AB5B16D27F380FF1A37F6BE6666699670BFE9B57CCB8",
+  "base_file_tree_hash": "E3E1EECF4175C8E336DD423D03D00E32B9011D37EC91F51B3D3D2F989BF81D2A",
+  "final_commit_local": "f9a06e65c5a988a8b1165236d337a41efa4f8bf7",
+  "final_commit_publish": "<set by GITHUB_SYNC.md>",
+  "config_changed": false,
+  "modules": {
+    "TICK_ENGINE": "READY",
+    "EXECUTION_MEASUREMENT": "PARTIAL",
+    "COST_MODEL": "PARTIAL",
+    "GPU_ENGINE": "READY",
+    "FEATURE_ENGINE": "READY",
+    "LABEL_ENGINE": "PARTIAL",
+    "PIT_GUARD": "READY",
+    "LEDGER": "READY",
+    "TICK_RECORDER": "READY",
+    "MODEL_PIPELINE": "SKELETON_PASS",
+    "AGENT_INTERFACE": "READY(skel)",
+    "ENTRY_EXIT_INTERFACE": "READY(skel)",
+    "DATA_REGISTRY": "READY"
+  },
+  "tests": {"TEST_COUNT": 28, "PASS": 28, "FAIL": 0, "DATA_GAP": 8},
+  "evidence": {
+    "tick_integrity_real": {"ticks": 500000, "dup": 0, "ooo": 0, "regression": 0, "stale": 99, "verdict": "REVIEW"},
+    "tick_integrity_injected": {"verdict": "FAIL", "detected": ["duplicate", "out_of_order", "timestamp_regression", "sequence_gap"]},
+    "cost_model": {"spread_bp_n": 15563968, "spread_bp_median": 1.605, "round_trip_status": "PARTIAL", "min_move_p55_bp": 16.05},
+    "feature_engine": {"n": 200000, "no_future_input": true, "feature_count": 17, "ofi": "L1_PROXY"},
+    "label_engine": {"net": "DATA_GAP", "overlap_ratio_1s": 6.62, "effective_n_1s": 30200},
+    "gpu_benchmark": {"dataset": 500000, "cpu_s": 0.097, "cpu_ticks_per_sec": 5144932, "backend": "GPU", "vram_peak_mib": 29.3, "max_abs_cpu_gpu_diff": 0.0},
+    "execution_calibration_mock": {"entries": 50, "exits": 50, "CALIBRATION_ORDERS_SENT": 0},
+    "ledger": {"verify_ok": true, "events": 6},
+    "data_registry": {"entries": 11, "total_ticks": 15563968}
+  },
+  "data_gaps": [
+    "real broker entry/exit latency",
+    "measured commission",
+    "measured slippage",
+    "net labels (blocked on measured cost)",
+    ">=5000 real calibration samples",
+    "L2 / trade flow",
+    "independent V3 demo account",
+    "config-hash binding of model registry (pipeline smoke only)"
+  ],
+  "safety": {
+    "V3_AUTO_TRADING": false,
+    "V3_ORDER_SEND": false,
+    "V3_LIVE": false,
+    "ORDER_SENT": false,
+    "V1_UNTOUCHED": true,
+    "V2_UNTOUCHED": true,
+    "CALIBRATION_ORDER_MARK": true,
+    "MAGIC": 90004
+  },
+  "V3_HFT_FOUNDATION_STATUS": "PARTIAL"
+}

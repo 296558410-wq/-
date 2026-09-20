@@ -1,0 +1,23 @@
+{
+  "schema": "v3_label_schema/1",
+  "horizons_ms": [100, 250, 500, 1000, 2000, 5000],
+  "label_record": {
+    "label_timestamp_ns": "int",
+    "base_timestamp_ns": "int",
+    "horizon_ms": "int",
+    "gross_future_return": "float",
+    "net_future_return": "float",
+    "cost_bp_applied": "float",
+    "label_schema_hash": "str"
+  },
+  "cost_awareness": {
+    "gross_future_return": "mid(t+h)/mid(t) - 1",
+    "net_future_return": "gross - round_trip_cost_bp/1e4",
+    "NET_LABEL_STATUS": "DATA_GAP if costs not measured"
+  },
+  "overlap": {
+    "fields": ["label_horizon", "sample_interval", "overlap_ratio", "effective_n"],
+    "rule": "overlapping samples must NOT be counted as independent observations",
+    "stats": ["block bootstrap", "permutation", "purged/embargo validation"]
+  }
+}

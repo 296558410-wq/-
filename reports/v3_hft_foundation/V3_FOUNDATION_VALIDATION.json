@@ -1,0 +1,218 @@
+{
+ "generated_at": "2026-09-20T11:39:05.332974+00:00",
+ "duka_dir": "C:\\AIQuant\\data\\staging_duka\\assembled",
+ "duka_files": [
+  "ticks_202309.parquet",
+  "ticks_202310.parquet",
+  "ticks_202311.parquet",
+  "ticks_202401.parquet",
+  "ticks_202402.parquet",
+  "ticks_202403.parquet",
+  "ticks_202608.parquet"
+ ],
+ "tick_integrity_real": {
+  "file": "ticks_202309.parquet",
+  "rates": {
+   "TICK_DUPLICATE_RATE": 0.0,
+   "TICK_OUT_OF_ORDER_RATE": 0.0,
+   "TICK_SEQUENCE_GAP_COUNT": 0,
+   "STALE_TICK_COUNT": 99,
+   "ABNORMAL_SPREAD_COUNT": 0,
+   "ABNORMAL_PRICE_COUNT": 0,
+   "TIMESTAMP_REGRESSION_COUNT": 0,
+   "TICKS": 500000
+  },
+  "verdict": "REVIEW",
+  "interval_stats_ms": {
+   "median": 126.0,
+   "p95": 2708.0,
+   "p99": 7433.0,
+   "max": 3603258.0
+  }
+ },
+ "tick_integrity_injected": {
+  "rates": {
+   "TICK_DUPLICATE_RATE": 0.0049504950495049506,
+   "TICK_OUT_OF_ORDER_RATE": 0.0049504950495049506,
+   "TICK_SEQUENCE_GAP_COUNT": 2,
+   "STALE_TICK_COUNT": 23,
+   "ABNORMAL_SPREAD_COUNT": 0,
+   "ABNORMAL_PRICE_COUNT": 0,
+   "TIMESTAMP_REGRESSION_COUNT": 1,
+   "TICKS": 202
+  },
+  "verdict": "FAIL"
+ },
+ "cost_model": {
+  "spread_bp": {
+   "n": 15563968,
+   "median": 1.6046624925391408,
+   "p95": 1.9122188861779146,
+   "p99": 2.285441760771819
+  },
+  "slippage_bp": {
+   "n": 0,
+   "source": "DATA_GAP/MODEL"
+  },
+  "commission_bp": {
+   "value": null,
+   "source": "DATA_GAP"
+  },
+  "round_trip_cost_bp": {
+   "status": "PARTIAL(spread measured; commission DATA_GAP)",
+   "value": 1.6046624925391408,
+   "components": {
+    "spread": 1.6046624925391408
+   }
+  },
+  "minimum_required_move_p55": {
+   "status": "PARTIAL(commission/slippage not fully measured)",
+   "value_bp": 16.046624925391395,
+   "win_rate": 0.55
+  },
+  "expected_net_edge_example_bp": {
+   "status": "OK",
+   "expected_net_edge_bp": 3.395337507460859,
+   "alpha_threshold": "NOT_DEFINED_AT_FOUNDATION_STAGE"
+  }
+ },
+ "feature_engine": {
+  "n": 200000,
+  "no_future_input": true,
+  "feature_schema_hash": "4a3bea987856b89e4af562219f88d8bbe20ff6af376d2b87f74fd29e98181971",
+  "ofi_status": "L1_PROXY",
+  "feature_count": 17
+ },
+ "label_engine": {
+  "100ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 0.6622516556291391,
+   "effective_n": 200000
+  },
+  "250ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 1.6556291390728477,
+   "effective_n": 120800
+  },
+  "500ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 3.3112582781456954,
+   "effective_n": 60400
+  },
+  "1000ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 6.622516556291391,
+   "effective_n": 30200
+  },
+  "2000ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 13.245033112582782,
+   "effective_n": 15100
+  },
+  "5000ms": {
+   "NET_LABEL_STATUS": "DATA_GAP",
+   "overlap_ratio": 33.11258278145695,
+   "effective_n": 6040
+  }
+ },
+ "gpu_benchmark": {
+  "dataset_size": 500000,
+  "feature_count": 17,
+  "cpu_time_s": 0.09718299994710833,
+  "cpu_ticks_per_sec": 5144932.758529003,
+  "gpu_backend": "gpu",
+  "vram_peak_mib": 29.3,
+  "max_abs_cpu_gpu_diff": 0.0
+ },
+ "gpu_info": {
+  "torch": "2.14.0+cu126",
+  "cuda_available": true,
+  "cuda_version": "12.6",
+  "device": "NVIDIA RTX A2000 Laptop GPU",
+  "vram_mib": 4095.6,
+  "cc": "8.6"
+ },
+ "tick_recorder": {
+  "dir": "C:\\AIQuant\\research\\hermes\\trader_v3\\data\\ticks_v3",
+  "manifest_exists": true
+ },
+ "execution_calibration_mock": {
+  "mode": "MOCK_NO_ORDERS",
+  "CALIBRATION_ORDERS_SENT": 0,
+  "entry_profile": {
+   "ENTRY_LATENCY_PROFILE": {
+    "signal_to_fill_ns": {
+     "n": 50,
+     "mean": 1198705.76,
+     "median": 1202796.5,
+     "p95": 1284300,
+     "p99": 1317265,
+     "max": 1317265
+    },
+    "signal_to_send_ns": {
+     "n": 50,
+     "mean": 120000.0,
+     "median": 120000.0,
+     "p95": 120000,
+     "p99": 120000,
+     "max": 120000
+    },
+    "send_to_ack_ns": {
+     "n": 50,
+     "mean": 877536.6,
+     "median": 876178.0,
+     "p95": 967752,
+     "p99": 971395,
+     "max": 971395
+    },
+    "ack_to_fill_ns": {
+     "n": 50,
+     "mean": 201169.16,
+     "median": 204945.0,
+     "p95": 243146,
+     "p99": 247346,
+     "max": 247346
+    },
+    "slippage_bps": {
+     "n": 50,
+     "mean": 0.10822825619523474,
+     "median": 0.10822847572377611,
+     "p95": 0.10824648807790396,
+     "p99": 0.10824971043192615,
+     "max": 0.10824971043192615
+    }
+   },
+   "n": 50
+  },
+  "exit_profile": {
+   "EXIT_LATENCY_PROFILE": {
+    "exit_latency_ns": {
+     "n": 50,
+     "mean": 950000.0,
+     "median": 950000.0,
+     "p95": 950000,
+     "p99": 950000,
+     "max": 950000
+    },
+    "exit_slippage": {
+     "n": 50,
+     "mean": 0.01999999999998181,
+     "median": 0.01999999999998181,
+     "p95": 0.01999999999998181,
+     "p99": 0.01999999999998181,
+     "max": 0.01999999999998181
+    }
+   },
+   "n": 50
+  }
+ },
+ "ledger": {
+  "ok": true,
+  "events": 6,
+  "head": "5a9c29b0f0da230bdf33f6a7da4152f4db69a2a8596ac6dd7fcb90f3b367d6bd"
+ },
+ "data_registry": {
+  "entries": 11,
+  "total_ticks": 15563968
+ }
+}

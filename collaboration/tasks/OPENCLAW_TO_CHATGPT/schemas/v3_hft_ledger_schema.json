@@ -1,0 +1,27 @@
+{
+  "schema": "v3_hft_ledger_schema/1",
+  "properties": {"append_only": true, "hash_chained": true},
+  "event": {
+    "event_id": "int (monotonic per ledger)",
+    "timestamp_ns": "int",
+    "event_type": "TICK|FEATURE|MODEL|AGENT|ENTRY|FILL|EXIT|PNL",
+    "run_id": "str",
+    "decision_id": "str|null",
+    "model_version": "str|null",
+    "feature_hash": "str|null",
+    "price": "float|null",
+    "bid": "float|null",
+    "ask": "float|null",
+    "spread": "float|null",
+    "order_id": "str|null",
+    "position_id": "str|null",
+    "fill_price": "float|null",
+    "slippage": "float|null",
+    "latency_ns": "int|null",
+    "pnl": "float|null",
+    "prev_hash": "str",
+    "event_hash": "str"
+  },
+  "chain": "event_hash = sha256(canonical(event without event_hash) + prev_hash)",
+  "reconstruction": "Tick -> Feature -> Model -> Agent -> Entry -> Fill -> Exit -> P&L"
+}

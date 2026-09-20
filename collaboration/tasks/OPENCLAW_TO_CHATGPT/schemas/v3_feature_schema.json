@@ -1,0 +1,32 @@
+{
+  "schema": "v3_feature_schema/1",
+  "discipline": [
+    "latest_input_timestamp <= feature_timestamp (no future ticks).",
+    "Features needing L2 are marked DATA_GAP or L1_PROXY; never masquerade as real order flow."
+  ],
+  "features": {
+    "tick_return": {"inputs": "L1", "status": "OK"},
+    "mid_return": {"inputs": "L1", "status": "OK"},
+    "bid_return": {"inputs": "L1", "status": "OK"},
+    "ask_return": {"inputs": "L1", "status": "OK"},
+    "tick_velocity": {"inputs": "L1", "status": "OK"},
+    "tick_intensity": {"inputs": "L1", "status": "OK"},
+    "spread": {"inputs": "L1", "status": "OK"},
+    "spread_change": {"inputs": "L1", "status": "OK"},
+    "spread_zscore": {"inputs": "L1", "status": "OK"},
+    "mid_momentum": {"inputs": "L1", "status": "OK"},
+    "short_term_volatility": {"inputs": "L1", "status": "OK"},
+    "realized_volatility": {"inputs": "L1", "status": "OK"},
+    "price_acceleration": {"inputs": "L1", "status": "OK"},
+    "micro_price": {"inputs": "L1", "status": "OK", "note": "standard L1 micro-price using bid/ask sizes when available; else size-less variant flagged L1_PROXY"},
+    "order_flow_imbalance": {"inputs": "L1_PROXY", "status": "PROXY", "note": "quote-imbalance proxy; TRUE order flow needs L2/trade flow => DATA_GAP"},
+    "reversal_pressure": {"inputs": "L1", "status": "OK"},
+    "liquidity_proxy": {"inputs": "L1_PROXY", "status": "PROXY"}
+  },
+  "feature_record": {
+    "feature_timestamp_ns": "int",
+    "latest_input_timestamp_ns": "int",
+    "feature_schema_hash": "str",
+    "values": "dict[str,float]"
+  }
+}

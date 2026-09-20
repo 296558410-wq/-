@@ -1,0 +1,48 @@
+{
+  "schema": "v3_execution_schema/1",
+  "purpose": "Entry/Exit execution measurement (calibration). Not a strategy.",
+  "calibration": {
+    "CALIBRATION_ORDER": true,
+    "MAGIC": 90004,
+    "LIVE": false,
+    "quantity_fixed_in_advance": true,
+    "dynamic_increase_by_result": false,
+    "decided_by_hermes_or_model": false
+  },
+  "entry_record": {
+    "signal_time_ns": "int",
+    "request_create_time_ns": "int",
+    "mt5_send_time_ns": "int",
+    "broker_ack_time_ns": "int",
+    "fill_time_ns": "int",
+    "requested_price": "float",
+    "bid_at_request": "float",
+    "ask_at_request": "float",
+    "fill_price": "float",
+    "spread_at_request": "float",
+    "slippage_price": "float",
+    "slippage_bps": "float",
+    "latency_total_ns": "int",
+    "latency_breakdown": {
+      "signal_to_send_ns": "int",
+      "send_to_ack_ns": "int",
+      "ack_to_fill_ns": "int",
+      "signal_to_fill_ns": "int"
+    }
+  },
+  "exit_record": {
+    "exit_signal_time_ns": "int",
+    "exit_request_time_ns": "int",
+    "mt5_send_time_ns": "int",
+    "broker_ack_time_ns": "int",
+    "exit_fill_time_ns": "int",
+    "exit_requested_price": "float",
+    "exit_bid": "float",
+    "exit_ask": "float",
+    "exit_fill_price": "float",
+    "exit_slippage": "float",
+    "exit_latency_ns": "int"
+  },
+  "profiles": ["ENTRY_LATENCY_PROFILE", "EXIT_LATENCY_PROFILE"],
+  "stats": ["mean", "median", "p95", "p99", "max"]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "v3_model_registry/1",
+  "binding": {
+    "model_version": "str",
+    "feature_schema_hash": "str",
+    "label_schema_hash": "str",
+    "training_data_hash": "str",
+    "code_commit": "str",
+    "config_hash": "str"
+  },
+  "artifacts": ["baseline (logistic | lightgbm | small_mlp)"],
+  "rule": "a model may not exist independently of its data/feature/label version"
+}

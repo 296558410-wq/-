@@ -1,0 +1,28 @@
+{
+  "schema": "v3_tick_schema/1",
+  "symbol_default": "XAUUSD",
+  "record": {
+    "timestamp_utc": {"type": "string", "unit": "ISO8601 UTC", "source": "OBSERVED", "desc": "wall-clock UTC of receive"},
+    "timestamp_ns": {"type": "int", "unit": "ns since epoch", "source": "OBSERVED"},
+    "mt5_server_time": {"type": "int|string", "unit": "broker server time (time_msc)", "source": "OBSERVED"},
+    "local_receive_time_ns": {"type": "int", "unit": "ns, monotonic perf counter", "source": "OBSERVED"},
+    "symbol": {"type": "string", "source": "OBSERVED"},
+    "bid": {"type": "float", "source": "OBSERVED"},
+    "ask": {"type": "float", "source": "OBSERVED"},
+    "mid": {"type": "float", "source": "DERIVED", "formula": "(bid+ask)/2"},
+    "spread": {"type": "float", "source": "DERIVED", "formula": "ask-bid"},
+    "tick_sequence": {"type": "int", "source": "LOCAL_MONOTONIC", "desc": "recorder-assigned, monotonic per stream"},
+    "source": {"type": "string", "values": ["mt5", "duka"], "source": "OBSERVED"},
+    "terminal_id": {"type": "string", "source": "OBSERVED"},
+    "account_id": {"type": "string", "source": "OBSERVED"},
+    "last": {"type": "float|null", "source": "OBSERVED_OPTIONAL"},
+    "volume": {"type": "int|null", "source": "OBSERVED_OPTIONAL"},
+    "volume_real": {"type": "float|null", "source": "OBSERVED_OPTIONAL"},
+    "flags": {"type": "int|null", "source": "OBSERVED_OPTIONAL"}
+  },
+  "discipline": [
+    "Never fabricate fields the broker does not provide.",
+    "mid/spread are derived, labeled DERIVED.",
+    "ask >= bid enforced; crossed quotes rejected."
+  ]
+}

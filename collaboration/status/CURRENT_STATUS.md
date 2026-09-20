@@ -269,3 +269,15 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **DATA_GAP (15)** — entry/exit latency, 实测 commission/slippage/min-move, features, labels, agent链, entry/exit engine, trade ledger, PIT, local_receive_time, tick loss detection, 历史缺口, 独立账号
 - 报告: `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-FOUNDATION-AUDIT-001-RESULT.md` (+ `.json`)
 - **DECISION** — 未进入修复阶段; 等待 `V3-HFT-FOUNDATION-REPAIR-001`
+
+## 2026-09-20 19:55 - V3-HFT-FOUNDATION-REPAIR-001 (stage-1 infrastructure · PARTIAL)
+- **FACT** — V3_HFT_FOUNDATION_STATUS=PARTIAL; BASE_COMMIT d22d9fb; BASE_CONFIG_SHA256 8F576ABD…CCB8 (CONFIG_CHANGED=NO); local FINAL_COMMIT f9a06e6
+- **FACT** — 新增 foundation/ (14 模块 + tests) + schemas/ (7) + V3_FOUNDATION_VALIDATION.json
+- **FACT** — TICK_ENGINE/GPU_ENGINE/FEATURE_ENGINE/PIT_GUARD/LEDGER/TICK_RECORDER/DATA_REGISTRY=READY
+- **FACT** — EXECUTION_MEASUREMENT=PARTIAL (harness+mock 验证; 真实 demo calibration 未执行); COST_MODEL=PARTIAL (spread 实测 1.60bp@15.56M; commission/slippage DATA_GAP); LABEL_ENGINE=PARTIAL (net=DATA_GAP)
+- **FACT** — TEST_COUNT=28 PASS=28 FAIL=0; GPU real compute CPU/GPU diff=0.0 (500k ticks, VRAM 29MiB)
+- **FACT** — V3_AUTO_TRADING=FALSE; V3_ORDER_SEND=FALSE; V3_LIVE=FALSE; ORDER_SENT=FALSE (CALIBRATION_ORDERS_SENT=0)
+- **FACT** — V1_UNTOUCHED=TRUE; V2_UNTOUCHED=TRUE (V2 BROKER_DEMO 48h forward 未受影响)
+- **DATA_GAP** — real broker latency; measured commission/slippage; net labels; >=5000 real calibration samples; L2/trade flow; independent V3 account
+- 报告: `collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-FOUNDATION-REPAIR-001-RESULT.md` (+ `.json`, `schemas/`)
+- **DECISION** — 不进入自动交易; 下一步须单独建立 `V3-HFT-ALPHA-RESEARCH-001`

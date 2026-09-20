@@ -1,0 +1,16 @@
+{
+  "schema": "v3_cost_model/1",
+  "components": {
+    "spread": {"source": "MEASURED|ASSUMED|DATA_GAP"},
+    "slippage": {"source": "MEASURED|MODEL|DATA_GAP"},
+    "commission": {"source": "MEASURED|ASSUMED|DATA_GAP"},
+    "round_trip_cost": {"formula": "spread + 2*commission_per_side + expected_slippage"},
+    "latency_cost": {"note": "slippage realized during latency; MEASURED only from execution calibration"},
+    "minimum_required_move": {"formula": "total_cost_bp / (2p-1) for symmetric scalp", "note": "uses MEASURED inputs only; else DATA_GAP"}
+  },
+  "stats": ["median", "p95", "p99"],
+  "expected_net_edge": {
+    "formula": "expected_gross_move - spread_cost - expected_slippage - commission - latency_cost",
+    "alpha_threshold": "NOT DEFINED at foundation stage"
+  }
+}
