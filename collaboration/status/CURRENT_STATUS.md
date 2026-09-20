@@ -296,3 +296,12 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - **FACT** — 市场休市; 已排程 Windows 任务 \OpenClaw\v3-calibration-pilot @ 2026-09-21 06:30 GMT+8 (10 roundtrips, 0.01, MAGIC 90004, 含 PILOT_DONE 防重)
 - **FACT** — ORDER_SENT=FALSE 至今; 当前跑 --run 被闸门拒绝(market closed)
 - 产物: foundation/calibration_pilot.py, run_calibration_pilot.cmd, state/V3_CALIBRATION_PILOT_STATUS.json
+
+## 2026-09-20 20:08 - V3-HFT-CALIBRATION-PILOT-001 (ARMED, spec-compliant)
+- **FACT** — 按任务书重建 pilot: MAX_CALIBRATION_ROUND_TRIPS=20(硬上限, n>20 拒绝), 冻结方向(交替 LONG/SHORT) + 冻结持有序列[100,250,500,1000,2000]ms, hash=18568a95…, CALIBRATION_VOLUME=FIXED 0.01, NO_AUTO_RETRY, 24 项自动停止门, MT5 对账(cid↔order↔deal↔ledger, PASS 才计入), Ledger 7 事件 hash-chain
+- **FACT** — 隔离: 用独立实例 fxtm_demo_v3calib / login 160764551 (spec §4 写 fxtm_demo_v3 但该实例实为 V1 共享账号 160759434 → 按 §3 用隔离实例, 已记录偏差)
+- **FACT** — preflight: independent=TRUE, positions=0, spec 已记录(contract 100/tick 0.1/min 0.01); selftest(MOCK) chain_ok=true
+- **FACT** — 市场休市 → 0 单; ORDER_SENT=FALSE
+- **FACT** — 已排程 \OpenClaw\v3-calibration-pilot @ 2026-09-21 06:30 GMT+8 (--n 20)
+- 交物: CHATGPT-TASK-V3-HFT-CALIBRATION-PILOT-001-RESULT.md(+.json, PRELIMINARY/INCOMPLETE); state/V3_CALIBRATION_PILOT_STATUS.json
+- **DECISION** — 真实 20 笔后出 FINAL(REAL_DATA), 然后 WAIT_FOR_AUDIT; 不自动扩到 5000

@@ -1,48 +1,43 @@
 {
-  "schema": "v3_calibration_pilot_status/1",
-  "task_id": "V3-CALIBRATION-PILOT-001",
-  "status": "ARMED (awaiting market open)",
-  "ts_utc": "2026-09-20T12:00:00+00:00",
+  "schema": "v3_calibration_pilot_status/2",
+  "task_id": "V3-HFT-CALIBRATION-PILOT-001",
+  "status": "ARMED (market closed; awaiting open)",
+  "ts_utc": "2026-09-20T12:07:00+00:00",
   "orders_sent": 0,
   "CALIBRATION_ORDERS_SENT": 0,
-  "independent_account": {
+  "spec_alignment": {
+    "MAX_CALIBRATION_ROUND_TRIPS": 20,
+    "CALIBRATION_AUTO_STOP": "at cap",
+    "CALIBRATION_VOLUME": "FIXED 0.01 (broker volume_min)",
+    "direction_sequence": "frozen alternating LONG/SHORT x10",
+    "hold_sequence_ms": [100, 250, 500, 1000, 2000],
+    "frozen_sequence_hash": "18568a95b99be7f9341bf6881667a8560e79e81498aacd281f83b9e7b44e9e47",
+    "MOCK_EXECUTION": false,
+    "NO_AUTO_RETRY": true,
+    "entries_measured": ["signal_to_request_ms", "request_to_ack_ms", "ack_to_fill_ms", "signal_to_fill_ms", "slippage_bps", "bid/ask/mid/spread"],
+    "exits_measured": ["exit_signal_to_fill_ms", "exit_slippage_bps", "exit latencies"],
+    "reconciliation": "calibration_id <-> MT5 order <-> MT5 deal <-> ledger (PASS required)",
+    "ledger_events": ["CALIBRATION_START", "ORDER_REQUEST", "BROKER_RESPONSE", "ENTRY_FILL", "EXIT_REQUEST", "EXIT_FILL", "CALIBRATION_COMPLETE"]
+  },
+  "instance": {
+    "path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
     "login": 160764551,
-    "name": "o",
-    "type": "Advantage Demo USD",
     "server": "ForexTimeFXTM-Demo01",
-    "instance": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
     "portable": true,
-    "verified": true,
-    "balance": 5000.0,
-    "positions": 0,
-    "creds_file": "C:\\AIQuant\\.env.mt5_v3_calib (GITIGNORED)"
-  },
-  "isolation": {
-    "v1_host_login": 160759434,
-    "v2_login": 160761384,
-    "v3_calib_login": 160764551,
     "independent": true,
-    "note": "V3 no longer reuses V1's .env.mt5_demo. Dedicated portable instance + dedicated env file."
+    "spec_deviation": "Task §4 names data dir fxtm_demo_v3, but that instance is shared with V1 (login 160759434). Used the isolated fxtm_demo_v3calib to satisfy the §3 isolation hard-rule."
   },
-  "root_cause_of_auto_revert": [
-    "v3 original instance was NOT /portable -> used roaming profile auto-logged into 160759434",
-    "V3 adapter/pilot forced login from V1's .env.mt5_demo (DEMO_MT5_LOGIN=160759434) on every connect"
-  ],
-  "market": {"open": false, "reason": "weekend; XAUUSD reopens ~Sun 22:00Z (Mon 06:00 GMT+8)"},
-  "scheduled": {
-    "task": "\\OpenClaw\\v3-calibration-pilot",
-    "cmd": "C:\\AIQuant\\research\\hermes\\trader_v3\\run_calibration_pilot.cmd",
-    "at_local": "2026-09-21T06:30:00+08:00",
-    "n_roundtrips": 50,
-    "volume": 0.01,
-    "MAGIC": 90004,
-    "CALIBRATION_ORDER": true,
-    "guard": "refuses if market closed / login != 160764551 / collides with V1/V2 / PILOT_DONE marker present",
-    "n_roundtrips_note": "raised 10 -> 50 per user 2026-09-20 20:02 (more samples for execution distribution)",
-    "log": "trader_v3/logs/calibration_pilot.log"
-  },
-  "safety": {
-    "V3_AUTO_TRADING": false, "V3_ORDER_SEND": false, "V3_LIVE": false,
-    "ORDER_SENT": false, "V1_UNTOUCHED": true, "V2_UNTOUCHED": true
-  }
+  "symbol_spec": {"name": "XAUUSD", "point": 0.01, "digits": 2, "trade_tick_size": 0.01,
+                  "trade_tick_value": 0.1, "trade_contract_size": 100.0,
+                  "volume_min": 0.01, "volume_step": 0.01},
+  "market": {"open": false, "reason": "weekend; XAUUSD reopens ~Mon 06:00 GMT+8"},
+  "scheduled": {"task": "\\OpenClaw\\v3-calibration-pilot",
+                "cmd": "C:\\AIQuant\\research\\hermes\\trader_v3\\run_calibration_pilot.cmd",
+                "at_local": "2026-09-21T06:30:00+08:00", "n_roundtrips": 20,
+                "log": "trader_v3/logs/calibration_pilot.log"},
+  "selftest": {"MOCK_EXECUTION": true, "chain_ok": true, "note": "mock chain check only; not calibration data"},
+  "safety": {"V3_AUTO_TRADING": false, "V3_ORDER_SEND": false, "V3_LIVE": false,
+             "V3_STRATEGY_AUTO_DECISION": false, "V3_HERMES_AUTO_ORDER": false,
+             "V3_MODEL_AUTO_ORDER": false, "ORDER_SENT": false,
+             "V1_UNTOUCHED": true, "V2_UNTOUCHED": true}
 }
