@@ -361,3 +361,12 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - RUN ACTIVE run_id=V2-PAPER-20260920-200702-f507; run_status=RUNNING; market_open=false (pre-open, XAUUSD reopens ~Sun 22:00Z, ~23min out); cycle window 21:30Z decision=WAIT / 0 orders / 0 trades; last_completed 2026-09-20T21:37:35Z; observe window 19:45Z a1/a2 OK (gold_spot 4378.65); missed_cycles=1
 - NOTE: health.run_id == ACTIVE.run_id (V2-PAPER-20260920-200702-f507) -> 早前 run_id 漂移(OBSERVATION @ V2-FULL-AUDIT-001)已消除
 - FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~30h/48h); V1/V3 untouched (V1 PID1348; V3 PID49300); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only; END not reached -> no end-report this cycle
+
+## 2026-09-21 06:45 - V3-HFT-CALIBRATION-PILOT-001 (FINAL, HALTED)
+- The scheduled bounded pilot ran at market open: \OpenClaw\v3-calibration-pilot, 06:30 GMT+8 (= 2026-09-20T22:30:01Z), exit=0; `run_calibration_pilot.cmd --run --n 20`.
+- RESULT: **HALTED**, halt_reason="UNKNOWN entry retcode=10027 (NO_AUTO_RETRY)". 0 roundtrips / 0 real samples / MOCK_EXECUTION=false / RECONCILIATION=PARTIAL / WAIT_FOR_AUDIT=true.
+- ROOT CAUSE: retcode 10027 = TRADE_RETCODE_CLIENT_DISABLES_AT -> automated trading DISABLED in the client terminal `fxtm_demo_v3calib` (terminal-level Algo Trading OFF). account_info().trade_allowed=true (account OK); block is terminal-side. First time the real order_send path was exercised (prior V3 work was MOCK only).
+- EVIDENCE: instance fxtm_demo_v3calib login=160764551; account before==after (balance/equity 5000, positions 0); ledger v3_calibration_ledger.jsonl 4 events hash-chain OK (START->ORDER_REQUEST price 4376.02 bid 4375.79 spread 0.23->BROKER_RESPONSE order_id 0->COMPLETE roundtrips=0); guard data/calibration/PILOT_DONE={"status":"HALTED","n":0}; V3_EXECUTION_PROFILE/V3_COST_PROFILE all n=0.
+- SAFETY: V3_LIVE=false / V3_AUTO_TRADING=false / ORDER_SENT=false / V1_UNTOUCHED=true / V2_UNTOUCHED=true. MT5 hosts intact: V1 160759434 (pid1348) / V2 160761384 (fxtm_demo_01 pid36460) / V3 160764551 (fxtm_demo_v3calib pid49300); UNMAPPED=0; no ghost fxtm_demo_v3.
+- NEXT (needs explicit user GO; no auto-repair): enable Algo Trading on fxtm_demo_v3calib terminal -> clear PILOT_DONE -> re-arm & re-run at market open -> FINAL REAL_DATA -> STOP/WAIT_FOR_AUDIT. Frozen spec unchanged (MAX=20, no expansion to 5000).
+- RESULT files updated: collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-PILOT-001-{RESULT.md,json} (FINAL).

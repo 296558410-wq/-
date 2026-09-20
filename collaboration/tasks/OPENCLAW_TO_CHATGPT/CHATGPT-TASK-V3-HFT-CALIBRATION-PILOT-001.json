@@ -1,16 +1,21 @@
 {
   "schema": "v3_hft_calibration_pilot/1",
   "task_id": "V3-HFT-CALIBRATION-PILOT-001",
-  "status": "INCOMPLETE",
-  "phase": "PRELIMINARY (awaiting market open; 0 real samples)",
+  "status": "HALTED",
+  "phase": "FINAL (ran at market open; halted by broker retcode 10027; 0 real samples)",
+  "run_id": "CALIB-PILOT-001",
+  "started_utc": "2026-09-20T22:30:01.184018+00:00",
+  "finished_utc": "2026-09-20T22:30:01.369681+00:00",
+  "halt_reason": "UNKNOWN entry retcode=10027 (NO_AUTO_RETRY)",
   "base_commit": "d22d9fbd07d5958e327de36c8c2aaa4efefd0401",
   "foundation_staging_commit": "063a4927570a0857eb1c3152d4f357d73c11e602",
   "orders_sent": 0,
   "CALIBRATION_ORDERS_SENT": 0,
   "MOCK_EXECUTION": false,
+  "reconciliation": "PARTIAL",
   "spec": {
     "MAX_CALIBRATION_ROUND_TRIPS": 20,
-    "CALIBRATION_AUTO_STOP": "at cap",
+    "CALIBRATION_AUTO_STOP": false,
     "CALIBRATION_VOLUME": "FIXED 0.01",
     "frozen_sequence_hash": "18568a95b99be7f9341bf6881667a8560e79e81498aacd281f83b9e7b44e9e47",
     "NO_AUTO_RETRY": true
@@ -19,17 +24,42 @@
     "path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib",
     "login": 160764551,
     "server": "ForexTimeFXTM-Demo01",
-    "independent": true,
-    "spec_deviation": "spec §4 names fxtm_demo_v3 but it is V1-shared (160759434); used isolated fxtm_demo_v3calib per §3"
+    "magic": 90004,
+    "independent": true
   },
-  "market_open": false,
-  "scheduled": {"task": "\\OpenClaw\\v3-calibration-pilot", "at_local": "2026-09-21T06:30:00+08:00", "n_roundtrips": 20},
+  "market_open": true,
+  "root_cause": {
+    "code": 10027,
+    "name": "TRADE_RETCODE_CLIENT_DISABLES_AT",
+    "meaning": "Autotrading disabled by client terminal (terminal-level Algo Trading OFF)",
+    "note": "account_info().trade_allowed was true; block is terminal-side, first time the real order_send path was exercised (prior V3 work was MOCK only)"
+  },
+  "account": {
+    "before": {"balance": 5000.0, "equity": 5000.0, "margin_free": 5000.0, "positions": 0},
+    "after":  {"balance": 5000.0, "equity": 5000.0, "margin_free": 5000.0, "positions": 0}
+  },
+  "ledger": {
+    "path": "research/hermes/trader_v3/data/hft_ledger/v3_calibration_ledger.jsonl",
+    "events": ["CALIBRATION_START", "ORDER_REQUEST", "BROKER_RESPONSE", "CALIBRATION_COMPLETE"],
+    "event_count": 4,
+    "hash_chain": "OK",
+    "first_order_price": 4376.02,
+    "bid": 4375.79,
+    "spread": 0.23
+  },
+  "guard": {"PILOT_DONE": "research/hermes/trader_v3/data/calibration/PILOT_DONE", "prevents_rerun": true},
   "labels": {"REAL_DATA": 0, "MOCK_DATA": "selftest-only", "SYNTHETIC_DATA": 0,
-             "DATA_GAP": ["real entry/exit latency", "real slippage", "real commission/swap", "reconciliation"]},
+             "DATA_GAP": ["entry/exit latency", "slippage", "commission/swap", "reconciliation"]},
   "safety": {
     "V3_AUTO_TRADING": false, "V3_LIVE": false, "V3_STRATEGY_AUTO_DECISION": false,
     "V3_HERMES_AUTO_ORDER": false, "V3_MODEL_AUTO_ORDER": false,
     "ORDER_SENT": false, "V1_UNTOUCHED": true, "V2_UNTOUCHED": true
   },
-  "next": "run at market open -> FINAL result (REAL_DATA) -> WAIT_FOR_AUDIT (no auto-expansion)"
+  "next": [
+    "enable Algo Trading on fxtm_demo_v3calib terminal (environment action)",
+    "clear data/calibration/PILOT_DONE",
+    "re-arm and re-run at market open (--n 20)",
+    "FINAL REAL_DATA -> STOP / WAIT_FOR_AUDIT (no auto-expansion to 5000)"
+  ],
+  "requires_user_decision": true
 }
