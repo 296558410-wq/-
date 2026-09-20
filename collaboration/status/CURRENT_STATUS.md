@@ -352,3 +352,12 @@ _更新约定：每次协作层变更/新决策后更新本文件，并保持分
 - RUN ACTIVE run_id=V2-PAPER-20260919-145431-c5a1; run_status=RUNNING; market_open=false (pre-open, XAUUSD reopens ~Sun 22:00Z); cycle_result=MARKET_CLOSED_SKIP; last_completed 2026-09-20T18:22Z; 0 orders / 0 trades this window; observe window 18:15Z a1/a2 OK (gold_spot 4378.65)
 - REPO: orig repo HEAD advanced d22d9fb -> 88f7228 (non-V2 workstreams: v3-calib resume / mt5-instance-isolation fix / money-hunter weekly review); d22d9fb is ancestor; V2 config still hash-frozen (CONFIG_UNCHANGED=TRUE)
 - FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~27h/48h); V1/V3 untouched (V1 PID1348; V3 PID49300); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only
+
+## 2026-09-21 05:37 - BROKER-DEMO-FORWARD-48H MONITOR (T+30h, UTC 2026-09-20T21:37Z)
+- SAFETY=PASS: execution_mode=BROKER_DEMO; broker.enabled=true; broker_demo_enabled=true; live_trading=false; allow_real_trading=false; LIVE_ALLOWED=false; execution_mode!=LIVE -> NO VIOLATION
+- MT5 fxtm_demo_01 terminal64.exe PID=36460 (portable, C:\AIQuant\mt5_instances\fxtm_demo_01); account 160761384 / server=ForexTimeFXTM-Demo01 (DEMO); MAGIC=90003 (execution/fxtm_demo_adapter.py; V1=90002/V3=90004); creds=.env.mt5_demo (C:\AIQuant\.env.mt5_demo)
+- CONFIG_INTEGRITY: sha256(config)=B0CC254B809DA52844778BBBB8A298DF77DD2D031A8353FEC3F982DAC26BE0E5 == freeze baseline -> CONFIG_UNCHANGED=TRUE
+- LEDGER ledger/hermes_v2_ledger.jsonl: 12 lines; bad_json=0; dup_event_id=0; dup_seq=0; dup_triples=0; hash-chain OK (GENESIS->evt12) (last evt 2026-09-11T13:09:29Z demo-calibration); per-run ledgers append-only
+- RUN ACTIVE run_id=V2-PAPER-20260920-200702-f507; run_status=RUNNING; market_open=false (pre-open, XAUUSD reopens ~Sun 22:00Z, ~23min out); cycle window 21:30Z decision=WAIT / 0 orders / 0 trades; last_completed 2026-09-20T21:37:35Z; observe window 19:45Z a1/a2 OK (gold_spot 4378.65); missed_cycles=1
+- NOTE: health.run_id == ACTIVE.run_id (V2-PAPER-20260920-200702-f507) -> 早前 run_id 漂移(OBSERVATION @ V2-FULL-AUDIT-001)已消除
+- FORWARD_STATUS=INCOMPLETE (in progress, elapsed ~30h/48h); V1/V3 untouched (V1 PID1348; V3 PID49300); REAL_BROKER_ACCESS scoped to V2 fxtm_demo_01 only; END not reached -> no end-report this cycle
