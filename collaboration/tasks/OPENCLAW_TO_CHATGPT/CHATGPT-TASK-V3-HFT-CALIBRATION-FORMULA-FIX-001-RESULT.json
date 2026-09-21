@@ -1,0 +1,154 @@
+{
+  "schema": "v3_calibration_formula_fix/1",
+  "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
+  "status": "PASS",
+
+  "STARTED_AT": "2026-09-21T07:11:13Z",
+  "FINISHED_AT": "2026-09-21T08:05:00Z",
+  "LOCAL_HEAD": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+  "REMOTE_HEAD": "PENDING_FIRST_LANDING_COMMIT",
+  "REPORT_COMMIT": "PENDING_FIRST_LANDING_COMMIT",
+
+  "FILES_CHANGED": ["research/hermes/trader_v3/foundation/calibration_pilot.py"],
+  "FILES_CREATED": [
+    "research/hermes/trader_v3/foundation/pnl_accounting.py",
+    "research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py",
+    "research/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+    "research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+    "research/hermes/trader_v3/audit/v3_formula_fix_summary.json"
+  ],
+  "FILES_DELETED": [],
+
+  "V1_UNTOUCHED": true,
+  "V2_UNTOUCHED": true,
+  "V3_UNTOUCHED": false,
+  "V3_ALPHA_UNTOUCHED": true,
+  "HERMES_UNTOUCHED": true,
+  "BROKER_ORDER_SENT": false,
+
+  "REPORT_BLOCK": {
+    "STATUS": "PASS",
+    "BUGS_FIXED": 6,
+    "TESTS": "9/9 PASS (+ existing foundation suite 28/28 PASS)",
+    "OLD_NET": {"mean_usd_per_roundtrip": -0.1375, "total_usd": -2.75},
+    "CORRECTED_NET": {"mean_usd_per_roundtrip": -0.372, "total_usd": -7.44},
+    "BROKER_NET": {"mean_usd_per_roundtrip": -0.372, "total_usd": -7.44},
+    "OLD_ERROR": {"total_usd": 4.69, "mean_usd_per_roundtrip": 0.2345},
+    "CORRECTED_ERROR": {"total_usd": 3.7136960173711486e-14, "mean_usd_per_roundtrip": 1.8568480086855743e-15},
+    "MAX_RESIDUAL": 8.003597784522753e-13,
+    "MEAN_RESIDUAL": 3.0740687773089803e-13,
+    "RAW_DATA_IMMUTABLE": true,
+    "ORDER_SENT": false,
+    "LIVE": false,
+    "EXPANSION": "LOCKED",
+    "GIT_COMMIT": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+    "REMOTE_SYNC": "PENDING_FIRST_LANDING_COMMIT"
+  },
+
+  "BUGS_FIXED": [
+    {
+      "id": 1, "name": "SPREAD_DOUBLE_COUNT",
+      "detail": "net_pnl subtracted the entry spread although the fill price already contains bid/ask (buy@ask / sell@bid).",
+      "effect_usd_per_roundtrip": 0.18,
+      "fix": "no separate spread term; spread kept as diagnostic with spread_slippage_basis=EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED"
+    },
+    {
+      "id": 2, "name": "SLIPPAGE_DOUBLE_COUNT",
+      "detail": "entry/exit slippage subtracted although the fill price IS the executed price.",
+      "effect_usd_per_roundtrip": 0.0255,
+      "fix": "slippage reported signed as diagnostics only, never deducted"
+    },
+    {
+      "id": 3, "name": "ABS_COSTISES_FAVOURABLE_FILL",
+      "detail": "abs(slippage) turned a favourable fill (V3CAL-00 exit +0.30) into a cost.",
+      "fix": "signed terms only; favourable fills stay favourable"
+    },
+    {
+      "id": 4, "name": "COMMISSION_SIGN_INVERSION",
+      "detail": "MT5 returns commission as a negative number (cost); net_pnl computed '... - comm' which ADDED 0.22 instead of charging it (2x|comm| error).",
+      "effect_usd_per_roundtrip": 0.44,
+      "fix": "fees are added with the broker sign: net = gross + commission + swap"
+    },
+    {
+      "id": 5, "name": "CONFLATED_PNL_CONCEPTS",
+      "detail": "broker realized P&L, execution cost and model/theoretical P&L were one number.",
+      "fix": "BROKER_REALIZED_NET (anchor) / CORRECTED_NET (rebuild) / THEORETICAL_NET + EXECUTION_FRICTION (diagnostic, exact decomposition)"
+    },
+    {
+      "id": 6, "name": "IMPLICIT_UNITS_AND_DEAD_GROSS",
+      "detail": "no spec-based unit reconstruction; a dead 'gross' line multiplied by an unset volume key (0).",
+      "fix": "units = contract_size x volume, cross-checked vs tick_value/tick_size; currency conversion explicit; dead code removed; s['volume'] set"
+    }
+  ],
+
+  "TESTS": [
+    {"id": "A", "name": "spread_not_double_charged", "status": "PASS", "evidence": "corrected -0.18 vs old -0.36 for one full spread"},
+    {"id": "B", "name": "favourable_slippage_stays_favourable", "status": "PASS", "evidence": "corrected +0.06 vs old -0.36; slippage -0.08/-0.16 preserved"},
+    {"id": "C", "name": "negative_commission_decreases_net", "status": "PASS", "evidence": "corrected 0.78 vs old 1.04 (old inverted the sign)"},
+    {"id": "D", "name": "zero_commission", "status": "PASS", "evidence": "net == gross"},
+    {"id": "E", "name": "zero_swap", "status": "PASS", "evidence": "swap=0 -> net unchanged; swap=-0.5 shifts net by -0.50"},
+    {"id": "F", "name": "long_and_short_correct", "status": "PASS", "evidence": "LONG +1.00 and SHORT +1.00 both net 0.78; mirrored SHORT nets -1.00"},
+    {"id": "G", "name": "contract_size_volume_scaling", "status": "PASS", "evidence": "u=1.0/10.0/0.1; tick-metadata mismatch flagged DATA_GAP_TICK_VALUE_INCONSISTENT"},
+    {"id": "H", "name": "frozen_20_offline_recompute", "status": "PASS", "evidence": "n=20, old formula reproduced 20/20, corrected_mean=-0.3720, max_resid=8.00e-13"},
+    {"id": "I", "name": "broker_realized_reconciliation", "status": "PASS", "evidence": "broker net -7.44 == deal profit+fees == pilot balance delta"}
+  ],
+  "TEST_SUITE": {"file": "foundation/tests/test_v3_formula_fix.py",
+                 "total": 9, "pass": 9, "fail": 0, "skip": 0,
+                 "existing_suite": {"file": "foundation/tests/run_all.py", "total": 28, "pass": 28, "fail": 0}},
+
+  "FORMULA": {
+    "version_old": "v3-calibration-netpnl-1",
+    "version_new": "v3-calibration-netpnl-2",
+    "old": "net = gross_fills - spread - abs(entry_slip) - abs(exit_slip) - commission",
+    "new": "net = (signed(exit_fill-entry_fill) * contract_size * volume) + commission + swap",
+    "broker_anchor": "broker_realized_net = sum(deal.profit) + sum(deal.commission) + sum(deal.swap)",
+    "theoretical": "theoretical_net = mid_to_mid_gross + fees  (DIAGNOSTIC ONLY)",
+    "friction": "execution_friction = mid_to_mid_gross - actual_gross = friction_spread + friction_slippage",
+    "identity": "CORRECTED_NET = THEORETICAL_NET - EXECUTION_FRICTION"
+  },
+
+  "COMPARISON": {
+    "csv": "research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+    "summary": "research/hermes/trader_v3/audit/v3_formula_fix_summary.json",
+    "script": "research/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+    "inputs_are_frozen": ["data/hft_ledger/v3_calibration_ledger.jsonl",
+                          "data/calibration/registry.jsonl",
+                          "audit/_probe_broker_out.json"],
+    "supplementary_input": "audit/v3_cost_bridge_20trades.csv (exit-side quotes only, flagged per row)",
+    "key_rows": [
+      {"trade_id": "V3CAL-00", "side": "LONG", "old_net": -0.16, "corrected_net": -0.10, "broker_net": -0.10, "old_error": -0.06, "corrected_error": 8.0e-13},
+      {"trade_id": "V3CAL-01", "side": "SHORT", "old_net": -0.15, "corrected_net": -0.41, "broker_net": -0.41, "old_error": 0.26, "corrected_error": 4.0e-13},
+      {"trade_id": "V3CAL-12", "side": "LONG", "old_net": -0.12, "corrected_net": -0.30, "broker_net": -0.30, "old_error": 0.18, "corrected_error": 7.3e-14},
+      {"trade_id": "V3CAL-19", "side": "SHORT", "old_net": -0.17, "corrected_net": -0.43, "broker_net": -0.43, "old_error": 0.26, "corrected_error": -3.6e-14}
+    ]
+  },
+
+  "RAW_DATA_BASELINE_HASHES": {
+    "data/hft_ledger/v3_calibration_ledger.jsonl": {"expected": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C", "UNCHANGED": true},
+    "data/calibration/PILOT_DONE": {"expected": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6", "UNCHANGED": true},
+    "data/calibration/registry.jsonl": {"expected": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25", "UNCHANGED": true},
+    "audit/_probe_broker_out.json": {"expected": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0", "UNCHANGED": true}
+  },
+
+  "FINDINGS": [
+    "The full +0.2345 USD/round-trip MODEL-vs-BROKER gap was an accounting artifact: only the commission sign inversion (0.44) plus the double-charged spread (0.18) and slippage (0.0255) explain it exactly; nothing was really unaccounted.",
+    "The corrected rebuild (fill prices x broker spec + broker-signed fees) reconciles to the broker's own books on 20/20 within 8.0e-13 USD.",
+    "The pilot's published cost profile was systematically optimistic by ~0.2345 USD/RT (2.7x the true -0.372 USD/RT) and must not be used for any cost/edge decision until regenerated by a future run.",
+    "Round-trip unit value u = contract_size(100) x volume(0.01) = 1.0 USD per 1.0 price unit, verified 20/20 against deal.profit; broker tick_value metadata (0.1) is inconsistent and is now flagged, never used."
+  ],
+
+  "DATA_GAPS": [
+    "exit-side bid/ask are not persisted by the frozen ledger (only the executable side); the friction/theoretical split of the historical 20 uses the previous audit CSV as supplementary and is flagged per row. Broker facts and CORRECTED_NET never depend on it. Fixed for future runs (pilot now stores exit_bid/exit_ask).",
+    "tick.age at request is unrecoverable for the historical 20 (computed but never persisted); now recorded (tick_age_ms / exit_tick_age_ms).",
+    "broker symbol trade_tick_value (0.1) does not reconcile with trade_contract_size (100) -> unit_status=DATA_GAP_TICK_VALUE_INCONSISTENT on all 20 rows.",
+    "no independent tick/quote source covers the 2026-09-20T23:05:42-23:06:13Z window (pre-existing, unchanged).",
+    "historical registry.jsonl keeps entry_fill_price=null (key-mismatch defect before the fix); the frozen record is immutable by instruction, the corrected value is recoverable from the ledger and is written properly from now on.",
+    "n=20 sample size (statistical, not a defect) - no expansion attempted (EXPANSION=LOCKED)."
+  ],
+
+  "ERRORS": [
+    "none blocking. Two self-caught defects during the work, both fixed before delivery: (a) the recompute script initially summed both legs' volume (position size 0.02 instead of 0.01) - detected because the corrected net was exactly 2x the broker gross and fixed to one-leg volume; (b) the test runner double-registered cases and Test B used a coincidentally identical fill pair - both corrected (9/9 PASS)."
+  ],
+
+  "NEXT_RECOMMENDATION": "WAIT_FOR_CHATGPT_AUDIT. Independent audit of the v2 accounting definition (friction decomposition, tick-value DATA_GAP). Keep EXPANSION=LOCKED, LIVE=FALSE, ORDER_SEND=FALSE. Calibration expansion / Alpha / demo forward stay separate, explicitly authorised tasks."
+}
