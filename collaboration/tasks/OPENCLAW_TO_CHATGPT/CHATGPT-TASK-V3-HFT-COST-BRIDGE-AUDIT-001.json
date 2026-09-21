@@ -1,0 +1,184 @@
+{
+  "schema": "v3_hft_cost_bridge_audit/1",
+  "task_id": "V3-HFT-COST-BRIDGE-AUDIT-001",
+  "status": "VALID",
+  "mode": "AUDIT_ONLY / READ_ONLY",
+  "audit_timestamp_utc": "2026-09-21T05:29:19Z",
+  "task_framing_correction": {
+    "task_quoted_model_net": 0.1375,
+    "task_quoted_broker_net": -0.372,
+    "task_quoted_difference": -0.5095,
+    "reason": "the task quotes V3_COST_PROFILE.NET_ROUND_TRIP_COST (+0.1375, a COST) against BROKER net P&L (-0.372), mixing sign conventions",
+    "like_for_like_model_net": -0.1375,
+    "like_for_like_difference_model_minus_broker": 0.2345
+  },
+  "headline": {
+    "MODEL_NET_MEAN_usd": -0.13749999999993634,
+    "BROKER_NET_MEAN_usd": -0.372,
+    "MEAN_DIFFERENCE_usd": 0.23450000000006366,
+    "EXPLAINED_DIFFERENCE_usd": 0.2345000000000637,
+    "UNEXPLAINED_DIFFERENCE_usd": -5.551115123125783e-17,
+    "EXPLAINED_RATIO": 1.0000000000000002,
+    "max_abs_per_trade_unexplained_usd": 5.551115123125783e-17
+  },
+  "effects_contribution_to_gap_usd": {
+    "SPREAD_EFFECT": -0.17999999999992725,
+    "ENTRY_SLIPPAGE_EFFECT": -0.00749999999998181,
+    "EXIT_SLIPPAGE_EFFECT": -0.018000000000029104,
+    "COMMISSION_EFFECT": 0.44000000000000006,
+    "SWAP_EFFECT": -0.0,
+    "CONVERSION_EFFECT": 1.817990202823694e-15,
+    "ROUNDING_EFFECT": 0.0,
+    "OTHER_EFFECT": 0.0
+  },
+  "root_causes": {
+    "spread_double_count": "net_pnl subtracts the entry spread although the spread is already embedded in fill-to-fill gross (long buys ask / sells bid)",
+    "slippage_double_count_and_abs": "net_pnl subtracts abs(entry_slippage) and abs(exit_slippage) although both are already inside the fill price; abs() also turns the favourable +0.30 exit fill on V3CAL-00 into a -0.30 charge",
+    "commission_sign_inversion": "MT5 returns commission = -0.22/RT (negative cost); calibration_pilot.py computes net_pnl = gross - spread - |slips| - comm, adding +0.22 instead of charging it; error = 2*|comm| = 0.44/RT",
+    "formula_reproduced": true,
+    "formula_line": "foundation/calibration_pilot.py::_round_trip -> s[\"net_pnl\"] = (s[\"gross_pnl\"] - spread - abs(s[\"slippage_price\"] or 0) - abs(s[\"exit_slippage_price\"] or 0) - (comm if comm is not None else 0))"
+  },
+  "by_item": {
+    "1_spread": -0.18,
+    "2_entry_slippage": -0.0075,
+    "3_exit_slippage": -0.018,
+    "4_commission": 0.44,
+    "5_swap": 0.0,
+    "6_price_pnl_conversion": 0.0,
+    "7_position_size": 0.0,
+    "8_requested_price_definition": 0.0,
+    "9_actual_price_definition": 0.0,
+    "10_fok_execution": 0.0,
+    "11_timestamp_quote_alignment": 0.0,
+    "12_holding_duration": 0.0,
+    "13_rounding_contract": 0.0,
+    "14_other": 0.0,
+    "15_code_accounting_error": 0.2345
+  },
+  "cost_levels_usd_per_roundtrip": {
+    "true_structural_cost": 0.3999999999999272,
+    "true_structural_cost_bps": 0.914497877793196,
+    "model_theoretical_cost": 0.4254999999999381,
+    "task_quoted_model_cost": 0.13749999999993634,
+    "task_quoted_model_cost_bps": 0.314,
+    "spread_bps_measured": 0.4115240453203641,
+    "commission_bps_per_side": 0.20576202250350653,
+    "underestimation_usd": 0.2625,
+    "underestimation_bps": 0.6
+  },
+  "reconciliation": {
+    "ledger_chain_ok": true,
+    "ledger_events": 131,
+    "ledger_head": "4b4beabecb36c90a2028f476952c909aaff9320cd5af44fcbf72af3c38e96575",
+    "n_roundtrips": 20,
+    "model_formula_reproduced_20_20": true,
+    "cost_profile_mean_reproduced": true,
+    "broker_entry_price_matches_ledger_fill_20_20": true,
+    "broker_exit_price_matches_ledger_fill_20_20": true,
+    "broker_deal_count": 40,
+    "broker_order_count": 40,
+    "broker_profit_total": -3.04,
+    "broker_commission_total": -4.4,
+    "broker_swap_total": 0.0,
+    "broker_net_sum": -7.44,
+    "broker_balance_delta": -7.4399999999996,
+    "broker_net_equals_balance_delta": true,
+    "broker_tz_offsets_s": [10800]
+  },
+  "fok": {
+    "symbol_filling_mode": 1,
+    "order_type_filling": 0,
+    "order_type_filling_meaning": "FOK",
+    "order_states": [4],
+    "order_states_meaning": "FILLED",
+    "partial_fills": 0,
+    "rejections": 0,
+    "max_favourable_fill_vs_requested": 0.3000000000001819,
+    "max_adverse_fill_vs_requested": -0.020000000000436557,
+    "request_deviation_limit_points": 20,
+    "fok_effect_on_bridge_usd": 0.0
+  },
+  "time_alignment": {
+    "status": "PASS_WITH_DEFECT",
+    "server_tz_offset_s": 10800,
+    "look_ahead": false,
+    "defect": "registry hold_actual_ms derived from integer-second tick stamps (1000 ms quantisation)"
+  },
+  "unit_conversion": {
+    "status": "PASS",
+    "contract_size": 100.0,
+    "volume": 0.01,
+    "effective_ounces": 1.0,
+    "account_currency": "USD",
+    "price_move_to_usd_factor": 1.0,
+    "verified_against_broker_profit": "20/20"
+  },
+  "data_gaps": [
+    "no independent tick/quote source for 2026-09-20T23:05:42-23:06:13Z (copy_ticks_range=0; local live_fxtm has no 2026-09-20 file)",
+    "ledger persists no exit-time bid/ask (exit spread reconstructed: 5/20 from bps, 15/20 assumed = entry spread)",
+    "registry entry_fill_price null + cost-profile entry_slippage null (code key mismatch: fill_price vs entry_fill_price; slippage_price vs entry_slippage_price)",
+    "hold_actual_ms quantised to 1000 ms",
+    "tick.age / STALE_TICK_AT_REQUEST never persisted to ledger",
+    "broker symbol_info trade_tick_value (0.1) does not reconcile with contract_size (100.0); unused by bridge",
+    "calibration_pilot.py dead `gross` variable multiplies by an unset s[\"volume\"] (latent unit bug, no effect this run)"
+  ],
+  "safety": {
+    "V1_ORDER_SEND": false,
+    "V2_ORDER_SEND": false,
+    "V3_ORDER_SEND": false,
+    "LIVE": false,
+    "CALIBRATION_AUTO_STOP": true,
+    "EXPANSION": "LOCKED",
+    "order_send_calls": 0,
+    "order_check_calls": 0,
+    "V1_UNTOUCHED": true,
+    "V2_UNTOUCHED": true,
+    "V3_ALPHA_UNTOUCHED": true,
+    "ledger_or_calibration_data_modified": false
+  },
+  "gates": {
+    "MODEL_APPROX_BROKER": false,
+    "ALL_DIFFERENCES_ITEMISED": true,
+    "EXPANSION_ALLOWED": "NO",
+    "ALPHA_NOT_PROVEN_AFTER_COST": true
+  },
+  "artifacts": {
+    "csv": "research/hermes/trader_v3/audit/v3_cost_bridge_20trades.csv",
+    "summary": "research/hermes/trader_v3/audit/v3_cost_bridge_summary.json",
+    "manifest": "research/hermes/trader_v3/audit/v3_cost_bridge_manifest.json",
+    "script": "research/hermes/trader_v3/audit/v3_cost_bridge_audit.py",
+    "broker_probe": "research/hermes/trader_v3/audit/_probe_broker.py",
+    "broker_raw": "research/hermes/trader_v3/audit/_probe_broker_out.json"
+  },
+  "hashes": {
+    "ledger_sha256": "fc8fd01e5ac487dd63558241d67584d453ccd21d8aa3a91d8bb804304e06750c",
+    "registry_sha256": "7ad9596c4cab88bb95e0650daabbb169b53c3d3b796b07ea8bacb7c6366f4f25",
+    "cost_profile_sha256": "26b3f8d80a7ad4754d403ee2c03df1898cb2fb2bf19a04edc6d8fc515bd0a728",
+    "broker_data_sha256": "bbd36b4680c4ca36737192f5a5a4ac127e6fa220be6816322c00efcfc7aeaaa4",
+    "tick_data_sha256": null,
+    "input_sha256": "0e58f297787790e9970c5d2d99355d6bbebdca25bb34405948d329ac05c6befd",
+    "result_sha256": "4d8c72a54ee02b10756845089e328207e61bccbffb61453b9297acaa0f99c9fe"
+  },
+  "git": {
+    "repo": "C:\\AIQuant",
+    "branch": "fix/v2-full-system-repair-20260917",
+    "base_commit": "98ef9a74221427d5ef1e3eaa365cdd6d893ccbc1",
+    "audit_commit": "7351955e1b8e029eda84c20610862d03e1050492",
+    "head_commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+    "path_limited": true
+  },
+  "staging": {
+    "repo": "C:\\AIQuant\\github_publish_staging",
+    "remote": "https://github.com/296558410-wq/-.git",
+    "branch": "main",
+    "staging_commit": "PENDING",
+    "remote_synced": "PENDING"
+  },
+  "halt": false,
+  "wait_for_chatgpt_audit": true,
+  "next_recommendation": [
+    "chatgpt independent audit of the §15 accounting error and the sign-convention framing",
+    "if a corrected cost figure is wanted, fix calibration_pilot.py net_pnl accounting in a SEPARATE authorised task (not this read-only audit)",
+    "do NOT start any new calibration / expansion / model training / alpha research / demo trading"
+  ]
+}
