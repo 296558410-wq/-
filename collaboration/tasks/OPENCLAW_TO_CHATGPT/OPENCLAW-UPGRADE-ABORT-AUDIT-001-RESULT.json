@@ -1,0 +1,76 @@
+{
+  "schema": "openclaw_upgrade_abort_audit/1",
+  "task_id": "OPENCLAW-UPGRADE-ABORT-AUDIT-001",
+  "mode": "READ_ONLY",
+  "audited_command": "npm install openclaw@2026.9.5 --save-exact",
+  "cwd": "C:\\Users\\surface\\dtlopenclaw\\tools\\openclaw",
+  "install_failure_time_utc": "2026-09-21T13:46:00.662Z",
+  "audit_timestamp_utc": "2026-09-21T13:53:00Z",
+  "npm_exit_code": 1,
+  "CLASSIFICATION": {
+    "INSTALL_FAILED": true,
+    "PARTIAL_INSTALL": false,
+    "NO_INSTALL_CHANGE": true,
+    "EFFECTIVE_TREE_CHANGE": "NONE (only directory mtimes touched; no file content changed)"
+  },
+  "ROOT_CAUSE": {
+    "stage": "preinstall hook of openclaw@2026.9.5",
+    "script": "node scripts/preinstall-package-manager-warning.mjs",
+    "invoked_as": "C:\\Windows\\system32\\cmd.exe /d /s /c node scripts/preinstall-package-manager-warning.mjs",
+    "error": "'node' is not recognized as an internal or external command (node not on PATH in the spawned cmd environment)",
+    "preinstall_exit_code": 1,
+    "tarball_download": "OK (http fetch GET 200 https://mirrors.cloud.tencent.com/npm/openclaw/-/openclaw-2026.9.5.tgz)",
+    "cleanup_warning": "EPERM: operation not permitted, rmdir ... node_modules\\openai\\resources\\admin ; node_modules\\openai\\src"
+  },
+  "checks": {
+    "1_package_json_still_2026_9_4": {"value": {"dependencies": {"openclaw": "2026.9.4"}, "name": "openclaw-runtime", "private": true}, "result": "UNCHANGED"},
+    "2_package_lock_json_present": {"value": false, "result": "NOT_CREATED"},
+    "3_npmrc_changed": {"value": "registry=https://mirrors.cloud.tencent.com/npm", "result": "UNCHANGED"},
+    "4_cli_shim_changed": {"result": "UNCHANGED"},
+    "5_node_modules_openclaw_version": {"value": "2026.9.4", "dir_mtime": "2026-09-21T10:12:00", "result": "UNCHANGED"},
+    "6_node_modules_completeness": {"npm_ls": "openclaw-runtime@ C:\\Users\\surface\\dtlopenclaw\\tools\\openclaw \\n`-- openclaw@2026.9.4", "dist_index_js_present": true, "files_modified_after_2145Z": 0, "result": "INTACT"},
+    "7_npm_debug_log": {"path": "C:\\Users\\surface\\AppData\\Local\\npm-cache\\_logs\\2026-09-21T13_46_00_662Z-debug-0.log", "bytes": 155301, "exists": true},
+    "8_cli_version": "OpenClaw 2026.9.4 (3a9d69d)",
+    "9_gateway": {"version": "2026.9.4", "health": "OK", "http": 200},
+    "10_gateway_pid": {"listener_pid": 43988, "supervisor_pid": 20680, "job_anchor_pid": 60252, "port": 18789, "listening": true}
+  },
+  "hash_compare_vs_PREFLIGHT_002": {
+    "package_json": {"before": "B3609ABA08756609354B62B02153F218E77D1424E2AD95E7936EB1E777AB27F3", "now": "B3609ABA08756609354B62B02153F218E77D1424E2AD95E7936EB1E777AB27F3", "result": "MATCH"},
+    "npmrc": {"before": "91848FE1B6F651D328BBA3021CE352118AB15024776EADAB469C024626B08D84", "now": "91848FE1B6F651D328BBA3021CE352118AB15024776EADAB469C024626B08D84", "result": "MATCH"},
+    "cli_shim": {"before": "A1559295754FE7E213C9BB7EACCF52095A31872AF7479887A513819F616B149E", "now": "A1559295754FE7E213C9BB7EACCF52095A31872AF7479887A513819F616B149E", "result": "MATCH"}
+  },
+  "touched_mtimes_only": {
+    "node_modules_dir": "2026-09-21T21:49:37 (was 10:12:04)",
+    "node_modules_dot_bin_dir": "2026-09-21T21:49:36 (files inside still 10:11:59 — unchanged)",
+    "node_modules_dot_package_lock_json": "2026-09-21T10:12:04 (unchanged)"
+  },
+  "leftover_temp_or_staging_in_install_root": "NONE",
+  "npm_cache_side_effect": "openclaw-2026.9.5.tgz present in AppData\\Local\\npm-cache\\_cacache (outside install root; NOT cleaned per read-only)",
+  "trading_safety": {
+    "V1": "HEALTHY (workflow_latest 2026-09-21T21:50:32+08:00)",
+    "V2": "HEALTHY (run V2-PAPER-20260920-200702-f507 RUNNING; ledger OK; replay MATCH)",
+    "V3": "HEALTHY (calibration PASS n=20; AUTO_STOP=TRUE; WAIT_FOR_AUDIT=TRUE)",
+    "MT5_INSTANCE_COUNT": 3,
+    "MT5_ISOLATION": "PASS",
+    "MT5_UNMAPPED": 0,
+    "MT5_ORPHAN": 0,
+    "MT5_GHOST": 0,
+    "ORDER_SEND_CALLS": 0,
+    "LIVE": false,
+    "V3_LIVE_ALLOWED": "NO",
+    "V3_ORDER_SEND_ALLOWED": "NO",
+    "V3_FORWARD_ALLOWED": "NO",
+    "EXPANSION": "LOCKED"
+  },
+  "no_repair_performed": true,
+  "forbidden_actions_performed": {
+    "npm_install": false, "npm_update": false, "npm_ci": false, "openclaw_update": false,
+    "rollback": false, "repair": false, "gateway_restart": false, "path_modified": false,
+    "npm_config_modified": false, "node_modules_deleted": false, "lockfile_deleted": false,
+    "package_json_modified": false, "v1_v2_v3_modified": false, "mt5_modified": false, "scheduler_modified": false
+  },
+  "current_versions_after_abort": {"CLI": "2026.9.4", "Gateway": "2026.9.4", "Package": "2026.9.4"},
+  "note_for_future_attempt": "failure point: npm spawns cmd.exe where 'node' is not on PATH; ensure node is resolvable in that environment (e.g. put C:\\Users\\surface\\dtlopenclaw\\tools\\node-v24.21.0-win-x64 on PATH for the session) to pass the preinstall hook. NOT executed in this task.",
+  "STATUS": "INSTALL_FAILED / PARTIAL_INSTALL=FALSE / NO_INSTALL_CHANGE=TRUE",
+  "next_state": "WAIT_FOR_CHATGPT_AUDIT"
+}
