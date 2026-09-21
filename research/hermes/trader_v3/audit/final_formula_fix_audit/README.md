@@ -11,20 +11,20 @@
 
 | 项 | 值 |
 |---|---|
-| BASE_COMMIT (local repo) | `6170050dcd6397f29193effc4f0baaed9036e2ab` — **historical** |
-| FINAL_CODE_COMMIT (local repo) | `4f6bd54c4a4963fb2885921fee1d7adb510c940a` — **historical** |
-| FINAL_AUDIT_COMMIT (local repo, historical) | `4ac5a240e752c40ebd1a968350c6f3e95d176cd7` — **historical** |
-| STAGING_COMMIT (github repo, historical) | `461b980bcf4b11506073ed3424fbe5f9e4849e18` — **historical** |
-| PREVIOUS_HEAD (github, before FIX-003) | `9ad4f4b39897e28fb89b934a064be49290b85da3` — **historical** |
-| origin/main (as of FIX-003 start) | `9ad4f4b39897e28fb89b934a064be49290b85da3` |
-| HEAD == origin/main (as of FIX-003 start) | `TRUE` |
-| 当前材料 commit | 用 `git -C <github_repo> log -1 --format=%H -- research/hermes/trader_v3/audit/final_formula_fix_audit/` 解析（FIX-003 提交后即为其结果） |
-| 仓库区分 | `6170050/4f6bd54/4ac5a24` 在 **本地 C:\AIQuant**；`461b980/4ac9a54/9ad4f4b` 在 **GitHub staging** |
-| GitHub 对象可解析性 | `6170050/4f6bd54/4ac5a24` = **NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE**；`461b980/4ac9a54/9ad4f4b` = `commit` |
+| BASE_COMMIT (**local C:\AIQuant**) — historical | `6170050dcd6397f29193effc4f0baaed9036e2ab` |
+| FORMULA_FIX_CODE_COMMIT (**local C:\AIQuant**) — historical | `4f6bd54c4a4963fb2885921fee1d7adb510c940a` |
+| LOCAL_AUDIT_COMMIT (**local C:\AIQuant**) — historical | `4ac5a240e752c40ebd1a968350c6f3e95d176cd7` |
+| STAGING_COMMIT (**github**) — historical | `461b980bcf4b11506073ed3424fbe5f9e4849e18` |
+| MATERIAL_PACK (**github**) — historical | `4ac9a541468110867940b9cb35cc7ed01ae00260` |
+| MATERIAL_PACK_PREVIOUS (**github**) — historical | `9ad4f4b39897e28fb89b934a064be49290b85da3` |
+| CURRENT_AUDIT_MATERIAL (**github**) — as of FIX-004 | `19281f29d4eafea4aabfa08993327d39ff53a36e` |
+| origin_main / HEAD (as of FIX-004 start) | `19281f29d4eafea4aabfa08993327d39ff53a36e` |
+| HEAD == origin_main (as of FIX-004 start) | `TRUE` |
+| 当前材料 commit | 用 `git -C <github_repo> log -1 --format=%H -- research/hermes/trader_v3/audit/final_formula_fix_audit/` 解析 |
+| 语义警告 | **`4ac5a24` = LOCAL_AUDIT，绝不得当作 Formula-Fix 的 CODE commit** |
 
-> 说明：本表中标注 **historical** 的 commit 均为**历史节点**，不再代表“当前最终 GitHub 状态”。
-> 早期材料曾把 `4ac5a24` / `461b980` 当作“当前 commit”，属 metadata 不一致（跨仓库混淆），已在 FIX-003 修正。
-> 完整可解析性记录见 `commit_lineage.json`；代码证据说明见 `formula_fix_code_evidence.md`。
+> 标注 **historical** 的 commit 不再代表“当前最终 GitHub 状态”。
+> 完整可解析性与时序记录见 `commit_lineage.json`；代码证据见 `formula_fix_code_evidence.md`、`patch_verification.json`。
 | Broker 真实净值（20 笔） | **-7.44 USD**（-0.372 USD/RT） |
 | Corrected 公式结果 | **-7.44 USD**（-0.372 USD/RT） |
 | 对平 | **20/20**（total_error 3.7e-14 USD） |
@@ -197,12 +197,17 @@ reconciliation_summary.json              : broker_total_net_pnl=-7.44, matched_c
 ## 5c. Patch 血缘与代码证据（FIX-003）
 
 ```text
-patch_verification.json : patch_generated_from_base_to_final = TRUE
+patch_verification.json : patch_generated_from_base_to_final = TRUE     (范围 = BASE → LOCAL_AUDIT)
                           changed_files_verified             = TRUE
-                          证明：12/12 文件的 `index <old>..<new>` 与 Git 对象库 BASE/FINAL blob 逐一匹配
-                          反例排除：文件集(12) ≠ 4ac5a24 的 HEAD~1→HEAD 文件集(6)
+                          formula_fix_code_commit            = 4f6bd54…（CODE；BASE→CODE 共 6 文件）
+                          local_audit_commit                = 4ac5a24…（LOCAL_AUDIT，**不是** CODE）
+                          证明：12/12 文件的 `index <old>..<new>` 与 Git 对象库 BASE/LOCAL_AUDIT blob 逐一匹配
+                          新增文件：base_blob=null / base_blob_status=NOT_APPLICABLE_NEW_FILE
+                          修改文件：calibration_pilot.py base_blob=26b4558a3bf3…, match=true
+                          反例排除：文件集(12) ≠ LOCAL_AUDIT 的 HEAD~1→HEAD 文件集(6)
 formula_fix_code_evidence.md : Git object availability = unavailable（GitHub 仓库不含 6170050/4f6bd54/4ac5a24）
-已修正：旧 patch 因 PowerShell 文本管道导致编码损伤 → 已用原始字节重新生成
+已修正：(A) 旧 patch 因 PowerShell 文本管道导致编码损伤 → 原始字节重生成
+        (B) 旧 patch_verification.json 把新增文件 base_blob 误填为 BASE commit SHA → 已改为 null
 ```
 
 本材料包**不含**任何 password / token / API key / `.env` / 私钥。

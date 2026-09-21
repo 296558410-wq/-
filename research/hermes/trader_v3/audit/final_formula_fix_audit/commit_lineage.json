@@ -1,161 +1,222 @@
 {
- "schema": "v3_commit_lineage/2",
- "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-003",
+ "schema": "v3_commit_lineage/3",
+ "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-004",
  "repositories": {
-  "github_staging_repo": {
-   "path": "C:\\AIQuant\\github_publish_staging",
-   "remote": "https://github.com/296558410-wq/-.git",
+  "github_repository": {
+   "url": "https://github.com/296558410-wq/-.git",
+   "local_path": "C:\\AIQuant\\github_publish_staging",
    "branch": "main"
   },
   "local_research_repo": {
-   "path": "C:\\AIQuant",
-   "note": "C:\\AIQuant ?????? V3 ??? patch ????????",
-   "published_to_github": false
+   "local_path": "C:\\AIQuant",
+   "published_to_github": false,
+   "note": "Formula-Fix ????? commit ???????????? GitHub?github_object_available=FALSE?"
   }
  },
  "base_commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
  "formula_fix_code_commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
- "final_audit_material_commit": "9ad4f4b39897e28fb89b934a064be49290b85da3",
- "origin_main": "9ad4f4b39897e28fb89b934a064be49290b85da3",
- "head": "9ad4f4b39897e28fb89b934a064be49290b85da3",
+ "final_audit_material_commit": "19281f29d4eafea4aabfa08993327d39ff53a36e",
+ "origin_main": "19281f29d4eafea4aabfa08993327d39ff53a36e",
+ "head": "19281f29d4eafea4aabfa08993327d39ff53a36e",
  "head_equals_origin_main": true,
- "resolution_as_of": "2026-09-21T19:40:00Z (before the FIX-003 metadata commit)",
+ "resolution_as_of": "2026-09-21T19:36Z ? FIX-004 ?????? GitHub ???before the FIX-004 metadata commit?",
  "how_to_resolve_current": {
   "current_origin_main": "git -C <github_repo> rev-parse origin/main",
   "newest_commit_touching_this_material": "git -C <github_repo> log -1 --format=%H -- research/hermes/trader_v3/audit/final_formula_fix_audit/"
  },
- "self_reference_note": "????????????????FIX-003 ?? commit SHA ?????????????? git log -1 -- <path> ?????????????? FINAL_AUDIT_METADATA_COMMIT??",
+ "self_reference_note": "???????????????FIX-004 ?? commit SHA ??????????? git log -1 -- <path> ????????????????",
+ "semantics_warning": "????? 4ac5a240e752c40ebd1a968350c6f3e95d176cd7 ?? Formula-Fix ? CODE commit??? LOCAL_AUDIT?????/???commit?",
+ "lineage": {
+  "BASE": {
+   "commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+   "repo": "C:\\AIQuant",
+   "type": "BASE",
+   "status": "historical",
+   "github_object_available": false
+  },
+  "FORMULA_FIX_CODE": {
+   "commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+   "repo": "C:\\AIQuant",
+   "type": "CODE",
+   "status": "historical",
+   "github_object_available": false
+  },
+  "LOCAL_AUDIT": {
+   "commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
+   "repo": "C:\\AIQuant",
+   "type": "LOCAL_AUDIT",
+   "status": "historical",
+   "github_object_available": false
+  },
+  "GITHUB_STAGING_CANONICAL_REPORT": {
+   "commit": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
+   "repo": "C:\\AIQuant\\github_publish_staging",
+   "type": "STAGING",
+   "status": "historical",
+   "github_object_available": true
+  },
+  "GITHUB_MATERIAL_PACK": {
+   "commit": "4ac9a541468110867940b9cb35cc7ed01ae00260",
+   "repo": "C:\\AIQuant\\github_publish_staging",
+   "type": "MATERIAL",
+   "status": "historical",
+   "github_object_available": true
+  },
+  "GITHUB_MATERIAL_PACK_PREVIOUS": {
+   "commit": "9ad4f4b39897e28fb89b934a064be49290b85da3",
+   "repo": "C:\\AIQuant\\github_publish_staging",
+   "type": "MATERIAL",
+   "status": "historical",
+   "github_object_available": true
+  },
+  "GITHUB_CURRENT_FINAL_AUDIT_METADATA": {
+   "commit": "19281f29d4eafea4aabfa08993327d39ff53a36e",
+   "repo": "GitHub repository",
+   "type": "CURRENT_AUDIT_MATERIAL",
+   "status": "CURRENT",
+   "github_object_available": true
+  }
+ },
  "commits": {
   "6170050": {
-   "detail": {
-    "commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
-    "repo": "C:\\AIQuant",
-    "parent": "7351955e1b8e029eda84c20610862d03e1050492",
-    "subject": "audit(v3): record base/audit commit metadata for V3-HFT-COST-BRIDGE-AUDIT-001",
-    "author": "openclaw",
-    "date": "2026-09-21T13:30:32+08:00",
-    "changed_files": [
-     "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_manifest.json",
-     "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_summary.json"
-    ],
-    "purpose": "state immediately BEFORE the formula fix (parent of code commit)",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": false,
-   "github_resolution": "NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE"
+   "commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+   "repo_path": "C:\\AIQuant",
+   "repository": "C:\\AIQuant",
+   "type": "BASE",
+   "status": "historical",
+   "purpose": "Formula-Fix ??????FORMULA_FIX_CODE ? parent?",
+   "parent": "7351955e1b8e029eda84c20610862d03e1050492",
+   "subject": "audit(v3): record base/audit commit metadata for V3-HFT-COST-BRIDGE-AUDIT-001",
+   "date": "2026-09-21T13:30:32+08:00",
+   "changed_files": [
+    "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_manifest.json",
+    "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_summary.json"
+   ],
+   "github_object_available": false
   },
   "4f6bd54": {
-   "detail": {
-    "commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
-    "repo": "C:\\AIQuant",
-    "parent": "6170050dcd6397f29193effc4f0baaed9036e2ab",
-    "subject": "fix(v3-calib): V3-HFT-CALIBRATION-FORMULA-FIX-001 broker-anchored net_pnl (spread/slippage double count, abs(), commission sign) + regression tests + offline old-vs-new comparison",
-    "author": "296558410-wq",
-    "date": "2026-09-21T15:16:45+08:00",
-    "changed_files": [
-     "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
-     "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
-     "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_summary.json",
-     "M\tresearch/hermes/trader_v3/foundation/calibration_pilot.py",
-     "A\tresearch/hermes/trader_v3/foundation/pnl_accounting.py",
-     "A\tresearch/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py"
-    ],
-    "purpose": "the actual V3-only formula fix + regression tests + offline recompute artifacts",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": false,
-   "github_resolution": "NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE"
+   "commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+   "repo_path": "C:\\AIQuant",
+   "repository": "C:\\AIQuant",
+   "type": "CODE",
+   "status": "historical",
+   "purpose": "??? V3-only Formula-Fix ???? + ???? + ??????",
+   "parent": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+   "subject": "fix(v3-calib): V3-HFT-CALIBRATION-FORMULA-FIX-001 broker-anchored net_pnl (spread/slippage double count, abs(), commission sign) + regression tests + offline old-vs-new comparison",
+   "date": "2026-09-21T15:16:45+08:00",
+   "changed_files": [
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_summary.json",
+    "M\tresearch/hermes/trader_v3/foundation/calibration_pilot.py",
+    "A\tresearch/hermes/trader_v3/foundation/pnl_accounting.py",
+    "A\tresearch/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py"
+   ],
+   "github_object_available": false
   },
   "4ac5a24": {
-   "detail": {
-    "commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
-    "repo": "C:\\AIQuant",
-    "parent": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
-    "subject": "report(v3-calib): FORMULA-FIX-001 canonical result (md+json) + section-6 20-trade table + reports/ copies",
-    "author": "296558410-wq",
-    "date": "2026-09-21T23:56:13+08:00",
-    "changed_files": [
-     "A\tresearch/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv",
-     "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
-     "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
-     "A\tresearch/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv",
-     "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_comparison.csv",
-     "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_summary.json"
-    ],
-    "purpose": "canonical report (md+json) + section-6 20-trade table + reports/ copies (local, path-limited)",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": false,
-   "github_resolution": "NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE"
+   "commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
+   "repo_path": "C:\\AIQuant",
+   "repository": "C:\\AIQuant",
+   "type": "LOCAL_AUDIT",
+   "status": "historical",
+   "purpose": "?? audit/report ???canonical ?? + ?? 20 ?? + reports/ ???",
+   "parent": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+   "subject": "report(v3-calib): FORMULA-FIX-001 canonical result (md+json) + section-6 20-trade table + reports/ copies",
+   "date": "2026-09-21T23:56:13+08:00",
+   "changed_files": [
+    "A\tresearch/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv",
+    "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
+    "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
+    "A\tresearch/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv",
+    "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_comparison.csv",
+    "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_summary.json"
+   ],
+   "github_object_available": false
   },
   "461b980": {
-   "detail": {
-    "commit": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
-    "repo": "C:\\AIQuant\\github_publish_staging",
-    "parent": "563dbdb8cbdbf3070eede5fef76f1623ac6bc29c",
-    "subject": "report(v3-calib): FORMULA-FIX-001 canonical result (md+json) - A-K structure, 20/20 reconciliation, ALPHA_NOT_PROVEN_AFTER_COST=TRUE",
-    "author": "296558410-wq",
-    "date": "2026-09-21T23:56:18+08:00",
-    "changed_files": [
-     "A\tcollaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
-     "M\tcollaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md"
-    ],
-    "purpose": "publish of the canonical result report to the GitHub staging repo (historical)",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": true,
-   "github_resolution": "commit"
+   "commit": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
+   "repo_path": "C:\\AIQuant\\github_publish_staging",
+   "repository": "C:\\AIQuant\\github_publish_staging",
+   "type": "STAGING",
+   "status": "historical",
+   "purpose": "canonical ????? GitHub staging",
+   "parent": "563dbdb8cbdbf3070eede5fef76f1623ac6bc29c",
+   "subject": "report(v3-calib): FORMULA-FIX-001 canonical result (md+json) - A-K structure, 20/20 reconciliation, ALPHA_NOT_PROVEN_AFTER_COST=TRUE",
+   "date": "2026-09-21T23:56:18+08:00",
+   "changed_files": [
+    "A\tcollaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
+    "M\tcollaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md"
+   ],
+   "github_object_available": true
   },
   "4ac9a54": {
-   "detail": {
-    "commit": "4ac9a541468110867940b9cb35cc7ed01ae00260",
-    "repo": "C:\\AIQuant\\github_publish_staging",
-    "parent": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
-    "subject": "audit(v3): FORMULA-FIX-002 final audit material pack under research/hermes/trader_v3/audit/final_formula_fix_audit (evidence only)",
-    "author": "296558410-wq",
-    "date": "2026-09-22T00:02:52+08:00",
-    "changed_files": [
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/README.md",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/SHA256SUMS.txt",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/broker_facts_20trades.json",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/changed_files.txt",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/commit_lineage.json",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/diff_stat.txt",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/git_diff_formula_fix.patch",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/reconciliation_method.md",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/reconciliation_summary.json",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/safety_final.json",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/test_results.md",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/v3_calibration_formula_fix_20trades.csv"
-    ],
-    "purpose": "FORMULA-FIX-002 first material pack (historical)",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": true,
-   "github_resolution": "commit"
+   "commit": "4ac9a541468110867940b9cb35cc7ed01ae00260",
+   "repo_path": "C:\\AIQuant\\github_publish_staging",
+   "repository": "C:\\AIQuant\\github_publish_staging",
+   "type": "MATERIAL",
+   "status": "historical",
+   "purpose": "FORMULA-FIX-002 ???????",
+   "parent": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
+   "subject": "audit(v3): FORMULA-FIX-002 final audit material pack under research/hermes/trader_v3/audit/final_formula_fix_audit (evidence only)",
+   "date": "2026-09-22T00:02:52+08:00",
+   "changed_files": [
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/README.md",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/SHA256SUMS.txt",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/broker_facts_20trades.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/changed_files.txt",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/commit_lineage.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/diff_stat.txt",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/git_diff_formula_fix.patch",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/reconciliation_method.md",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/reconciliation_summary.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/safety_final.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/test_results.md",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/v3_calibration_formula_fix_20trades.csv"
+   ],
+   "github_object_available": true
   },
   "9ad4f4b": {
-   "detail": {
-    "commit": "9ad4f4b39897e28fb89b934a064be49290b85da3",
-    "repo": "C:\\AIQuant\\github_publish_staging",
-    "parent": "4ac9a541468110867940b9cb35cc7ed01ae00260",
-    "subject": "audit(v3): FORMULA-FIX-002 complete material pack (data_gaps.md, entry/exit order columns, git_diff_stat, SHA256SUMS 14/14)",
-    "author": "296558410-wq",
-    "date": "2026-09-22T03:20:11+08:00",
-    "changed_files": [
-     "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/README.md",
-     "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/SHA256SUMS.txt",
-     "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/data_gaps.md",
-     "R100\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/diff_stat.txt\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/git_diff_stat.txt",
-     "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/v3_calibration_formula_fix_20trades.csv"
-    ],
-    "purpose": "FORMULA-FIX-002 completed material pack (previous HEAD before FIX-003)",
-    "resolvable_in_current_github_object_database": "historical"
-   },
-   "resolvable_in_current_github_object_database": true,
-   "github_resolution": "commit"
+   "commit": "9ad4f4b39897e28fb89b934a064be49290b85da3",
+   "repo_path": "C:\\AIQuant\\github_publish_staging",
+   "repository": "C:\\AIQuant\\github_publish_staging",
+   "type": "MATERIAL",
+   "status": "historical",
+   "purpose": "FORMULA-FIX-002 ????????FIX-003 ??? HEAD?",
+   "parent": "4ac9a541468110867940b9cb35cc7ed01ae00260",
+   "subject": "audit(v3): FORMULA-FIX-002 complete material pack (data_gaps.md, entry/exit order columns, git_diff_stat, SHA256SUMS 14/14)",
+   "date": "2026-09-22T03:20:11+08:00",
+   "changed_files": [
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/README.md",
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/SHA256SUMS.txt",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/data_gaps.md",
+    "R100\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/diff_stat.txt\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/git_diff_stat.txt",
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/v3_calibration_formula_fix_20trades.csv"
+   ],
+   "github_object_available": true
+  },
+  "19281f2": {
+   "commit": "19281f29d4eafea4aabfa08993327d39ff53a36e",
+   "repo_path": "C:\\AIQuant\\github_publish_staging",
+   "repository": "C:\\AIQuant\\github_publish_staging",
+   "type": "CURRENT_AUDIT_MATERIAL",
+   "status": "CURRENT",
+   "purpose": "FIX-003 metadata ????? GitHub ???? HEAD?",
+   "parent": "9ad4f4b39897e28fb89b934a064be49290b85da3",
+   "subject": "audit(v3): reconcile formula-fix audit metadata",
+   "date": "2026-09-22T03:33:47+08:00",
+   "changed_files": [
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/README.md",
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/SHA256SUMS.txt",
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/commit_lineage.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/formula_fix_code_evidence.md",
+    "M\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/git_diff_formula_fix.patch",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/patch_verification.json",
+    "A\tresearch/hermes/trader_v3/audit/final_formula_fix_audit/pre_fix_state.json"
+   ],
+   "github_object_available": true
   }
  }
 }
