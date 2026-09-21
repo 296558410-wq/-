@@ -1,0 +1,49 @@
+{
+ "schema": "v3_hft_alpha_discovery_result/1",
+ "task": "V3-HFT-ALPHA-DISCOVERY-001",
+ "generated_utc": "2026-09-21T20:1x:xxZ",
+ "final_format_block": {
+  "FREEZE_COMMIT": "b42c865e49e8ea11a740c14dfbddb8eb74b1e161 (C:\\AIQuant, branch fix/v2-full-system-repair-20260917; freeze doc sha256 557bcc3c96338c1261f8a5b70371a6a679ff61ec433fbd24234aabf782b8a4d0)",
+  "DATASET": "FXTM demo L1 ticks 2026-08-04..2026-09-21 (35 files, 7,239,126 ticks); cross-check DUKA assembled 2023-09..2026-08 (7 files, 15,563,968 ticks)",
+  "FEATURES_TESTED": "B0 lagged returns; B1 microprice (DATA_GAP); B2 OFI tick-rule proxy (true OFI DATA_GAP); B3 momentum; B4 spread/vol state; B5 limited reversal; B6 interaction (14 feature columns, 7 families, <=2 per family)",
+  "MODELS_TESTED": "Naive(reference), Ridge, Logistic, HistGradientBoosting(GBT), torch MLP",
+  "BEST_HORIZON": "300000 ms (5 min) by VAL selection; net still negative in OOS",
+  "COST_MODEL": "anchor 0.40 USD/round-trip (spread 0.18 + commission 0.22) ~= 0.90 bp; stress tiers 0.40/0.50/0.60/0.80/1.00 USD/RT; measured median spread 0.15 USD = 0.343 bp; commission 0.22 USD/RT in the latency simulation",
+  "RESULT_STATUS": "NO_ALPHA",
+  "NET_ALPHA_AFTER_COST": "NEGATIVE on every tested horizon. OOS per-trade net: 1s -0.901 bp (-0.397 USD), 30s -0.888 bp (-0.383 USD), 5min -0.825 bp (-0.362 USD). Best gross edge +0.096 bp vs ~0.90 bp cost.",
+  "OOS_RESULT": "No positive net-of-cost edge. TEST fold (2026-09-07..09-21) untouched until final evaluation; all selected configurations were chosen on VAL only.",
+  "STATISTICAL_SIGNIFICANCE": "0 of 30 tests survive Benjamini-Hochberg FDR q=0.05. 8 of 30 produced a valid p-value; the rest traded too rarely to test. No bootstrap CI upper bound clears the 0.10 USD/RT minimum-tradable bar.",
+  "ITERATION_COUNT": "30 (cap 30, not exceeded)",
+  "ORDER_SEND": "0",
+  "LIVE": "NO",
+  "EXPANSION": "LOCKED",
+  "V1_UNTOUCHED": "YES",
+  "V2_UNTOUCHED": "YES",
+  "OPENCLAW_UNTOUCHED": "YES",
+  "WAIT_FOR_CHATGPT_FINAL_AUDIT": "YES"
+ },
+ "horizon_verdicts": {
+  "50": "DATA_INSUFFICIENT (clean fraction 0.001; feed resolution 266 ms > 2x50 ms)",
+  "200": "DATA_INSUFFICIENT (clean fraction 0.446 < 0.5)",
+  "1000": "NO_ALPHA (measurable, eff_n 605337; no VAL-eligible config; OOS net -0.901 bp)",
+  "5000": "NO_ALPHA (measurable, eff_n 147727; diagnostic only, not in the frozen search set)",
+  "30000": "NO_ALPHA (measurable, eff_n 24769; OOS net -0.888 bp on 383 trades)",
+  "300000": "NO_ALPHA (measurable, eff_n 2467; OOS net -0.825 bp on 110248 trades)",
+  "3600000": "NO_ALPHA (measurable, eff_n 196; diagnostic only, not in the frozen search set)",
+  "86400000": "DATA_INSUFFICIENT (0 clean samples; every window crosses a registered session gap)"
+ },
+ "decisive_evidence": {
+  "cost_bp": 0.90,
+  "median_abs_move_bp": {"200ms": 0.162, "1s": 0.346, "5s": 0.582, "30s": 1.269, "5min": 4.168, "1h": 16.065},
+  "cost_over_move_at_1s": 2.6,
+  "best_gross_edge_bp_any_config": 0.096,
+  "gross_edge_shortfall_vs_cost": "~9x",
+  "strongest_univariate_rank_ic": {"1s": -0.179, "5s": -0.142, "30s": -0.065, "5min": -0.019, "1h": 0.024},
+  "luck_example": "iteration 8 (B0/Ridge @30s): VAL net -0.284 USD -> TEST net +0.821 USD, not selectable, not significant"
+ },
+ "data_gaps": ["2023-12", "2024-04..2026-07", "daily 21:00-22:59Z", "L2/trade_flow (L2_DATA_GAP)", "FXTM volume/volume_real/last identically 0 -> B1 microprice and true B2 OFI are DATA_GAP"],
+ "halt": false,
+ "iteration_cap_triggered": false,
+ "artifacts_root": "C:\\AIQuant\\research\\hermes\\trader_v3\\alpha",
+ "note": "No code was changed to improve any number. The freeze was hashed before the first feature computation. PASS judgement is explicitly left to the external auditor."
+}
