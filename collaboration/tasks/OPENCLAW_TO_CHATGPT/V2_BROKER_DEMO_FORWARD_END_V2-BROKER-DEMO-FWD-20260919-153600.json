@@ -1,0 +1,147 @@
+{
+  "run_id": "V2-BROKER-DEMO-FWD-20260919-153600",
+  "report": "V2_BROKER_DEMO_FORWARD_END",
+  "generated_utc": "2026-09-21T15:45:00Z",
+  "generated_by": "openclaw:main (cron 52e346da-a48e-4fda-9ecc-34285f9e84c2, read-only monitor)",
+  "forward_window": {
+    "start_utc": "2026-09-19T15:36:00Z",
+    "end_utc": "2026-09-21T15:36:00Z",
+    "duration_h": 48
+  },
+  "verdict": {
+    "FORWARD_STATUS": "ENDED",
+    "SAFETY": "PASS",
+    "LIVE": 0,
+    "EVIDENCE_COMPLETENESS": "PARTIAL",
+    "notes": [
+      "No safety violation: execution_mode=BROKER_DEMO, live_trading=false, allow_real_trading=false, account/terminal match.",
+      "V2 BROKER_DEMO ledger recorded 0 new events during the 48h window (last event 2026-09-11) -> broker-side accounting for the window is absent.",
+      "Demo terminal (magic 90003) shows position lifecycles matching the engine's paper fills by price/time, not recorded in the broker ledger -> audit-flagged divergence."
+    ]
+  },
+  "config_integrity": {
+    "path": "C:/AIQuant/research/hermes/trader_v2/config/v2_config.json",
+    "sha256": "B0CC254B809DA52844778BBBB8A298DF77DD2D031A8353FEC3F982DAC26BE0E5",
+    "freeze_baseline_sha256": "B0CC254B809DA52844778BBBB8A298DF77DD2D031A8353FEC3F982DAC26BE0E5",
+    "CONFIG_UNCHANGED": true
+  },
+  "safety_flags": {
+    "execution_mode": "BROKER_DEMO",
+    "broker_enabled": true,
+    "broker_demo_enabled": true,
+    "live_trading": false,
+    "allow_real_trading": false,
+    "LIVE_ALLOWED": false,
+    "VIOLATION": false
+  },
+  "mt5": {
+    "terminal_id": 36460,
+    "terminal_path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_01\\terminal64.exe",
+    "portable": true,
+    "present": true,
+    "server": "ForexTimeFXTM-Demo01",
+    "login": 160761384,
+    "demo": true,
+    "trade_mode": 0,
+    "currency": "USD",
+    "leverage": 500,
+    "magic": 90003,
+    "magic_source": "execution/fxtm_demo_adapter.py",
+    "credential_source": "C:\\AIQuant\\.env.mt5_demo (env FXTM_DEMO_*)"
+  },
+  "account_at_end": {
+    "balance": 1053.70,
+    "equity": 1053.10,
+    "margin": 8.70,
+    "margin_free": 1044.40,
+    "positions": 1,
+    "open_positions": [
+      {
+        "ticket": 2376714158,
+        "symbol": "XAUUSD",
+        "side": "SHORT",
+        "volume": 0.01,
+        "entry": 4349.86,
+        "current": 4350.46,
+        "sl": 4386.85,
+        "tp": 4341.40,
+        "profit": -0.60,
+        "magic": 90003,
+        "opened_utc_est": "2026-09-21T15:23:15Z"
+      }
+    ]
+  },
+  "ledger": {
+    "path": "research/hermes/trader_v2/ledger/hermes_v2_ledger.jsonl",
+    "events": 12,
+    "bad_json": 0,
+    "dup_seq": 0,
+    "dup_event_id": 0,
+    "dup_event_hash": 0,
+    "dup_triples": 0,
+    "seq_unique_1_to_n": true,
+    "hash_chain_ok": true,
+    "env_execution_mode": "BROKER_DEMO/BROKER_DEMO (all events)",
+    "first_ts": "2026-09-11T13:09:29.779930+00:00",
+    "last_ts": "2026-09-11T13:09:29.788931+00:00",
+    "events_in_window": 0,
+    "append_only": true
+  },
+  "engine_run": {
+    "active_run_id": "V2-PAPER-20260920-200702-f507",
+    "prior_run_id_in_window": "V2-PAPER-20260919-145431-c5a1",
+    "health_run_id_matches_active": true,
+    "run_status": "RUNNING",
+    "market_open": true,
+    "current_cycle": "2026-09-21T15:30Z",
+    "last_completed_utc": "2026-09-21T15:23:16Z",
+    "replay_match": true,
+    "shadow_guardian": {"cycles": 90, "snapshots": 94, "replay_mismatch": 0},
+    "counters_lifetime_end": {"cycles_attempted": 459, "wait": 328, "trade": 36, "reject": 1, "missed_cycles": 1, "recovery_count": 1, "duplicate_prevented": 5},
+    "health_forward_validation_allowed": false,
+    "flag_file_state_FORWARD_VALIDATION_ALLOWED": true,
+    "flag_discrepancy": "informational (unchanged across all monitor cycles)"
+  },
+  "window_execution": {
+    "scope": "engine run ledger research/runs/V2-PAPER-20260920-200702-f507/ledger.jsonl, ts in [START,END]",
+    "decision_events": 78,
+    "decisions_breakdown": {"WAIT": 67, "TRADE": 10, "REJECT": 1},
+    "orders": {"EXECUTION_REQUEST": 10, "ORDER_ACCEPTED": 2, "FILL": 2, "POSITION_OPEN": 2, "POSITION_CLOSED": 1, "ORDER_REJECTED": 8},
+    "reject_reasons": {"POSITION_BUSY (XAUUSD 已有 open position)": 7, "PRECHECK_REJECT long_sl_at_or_above_market": 1},
+    "fills": [
+      {"event_id": "evt-000112-FILL", "decision_id": "DEC-ctx_faedd61a049f", "symbol": "XAUUSD", "side": "LONG", "volume": 0.01, "reference_price": 4356.05, "fill_price": 4348.59, "slippage": null, "latency_ms": null},
+      {"event_id": "evt-000185-FILL", "decision_id": "DEC-ctx_f5eed567f310", "symbol": "XAUUSD", "side": "SHORT", "volume": 0.01, "reference_price": 4369.37, "fill_price": 4349.86, "slippage": null, "latency_ms": null}
+    ],
+    "slippage": {"measured": false, "recorded_slippage_field": null, "note": "reference-vs-fill deltas are stale-reference artifacts of the paper/local fill path; broker slippage not measured this window"},
+    "pnl": {"roundtrips_closed": 1, "gross_pnl": -10.10, "commission": -0.22, "swap": 0.0, "net_pnl": -10.32},
+    "cost": {"commission": -0.22, "swap": 0.0, "message": "total_exec_cost"}
+  },
+  "broker_demo_divergence": {
+    "flagged": true,
+    "detail": "Demo-shell positions on fxtm_demo_01 (magic 90003) match engine paper fills by price/time (LONG entry 4348.59 @ ~08:08Z; SHORT entry 4349.86 @ ~15:23Z) but hermes_v2_ledger.jsonl recorded no corresponding events (last evt 2026-09-11). demo=true / magic 90003 -> not a LIVE violation; ledger does not record this demo position lifecycle."
+  },
+  "live_gate": {
+    "LIVE_ALLOWED": false,
+    "live_trading": false,
+    "allow_real_trading": false,
+    "live_orders": 0,
+    "real_broker_access_scope": "V2 fxtm_demo_01 (demo) only"
+  },
+  "v1_v3": {
+    "V1_TERMINAL_PID": 1348,
+    "V1_PATH": "C:\\Program Files\\ForexTime (FXTM) MT5\\terminal64.exe",
+    "V1_UNTOUCHED": true,
+    "V3_TERMINAL_PID": 49300,
+    "V3_PATH": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib\\terminal64.exe",
+    "V3_UNTOUCHED": true,
+    "STRATEGY_UNTOUCHED": true,
+    "CONFIG_FREEZE_HELD": true
+  },
+  "freeze": {
+    "file": "collaboration/tasks/OPENCLAW_TO_CHATGPT/V2_BROKER_DEMO_FORWARD_FREEZE_V2-BROKER-DEMO-FWD-20260919-153600.json",
+    "parent_commit_staging": "7d699bed12b3e6509e4d31a4d6c1ae41526ae217",
+    "CODE_FREEZE": true,
+    "CONFIG_FREEZE": true,
+    "monitor_read_only": true
+  }
+}
