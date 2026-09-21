@@ -228,3 +228,103 @@ STATUS                     = FAIL   (原因: 版本仍 2026.9.4，未升级到 2
 
 WAIT_FOR_CHATGPT_AUDIT
 ```
+
+---
+
+## R1 — Updater Blocker Evidence
+
+> **APPEND-ONLY**。原始审计内容与结论**未改动**：`STATUS = FAIL`（`CURRENT_VERSION = 2026.9.4` / `TARGET_VERSION = 2026.9.5` / `UPGRADE_EXECUTED = FALSE`）。未将 FAIL 改为 PASS。
+
+### R1.1 Blocker
+```text
+UPDATER_BLOCKER = TRUE
+BLOCKER_MESSAGE = Update refused: package manager owner is unknown; no changes were made.
+UPDATER_ACTION  = NO_CHANGE
+```
+**这不是**升级失败后的回滚，**也不是**升级过程中损坏：
+```text
+UPGRADE_ATTEMPTED         = TRUE
+UPGRADE_EXECUTED          = FALSE
+FILES_MODIFIED_BY_UPDATER = FALSE
+ROLLBACK_EXECUTED         = FALSE
+REPAIR_EXECUTED           = FALSE
+SYSTEM_STATE_CHANGED      = FALSE
+```
+
+### R1.2 安装形态（只读记录）
+```text
+INSTALL_ROOT = C:\Users\surface\dtlopenclaw\tools\openclaw
+package.json 关键字段:
+  name                  = openclaw-runtime
+  private               = true
+  dependencies.openclaw = 2026.9.4
+CLI shim = C:\Users\surface\.openclaw\tmp\agent-cli\openclaw.cmd
+  实测内容 = node.exe --max-old-space-size=8192 <INSTALL_ROOT>\node_modules\openclaw\dist\index.js %*
+  → 直接调用本地 dist\index.js 的 shim；不是标准 package-manager global shim
+```
+
+### R1.3 updater 拒绝原因
+```text
+PACKAGE_MANAGER_OWNER = UNKNOWN
+updater 建议（原文，仅记录，未执行）：
+  Run this OpenClaw install through its active npm/pnpm/Bun global shim,
+  or reinstall it with that package manager, then retry.
+OWNER_UNKNOWN = TRUE
+（不得解释为已完成重装）
+```
+
+### R1.4 目标版本存在性（只读，实际所用镜像）
+```text
+$ npm.cmd view openclaw@2026.9.5 version --registry=https://mirrors.cloud.tencent.com/npm
+→ 2026.9.5
+
+$ npm.cmd view openclaw dist-tags --json --registry=https://mirrors.cloud.tencent.com/npm
+→ {"latest":"2026.9.5","beta":"2026.9.5","alpha":"2026.5.19-alpha.1","extended-stable":"2026.7.35"}
+
+TARGET_VERSION_FOUND = TRUE
+TARGET_VERSION       = 2026.9.5
+DIST_TAG_LATEST      = 2026.9.5
+```
+未执行 install；未修改 registry；未修改 npm 配置。
+
+### R1.5 对原 DATA_GAP 的澄清（不改写历史）
+原始 `openclaw update status` 的 npm registry timeout 记录**保留**（当时真实发生）。
+```text
+CLARIFICATION:
+  该 timeout 针对 registry.npmjs.org。
+  当前安装环境实际使用/可访问的镜像是 mirrors.cloud.tencent.com/npm（见 INSTALL_ROOT\.npmrc）。
+  该镜像已只读验证 2026.9.5 存在。
+  → npmjs.org timeout ≠ target version unavailable
+```
+不删除原始记录，不改写历史。
+
+### R1.6 lockfile 状态
+```text
+LOCKFILE_PRESENT = FALSE
+```
+INSTALL_ROOT 目录仅含 `.npmrc` / `package.json` / `node_modules`，无 `package-lock.json`。
+本任务严格 READ_ONLY：未生成 lockfile，未执行 `npm install` / `npm ci` / `npm update`。
+`lockfile missing` 属当前安装状态的一部分，不在本审计任务内修复。
+
+### R1.7 安全复核（R1 时刻）
+```text
+V1_V2_V3_UNTOUCHED = TRUE
+MT5_INSTANCE_COUNT = 3
+MT5_ISOLATION      = PASS
+ORDER_SEND_CALLS   = 0
+LIVE               = FALSE
+V3_LIVE_ALLOWED       = NO
+V3_ORDER_SEND_ALLOWED = NO
+V3_FORWARD_ALLOWED    = NO
+EXPANSION             = LOCKED
+Gateway version (现)  = 2026.9.4（未变）
+```
+未重启 Gateway / V1 / V2 / V3 / MT5；未执行升级；未执行方案 A / 方案 B；未执行 V3 formula fix / calibration expansion。
+
+### R1.8 R1 结论
+```text
+STATUS           = FAIL   (保持原结论不变)
+UPGRADE_EXECUTED = FALSE
+UPDATER_BLOCKER  = TRUE
+NEXT             = WAIT_FOR_CHATGPT_AUDIT
+```
