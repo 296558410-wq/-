@@ -11,12 +11,20 @@
 
 | 项 | 值 |
 |---|---|
-| BASE_COMMIT | `6170050dcd6397f29193effc4f0baaed9036e2ab` |
-| FINAL_CODE_COMMIT | `4f6bd54c4a4963fb2885921fee1d7adb510c940a` |
-| FINAL_AUDIT_COMMIT (local) | `4ac5a240e752c40ebd1a968350c6f3e95d176cd7` |
-| STAGING_COMMIT | `461b980bcf4b11506073ed3424fbe5f9e4849e18` |
-| origin/main | `461b980bcf4b11506073ed3424fbe5f9e4849e18` |
-| HEAD == origin/main | `TRUE` |
+| BASE_COMMIT (local repo) | `6170050dcd6397f29193effc4f0baaed9036e2ab` — **historical** |
+| FINAL_CODE_COMMIT (local repo) | `4f6bd54c4a4963fb2885921fee1d7adb510c940a` — **historical** |
+| FINAL_AUDIT_COMMIT (local repo, historical) | `4ac5a240e752c40ebd1a968350c6f3e95d176cd7` — **historical** |
+| STAGING_COMMIT (github repo, historical) | `461b980bcf4b11506073ed3424fbe5f9e4849e18` — **historical** |
+| PREVIOUS_HEAD (github, before FIX-003) | `9ad4f4b39897e28fb89b934a064be49290b85da3` — **historical** |
+| origin/main (as of FIX-003 start) | `9ad4f4b39897e28fb89b934a064be49290b85da3` |
+| HEAD == origin/main (as of FIX-003 start) | `TRUE` |
+| 当前材料 commit | 用 `git -C <github_repo> log -1 --format=%H -- research/hermes/trader_v3/audit/final_formula_fix_audit/` 解析（FIX-003 提交后即为其结果） |
+| 仓库区分 | `6170050/4f6bd54/4ac5a24` 在 **本地 C:\AIQuant**；`461b980/4ac9a54/9ad4f4b` 在 **GitHub staging** |
+| GitHub 对象可解析性 | `6170050/4f6bd54/4ac5a24` = **NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE**；`461b980/4ac9a54/9ad4f4b` = `commit` |
+
+> 说明：本表中标注 **historical** 的 commit 均为**历史节点**，不再代表“当前最终 GitHub 状态”。
+> 早期材料曾把 `4ac5a24` / `461b980` 当作“当前 commit”，属 metadata 不一致（跨仓库混淆），已在 FIX-003 修正。
+> 完整可解析性记录见 `commit_lineage.json`；代码证据说明见 `formula_fix_code_evidence.md`。
 | Broker 真实净值（20 笔） | **-7.44 USD**（-0.372 USD/RT） |
 | Corrected 公式结果 | **-7.44 USD**（-0.372 USD/RT） |
 | 对平 | **20/20**（total_error 3.7e-14 USD） |
@@ -95,7 +103,10 @@ corrected_net_pnl = gross_pnl_usd + commission + swap
 | 12 | `test_results.md` | 9/9 + 28/28 测试证据与命令 |
 | 13 | `safety_final.json` | 安全只读核查结果 |
 | 14 | `data_gaps.md` | **DATA_GAP 完整披露**（DG-1..DG-6：DESCRIPTION / IMPACT / CAN_RECONSTRUCT / USED_IN_CORRECTED_PNL） |
-| 15 | `SHA256SUMS.txt` | 本包全部材料哈希清单（含 data_gaps.md） |
+| 15 | `SHA256SUMS.txt` | 本包全部材料哈希清单（覆盖本目录全部文件） |
+| 16 | `pre_fix_state.json` | FIX-003 修改前基线（HEAD / origin/main / git status / 材料 SHA256） |
+| 17 | `formula_fix_code_evidence.md` | **代码证据说明**（Git object availability = unavailable；patch 为 BASE→FINAL 证据） |
+| 18 | `patch_verification.json` | **patch 血缘证明**（index blob 与 Git 对象库 12/12 匹配） |
 
 ---
 
@@ -136,12 +147,24 @@ corrected_net_pnl = gross_pnl_usd + commission + swap
 
 ## 4. Commit 链（从 Git 实际读取，非猜测）
 
-| commit | 类型 | parent | subject | 作用 |
-|---|---|---|---|---|
-| `6170050` | BASE | — | `audit(v3): record base/audit commit metadata for V3-HFT-COST-BRIDGE-AUDIT-001` | 修复前状态 |
-| `4f6bd54` | CODE | `6170050` | `fix(v3-calib): V3-HFT-CALIBRATION-FORMULA-FIX-001 broker-anchored net_pnl …` | **真正的公式修复** + 测试 + 重算产物（6 文件） |
-| `4ac5a24` | AUDIT | `4f6bd54` | `report(v3-calib): FORMULA-FIX-001 canonical result (md+json) + section-6 20-trade table + reports/ copies` | 正式报告与 §六 表（6 文件） |
-| `461b980` | STAGING | — | `report(v3-calib): FORMULA-FIX-001 canonical result (md+json) - A-K structure, …` | 报告发布到 GitHub staging |
+| commit | 仓库 | 类型 | parent | subject | 作用 |
+|---|---|---|---|---|---|
+| `6170050` | **local C:\AIQuant** | BASE | — | `audit(v3): record base/audit commit metadata for V3-HFT-COST-BRIDGE-AUDIT-001` | 修复前状态（historical） |
+| `4f6bd54` | **local C:\AIQuant** | CODE | `6170050` | `fix(v3-calib): V3-HFT-CALIBRATION-FORMULA-FIX-001 broker-anchored net_pnl …` | **真正的公式修复** + 测试 + 重算产物（6 文件，historical） |
+| `4ac5a24` | **local C:\AIQuant** | AUDIT | `4f6bd54` | `report(v3-calib): FORMULA-FIX-001 canonical result …` | 正式报告与 §六 表（6 文件，historical） |
+| `461b980` | **GitHub staging** | STAGING | — | `report(v3-calib): FORMULA-FIX-001 canonical result (md+json) …` | 报告发布到 GitHub（historical） |
+| `9ad4f4b` | **GitHub staging** | MATERIAL | `4ac9a54` | `audit(v3): FORMULA-FIX-002 complete material pack …` | FIX-002 完成材料包（FIX-003 之前的 HEAD，historical） |
+
+**GitHub 对象库可解析性（实际查询）**
+```text
+6170050 -> NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE
+4f6bd54 -> NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE
+4ac5a24 -> NOT_PRESENT_IN_CURRENT_GITHUB_OBJECT_DATABASE
+461b980 -> commit
+4ac9a54 -> commit
+9ad4f4b -> commit
+```
+代码证据因此以 `git_diff_formula_fix.patch`（BASE→FINAL）形式提供，见 `formula_fix_code_evidence.md` 与 `patch_verification.json`。
 
 完整展开见 `commit_lineage.json`。
 
@@ -157,6 +180,29 @@ V3_ORDER_SEND_ALLOWED = NO / V3_LIVE_ALLOWED = NO / V3_FORWARD_ALLOWED = NO
 EXPANSION = LOCKED
 V1_UNTOUCHED = TRUE / V2_UNTOUCHED = TRUE / OPENCLAW_UNTOUCHED = TRUE
 MT5_INSTANCE_COUNT = 3 / MT5_ISOLATION = PASS
+```
+
+## 5b. 材料一致性核对（FIX-003，只读离线）
+
+```text
+v3_calibration_formula_fix_20trades.csv : 20 rows
+reconciled (reconciliation_status=PASS)  : 20
+broker total net_pnl                     : -7.44 USD
+broker mean net_pnl                      : -0.372 USD/RT
+broker_facts_20trades.json               : 40 deals / 40 orders
+reconciliation_summary.json              : broker_total_net_pnl=-7.44, matched_count=20
+=> 与实际文件一致；未修改任何数据来迎合预期
+```
+
+## 5c. Patch 血缘与代码证据（FIX-003）
+
+```text
+patch_verification.json : patch_generated_from_base_to_final = TRUE
+                          changed_files_verified             = TRUE
+                          证明：12/12 文件的 `index <old>..<new>` 与 Git 对象库 BASE/FINAL blob 逐一匹配
+                          反例排除：文件集(12) ≠ 4ac5a24 的 HEAD~1→HEAD 文件集(6)
+formula_fix_code_evidence.md : Git object availability = unavailable（GitHub 仓库不含 6170050/4f6bd54/4ac5a24）
+已修正：旧 patch 因 PowerShell 文本管道导致编码损伤 → 已用原始字节重新生成
 ```
 
 本材料包**不含**任何 password / token / API key / `.env` / 私钥。

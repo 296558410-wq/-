@@ -1,0 +1,144 @@
+{
+ "schema": "v3_patch_verification/1",
+ "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-003",
+ "patch_file": "git_diff_formula_fix.patch",
+ "base_commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+ "final_code_commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
+ "patch_scope": "research/hermes/trader_v3/",
+ "patch_generated_from_base_to_final": true,
+ "changed_files_verified": true,
+ "provenance_method": "?? hunk ?? `index <old>..<new>` ? Git ????? BASE:path / FINAL:path blob ????????????? old=0000000 ? BASE ?????",
+ "evidence": {
+  "patch_sha256": "7962bff9309cbfdf9de3bf7d9e05c17c3ac76b8a6a94fa46d42d0273dfdc7241",
+  "previous_patch_sha256_encoding_degraded": "5ba0f8b3574caf72dd7faad3782077c362138cd2731db272216d66872047e490",
+  "previous_patch_defect": "?? artifact ? PowerShell ????(Out-File)?? -> ? ASCII ??????? 2970 vs ?? 2985????????? Python ????????",
+  "file_list_equals_base_to_final": true,
+  "file_list_differs_from_head1_to_head": true,
+  "base_to_final_file_count": 12,
+  "head1_to_head_file_count": 6,
+  "index_blob_matches": 12,
+  "index_blob_mismatches": 0
+ },
+ "per_file_index_provenance": [
+  {
+   "path": "research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "9d85337",
+   "final_blob": "9d853370d236",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "3613977",
+   "final_blob": "3613977c3a83",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "b0377f6",
+   "final_blob": "b0377f6261d9",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/audit/v3_formula_fix_summary.json",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "6c88074",
+   "final_blob": "6c88074ef971",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/foundation/calibration_pilot.py",
+   "base_exists": true,
+   "index_old": "26b4558",
+   "base_blob": "26b4558a3bf3",
+   "final_exists": true,
+   "index_new": "70f56cc",
+   "final_blob": "70f56cc2da2c",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/foundation/pnl_accounting.py",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "3252700",
+   "final_blob": "3252700e53e5",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "61ab8d2",
+   "final_blob": "61ab8d2b164a",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "7f5d522",
+   "final_blob": "7f5d5227fc75",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "24ba01a",
+   "final_blob": "24ba01a1bb8b",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "9d85337",
+   "final_blob": "9d853370d236",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/reports/v3_formula_fix_comparison.csv",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "3613977",
+   "final_blob": "3613977c3a83",
+   "match": true
+  },
+  {
+   "path": "research/hermes/trader_v3/reports/v3_formula_fix_summary.json",
+   "base_exists": false,
+   "index_old": "0000000",
+   "base_blob": "6170050dcd63",
+   "final_exists": true,
+   "index_new": "6c88074",
+   "final_blob": "6c88074ef971",
+   "match": true
+  }
+ ]
+}
