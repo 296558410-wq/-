@@ -83,13 +83,17 @@
     "broker_net_sum": -7.44,
     "broker_balance_delta": -7.4399999999996,
     "broker_net_equals_balance_delta": true,
-    "broker_tz_offsets_s": [10800]
+    "broker_tz_offsets_s": [
+      10800
+    ]
   },
   "fok": {
     "symbol_filling_mode": 1,
     "order_type_filling": 0,
     "order_type_filling_meaning": "FOK",
-    "order_states": [4],
+    "order_states": [
+      4
+    ],
     "order_states_meaning": "FILLED",
     "partial_fills": 0,
     "rejections": 0,
@@ -171,8 +175,9 @@
     "repo": "C:\\AIQuant\\github_publish_staging",
     "remote": "https://github.com/296558410-wq/-.git",
     "branch": "main",
-    "staging_commit": "PENDING",
-    "remote_synced": "PENDING"
+    "staging_commit": "48131eabaa00e6b3560fc12705f50178fb6870c7",
+    "remote_synced": true,
+    "note": "staging_commit is the commit that delivered these files; a follow-up metadata-only commit updates this field."
   },
   "halt": false,
   "wait_for_chatgpt_audit": true,
