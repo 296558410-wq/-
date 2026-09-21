@@ -13,10 +13,10 @@
 TASK_ID    = V3-HFT-CALIBRATION-FORMULA-FIX-001
 STATUS     = PASS
 STARTED_AT = 2026-09-21T07:11:13Z  (15:11 GMT+8)
-FINISHED_AT= 2026-09-21T07:5xZ     (see git timestamps)
+FINISHED_AT= 2026-09-21T07:18:00Z  (15:18 GMT+8)
 
-LOCAL_HEAD = <filled below: GIT_COMMIT>
-REMOTE_HEAD= <filled below: REMOTE_SYNC>
+LOCAL_HEAD = 4f6bd54c4a4963fb2885921fee1d7adb510c940a   (C:\AIQuant, branch fix/v2-full-system-repair-20260917)
+REMOTE_HEAD= 06745eabbca52934b3e3e1737ebf4ee7dc8a0e15   (staging main, first landing of this report)
 
 FILES_CHANGED = research/hermes/trader_v3/foundation/calibration_pilot.py
 FILES_CREATED = research/hermes/trader_v3/foundation/pnl_accounting.py
@@ -79,8 +79,9 @@ V1_UNTOUCHED: TRUE
 V2_UNTOUCHED: TRUE
 V3_ALPHA_UNTOUCHED: TRUE
 
-GIT_COMMIT: <GIT_COMMIT>
-REMOTE_SYNC: <REMOTE_SYNC>
+GIT_COMMIT: 4f6bd54c4a4963fb2885921fee1d7adb510c940a
+REMOTE_SYNC: 06745eabbca52934b3e3e1737ebf4ee7dc8a0e15  (local HEAD == origin/main, verified)
+REPORT_COMMIT: 06745eabbca52934b3e3e1737ebf4ee7dc8a0e15  (staging commit that first carried this report)
 ```
 
 ## 1. What was wrong (confirmed by V3-HFT-COST-BRIDGE-AUDIT-001)
