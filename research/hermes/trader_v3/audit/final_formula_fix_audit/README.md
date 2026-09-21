@@ -84,17 +84,18 @@ corrected_net_pnl = gross_pnl_usd + commission + swap
 | 1 | `README.md` | 本索引 + 证据关系 |
 | 2 | `V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md` | 最终报告（与正式报告**逐字节一致**） |
 | 3 | `V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json` | 最终报告（机器可读，A–K 结构） |
-| 4 | `v3_calibration_formula_fix_20trades.csv` | 20 笔逐笔（含 deal id / broker 事实 / 新旧净值 / 对平 / evidence_status） |
+| 4 | `v3_calibration_formula_fix_20trades.csv` | 20 笔逐笔（含 **entry/exit order + deal id** / broker 事实 / 新旧净值 / observed_spread / 双边滑点 / hold_actual_ms / 规格与货币 / 对平 / evidence_status） |
 | 5 | `broker_facts_20trades.json` | Broker 不可变事实导出（40 deal + 40 order + symbol spec，**无任何凭据**） |
 | 6 | `git_diff_formula_fix.patch` | `git diff BASE FINAL -- research/hermes/trader_v3/` |
-| 7 | `diff_stat.txt` | 同上 `--stat` |
+| 7 | `git_diff_stat.txt` | 同上 `--stat`（`git diff --stat BASE FINAL`） |
 | 8 | `changed_files.txt` | 修改文件清单（name-status） |
 | 9 | `commit_lineage.json` | BASE/CODE/AUDIT/STAGING 四 commit 的 parent·subject·changed files·purpose |
 | 10 | `reconciliation_summary.json` | 20/20 对平汇总（broker vs corrected） |
 | 11 | `reconciliation_method.md` | **计算路径**（证明非自证循环） |
 | 12 | `test_results.md` | 9/9 + 28/28 测试证据与命令 |
 | 13 | `safety_final.json` | 安全只读核查结果 |
-| 14 | `SHA256SUMS.txt` | 本包全部材料哈希清单 |
+| 14 | `data_gaps.md` | **DATA_GAP 完整披露**（DG-1..DG-6：DESCRIPTION / IMPACT / CAN_RECONSTRUCT / USED_IN_CORRECTED_PNL） |
+| 15 | `SHA256SUMS.txt` | 本包全部材料哈希清单（含 data_gaps.md） |
 
 ---
 
