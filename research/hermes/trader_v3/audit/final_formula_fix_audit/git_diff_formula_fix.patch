@@ -1,0 +1,2969 @@
+﻿diff --git a/research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv b/research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv
+new file mode 100644
+index 0000000..9d85337
+--- /dev/null
++++ b/research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv
+@@ -0,0 +1,21 @@
++trade_id,direction,volume,entry_fill_price,exit_fill_price,gross_pnl,commission,swap,broker_realized_net,old_model_net,corrected_model_net,old_error,corrected_error,residual,theoretical_net,execution_cost,cost_spread,cost_slippage,cost_commission,cost_swap
++V3CAL-00,LONG,0.01,4373.73,4373.85,0.12000000000080036,-0.22,0.0,-0.1,-0.15999999999919964,-0.09999999999919965,-0.05999999999919964,8.003597784522753e-13,8.003597784522753e-13,-0.20000000000047294,-0.10000000000127329,0.17999999999938154,-0.28000000000065484,-0.22,0.0
++V3CAL-01,SHORT,0.01,4373.77,4373.96,-0.18999999999959982,-0.22,0.0,-0.41000000000000003,-0.14999999999898136,-0.4099999999995998,0.26000000000101864,4.0023540037736893e-13,4.0023540037736893e-13,-0.23000000000021828,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-02,LONG,0.01,4373.97,4373.82,-0.1500000000005457,-0.22,0.0,-0.37,-0.12000000000105501,-0.37000000000054567,0.24999999999894498,-5.456746166032644e-13,-5.456746166032644e-13,-0.18000000000003638,0.19000000000050932,0.18000000000029104,0.010000000000218279,-0.22,0.0
++V3CAL-03,SHORT,0.01,4373.82,4374.04,-0.22000000000025466,-0.22,0.0,-0.44,-0.1800000000005457,-0.44000000000025463,0.25999999999945433,-2.5462965069777965e-13,-2.5462965069777965e-13,-0.2599999999999636,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-04,LONG,0.01,4374.04,4373.86,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-05,SHORT,0.01,4373.86,4374.04,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-06,LONG,0.01,4374.05,4373.87,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-07,SHORT,0.01,4373.87,4374.05,-0.18000000000029104,-0.22,0.0,-0.4,-0.15000000000080035,-0.400000000000291,0.24999999999919967,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.22,0.0
++V3CAL-08,LONG,0.01,4374.05,4373.87,-0.18000000000029104,-0.22,0.0,-0.4,-0.15000000000080035,-0.400000000000291,0.24999999999919967,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.22,0.0
++V3CAL-09,SHORT,0.01,4373.87,4374.05,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-10,LONG,0.01,4374.03,4373.83,-0.1999999999998181,-0.22,0.0,-0.42000000000000004,-0.1799999999996362,-0.4199999999998181,0.24000000000036384,1.8196555373606316e-13,1.8196555373606316e-13,-0.22,0.1999999999998181,0.1799999999998363,0.01999999999998181,-0.22,0.0
++V3CAL-11,SHORT,0.01,4373.93,4374.11,-0.17999999999938154,-0.22,0.0,-0.4,-0.13999999999876309,-0.3999999999993815,0.2600000000012369,6.185052470186747e-13,6.185052470186747e-13,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-12,LONG,0.01,4374.15,4374.07,-0.07999999999992724,-0.22,0.0,-0.3,-0.11999999999923602,-0.2999999999999272,0.18000000000076397,7.277511926417901e-14,7.277511926417901e-14,-0.03999999999970896,0.2600000000002183,0.17999999999938154,0.08000000000083674,-0.22,0.0
++V3CAL-13,SHORT,0.01,4374.05,4374.13,-0.07999999999992724,-0.22,0.0,-0.3,-0.05999999999974534,-0.2999999999999272,0.24000000000025465,7.277511926417901e-14,7.277511926417901e-14,-0.10000000000010914,0.1999999999998181,0.18000000000029104,0.019999999999527063,-0.22,0.0
++V3CAL-14,LONG,0.01,4374.13,4374.03,-0.1000000000003638,-0.22,0.0,-0.32,-0.060000000000654835,-0.32000000000036377,0.2599999999993452,-3.6376457401843254e-13,-3.6376457401843254e-13,-0.14000000000007276,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-15,SHORT,0.01,4374.02,4374.2,-0.17999999999938154,-0.22,0.0,-0.4,-0.13999999999876309,-0.3999999999993815,0.2600000000012369,6.185052470186747e-13,6.185052470186747e-13,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-16,LONG,0.01,4374.22,4374.02,-0.1999999999998181,-0.22,0.0,-0.42000000000000004,-0.19999999999916326,-0.4199999999998181,0.22000000000083678,1.8196555373606316e-13,1.8196555373606316e-13,-0.20000000000047294,0.21999999999934516,0.1799999999998363,0.03999999999950887,-0.22,0.0
++V3CAL-17,SHORT,0.01,4374.02,4374.18,-0.15999999999985448,-0.22,0.0,-0.38,-0.11999999999923602,-0.37999999999985445,0.26000000000076395,1.4555023852835802e-13,1.4555023852835802e-13,-0.19999999999956344,0.18000000000029104,0.17999999999938154,9.094947017729282e-13,-0.22,0.0
++V3CAL-18,LONG,0.01,4374.18,4374.05,-0.13000000000010914,-0.22,0.0,-0.35,-0.09000000000040018,-0.3500000000001091,0.2599999999995998,-1.0913492332065289e-13,-1.0913492332065289e-13,-0.1699999999998181,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-19,SHORT,0.01,4374.05,4374.26,-0.21000000000003638,-0.22,0.0,-0.43,-0.16999999999941792,-0.43000000000003635,0.2600000000005821,-3.6359804056473877e-14,-3.6359804056473877e-14,-0.2500000000006548,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
+diff --git a/research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv b/research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv
+new file mode 100644
+index 0000000..3613977
+--- /dev/null
++++ b/research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv
+@@ -0,0 +1,21 @@
++trade_id,side,volume,price_unit_usd,entry_fill_price,exit_fill_price,gross_pnl_price,gross_pnl_usd,commission,swap,old_net_pnl,corrected_net_pnl,broker_realized_net,old_error,corrected_error,old_published_model_net,old_formula_reproduced,entry_slippage_adverse,exit_slippage_adverse,spread_at_entry,theoretical_net,execution_friction,friction_spread,friction_slippage,broker_gross_profit,reconciliation_residual,accounting_reconciliation,unit_status,net_pnl_status,exit_quote_source
++V3CAL-00,LONG,0.01,1.0,4373.73,4373.85,0.12000000000080036,0.12000000000080036,-0.22,0.0,-0.15999999999919964,-0.09999999999919965,-0.1,-0.05999999999919964,8.003597784522753e-13,-0.15999999999919964,True,0.019999999999527063,-0.3000000000001819,0.18000000000029104,-0.20000000000047294,-0.10000000000127329,0.17999999999938154,-0.28000000000065484,0.12,8.003597784522753e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-01,SHORT,0.01,1.0,4373.77,4373.96,-0.18999999999959982,-0.18999999999959982,-0.22,0.0,-0.14999999999898136,-0.4099999999995998,-0.41000000000000003,0.26000000000101864,4.0023540037736893e-13,-0.14999999999898136,True,0.0,0.0,0.17999999999938154,-0.23000000000021828,0.17999999999938154,0.17999999999938154,0.0,-0.19,4.0023540037736893e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-02,LONG,0.01,1.0,4373.97,4373.82,-0.1500000000005457,-0.1500000000005457,-0.22,0.0,-0.12000000000105501,-0.37000000000054567,-0.37,0.24999999999894498,-5.456746166032644e-13,-0.12000000000105501,True,0.010000000000218279,0.0,0.18000000000029104,-0.18000000000003638,0.19000000000050932,0.18000000000029104,0.010000000000218279,-0.15,-5.456746166032644e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-03,SHORT,0.01,1.0,4373.82,4374.04,-0.22000000000025466,-0.22000000000025466,-0.22,0.0,-0.1800000000005457,-0.44000000000025463,-0.44,0.25999999999945433,-2.5462965069777965e-13,-0.1800000000005457,True,0.0,0.0,0.18000000000029104,-0.2599999999999636,0.18000000000029104,0.18000000000029104,0.0,-0.22,-2.5462965069777965e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-04,LONG,0.01,1.0,4374.04,4373.86,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-05,SHORT,0.01,1.0,4373.86,4374.04,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-06,LONG,0.01,1.0,4374.05,4373.87,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-07,SHORT,0.01,1.0,4373.87,4374.05,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.15000000000080035,-0.400000000000291,-0.4,0.24999999999919967,-2.9098945475425353e-13,-0.15000000000080035,True,0.0,-0.010000000000218279,0.18000000000029104,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-08,LONG,0.01,1.0,4374.05,4373.87,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.15000000000080035,-0.400000000000291,-0.4,0.24999999999919967,-2.9098945475425353e-13,-0.15000000000080035,True,0.0,-0.010000000000218279,0.18000000000029104,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-09,SHORT,0.01,1.0,4373.87,4374.05,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-10,LONG,0.01,1.0,4374.03,4373.83,-0.1999999999998181,-0.1999999999998181,-0.22,0.0,-0.1799999999996362,-0.4199999999998181,-0.42000000000000004,0.24000000000036384,1.8196555373606316e-13,-0.1799999999996362,True,0.0,0.020000000000436557,0.17999999999938154,-0.22,0.1999999999998181,0.1799999999998363,0.01999999999998181,-0.2,1.8196555373606316e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-11,SHORT,0.01,1.0,4373.93,4374.11,-0.17999999999938154,-0.17999999999938154,-0.22,0.0,-0.13999999999876309,-0.3999999999993815,-0.4,0.2600000000012369,6.185052470186747e-13,-0.13999999999876309,True,0.0,0.0,0.17999999999938154,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.18,6.185052470186747e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-12,LONG,0.01,1.0,4374.15,4374.07,-0.07999999999992724,-0.07999999999992724,-0.22,0.0,-0.11999999999923602,-0.2999999999999272,-0.3,0.18000000000076397,7.277511926417901e-14,-0.11999999999923602,True,0.07999999999992724,0.0,0.17999999999938154,-0.03999999999970896,0.2600000000002183,0.17999999999938154,0.08000000000083674,-0.08,7.277511926417901e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-13,SHORT,0.01,1.0,4374.05,4374.13,-0.07999999999992724,-0.07999999999992724,-0.22,0.0,-0.05999999999974534,-0.2999999999999272,-0.3,0.24000000000025465,7.277511926417901e-14,-0.05999999999974534,True,0.019999999999527063,0.0,0.18000000000029104,-0.10000000000010914,0.1999999999998181,0.18000000000029104,0.019999999999527063,-0.08,7.277511926417901e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-14,LONG,0.01,1.0,4374.13,4374.03,-0.1000000000003638,-0.1000000000003638,-0.22,0.0,-0.060000000000654835,-0.32000000000036377,-0.32,0.2599999999993452,-3.6376457401843254e-13,-0.060000000000654835,True,0.0,0.0,0.18000000000029104,-0.14000000000007276,0.18000000000029104,0.18000000000029104,0.0,-0.1,-3.6376457401843254e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-15,SHORT,0.01,1.0,4374.02,4374.2,-0.17999999999938154,-0.17999999999938154,-0.22,0.0,-0.13999999999876309,-0.3999999999993815,-0.4,0.2600000000012369,6.185052470186747e-13,-0.13999999999876309,True,0.0,0.0,0.17999999999938154,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.18,6.185052470186747e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-16,LONG,0.01,1.0,4374.22,4374.02,-0.1999999999998181,-0.1999999999998181,-0.22,0.0,-0.19999999999916326,-0.4199999999998181,-0.42000000000000004,0.22000000000083678,1.8196555373606316e-13,-0.19999999999916326,True,0.020000000000436557,0.019999999999527063,0.17999999999938154,-0.20000000000047294,0.21999999999934516,0.1799999999998363,0.03999999999950887,-0.2,1.8196555373606316e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-17,SHORT,0.01,1.0,4374.02,4374.18,-0.15999999999985448,-0.15999999999985448,-0.22,0.0,-0.11999999999923602,-0.37999999999985445,-0.38,0.26000000000076395,1.4555023852835802e-13,-0.11999999999923602,True,0.0,0.0,0.17999999999938154,-0.19999999999956344,0.18000000000029104,0.17999999999938154,9.094947017729282e-13,-0.16,1.4555023852835802e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-18,LONG,0.01,1.0,4374.18,4374.05,-0.13000000000010914,-0.13000000000010914,-0.22,0.0,-0.09000000000040018,-0.3500000000001091,-0.35,0.2599999999995998,-1.0913492332065289e-13,-0.09000000000040018,True,0.0,0.0,0.18000000000029104,-0.1699999999998181,0.18000000000029104,0.18000000000029104,0.0,-0.13,-1.0913492332065289e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-19,SHORT,0.01,1.0,4374.05,4374.26,-0.21000000000003638,-0.21000000000003638,-0.22,0.0,-0.16999999999941792,-0.43000000000003635,-0.43,0.2600000000005821,-3.6359804056473877e-14,-0.16999999999941792,True,0.0,0.0,0.17999999999938154,-0.2500000000006548,0.17999999999938154,0.17999999999938154,0.0,-0.21,-3.6359804056473877e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
+diff --git a/research/hermes/trader_v3/audit/v3_formula_fix_recompute.py b/research/hermes/trader_v3/audit/v3_formula_fix_recompute.py
+new file mode 100644
+index 0000000..b0377f6
+--- /dev/null
++++ b/research/hermes/trader_v3/audit/v3_formula_fix_recompute.py
+@@ -0,0 +1,341 @@
++"""V3-HFT-CALIBRATION-FORMULA-FIX-001: offline OLD vs CORRECTED recompute.
++
++Recomputes the 20 frozen V3 calibration round trips with
++  * the OLD (defective) net_pnl formula, and
++  * the CORRECTED broker-anchored formula,
++without touching the broker: NO order_send, NO new calibration order, NO write
++to any pilot artifact. Inputs are READ-ONLY frozen artifacts:
++
++  data/hft_ledger/v3_calibration_ledger.jsonl   (fills / requested prices / quotes)
++  data/calibration/registry.jsonl               (direction, commission, swap, deal ids)
++  audit/_probe_broker_out.json                  (broker deal facts + symbol spec)
++  audit/v3_cost_bridge_20trades.csv             (SUPPLEMENTARY: exit-side quotes only;
++                                                 exit bid/ask are not in the ledger)
++
++Broker facts are never adjusted. Run from trader_v3:
++    python audit/v3_formula_fix_recompute.py
++"""
++from __future__ import annotations
++import csv
++import hashlib
++import json
++import os
++import sys
++
++HERE = os.path.dirname(os.path.abspath(__file__))
++V3 = os.path.dirname(HERE)
++if V3 not in sys.path:
++    sys.path.insert(0, V3)
++
++from foundation import ledger as LED, pnl_accounting as PNA  # noqa: E402
++
++LEDGER = os.path.join(V3, "data", "hft_ledger", "v3_calibration_ledger.jsonl")
++REGISTRY = os.path.join(V3, "data", "calibration", "registry.jsonl")
++PROBE = os.path.join(HERE, "_probe_broker_out.json")
++AUDIT_CSV = os.path.join(HERE, "v3_cost_bridge_20trades.csv")
++OUT_CSV = os.path.join(HERE, "v3_formula_fix_comparison.csv")
++OUT_JSON = os.path.join(HERE, "v3_formula_fix_summary.json")
++
++# task-briefed immutability baselines (must stay byte-identical)
++BASELINE_SHA256 = {
++    "data/hft_ledger/v3_calibration_ledger.jsonl":
++        "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
++    "data/calibration/PILOT_DONE":
++        "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
++    "data/calibration/registry.jsonl":
++        "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
++    "audit/_probe_broker_out.json":
++        "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0",
++}
++
++CSV_COLUMNS = ["trade_id", "side", "volume", "price_unit_usd",
++               "entry_fill_price", "exit_fill_price",
++               "gross_pnl_price", "gross_pnl_usd", "commission", "swap",
++               "old_net_pnl", "corrected_net_pnl", "broker_realized_net",
++               "old_error", "corrected_error",
++               "old_published_model_net", "old_formula_reproduced",
++               "entry_slippage_adverse", "exit_slippage_adverse",
++               "spread_at_entry", "theoretical_net", "execution_friction",
++               "friction_spread", "friction_slippage",
++               "broker_gross_profit", "reconciliation_residual",
++               "accounting_reconciliation", "unit_status", "net_pnl_status",
++               "exit_quote_source"]
++
++
++def sha256(path: str) -> str:
++    h = hashlib.sha256()
++    with open(path, "rb") as f:
++        for chunk in iter(lambda: f.read(65536), b""):
++            h.update(chunk)
++    return h.hexdigest()
++
++
++def verify_baselines() -> dict:
++    out = {}
++    for rel, want in BASELINE_SHA256.items():
++        p = os.path.join(V3, rel.replace("/", os.sep))
++        got = sha256(p) if os.path.exists(p) else None
++        out[rel] = {"expected": want, "actual": got,
++                    "UNCHANGED": (got is not None and got.upper() == want.upper())}
++    return out
++
++
++def load_ledger() -> dict:
++    ev = LED.Ledger.replay(LEDGER)
++    per: dict = {}
++    for e in ev:
++        cid = e.get("decision_id")
++        if not cid or not cid.startswith("V3CAL-"):
++            continue
++        d = per.setdefault(cid, {})
++        t = e.get("event_type")
++        if t == "ORDER_REQUEST":
++            d["entry_req_price"] = e.get("price")
++            d["entry_bid"] = e.get("bid")
++            d["entry_ask"] = e.get("ask")
++            d["entry_spread"] = e.get("spread")
++            d["entry_request_ns"] = e.get("timestamp_ns")
++        elif t == "ENTRY_FILL":
++            d["entry_fill_price"] = e.get("price")
++            d["entry_fill_ns"] = e.get("timestamp_ns")
++            d["position_id"] = e.get("position_id")
++        elif t == "EXIT_REQUEST":
++            d["exit_req_price"] = e.get("price")
++            d["exit_request_ns"] = e.get("timestamp_ns")
++        elif t == "EXIT_FILL":
++            d["exit_fill_price"] = e.get("price")
++            d["exit_fill_ns"] = e.get("timestamp_ns")
++    return per
++
++
++def load_registry() -> dict:
++    out = {}
++    with open(REGISTRY, encoding="utf-8") as f:
++        for ln in f:
++            ln = ln.strip()
++            if ln:
++                r = json.loads(ln)
++                out[r["calibration_id"]] = r
++    return out
++
++
++def load_probe() -> dict:
++    with open(PROBE, encoding="utf-8") as f:
++        return json.load(f)
++
++
++def load_audit_csv() -> dict:
++    out = {}
++    if not os.path.exists(AUDIT_CSV):
++        return out
++    with open(AUDIT_CSV, encoding="utf-8", newline="") as f:
++        for r in csv.DictReader(f):
++            out[r["trade_id"]] = r
++    return out
++
++
++def _f(x):
++    if x is None or x == "":
++        return None
++    try:
++        return float(x)
++    except (TypeError, ValueError):
++        return None
++
++
++def broker_facts_by_position(probe: dict) -> dict:
++    """Broker deal facts, keyed by position id (= registry order_id)."""
++    out: dict = {}
++    for d in probe.get("deals", []):
++        pid = str(d.get("position_id"))
++        rec = out.setdefault(pid, {"profit": 0.0, "commission": 0.0, "swap": 0.0,
++                                   "volume": 0.0, "entry": None, "exit": None})
++        rec["profit"] += float(d.get("profit") or 0.0)
++        rec["commission"] += float(d.get("commission") or 0.0)
++        rec["swap"] += float(d.get("swap") or 0.0)
++        # position size: one leg of the round trip, NEVER the sum of both legs
++        rec["volume"] = max(rec["volume"], float(d.get("volume") or 0.0))
++        if d.get("entry") == 0:
++            rec["entry"] = d
++        elif d.get("entry") == 1:
++            rec["exit"] = d
++    return out
++
++
++def recompute() -> dict:
++    led = load_ledger()
++    reg = load_registry()
++    probe = load_probe()
++    sup = load_audit_csv()
++    facts = broker_facts_by_position(probe)
++    spec = probe.get("spec", {})
++    acct_ccy = (probe.get("account") or {}).get("currency")
++
++    rows = []
++    for cid in sorted(reg):
++        r = reg[cid]
++        l = led.get(cid, {})
++        pid = str(r.get("order_id"))
++        bf = facts.get(pid)
++        if bf is None:
++            raise SystemExit(f"HALT: no broker facts for {cid} (position {pid})")
++        direction = r.get("direction")
++        volume = bf["volume"]
++        if not volume:
++            raise SystemExit(f"HALT: broker volume missing for {cid}")
++
++        entry_fill = l.get("entry_fill_price")
++        exit_fill = l.get("exit_fill_price")
++        if entry_fill is None or exit_fill is None:
++            raise SystemExit(f"HALT: ledger fills missing for {cid}")
++
++        # ledger is authoritative for requested prices / quotes; exit quotes are
++        # NOT persisted in the ledger -> supplementary (flagged), else DATA_GAP.
++        entry_bid, entry_ask = l.get("entry_bid"), l.get("entry_ask")
++        entry_spread = l.get("entry_spread")
++        entry_req = l.get("entry_req_price")
++        exit_req = l.get("exit_req_price")
++        exit_bid = exit_ask = exit_mid = None
++        quote_src = "LEDGER"
++        srow = sup.get(cid)
++        if srow is not None and srow.get("exit_bid") and srow.get("exit_ask"):
++            exit_bid, exit_ask = _f(srow["exit_bid"]), _f(srow["exit_ask"])
++            exit_mid = _f(srow.get("exit_mid"))
++            quote_src = "AUDIT_CSV_SUPPLEMENTARY"
++        else:
++            quote_src = "DATA_GAP_EXIT_QUOTES_NOT_PERSISTED"
++        entry_mid = (entry_bid + entry_ask) / 2.0 if (entry_bid and entry_ask) else None
++
++        side_in, side_out = PNA.leg_side(direction, "entry"), PNA.leg_side(direction, "exit")
++        slip_in = PNA.adverse_slippage_price(side_in, entry_req, entry_fill)
++        slip_out = PNA.adverse_slippage_price(side_out, exit_req, exit_fill)
++        broker_gross = bf["profit"]
++        comm = bf["commission"]
++        swap = bf["swap"]
++
++        # OLD (frozen, defective) formula: charges spread + |slippage| again and
++        # subtracts the broker-signed (negative) commission.
++        old_net = PNA.old_formula_net(direction=direction, entry_fill_price=entry_fill,
++                                      exit_fill_price=exit_fill, spread=entry_spread,
++                                      entry_slippage=slip_in, exit_slippage=slip_out,
++                                      commission=comm)
++        # CORRECTED (broker-anchored)
++        acc = PNA.round_trip_accounting(
++            direction=direction, volume=volume,
++            contract_size=spec.get("trade_contract_size"),
++            tick_size=spec.get("trade_tick_size"), tick_value=spec.get("trade_tick_value"),
++            entry_fill_price=entry_fill, exit_fill_price=exit_fill,
++            entry_mid=entry_mid, exit_mid=exit_mid,
++            entry_ref_price=entry_req, exit_ref_price=exit_req,
++            entry_bid=entry_bid, entry_ask=entry_ask, exit_bid=exit_bid, exit_ask=exit_ask,
++            commission=comm, swap=swap, broker_gross_profit=broker_gross,
++            profit_currency=spec.get("currency_profit"), account_currency=acct_ccy)
++
++        published = _f((srow or {}).get("model_net"))
++        rows.append({
++            "trade_id": cid, "side": direction, "volume": volume,
++            "price_unit_usd": acc["price_unit_usd"],
++            "entry_fill_price": entry_fill, "exit_fill_price": exit_fill,
++            "gross_pnl_price": acc["gross_pnl"], "gross_pnl_usd": acc["gross_pnl_usd"],
++            "commission": comm, "swap": swap,
++            "old_net_pnl": old_net,
++            "corrected_net_pnl": acc["net_pnl"],
++            "broker_realized_net": acc["broker_realized_net"],
++            "old_error": None if acc["broker_realized_net"] is None else old_net - acc["broker_realized_net"],
++            "corrected_error": acc["reconciliation_residual"],
++            "old_published_model_net": published,
++            "old_formula_reproduced": (None if published is None
++                                       else abs(published - old_net) <= 1e-9),
++            "entry_slippage_adverse": slip_in, "exit_slippage_adverse": slip_out,
++            "spread_at_entry": entry_spread,
++            "theoretical_net": acc["theoretical_net"],
++            "execution_friction": acc["execution_friction"],
++            "friction_spread": acc["friction_spread"],
++            "friction_slippage": acc["friction_slippage"],
++            "broker_gross_profit": broker_gross,
++            "reconciliation_residual": acc["reconciliation_residual"],
++            "accounting_reconciliation": acc["accounting_reconciliation"],
++            "unit_status": acc["unit_status"], "net_pnl_status": acc["net_pnl_status"],
++            "exit_quote_source": quote_src,
++        })
++
++    n = len(rows)
++
++    def mean(key):
++        xs = [r[key] for r in rows if r[key] is not None]
++        return (sum(xs) / len(xs)) if xs else None
++
++    def total(key):
++        xs = [r[key] for r in rows if r[key] is not None]
++        return sum(xs)
++
++    corrected_resid = [abs(r["corrected_error"]) for r in rows if r["corrected_error"] is not None]
++    hashes = verify_baselines()
++    summary = {
++        "schema": "v3_formula_fix/1",
++        "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
++        "net_pnl_formula_version": PNA.VERSION,
++        "n_roundtrips": n,
++        "OLD_MODEL_NET_MEAN": mean("old_net_pnl"),
++        "CORRECTED_MODEL_NET_MEAN": mean("corrected_net_pnl"),
++        "BROKER_NET_MEAN": mean("broker_realized_net"),
++        "OLD_TOTAL_ERROR": total("old_error"),
++        "CORRECTED_TOTAL_ERROR": total("corrected_error"),
++        "MAX_ABS_RESIDUAL": max(corrected_resid) if corrected_resid else None,
++        "MEAN_ABS_RESIDUAL": (sum(corrected_resid) / len(corrected_resid)) if corrected_resid else None,
++        "BROKER_NET_SUM": total("broker_realized_net"),
++        "BROKER_GROSS_SUM": total("broker_gross_profit"),
++        "BROKER_COMMISSION_SUM": total("commission"),
++        "BROKER_SWAP_SUM": total("swap"),
++        "UNIT": {"price_unit_usd": rows[0]["price_unit_usd"], "volume": rows[0]["volume"],
++                 "contract_size": spec.get("trade_contract_size"),
++                 "tick_size": spec.get("trade_tick_size"),
++                 "tick_value": spec.get("trade_tick_value"),
++                 "account_currency": acct_ccy,
++                 "profit_currency": spec.get("currency_profit"),
++                 "unit_status": rows[0]["unit_status"]},
++        "OLD_FORMULA_REPRODUCED_ALL": all(r["old_formula_reproduced"] for r in rows
++                                          if r["old_formula_reproduced"] is not None),
++        "CORRECTED_RECONCILED_ALL": all(r["accounting_reconciliation"] == "PASS" for r in rows),
++        "CROSS_CHECK_audit_summary": {
++            "MODEL_NET_MEAN_expected": -0.1375, "MODEL_NET_MEAN_actual": mean("old_net_pnl"),
++            "BROKER_NET_MEAN_expected": -0.372, "BROKER_NET_MEAN_actual": mean("broker_realized_net"),
++            "BROKER_NET_SUM_expected": -7.44, "BROKER_NET_SUM_actual": total("broker_realized_net"),
++            "BROKER_BALANCE_DELTA_expected": -7.44,
++        },
++        "RAW_DATA_BASELINE_HASHES": hashes,
++        "RAW_DATA_IMMUTABLE": all(v["UNCHANGED"] for v in hashes.values()),
++        "ORDER_SENT": False, "LIVE": False, "EXPANSION": "LOCKED",
++        "exit_quote_note": ("exit-side bid/ask are not persisted by the pilot ledger; "
++                            "friction/theoretical decomposition uses the previous audit CSV "
++                            "(supplementary) and is flagged per row. Broker facts and the "
++                            "corrected net use ONLY the ledger fills + broker deals."),
++        "rows": rows,
++    }
++    return summary
++
++
++def write_outputs(summary: dict) -> None:
++    with open(OUT_CSV, "w", encoding="utf-8", newline="") as f:
++        w = csv.DictWriter(f, fieldnames=CSV_COLUMNS, extrasaction="ignore")
++        w.writeheader()
++        for r in summary["rows"]:
++            w.writerow(r)
++    with open(OUT_JSON, "w", encoding="utf-8") as f:
++        json.dump(summary, f, ensure_ascii=False, indent=1, default=str)
++
++
++def main() -> int:
++    s = recompute()
++    write_outputs(s)
++    print(json.dumps({k: s[k] for k in
++                      ("n_roundtrips", "OLD_MODEL_NET_MEAN", "CORRECTED_MODEL_NET_MEAN",
++                       "BROKER_NET_MEAN", "OLD_TOTAL_ERROR", "CORRECTED_TOTAL_ERROR",
++                       "MAX_ABS_RESIDUAL", "MEAN_ABS_RESIDUAL", "BROKER_NET_SUM",
++                       "OLD_FORMULA_REPRODUCED_ALL", "CORRECTED_RECONCILED_ALL",
++                       "RAW_DATA_IMMUTABLE")}, ensure_ascii=False, indent=1))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/research/hermes/trader_v3/audit/v3_formula_fix_summary.json b/research/hermes/trader_v3/audit/v3_formula_fix_summary.json
+new file mode 100644
+index 0000000..6c88074
+--- /dev/null
++++ b/research/hermes/trader_v3/audit/v3_formula_fix_summary.json
+@@ -0,0 +1,707 @@
++{
++ "schema": "v3_formula_fix/1",
++ "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
++ "net_pnl_formula_version": "v3-calibration-netpnl-2",
++ "n_roundtrips": 20,
++ "OLD_MODEL_NET_MEAN": -0.13749999999993634,
++ "CORRECTED_MODEL_NET_MEAN": -0.37199999999999817,
++ "BROKER_NET_MEAN": -0.372,
++ "OLD_TOTAL_ERROR": 4.690000000001273,
++ "CORRECTED_TOTAL_ERROR": 3.7136960173711486e-14,
++ "MAX_ABS_RESIDUAL": 8.003597784522753e-13,
++ "MEAN_ABS_RESIDUAL": 3.0740687773089803e-13,
++ "BROKER_NET_SUM": -7.44,
++ "BROKER_GROSS_SUM": -3.04,
++ "BROKER_COMMISSION_SUM": -4.4,
++ "BROKER_SWAP_SUM": 0.0,
++ "UNIT": {
++  "price_unit_usd": 1.0,
++  "volume": 0.01,
++  "contract_size": 100.0,
++  "tick_size": 0.01,
++  "tick_value": 0.1,
++  "account_currency": "USD",
++  "profit_currency": "USD",
++  "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT"
++ },
++ "OLD_FORMULA_REPRODUCED_ALL": true,
++ "CORRECTED_RECONCILED_ALL": true,
++ "CROSS_CHECK_audit_summary": {
++  "MODEL_NET_MEAN_expected": -0.1375,
++  "MODEL_NET_MEAN_actual": -0.13749999999993634,
++  "BROKER_NET_MEAN_expected": -0.372,
++  "BROKER_NET_MEAN_actual": -0.372,
++  "BROKER_NET_SUM_expected": -7.44,
++  "BROKER_NET_SUM_actual": -7.44,
++  "BROKER_BALANCE_DELTA_expected": -7.44
++ },
++ "RAW_DATA_BASELINE_HASHES": {
++  "data/hft_ledger/v3_calibration_ledger.jsonl": {
++   "expected": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
++   "actual": "fc8fd01e5ac487dd63558241d67584d453ccd21d8aa3a91d8bb804304e06750c",
++   "UNCHANGED": true
++  },
++  "data/calibration/PILOT_DONE": {
++   "expected": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
++   "actual": "dec80e9f5166dd4ecdbb76da3b62f8edc7c61d857f5a9ac87269d6bd588339c6",
++   "UNCHANGED": true
++  },
++  "data/calibration/registry.jsonl": {
++   "expected": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
++   "actual": "7ad9596c4cab88bb95e0650daabbb169b53c3d3b796b07ea8bacb7c6366f4f25",
++   "UNCHANGED": true
++  },
++  "audit/_probe_broker_out.json": {
++   "expected": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0",
++   "actual": "f76782ce347738e7b31547c04c9bf5936022e9261a3ba5bb7a2877565bd70ca0",
++   "UNCHANGED": true
++  }
++ },
++ "RAW_DATA_IMMUTABLE": true,
++ "ORDER_SENT": false,
++ "LIVE": false,
++ "EXPANSION": "LOCKED",
++ "exit_quote_note": "exit-side bid/ask are not persisted by the pilot ledger; friction/theoretical decomposition uses the previous audit CSV (supplementary) and is flagged per row. Broker facts and the corrected net use ONLY the ledger fills + broker deals.",
++ "rows": [
++  {
++   "trade_id": "V3CAL-00",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.73,
++   "exit_fill_price": 4373.85,
++   "gross_pnl_price": 0.12000000000080036,
++   "gross_pnl_usd": 0.12000000000080036,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15999999999919964,
++   "corrected_net_pnl": -0.09999999999919965,
++   "broker_realized_net": -0.1,
++   "old_error": -0.05999999999919964,
++   "corrected_error": 8.003597784522753e-13,
++   "old_published_model_net": -0.15999999999919964,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.019999999999527063,
++   "exit_slippage_adverse": -0.3000000000001819,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.20000000000047294,
++   "execution_friction": -0.10000000000127329,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": -0.28000000000065484,
++   "broker_gross_profit": 0.12,
++   "reconciliation_residual": 8.003597784522753e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-01",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.77,
++   "exit_fill_price": 4373.96,
++   "gross_pnl_price": -0.18999999999959982,
++   "gross_pnl_usd": -0.18999999999959982,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14999999999898136,
++   "corrected_net_pnl": -0.4099999999995998,
++   "broker_realized_net": -0.41000000000000003,
++   "old_error": 0.26000000000101864,
++   "corrected_error": 4.0023540037736893e-13,
++   "old_published_model_net": -0.14999999999898136,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.19,
++   "reconciliation_residual": 4.0023540037736893e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-02",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.97,
++   "exit_fill_price": 4373.82,
++   "gross_pnl_price": -0.1500000000005457,
++   "gross_pnl_usd": -0.1500000000005457,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.12000000000105501,
++   "corrected_net_pnl": -0.37000000000054567,
++   "broker_realized_net": -0.37,
++   "old_error": 0.24999999999894498,
++   "corrected_error": -5.456746166032644e-13,
++   "old_published_model_net": -0.12000000000105501,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.010000000000218279,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.18000000000003638,
++   "execution_friction": 0.19000000000050932,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.010000000000218279,
++   "broker_gross_profit": -0.15,
++   "reconciliation_residual": -5.456746166032644e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-03",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.82,
++   "exit_fill_price": 4374.04,
++   "gross_pnl_price": -0.22000000000025466,
++   "gross_pnl_usd": -0.22000000000025466,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.1800000000005457,
++   "corrected_net_pnl": -0.44000000000025463,
++   "broker_realized_net": -0.44,
++   "old_error": 0.25999999999945433,
++   "corrected_error": -2.5462965069777965e-13,
++   "old_published_model_net": -0.1800000000005457,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.2599999999999636,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.22,
++   "reconciliation_residual": -2.5462965069777965e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-04",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.04,
++   "exit_fill_price": 4373.86,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-05",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.86,
++   "exit_fill_price": 4374.04,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-06",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4373.87,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-07",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.87,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15000000000080035,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.24999999999919967,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.15000000000080035,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": -0.010000000000218279,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17000000000007276,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": -0.010000000000218279,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-08",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4373.87,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15000000000080035,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.24999999999919967,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.15000000000080035,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": -0.010000000000218279,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17000000000007276,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": -0.010000000000218279,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-09",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.87,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-10",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.03,
++   "exit_fill_price": 4373.83,
++   "gross_pnl_price": -0.1999999999998181,
++   "gross_pnl_usd": -0.1999999999998181,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.1799999999996362,
++   "corrected_net_pnl": -0.4199999999998181,
++   "broker_realized_net": -0.42000000000000004,
++   "old_error": 0.24000000000036384,
++   "corrected_error": 1.8196555373606316e-13,
++   "old_published_model_net": -0.1799999999996362,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.020000000000436557,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.1999999999998181,
++   "friction_spread": 0.1799999999998363,
++   "friction_slippage": 0.01999999999998181,
++   "broker_gross_profit": -0.2,
++   "reconciliation_residual": 1.8196555373606316e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-11",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.93,
++   "exit_fill_price": 4374.11,
++   "gross_pnl_price": -0.17999999999938154,
++   "gross_pnl_usd": -0.17999999999938154,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.13999999999876309,
++   "corrected_net_pnl": -0.3999999999993815,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2600000000012369,
++   "corrected_error": 6.185052470186747e-13,
++   "old_published_model_net": -0.13999999999876309,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": 6.185052470186747e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-12",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.15,
++   "exit_fill_price": 4374.07,
++   "gross_pnl_price": -0.07999999999992724,
++   "gross_pnl_usd": -0.07999999999992724,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.11999999999923602,
++   "corrected_net_pnl": -0.2999999999999272,
++   "broker_realized_net": -0.3,
++   "old_error": 0.18000000000076397,
++   "corrected_error": 7.277511926417901e-14,
++   "old_published_model_net": -0.11999999999923602,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.07999999999992724,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.03999999999970896,
++   "execution_friction": 0.2600000000002183,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.08000000000083674,
++   "broker_gross_profit": -0.08,
++   "reconciliation_residual": 7.277511926417901e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-13",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4374.13,
++   "gross_pnl_price": -0.07999999999992724,
++   "gross_pnl_usd": -0.07999999999992724,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.05999999999974534,
++   "corrected_net_pnl": -0.2999999999999272,
++   "broker_realized_net": -0.3,
++   "old_error": 0.24000000000025465,
++   "corrected_error": 7.277511926417901e-14,
++   "old_published_model_net": -0.05999999999974534,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.019999999999527063,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.10000000000010914,
++   "execution_friction": 0.1999999999998181,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.019999999999527063,
++   "broker_gross_profit": -0.08,
++   "reconciliation_residual": 7.277511926417901e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-14",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.13,
++   "exit_fill_price": 4374.03,
++   "gross_pnl_price": -0.1000000000003638,
++   "gross_pnl_usd": -0.1000000000003638,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.060000000000654835,
++   "corrected_net_pnl": -0.32000000000036377,
++   "broker_realized_net": -0.32,
++   "old_error": 0.2599999999993452,
++   "corrected_error": -3.6376457401843254e-13,
++   "old_published_model_net": -0.060000000000654835,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.14000000000007276,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.1,
++   "reconciliation_residual": -3.6376457401843254e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-15",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.02,
++   "exit_fill_price": 4374.2,
++   "gross_pnl_price": -0.17999999999938154,
++   "gross_pnl_usd": -0.17999999999938154,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.13999999999876309,
++   "corrected_net_pnl": -0.3999999999993815,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2600000000012369,
++   "corrected_error": 6.185052470186747e-13,
++   "old_published_model_net": -0.13999999999876309,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": 6.185052470186747e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-16",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.22,
++   "exit_fill_price": 4374.02,
++   "gross_pnl_price": -0.1999999999998181,
++   "gross_pnl_usd": -0.1999999999998181,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.19999999999916326,
++   "corrected_net_pnl": -0.4199999999998181,
++   "broker_realized_net": -0.42000000000000004,
++   "old_error": 0.22000000000083678,
++   "corrected_error": 1.8196555373606316e-13,
++   "old_published_model_net": -0.19999999999916326,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.020000000000436557,
++   "exit_slippage_adverse": 0.019999999999527063,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.20000000000047294,
++   "execution_friction": 0.21999999999934516,
++   "friction_spread": 0.1799999999998363,
++   "friction_slippage": 0.03999999999950887,
++   "broker_gross_profit": -0.2,
++   "reconciliation_residual": 1.8196555373606316e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-17",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.02,
++   "exit_fill_price": 4374.18,
++   "gross_pnl_price": -0.15999999999985448,
++   "gross_pnl_usd": -0.15999999999985448,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.11999999999923602,
++   "corrected_net_pnl": -0.37999999999985445,
++   "broker_realized_net": -0.38,
++   "old_error": 0.26000000000076395,
++   "corrected_error": 1.4555023852835802e-13,
++   "old_published_model_net": -0.11999999999923602,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.19999999999956344,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 9.094947017729282e-13,
++   "broker_gross_profit": -0.16,
++   "reconciliation_residual": 1.4555023852835802e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-18",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.18,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.13000000000010914,
++   "gross_pnl_usd": -0.13000000000010914,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.09000000000040018,
++   "corrected_net_pnl": -0.3500000000001091,
++   "broker_realized_net": -0.35,
++   "old_error": 0.2599999999995998,
++   "corrected_error": -1.0913492332065289e-13,
++   "old_published_model_net": -0.09000000000040018,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.1699999999998181,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.13,
++   "reconciliation_residual": -1.0913492332065289e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-19",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4374.26,
++   "gross_pnl_price": -0.21000000000003638,
++   "gross_pnl_usd": -0.21000000000003638,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.16999999999941792,
++   "corrected_net_pnl": -0.43000000000003635,
++   "broker_realized_net": -0.43,
++   "old_error": 0.2600000000005821,
++   "corrected_error": -3.6359804056473877e-14,
++   "old_published_model_net": -0.16999999999941792,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.2500000000006548,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.21,
++   "reconciliation_residual": -3.6359804056473877e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  }
++ ]
++}
+\ No newline at end of file
+diff --git a/research/hermes/trader_v3/foundation/calibration_pilot.py b/research/hermes/trader_v3/foundation/calibration_pilot.py
+index 26b4558..70f56cc 100644
+--- a/research/hermes/trader_v3/foundation/calibration_pilot.py
++++ b/research/hermes/trader_v3/foundation/calibration_pilot.py
+@@ -26,7 +26,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
+ V3 = os.path.dirname(HERE)
+ sys.path.insert(0, V3)
+ 
+-from foundation import timeutil, ledger as LED
++from foundation import timeutil, ledger as LED, pnl_accounting as PNA
++
++# ---- V3-HFT-CALIBRATION-FORMULA-FIX-001 ----
++# net_pnl formula version. v3-calibration-netpnl-1 (frozen, defective) charged
++# spread + slippage a second time, used abs() on slippage and subtracted the
++# broker-signed (negative) commission. v3-calibration-netpnl-2 is broker-anchored;
++# see foundation/pnl_accounting.py.
+ 
+ # ---- spec constants (frozen) ----
+ MAX_ROUND_TRIPS = 20
+@@ -102,8 +108,10 @@ def _spec(mt5):
+     s = mt5.symbol_info(SYMBOL)
+     return {k: getattr(s, k, None) for k in
+             ("name", "digits", "point", "trade_tick_size", "trade_tick_value",
++             "trade_tick_value_profit", "trade_tick_value_loss",
+              "trade_contract_size", "volume_min", "volume_step", "volume_max",
+-             "spread", "visible", "trade_mode")}
++             "spread", "visible", "trade_mode", "filling_mode",
++             "currency_base", "currency_profit", "currency_margin")}
+ 
+ 
+ def _pos(mt5):
+@@ -347,7 +355,7 @@ def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
+     for i in range(n_roundtrips):
+         try:
+             _assert_hard_gates(_gacct(mt5))
+-            s = _round_trip(mt5, i, float(volume), lg)
++            s = _round_trip(mt5, i, float(volume), lg, spec=spec)
+         except Halt as h:
+             halt_reason = str(h)
+             break
+@@ -366,9 +374,14 @@ def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
+     profiles = _profiles(samples)
+     registry = [{k: s.get(k) for k in
+                  ("calibration_id", "order_id", "entry_deal_id", "exit_deal_id", "direction",
+-                  "hold_target_ms", "hold_actual_ms", "entry_fill_price", "exit_fill_price",
++                  "hold_target_ms", "hold_actual_ms", "hold_actual_ms_tick_stamp",
++                  "entry_fill_price", "exit_fill_price", "exit_bid", "exit_ask",
++                  "tick_age_ms", "exit_tick_age_ms", "STALE_TICK_AT_REQUEST",
+                   "entry_slippage_bps", "exit_slippage_bps", "commission", "swap",
+-                  "reconciliation", "sample_hash")} for s in samples]
++                  "broker_gross_profit", "broker_realized_net", "reconciliation_residual",
++                  "accounting_reconciliation", "price_unit_usd", "unit_status",
++                  "gross_pnl_usd", "net_pnl", "net_pnl_status", "sample_hash")
++                 } for s in samples]
+ 
+     if halt_reason:
+         status = "HALTED"
+@@ -398,6 +411,13 @@ def run(n_roundtrips: int = MAX_ROUND_TRIPS, mock: bool = False):
+         "V3_INITIAL_POSITIONS": len(pos0), "V3_FINAL_POSITIONS": len(pos1),
+         "V3_CALIBRATION_OPEN_POSITIONS": len(pos1),
+         "MOCK_EXECUTION": False,
++        "net_pnl_formula_version": PNA.VERSION,
++        "accounting": {"net_pnl_basis": "BROKER_REALIZED_ANCHORED_FILL_PRICE_REBUILD",
++                       "spread_slippage_basis": "EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED",
++                       "fees_sign": "BROKER_SIGNED (MT5 commission<0 == cost)",
++                       "broker_realized_net_source": "MT5 history_deals_get (profit+commission+swap)",
++                       "theoretical_net": "DIAGNOSTIC_ONLY (never reported as broker P&L)",
++                       "formula_fix_task": "V3-HFT-CALIBRATION-FORMULA-FIX-001"},
+         "labels": {"REAL_DATA": len([s for s in samples if s.get("real")]),
+                    "MOCK_DATA": 0, "SYNTHETIC_DATA": 0},
+         "NO_AUTO_RETRY": True,
+@@ -429,13 +449,26 @@ def _cost_profile(samples):
+             continue
+         rows.append({
+             "calibration_id": s.get("calibration_id"),
+-            "gross_pnl": s.get("gross_pnl"), "spread_cost": s.get("spread_cost"),
+-            "entry_slippage": s.get("entry_slippage_price"), "exit_slippage": s.get("exit_slippage_price"),
+-            "commission": s.get("commission"), "swap": s.get("swap"), "net_pnl": s.get("net_pnl"),
++            "gross_pnl": s.get("gross_pnl"), "gross_pnl_usd": s.get("gross_pnl_usd"),
++            "spread_price": s.get("spread_price"),
++            "entry_slippage_price": s.get("entry_slippage_price"),
++            "exit_slippage_price": s.get("exit_slippage_price"),
++            "commission": s.get("commission"), "swap": s.get("swap"),
++            "fees_usd": s.get("fees_usd"),
++            "net_pnl": s.get("net_pnl"),
++            "broker_realized_net": s.get("broker_realized_net"),
++            "theoretical_net": s.get("theoretical_net"),
++            "execution_friction": s.get("execution_friction"),
+         })
+     net = [r["net_pnl"] for r in rows]
++    broker = [r["broker_realized_net"] for r in rows if r["broker_realized_net"] is not None]
++    theo = [r["theoretical_net"] for r in rows if r["theoretical_net"] is not None]
+     return {"n": len(rows), "round_trip_net_pnl": _stats(net), "rows": rows,
+-            "NET_ROUND_TRIP_COST": _stats([-x for x in net if x is not None]),
++            "broker_realized_net": _stats(broker),
++            "theoretical_net": _stats(theo),
++            "net_pnl_basis": "BROKER_REALIZED_ANCHORED_FILL_PRICE_REBUILD",
++            "net_pnl_formula_version": PNA.VERSION,
++            "spread_slippage_basis": "EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED",
+             "commission_source": "MT5 history_deals_get (UNKNOWN if absent)"}
+ 
+ 
+@@ -449,7 +482,36 @@ def _sample_hash(d):
+     return hashlib.sha256(json.dumps(d, sort_keys=True, default=str).encode()).hexdigest()
+ 
+ 
+-def _round_trip(mt5, i, volume, lg):
++def _wall_epoch_s(wall_ns):
++    return None if wall_ns is None else wall_ns / 1e9
++
++
++def _deal_time_offset_s(deal, wall_ns):
++    """Broker deal stamp vs local wall clock (FXTM server = UTC+3 -> ~10800 s).
++
++    Recorded for alignment only; the broker stamp is NEVER rewritten as UTC.
++    """
++    if deal is None or wall_ns is None:
++        return None
++    msc = getattr(deal, "time_msc", None)
++    if msc:
++        return round(msc / 1000.0 - _wall_epoch_s(wall_ns), 3)
++    t = getattr(deal, "time", None)
++    return None if not t else round(float(t) - _wall_epoch_s(wall_ns), 3)
++
++
++def _tick_age_ms(tick):
++    """Age of a quote in ms at read time (quote staleness observability)."""
++    import datetime as dt
++    if tick is None or not getattr(tick, "time", None):
++        return None
++    return round((dt.datetime.now(dt.timezone.utc).timestamp() - tick.time) * 1000.0, 3)
++
++
++def _round_trip(mt5, i, volume, lg, spec=None):
++    """One calibration round trip; accounting is broker-anchored (see PNA)."""
++    if spec is None:
++        spec = _spec(mt5)
+     fill_mode = _filling_mode(mt5)
+     cid = f"V3CAL-{i:02d}"
+     hold_target = HOLDS_MS[i]
+@@ -462,6 +524,7 @@ def _round_trip(mt5, i, volume, lg):
+     spread = ask - bid
+     import datetime as dt
+     stale = (dt.datetime.now(dt.timezone.utc).timestamp() - (t.time or 0)) > 120
++    tick_age_ms = _tick_age_ms(t)
+     if bid <= 0 or ask <= 0 or ask < bid or spread < 0:
+         raise Halt(f"bad quote {bid}/{ask}")
+ 
+@@ -499,7 +562,11 @@ def _round_trip(mt5, i, volume, lg):
+          "ack_to_fill_ms": (fill - ack) / 1e6, "signal_to_fill_ms": (fill - sig) / 1e6,
+          "slippage_price": (fill_price - order["price"]) if is_long else (order["price"] - fill_price),
+          "order_id": str(getattr(r, "order", "")),
+-         "STALE_TICK_AT_REQUEST": bool(stale), "hold_target_ms": hold_target}
++         "STALE_TICK_AT_REQUEST": bool(stale), "hold_target_ms": hold_target,
++         "tick_age_ms": tick_age_ms,
++         "entry_bid": bid, "entry_ask": ask, "entry_tick_time_utc_epoch": t.time}
++    # adverse-positive slippage is the SAME value under the compat key
++    s["entry_slippage_price"] = s["slippage_price"]
+     s["entry_slippage_bps"] = (s["slippage_price"] / mid * 1e4) if mid else None
+     s["valid_entry"] = True
+     lg.append("ENTRY_FILL", timeutil.utc_ns(), run_id="CALIB-PILOT-001", decision_id=cid,
+@@ -534,7 +601,10 @@ def _round_trip(mt5, i, volume, lg):
+         "exit_mid": e_mid, "exit_fill_price": exit_price,
+         "exit_slippage_price": (e_order["price"] - exit_price) if is_long else (exit_price - e_order["price"]),
+         "exit_latency_ms": (e_fill - e_sig) / 1e6,
+-        "hold_actual_ms": (t2.time - t.time) * 1000 if (t2 and t) else None,
++        "hold_actual_ms": (e_fill - t0) / 1e6,          # monotonic: accurate hold duration
++        "hold_actual_ms_tick_stamp": (t2.time - t.time) * 1000 if (t2 and t) else None,
++        "exit_tick_age_ms": _tick_age_ms(t2),
++        "entry_fill_wall_ns": fill, "exit_fill_wall_ns": e_fill,
+         "valid_exit": True,
+     })
+     s["exit_slippage_bps"] = (s["exit_slippage_price"] / e_mid * 1e4) if e_mid else None
+@@ -543,32 +613,69 @@ def _round_trip(mt5, i, volume, lg):
+     lg.append("EXIT_FILL", timeutil.utc_ns(), run_id="CALIB-PILOT-001", decision_id=cid,
+               position_id=str(pid), price=exit_price, latency_ns=e_fill - e_sig)
+ 
+-    # deals / commission / swap / reconciliation
++    # deals / commission / swap / broker facts / reconciliation
+     deals = mt5.history_deals_get(position=pid) or []
+-    comm = swap = 0.0
+-    raw = {"commission": None, "swap": None}
+     entry_deal = exit_deal = None
+     for d in deals:
+         if d.entry == mt5.DEAL_ENTRY_IN:
+             entry_deal = d
+         elif d.entry == mt5.DEAL_ENTRY_OUT:
+             exit_deal = d
++    comm = swap = broker_profit = None
+     if deals:
+-        comm = sum(getattr(d, "commission", 0.0) or 0.0 for d in deals)
+-        swap = sum(getattr(d, "swap", 0.0) or 0.0 for d in deals)
+-        raw = {"commission": comm, "swap": swap}
+-    s["commission"] = raw["commission"]  # None => UNKNOWN (not 0)
+-    s["swap"] = raw["swap"]
++        comm = sum(float(getattr(d, "commission", 0.0) or 0.0) for d in deals)
++        swap = sum(float(getattr(d, "swap", 0.0) or 0.0) for d in deals)
++        broker_profit = sum(float(getattr(d, "profit", 0.0) or 0.0) for d in deals)
++    s["commission"] = comm          # None => UNKNOWN (never silently 0)
++    s["swap"] = swap
+     s["fee"] = None
++    s["volume"] = volume
++    s["entry_fill_price"] = fill_price
++    s["broker_gross_profit"] = broker_profit
+     s["entry_deal_id"] = getattr(entry_deal, "ticket", None)
+     s["exit_deal_id"] = getattr(exit_deal, "ticket", None)
+-    gross = ((exit_price - fill_price) if is_long else (fill_price - exit_price)) * (s["volume"] if "volume" in s else 0)
+-    s["gross_pnl"] = (exit_price - fill_price) if is_long else (fill_price - exit_price)
+-    s["spread_cost"] = spread
+-    s["net_pnl"] = (s["gross_pnl"] - spread - abs(s["slippage_price"] or 0) - abs(s["exit_slippage_price"] or 0)
+-                    - (comm if comm is not None else 0))
++    s["broker_entry_deal_price"] = getattr(entry_deal, "price", None)
++    s["broker_exit_deal_price"] = getattr(exit_deal, "price", None)
++    s["entry_deal_time"] = getattr(entry_deal, "time", None)
++    s["exit_deal_time"] = getattr(exit_deal, "time", None)
++    s["entry_deal_time_msc"] = getattr(entry_deal, "time_msc", None)
++    s["exit_deal_time_msc"] = getattr(exit_deal, "time_msc", None)
++    s["entry_deal_time_offset_s"] = _deal_time_offset_s(entry_deal, fill)
++    s["exit_deal_time_offset_s"] = _deal_time_offset_s(exit_deal, e_fill)
++
++    # ---- V3-HFT-CALIBRATION-FORMULA-FIX-001: broker-anchored accounting ----
++    # spread and slippage are ALREADY inside fill_price/exit_price; they are
++    # reported as diagnostics and NEVER deducted a second time. Commission and
++    # swap keep the broker sign (MT5 commission < 0 == a cost).
++    acct = mt5.account_info()
++    try:
++        acc = PNA.round_trip_accounting(
++            direction=direction, volume=volume,
++            contract_size=spec.get("trade_contract_size"),
++            tick_size=spec.get("trade_tick_size"), tick_value=spec.get("trade_tick_value"),
++            entry_fill_price=fill_price, exit_fill_price=exit_price,
++            entry_mid=mid, exit_mid=e_mid,
++            entry_ref_price=order["price"], exit_ref_price=e_order["price"],
++            entry_bid=bid, entry_ask=ask, exit_bid=e_bid, exit_ask=e_ask,
++            commission=comm, swap=swap, broker_gross_profit=broker_profit,
++            profit_currency=spec.get("currency_profit"),
++            account_currency=getattr(acct, "currency", None))
++    except ValueError as ve:
++        raise Halt(f"ACCOUNTING_SPEC_GAP at {cid}: {ve} (NO_AUTO_RETRY)")
++    s.update(acc)
++    s["spread_cost"] = spread   # informational only: embedded in the fill price
++    s["spread_cost_basis"] = "EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED"
++
+     recon = (entry_deal is not None and exit_deal is not None and len(_pos(mt5)) == 0)
+     s["reconciliation"] = "PASS" if recon else "FAIL"
++    if recon and s.get("accounting_reconciliation") != "PASS":
++        # unit / currency / fee rebuild does not match the broker's own books
++        recon = False
++        s["reconciliation"] = "FAIL"
++        s["ACCOUNTING_RECONCILIATION_FAIL"] = {
++            "residual": s.get("reconciliation_residual"),
++            "unit_status": s.get("unit_status"),
++            "net_pnl_status": s.get("net_pnl_status")}
+     if not recon:
+         # still record sample but reconciliation failure should stop the pilot
+         s["sample_hash"] = _sample_hash(s)
+diff --git a/research/hermes/trader_v3/foundation/pnl_accounting.py b/research/hermes/trader_v3/foundation/pnl_accounting.py
+new file mode 100644
+index 0000000..3252700
+--- /dev/null
++++ b/research/hermes/trader_v3/foundation/pnl_accounting.py
+@@ -0,0 +1,250 @@
++"""V3 calibration round-trip P&L accounting (pure functions, no broker I/O).
++
++Repairs the net_pnl defects of V3-HFT-CALIBRATION-PILOT-001 confirmed by
++V3-HFT-COST-BRIDGE-AUDIT-001. All defects lived in the net_pnl line of
++``calibration_pilot.py::_round_trip``:
++
++1. the entry spread was deducted although it is ALREADY inside the fill price
++   (the order is priced at the executable side: buy@ask / sell@bid) -> no
++   separate spread term may exist.
++2. entry/exit slippage was deducted although it is ALREADY inside the fill
++   price (the fill price IS the executed price) -> no separate slippage term.
++3. ``abs()`` turned favourable fills into costs -> only signed terms.
++4. MT5 returns commission as a NEGATIVE number for a cost; the old code did
++   ``net = ... - commission``, which INVERTED it into a credit (2x|comm| error)
++   -> fees are added with the broker sign.
++5. three quantities are now explicitly separated and never conflated:
++     BROKER_REALIZED_NET  broker's own accounting  (ANCHOR, not modelled)
++     CORRECTED_NET        independent rebuild from fill prices x broker spec
++                          + broker-signed fees (reconciles against the anchor)
++     THEORETICAL_NET      diagnostic mid-to-mid benchmark + real fees
++   Friction/spread/slippage terms are diagnostics only; they are NEVER reported
++   as actual broker P&L.
++6. units come from the broker symbol specification (contract size x volume),
++   cross-checked against tick value / tick size, with the account-currency
++   conversion made explicit.
++
++Identity guaranteed by construction (and asserted by ``assert_theoretical_identity``):
++    corrected_net = theoretical_net - execution_friction
++"""
++from __future__ import annotations
++
++VERSION = "v3-calibration-netpnl-2"
++
++MONEY_TOL = 1e-6  # USD tolerance for reconciliation (float residuals ~1e-13)
++
++
++def leg_side(direction: str, leg: str) -> str:
++    """'BUY'/'SELL' traded on the given leg of a round trip."""
++    d = (direction or "").upper()
++    lg = (leg or "").lower()
++    if d == "LONG":
++        return "BUY" if lg == "entry" else "SELL"
++    if d == "SHORT":
++        return "SELL" if lg == "entry" else "BUY"
++    raise ValueError(f"bad direction {direction!r}")
++
++
++def signed_price_move(direction: str, entry_price: float, exit_price: float) -> float:
++    """Price move in the position's own direction (already spread/slippage-inclusive)."""
++    d = (direction or "").upper()
++    return (exit_price - entry_price) if d == "LONG" else (entry_price - exit_price)
++
++
++def leg_side_reference_price(direction: str, leg: str, bid: float, ask: float) -> float:
++    """Executable reference price for a leg (buy at ask, sell at bid)."""
++    return ask if leg_side(direction, leg) == "BUY" else bid
++
++
++def adverse_slippage_price(side: str, ref_price: float, fill_price: float):
++    """Signed slippage of one leg in price units; POSITIVE = adverse (a cost).
++
++    Negative means the fill was better than the reference price; the sign is
++    preserved (the old abs() turned that into a cost).
++    """
++    if ref_price is None or fill_price is None:
++        return None
++    return (fill_price - ref_price) if side == "BUY" else (ref_price - fill_price)
++
++
++def adverse_vs_mid_price(side: str, mid: float, fill_price: float):
++    """Signed fill-vs-mid distance; POSITIVE = paid away from mid (a cost)."""
++    if mid is None or fill_price is None:
++        return None
++    return (fill_price - mid) if side == "BUY" else (mid - fill_price)
++
++
++def price_unit_usd(contract_size, volume):
++    """Account-currency value of a 1.0 price move for the traded volume."""
++    if contract_size is None or volume is None:
++        return None
++    return float(contract_size) * float(volume)
++
++
++def price_unit_from_tick_metadata(tick_size, tick_value, volume):
++    if not tick_size or tick_value is None or volume is None:
++        return None
++    return (float(tick_value) / float(tick_size)) * float(volume)
++
++
++def unit_crosscheck(contract_size, volume, tick_size=None, tick_value=None) -> dict:
++    u = price_unit_usd(contract_size, volume)
++    u_tick = price_unit_from_tick_metadata(tick_size, tick_value, volume)
++    consistent = None
++    if u is not None and u_tick is not None:
++        consistent = abs(u - u_tick) <= 1e-9 * max(1.0, abs(u))
++    if consistent is True:
++        status = "PASS"
++    elif consistent is False:
++        status = "DATA_GAP_TICK_VALUE_INCONSISTENT"
++    else:
++        status = "PASS_CONTRACT_SIZE_ONLY(tick metadata unavailable)"
++    return {"price_unit_usd": u, "price_unit_usd_tick_metadata": u_tick,
++            "tick_metadata_consistent": consistent, "unit_status": status}
++
++
++def round_trip_accounting(*, direction: str, volume, contract_size,
++                          entry_fill_price, exit_fill_price,
++                          entry_mid=None, exit_mid=None,
++                          entry_ref_price=None, exit_ref_price=None,
++                          entry_bid=None, entry_ask=None,
++                          exit_bid=None, exit_ask=None,
++                          commission=None, swap=None,
++                          broker_gross_profit=None,
++                          tick_size=None, tick_value=None,
++                          profit_currency=None, account_currency=None) -> dict:
++    """Broker-anchored accounting for one closed round trip.
++
++    ``commission``/``swap`` are the broker's own signed values (MT5 commission
++    is negative for a cost). ``broker_gross_profit`` is the broker's realised
++    P&L of the closing deal(s) (MT5 ``deal.profit``). Nothing here re-charges
++    spread or slippage: they are already inside the fill prices.
++    """
++    d = (direction or "").upper()
++    if d not in ("LONG", "SHORT"):
++        raise ValueError(f"bad direction {direction!r}")
++    if entry_fill_price is None or exit_fill_price is None:
++        raise ValueError("fill prices are required")
++
++    u = price_unit_usd(contract_size, volume)
++    if u is None:
++        raise ValueError("contract_size/volume are required")
++
++    units = unit_crosscheck(contract_size, volume, tick_size, tick_value)
++
++    # --- conversion: quote/profit currency vs account currency ---
++    if profit_currency and account_currency:
++        conv = "IDENTITY" if str(profit_currency).upper() == str(account_currency).upper() \
++            else "DATA_GAP_NO_FX_RATE"
++    else:
++        conv = "UNKNOWN"
++
++    gross_price = signed_price_move(d, entry_fill_price, exit_fill_price)
++    gross_usd = gross_price * u
++
++    # --- fees, broker sign preserved (MT5 commission < 0 == cost) ---
++    fees_usd = None
++    if commission is not None and swap is not None:
++        fees_usd = float(commission) + float(swap)
++
++    net_status = "OK"
++    if conv == "DATA_GAP_NO_FX_RATE":
++        net_status = "DATA_GAP_CURRENCY_CONVERSION"
++    elif conv == "UNKNOWN":
++        net_status = "DATA_GAP_CURRENCY_UNKNOWN"
++    elif fees_usd is None:
++        net_status = "DATA_GAP_FEES"
++    net_usd = None if net_status != "OK" else gross_usd + fees_usd
++
++    # --- broker realised net (anchor) ---
++    broker_net = None
++    if broker_gross_profit is not None and fees_usd is not None:
++        broker_net = float(broker_gross_profit) + fees_usd
++
++    residual = None
++    recon = "NOT_EVALUATED"
++    if net_usd is not None and broker_net is not None:
++        residual = net_usd - broker_net
++        recon = "PASS" if abs(residual) <= MONEY_TOL else "FAIL"
++
++    # --- diagnostics: spread / slippage (never deducted again) ---
++    side_in, side_out = leg_side(d, "entry"), leg_side(d, "exit")
++    slip_in = adverse_slippage_price(side_in, entry_ref_price, entry_fill_price)
++    slip_out = adverse_slippage_price(side_out, exit_ref_price, exit_fill_price)
++
++    mid_gross_usd = None
++    friction_usd = None
++    friction_spread_usd = None
++    friction_slippage_usd = None
++    theoretical_net = None
++    identity_ok = None
++    if entry_mid is not None and exit_mid is not None:
++        mid_gross_usd = signed_price_move(d, entry_mid, exit_mid) * u
++        f_in = adverse_vs_mid_price(side_in, entry_mid, entry_fill_price)
++        f_out = adverse_vs_mid_price(side_out, exit_mid, exit_fill_price)
++        friction_usd = (f_in + f_out) * u
++        # friction decomposes exactly into half-spread(s) + slippage
++        if entry_bid is not None and entry_ask is not None and exit_bid is not None and exit_ask is not None:
++            half = ((float(entry_ask) - float(entry_bid)) + (float(exit_ask) - float(exit_bid))) / 2.0
++            friction_spread_usd = half * u
++            friction_slippage_usd = friction_usd - friction_spread_usd
++        if fees_usd is not None:
++            theoretical_net = mid_gross_usd + fees_usd
++            if net_usd is not None:
++                identity_ok = abs((theoretical_net - friction_usd) - net_usd) <= MONEY_TOL
++
++    out = {
++        "accounting_version": VERSION,
++        "direction": d,
++        "volume": volume,
++        "contract_size": contract_size,
++        "gross_pnl": gross_price,            # signed price move (backward compatible key)
++        "gross_pnl_usd": gross_usd,          # == broker gross profit (unit reconciliation)
++        "entry_fill_price": entry_fill_price,
++        "exit_fill_price": exit_fill_price,
++        "net_pnl": net_usd,                  # CORRECTED net, broker-anchored
++        "net_pnl_basis": "BROKER_REALIZED_ANCHORED_FILL_PRICE_REBUILD",
++        "net_pnl_status": net_status,
++        "commission_usd": commission,
++        "swap_usd": swap,
++        "fees_usd": fees_usd,
++        "broker_gross_profit": broker_gross_profit,
++        "broker_realized_net": broker_net,
++        "reconciliation_residual": residual,
++        "accounting_reconciliation": recon,
++        "theoretical_mid_gross": mid_gross_usd,
++        "theoretical_net": theoretical_net,
++        "theoretical_identity_ok": identity_ok,
++        "execution_friction": friction_usd,
++        "friction_spread": friction_spread_usd,
++        "friction_slippage": friction_slippage_usd,
++        "entry_slippage_adverse_price": slip_in,
++        "exit_slippage_adverse_price": slip_out,
++        "entry_spread_price": (None if (entry_bid is None or entry_ask is None)
++                               else float(entry_ask) - float(entry_bid)),
++        "exit_spread_price": (None if (exit_bid is None or exit_ask is None)
++                              else float(exit_ask) - float(exit_bid)),
++        "spread_slippage_basis": "EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED",
++        "price_unit_usd": u,
++        "unit_status": units["unit_status"],
++        "currency_conversion": conv,
++    }
++    return out
++
++
++def assert_theoretical_identity(rec: dict) -> bool:
++    """corrected_net == theoretical_net - execution_friction (diagnostic invariant)."""
++    if rec.get("net_pnl") is None or rec.get("theoretical_net") is None or rec.get("execution_friction") is None:
++        return True  # nothing to check (DATA_GAP)
++    return abs((rec["theoretical_net"] - rec["execution_friction"]) - rec["net_pnl"]) <= MONEY_TOL
++
++
++def old_formula_net(*, direction: str, entry_fill_price, exit_fill_price,
++                    spread, entry_slippage, exit_slippage, commission) -> float:
++    """The FROZEN pre-fix formula (kept ONLY to quantify the defect offline).
++
++    net = gross_from_fills - spread - |entry_slip| - |exit_slip| - commission
++    """
++    gross = signed_price_move(direction, entry_fill_price, exit_fill_price)
++    return (gross - (spread or 0.0) - abs(entry_slippage or 0.0) - abs(exit_slippage or 0.0)
++            - (commission or 0.0))
+diff --git a/research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py b/research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py
+new file mode 100644
+index 0000000..61ab8d2
+--- /dev/null
++++ b/research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py
+@@ -0,0 +1,249 @@
++"""V3-HFT-CALIBRATION-FORMULA-FIX-001 regression tests (A-I).
++
++Standalone:  python foundation/tests/test_v3_formula_fix.py
++Exit 0 iff every executed case passes. No broker call, no order_send.
++
++A  fill price already contains bid/ask -> spread must NOT be charged twice
++B  favourable slippage must stay favourable (no abs())
++C  MT5 commission<0 (cost) -> NET decreases, sign not inverted
++D  commission=0 handled
++E  swap=0 handled
++F  LONG and SHORT both correct
++G  different contract size / volume scale correctly (broker spec units)
++H  the frozen 20 round trips recompute offline (old formula reproducible)
++I  broker realised P&L reconciles with independent broker facts
++"""
++from __future__ import annotations
++import importlib.util
++import json
++import os
++import sys
++
++HERE = os.path.dirname(os.path.abspath(__file__))
++V3 = os.path.dirname(os.path.dirname(HERE))
++if V3 not in sys.path:
++    sys.path.insert(0, V3)
++
++from foundation import pnl_accounting as PNA  # noqa: E402
++
++RESULTS = []
++
++
++def case(fn):
++    def wrap():
++        try:
++            note = fn()
++            RESULTS.append((fn.__name__, "PASS", note or ""))
++        except SkipTest as s:
++            RESULTS.append((fn.__name__, "SKIP", str(s)))
++        except Exception as e:  # noqa: BLE001
++            RESULTS.append((fn.__name__, "FAIL", f"{type(e).__name__}:{e}"))
++    wrap.__name__ = fn.__name__
++    return wrap
++
++
++class SkipTest(Exception):
++    pass
++
++
++def acc(**kw):
++    """Small helper: XAUUSD-style spec unless overridden."""
++    base = dict(direction="LONG", volume=0.01, contract_size=100.0,
++                tick_size=0.01, tick_value=1.0,
++                profit_currency="USD", account_currency="USD")
++    base.update(kw)
++    return PNA.round_trip_accounting(**base)
++
++
++BID, ASK = 3300.00, 3300.18
++MID = (BID + ASK) / 2.0
++
++
++# ---------------- A ----------------
++def test_a_spread_not_double_charged():
++    """Long entry filled at ask, exit filled at bid: net is exactly -1 spread."""
++    r = acc(entry_fill_price=ASK, exit_fill_price=BID, entry_ref_price=ASK, exit_ref_price=BID,
++            entry_bid=BID, entry_ask=ASK, exit_bid=BID, exit_ask=ASK,
++            entry_mid=MID, exit_mid=MID, commission=0.0, swap=0.0,
++            broker_gross_profit=BID - ASK)
++    assert abs(r["net_pnl"] - (-0.18)) < 1e-12, r["net_pnl"]
++    assert abs(r["gross_pnl_usd"] - (-0.18)) < 1e-12
++    assert abs(r["entry_spread_price"] - 0.18) < 1e-12
++    assert r["spread_slippage_basis"] == "EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED"
++    old = PNA.old_formula_net(direction="LONG", entry_fill_price=ASK, exit_fill_price=BID,
++                              spread=0.18, entry_slippage=0.0, exit_slippage=0.0, commission=0.0)
++    assert abs(old - (-0.36)) < 1e-12, old  # old formula charged the spread twice
++    return f"corrected={r['net_pnl']:.4f} vs old={old:.4f} (1x spread, not 2x)"
++
++
++# ---------------- B ----------------
++def test_b_favourable_slippage_stays_favourable():
++    """Fills better than the requested price must INCREASE net, never be costed."""
++    entry_fill, exit_fill = ASK - 0.08, BID + 0.16
++    r = acc(entry_fill_price=entry_fill, exit_fill_price=exit_fill,
++            entry_ref_price=ASK, exit_ref_price=BID,
++            entry_bid=BID, entry_ask=ASK, exit_bid=BID, exit_ask=ASK,
++            entry_mid=MID, exit_mid=MID, commission=0.0, swap=0.0,
++            broker_gross_profit=exit_fill - entry_fill)
++    assert abs(r["entry_slippage_adverse_price"] - (-0.08)) < 1e-12
++    assert abs(r["exit_slippage_adverse_price"] - (-0.16)) < 1e-12
++    assert abs(r["net_pnl"] - 0.06) < 1e-12, r["net_pnl"]
++    at_ref = PNA.signed_price_move("LONG", ASK, BID)
++    assert r["net_pnl"] > at_ref, "favourable slippage must add value"
++    old = PNA.old_formula_net(direction="LONG", entry_fill_price=entry_fill,
++                              exit_fill_price=exit_fill, spread=0.18,
++                              entry_slippage=-0.08, exit_slippage=-0.16, commission=0.0)
++    assert old < r["net_pnl"], "old abs() must be visibly worse"
++    return f"corrected={r['net_pnl']:.4f} old={old:.4f} (favourable kept)"
++
++
++# ---------------- C ----------------
++def test_c_negative_commission_decreases_net():
++    """Broker commission -0.22 per round trip is a COST."""
++    r = acc(entry_fill_price=ASK, exit_fill_price=ASK + 1.00, entry_ref_price=ASK,
++            exit_ref_price=ASK + 1.00, entry_bid=BID, entry_ask=ASK,
++            exit_bid=ASK - 0.18 + 1.00, exit_ask=ASK + 1.00,
++            entry_mid=MID, exit_mid=ASK + 1.00 - 0.09,
++            commission=-0.22, swap=0.0, broker_gross_profit=1.00)
++    assert abs(r["gross_pnl_usd"] - 1.00) < 1e-12
++    assert abs(r["net_pnl"] - 0.78) < 1e-12, r["net_pnl"]
++    assert r["net_pnl"] < r["gross_pnl_usd"], "a negative commission must reduce net"
++    old = PNA.old_formula_net(direction="LONG", entry_fill_price=ASK, exit_fill_price=ASK + 1.00,
++                              spread=0.18, entry_slippage=0.0, exit_slippage=0.0, commission=-0.22)
++    assert old > r["gross_pnl_usd"], "old formula inverted the commission into a credit"
++    return f"corrected={r['net_pnl']:.4f} old={old:.4f} (no sign inversion)"
++
++
++# ---------------- D ----------------
++def test_d_zero_commission():
++    r = acc(entry_fill_price=ASK, exit_fill_price=ASK + 1.00, entry_ref_price=ASK,
++            exit_ref_price=ASK + 1.00, commission=0.0, swap=0.0, broker_gross_profit=1.00)
++    assert abs(r["net_pnl"] - r["gross_pnl_usd"]) < 1e-12
++    assert r["net_pnl_status"] == "OK"
++    return "commission=0 -> net == gross"
++
++
++# ---------------- E ----------------
++def test_e_zero_swap():
++    base = dict(entry_fill_price=ASK, exit_fill_price=ASK + 1.00, entry_ref_price=ASK,
++                exit_ref_price=ASK + 1.00, commission=-0.22)
++    r0 = acc(swap=0.0, broker_gross_profit=1.00, **base)
++    r1 = acc(swap=-0.50, broker_gross_profit=1.00, **base)
++    assert abs(r0["net_pnl"] - 0.78) < 1e-12
++    assert abs(r1["net_pnl"] - (r0["net_pnl"] - 0.50)) < 1e-12
++    return f"swap=0 -> {r0['net_pnl']:.4f}; swap=-0.5 -> {r1['net_pnl']:.4f}"
++
++
++# ---------------- F ----------------
++def test_f_long_and_short_symmetric():
++    long_r = acc(direction="LONG", entry_fill_price=ASK, exit_fill_price=ASK + 1.00,
++                 entry_ref_price=ASK, exit_ref_price=ASK + 1.00, commission=-0.22, swap=0.0,
++                 broker_gross_profit=1.00)
++    short_r = acc(direction="SHORT", entry_fill_price=BID, exit_fill_price=BID - 1.00,
++                  entry_ref_price=BID, exit_ref_price=BID - 1.00, commission=-0.22, swap=0.0,
++                  broker_gross_profit=1.00)
++    assert abs(long_r["net_pnl"] - 0.78) < 1e-12
++    assert abs(short_r["net_pnl"] - 0.78) < 1e-12
++    mirror = acc(direction="SHORT", entry_fill_price=BID, exit_fill_price=BID + 1.00,
++                 entry_ref_price=BID, exit_ref_price=BID + 1.00, commission=0.0, swap=0.0,
++                 broker_gross_profit=-1.00)
++    assert abs(mirror["net_pnl"] - (-1.00)) < 1e-12
++    return "LONG +1.00 and SHORT +1.00 both net 0.78; mirrored SHORT nets -1.00"
++
++
++# ---------------- G ----------------
++def test_g_contract_size_and_volume_scale():
++    r1 = acc(volume=0.01, contract_size=100.0, entry_fill_price=BID, exit_fill_price=BID + 1.00,
++             entry_ref_price=BID, exit_ref_price=BID + 1.00, commission=0.0, swap=0.0,
++             broker_gross_profit=1.00)
++    r10 = acc(volume=0.10, contract_size=100.0, entry_fill_price=BID, exit_fill_price=BID + 1.00,
++              entry_ref_price=BID, exit_ref_price=BID + 1.00, commission=0.0, swap=0.0,
++              broker_gross_profit=10.00)
++    rsmall = acc(volume=0.01, contract_size=10.0, entry_fill_price=BID, exit_fill_price=BID + 1.00,
++                 entry_ref_price=BID, exit_ref_price=BID + 1.00, commission=0.0, swap=0.0,
++                 broker_gross_profit=0.10)
++    assert abs(r1["price_unit_usd"] - 1.0) < 1e-12
++    assert abs(r1["net_pnl"] - 1.0) < 1e-12
++    assert abs(r10["price_unit_usd"] - 10.0) < 1e-12 and abs(r10["net_pnl"] - 10.0) < 1e-12
++    assert abs(rsmall["price_unit_usd"] - 0.1) < 1e-12 and abs(rsmall["net_pnl"] - 0.10) < 1e-9
++    # tick metadata cross-check: consistent spec -> PASS
++    assert r1["unit_status"] == "PASS", r1["unit_status"]
++    bad = acc(entry_fill_price=BID, exit_fill_price=BID + 1.00, entry_ref_price=BID,
++              exit_ref_price=BID + 1.00, commission=0.0, swap=0.0, tick_value=0.1,
++              broker_gross_profit=1.00)
++    assert bad["unit_status"] == "DATA_GAP_TICK_VALUE_INCONSISTENT", bad["unit_status"]
++    return "u=1.0/10.0/0.1 correct; tick-metadata mismatch flagged as DATA_GAP"
++
++
++# ---------------- helpers for H / I ----------------
++def _load_recompute():
++    path = os.path.join(V3, "audit", "v3_formula_fix_recompute.py")
++    if not os.path.exists(path):
++        raise SkipTest("audit/v3_formula_fix_recompute.py not present")
++    spec = importlib.util.spec_from_file_location("v3_formula_fix_recompute", path)
++    mod = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(mod)
++    for req in (mod.LEDGER, mod.REGISTRY, mod.PROBE):
++        if not os.path.exists(req):
++            raise SkipTest(f"frozen input missing: {os.path.basename(req)}")
++    return mod
++
++
++# ---------------- H ----------------
++def test_h_frozen_20_offline_recompute():
++    mod = _load_recompute()
++    s = mod.recompute()
++    assert s["n_roundtrips"] == 20, s["n_roundtrips"]
++    assert s["OLD_FORMULA_REPRODUCED_ALL"] is True, "old formula must reproduce the frozen data"
++    assert s["CORRECTED_RECONCILED_ALL"] is True
++    assert abs(s["OLD_MODEL_NET_MEAN"] - (-0.1375)) < 1e-9, s["OLD_MODEL_NET_MEAN"]
++    assert abs(s["CORRECTED_MODEL_NET_MEAN"] - (-0.372)) < 1e-9, s["CORRECTED_MODEL_NET_MEAN"]
++    assert abs(s["BROKER_NET_MEAN"] - (-0.372)) < 1e-9, s["BROKER_NET_MEAN"]
++    assert s["MAX_ABS_RESIDUAL"] < 1e-6, s["MAX_ABS_RESIDUAL"]
++    assert s["RAW_DATA_IMMUTABLE"] is True
++    return (f"n=20 old_mean={s['OLD_MODEL_NET_MEAN']:.4f} "
++            f"corrected_mean={s['CORRECTED_MODEL_NET_MEAN']:.4f} "
++            f"max_resid={s['MAX_ABS_RESIDUAL']:.2e}")
++
++
++# ---------------- I ----------------
++def test_i_broker_realized_reconciliation():
++    mod = _load_recompute()
++    s = mod.recompute()
++    probe = mod.load_probe()
++    gross = sum(float(d.get("profit") or 0.0) for d in probe["deals"])
++    comm = sum(float(d.get("commission") or 0.0) for d in probe["deals"])
++    swap = sum(float(d.get("swap") or 0.0) for d in probe["deals"])
++    assert abs(s["BROKER_GROSS_SUM"] - gross) < 1e-9
++    assert abs(s["BROKER_COMMISSION_SUM"] - comm) < 1e-9
++    assert abs(s["BROKER_SWAP_SUM"] - swap) < 1e-9
++    assert abs(s["BROKER_NET_SUM"] - (gross + comm + swap)) < 1e-9
++    assert abs(s["BROKER_NET_SUM"] - (-7.44)) < 1e-9, s["BROKER_NET_SUM"]
++    # independent anchor: the pilot's own balance delta
++    pilot = os.path.join(V3, "state", "V3_CALIBRATION_PILOT.json")
++    if os.path.exists(pilot):
++        with open(pilot, encoding="utf-8") as f:
++            p = json.load(f)
++        delta = p["account_after"]["balance"] - p["account_before"]["balance"]
++        assert abs(delta - s["BROKER_NET_SUM"]) < 1e-6, (delta, s["BROKER_NET_SUM"])
++    for r in s["rows"]:
++        assert r["reconciliation_residual"] is None or abs(r["reconciliation_residual"]) < 1e-6
++    return f"broker net {s['BROKER_NET_SUM']:.2f} == deal profit+fees == balance delta"
++
++
++def run() -> int:
++    tests = [fn for name, fn in sorted(globals().items())
++             if name.startswith("test_") and callable(fn)]
++    for fn in tests:
++        case(fn)()
++    for name, status, note in RESULTS:
++        print(f"[{status}] {name}" + (f"  -> {note}" if note else ""))
++    p = sum(1 for _, st, _ in RESULTS if st == "PASS")
++    f = sum(1 for _, st, _ in RESULTS if st == "FAIL")
++    sk = sum(1 for _, st, _ in RESULTS if st == "SKIP")
++    print(f"=== FORMULA_FIX_TESTS total={len(RESULTS)} PASS={p} FAIL={f} SKIP={sk} ===")
++    return 0 if f == 0 else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(run())
+diff --git a/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json b/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json
+new file mode 100644
+index 0000000..7f5d522
+--- /dev/null
++++ b/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json
+@@ -0,0 +1,139 @@
++{
++  "schema": "v3_hft_calibration_formula_fix/1",
++  "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
++  "status": "PASS",
++  "authority": "user GO (V3-only minimal fix of calibration accounting formula)",
++  "date": "2026-09-21",
++  "repos": {
++    "code_commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
++    "code_commit_scope": "path-limited, trader_v3 only",
++    "v1_untouched": true,
++    "v2_untouched": true,
++    "openclaw_untouched": true
++  },
++  "A_bugs_fixed": [
++    {"n": 1, "bug": "spread double-charged (fill price already includes bid/ask)", "location": "foundation/calibration_pilot.py::_round_trip -> net_pnl", "fix": "not charged again; spread reported as diagnostic only"},
++    {"n": 2, "bug": "entry/exit slippage double-charged", "location": "same", "fix": "not charged again; diagnostic only"},
++    {"n": 3, "bug": "abs() turned favourable slippage into a cost", "location": "same", "fix": "abs() removed; sign preserved"},
++    {"n": 4, "bug": "MT5 commission sign reversed (commission<0 is a cost; code did -comm)", "location": "same", "fix": "use commission as-is"},
++    {"n": 5, "bug": "broker realized P&L conflated with theoretical execution cost", "location": "same", "fix": "separated into broker realized / execution cost (diagnostic) / model theoretical"},
++    {"n": 6, "bug": "units not anchored to broker symbol spec", "location": "same", "fix": "signed(exit_fill-entry_fill) * contract_size * volume + commission + swap; spec persisted per sample"}
++  ],
++  "new_module": "foundation/pnl_accounting.py (pure functions, formula version v3-calibration-netpnl-2, fail-closed HALT on reconciliation failure)",
++  "B_files_changed": [
++    "foundation/pnl_accounting.py",
++    "foundation/calibration_pilot.py",
++    "foundation/tests/test_v3_formula_fix.py",
++    "audit/v3_formula_fix_recompute.py",
++    "audit/v3_formula_fix_summary.json",
++    "audit/v3_formula_fix_comparison.csv",
++    "audit/v3_calibration_formula_fix_20trades.csv"
++  ],
++  "C_tests": {
++    "file": "foundation/tests/test_v3_formula_fix.py",
++    "cases": [
++      {"id": "A", "name": "test_a_spread_not_double_charged", "result": "PASS"},
++      {"id": "B", "name": "test_b_favourable_slippage_stays_favourable", "result": "PASS"},
++      {"id": "C", "name": "test_c_negative_commission_decreases_net", "result": "PASS"},
++      {"id": "D", "name": "test_d_zero_commission", "result": "PASS"},
++      {"id": "E", "name": "test_e_zero_swap", "result": "PASS"},
++      {"id": "F", "name": "test_f_long_and_short_symmetric", "result": "PASS"},
++      {"id": "G", "name": "test_g_contract_size_and_volume_scale", "result": "PASS"},
++      {"id": "H", "name": "test_h_frozen_20_offline_recompute", "result": "PASS"},
++      {"id": "I", "name": "test_i_broker_realized_reconciliation", "result": "PASS"}
++    ],
++    "total": 9,
++    "pass": 9,
++    "fail": 0
++  },
++  "D_old_model_net_mean": -0.13749999999993634,
++  "E_corrected_model_net_mean": -0.37199999999999817,
++  "F_broker_realized_net_mean": -0.372,
++  "F_broker_realized_net_total": -7.44,
++  "broker_breakdown": {"gross_profit_sum": -3.04, "commission_sum": -4.4, "swap_sum": 0.0},
++  "G_corrected_reconciliation_error": {
++    "corrected_total_error_usd": 3.7136960173711486e-14,
++    "old_total_error_usd": 4.690000000001273,
++    "max_abs_residual_usd": 8.003597784522753e-13,
++    "mean_abs_residual_usd": 3.0740687773089803e-13,
++    "reconciliation_20_20": true,
++    "old_formula_reproduced_all": true,
++    "corrected_reconciled_all": true
++  },
++  "H_data_gaps_addressed": [
++    "entry_fill_price persisted",
++    "entry_bid/entry_ask persisted",
++    "exit_bid/exit_ask persisted (future runs only; historical 20 not retroactive)",
++    "tick_age_ms persisted",
++    "hold_actual_ms uses monotonic clock (no longer quantised to 1000ms)",
++    "broker symbol specification persisted per sample (contract_size/tick_size/tick_value/currency)",
++    "timestamp precision improved"
++  ],
++  "I_data_gaps_remaining": [
++    "historical 20 exit_bid/exit_ask not recoverable; friction decomposition uses previous audit CSV, flagged AUDIT_CSV_SUPPLEMENTARY per row",
++    "unit_status = DATA_GAP_TICK_VALUE_INCONSISTENT: broker reports trade_tick_value(0.1) vs contract_size(100) inconsistent (flagged, not hidden)",
++    "full exit-side microstructure requires a future run"
++  ],
++  "J_raw_data_immutable": {
++    "value": true,
++    "baseline_sha256": {
++      "data/hft_ledger/v3_calibration_ledger.jsonl": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
++      "data/calibration/PILOT_DONE": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
++      "data/calibration/registry.jsonl": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
++      "audit/_probe_broker_out.json": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0"
++    },
++    "all_match": true,
++    "ledger_hash_chain_verify": "ok=True (131 events)"
++  },
++  "K_safety": {
++    "ORDER_SEND": false,
++    "ORDER_SEND_CALLS": 0,
++    "LIVE": false,
++    "V3_LIVE_ALLOWED": "NO",
++    "V3_ORDER_SEND_ALLOWED": "NO",
++    "V3_FORWARD_ALLOWED": "NO",
++    "EXPANSION": "LOCKED",
++    "CALIBRATION_AUTO_STOP": true,
++    "ALPHA_NOT_PROVEN_AFTER_COST": true,
++    "ALPHA_NOT_PROVEN_AFTER_COST_note": "post-fix true structural cost 0.40 USD/RT ~= 0.914bp vs old model 0.1375 ~= 0.314bp; frozen direction sequence is not alpha; edge does not survive cost; cost model must not be tuned to restore positive P&L"
++  },
++  "section10_answers": {
++    "q1_spread_slippage_double_count": "YES (fixed)",
++    "q2_broker_vs_theoretical_conflation": "YES (fixed)",
++    "q3_commission_sign_error": "YES (fixed)",
++    "q4_model_cost_optimistic_bias": "YES (eliminated)",
++    "q5_wrong_symbol_spec": "NO (units correct; tick_value/contract_size inconsistency flagged as DATA_GAP)",
++    "q6_timestamps_unused": "NO",
++    "q7_auto_fix_unrecorded": "NO (user GO + commit 4f6bd54)",
++    "q8_original_history_modified": "NO",
++    "q9_original_calibration_overwritten": "NO",
++    "q10_statistics_definition_changed": "NO (only formula errors corrected)"
++  },
++  "section11_regression": {
++    "v3_foundation_suite": "TEST_COUNT=28 PASS=28 FAIL=0 (foundation/tests/run_all.py)",
++    "v3_ledger_sha256_chain": "ok=True (131 events, head 4b4beabecb36c90a2028f476952c909aaff9320cd5af44fcbf72af3c38e96575)",
++    "pit_guard": "present (pit_no_future_enforced PASS, pit_purged_split_no_overlap PASS)",
++    "v1_regression": "untouched",
++    "v2_regression": "untouched"
++  },
++  "section14_health": {
++    "V1": "HEALTHY",
++    "V2": "HEALTHY",
++    "V3": "HEALTHY (calibration PASS n=20, AUTO_STOP=TRUE)",
++    "MT5_INSTANCE_COUNT": 3,
++    "MT5_ISOLATION": "PASS",
++    "MT5_UNMAPPED": 0,
++    "MT5_ORPHAN": 0,
++    "MT5_GHOST": 0
++  },
++  "deliverables": {
++    "audit_csv_section6": "research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv (20 rows, section-6 column order)",
++    "comparison_csv": "research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
++    "summary_json": "research/hermes/trader_v3/audit/v3_formula_fix_summary.json",
++    "recompute_script": "research/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
++    "reports_copy_dir": "research/hermes/trader_v3/reports/",
++    "staging_report_canonical": "collaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}",
++    "staging_report_prefixed": "collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}"
++  },
++  "next_state": "WAIT_FOR_CHATGPT_AUDIT"
++}
+diff --git a/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md b/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md
+new file mode 100644
+index 0000000..24ba01a
+--- /dev/null
++++ b/research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md
+@@ -0,0 +1,183 @@
++# V3-HFT-CALIBRATION-FORMULA-FIX-001 鈥?鏍″噯璐﹀姟鍏紡淇锛圴3-only锛?+
++- **Task**: V3-HFT-CALIBRATION-FORMULA-FIX-001
++- **Authority**: 鐢ㄦ埛 GO锛圴3-only 鏈€灏忎慨澶嶏紱鐢ㄦ埛鍙戠幇鐨勬槸**浼氳鍏紡闂**锛屼笉鏄競鍦哄垽鏂敊璇級
++- **Date**: 2026-09-21锛堜慨澶?娴嬭瘯/绂荤嚎閲嶇畻 15:13鈥?5:17 GMT+8锛涙湰鎶ュ憡涓轰换鍔′功姝ｅ紡褰掓。鐗堬級
++- **Repo commit**: `4f6bd54c4a4963fb2885921fee1d7adb510c940a`锛圕:\AIQuant锛宲ath-limited锛?+- **Mode**: V3-only 淇 + 鍙楠岃瘉锛?*鏈噸鍙戜换浣曡鍗?*锛堝叏绋?`order_send` = 0锛?+- **STATUS**: `PASS`
++- **Next**: `WAIT_FOR_CHATGPT_AUDIT`
++
++---
++
++## 鍗佷簲銆佹渶缁堟姤鍛婄粨鏋?+
++### A. bugs_fixed
++| # | BUG | 浣嶇疆 | 淇硶 |
++|---|---|---|---|
++| 1 | **spread 閲嶅璁℃彁** 鈥斺€?鎴愪氦浠峰凡鍚?bid/ask锛岃处鍔″張鎵ｄ竴娆?spread | `foundation/calibration_pilot.py::_round_trip` 鈫?net_pnl | 涓嶅啀鎵ｏ紱spread 浠呬綔璇婃柇閲忎笂鎶ワ紙鏍囨敞 `EMBEDDED_IN_FILL_PRICE_NOT_DEDUCTED`锛?|
++| 2 | **entry/exit slippage 閲嶅璁℃彁** 鈥斺€?婊戠偣宸插湪鎴愪氦浠峰唴 | 鍚屼笂 | 涓嶅啀鎵ｏ紱浠呰瘖鏂笂鎶?|
++| 3 | **`abs()` 鎶婃湁鍒╂粦鐐规垚鏈寲** | 鍚屼笂 | 鍒犻櫎 `abs()`锛屼繚鐣欑鍙凤紙鏈夊埄鍗虫湁鍒╋級 |
++| 4 | **MT5 commission 绗﹀彿鍙嶈浆** 鈥斺€?`commission<0` 涓烘垚鏈紝浠ｇ爜 `-comm` 鍙嶅彿锛堣宸?2脳\|comm\|锛?| 鍚屼笂 | 鐩存帴鍙?`commission`锛屼笉鍙嶅彿 |
++| 5 | **broker realized 涓?execution cost 娣锋穯** 鈥斺€?鏈垎绂讳笁鑰?| 鍚屼笂 | 鍒嗙涓猴細broker realized P&L / execution cost锛堣瘖鏂級/ model theoretical P&L |
++| 6 | **鍗曚綅鏈互 broker symbol spec 涓哄噯** | `_round_trip` | 缁熶竴 `signed(exit_fill鈭抏ntry_fill) 脳 contract_size 脳 volume + commission + swap`锛泂ymbol spec 鐜伴殢鏍锋湰钀界洏 |
++
++鏂拌处鍔′负鐙珛绾嚱鏁版ā鍧?`foundation/pnl_accounting.py`锛堝叕寮忕増鏈?`v3-calibration-netpnl-2`锛夛紝骞跺湪璐﹀姟瀵瑰钩澶辫触鏃?**fail-closed 鈫?HALT**銆?+
++### B. files_changed
++```text
++foundation/pnl_accounting.py                              (鏂板)
++foundation/calibration_pilot.py                           (+157/-25 鎺ュ叆鏂拌处鍔°€佸垹 abs/姝荤爜銆佽ˉ observability銆乫ail-closed)
++foundation/tests/test_v3_formula_fix.py                   (鏂板锛孉鈥揑)
++audit/v3_formula_fix_recompute.py                         (鏂板锛岀绾块噸绠?
++audit/v3_formula_fix_summary.json                         (鏂板)
++audit/v3_formula_fix_comparison.csv                       (鏂板锛屾棫/鏂板鐓?
++audit/v3_calibration_formula_fix_20trades.csv             (鏂板锛屄у叚 鍒楀簭鐨勬寮忛€愮瑪琛?
++```
++V1/V2锛?*闆舵敼鍔?*銆?+
++### C. tests
++`foundation/tests/test_v3_formula_fix.py` 鈥斺€?**9/9 PASS**锛圓鈥揑锛夛細
++```text
++A test_a_spread_not_double_charged                     PASS
++B test_b_favourable_slippage_stays_favourable          PASS
++C test_c_negative_commission_decreases_net             PASS
++D test_d_zero_commission                               PASS
++E test_e_zero_swap                                     PASS
++F test_f_long_and_short_symmetric                      PASS
++G test_g_contract_size_and_volume_scale                PASS
++H test_h_frozen_20_offline_recompute                   PASS
++I test_i_broker_realized_reconciliation                PASS
++TOTAL: 9 PASS / 0 FAIL
++```
++
++### D. old_model_net_mean
++```text
++-0.13749999999993634 USD / round-trip      (鍚堣 -2.750)
++```
++
++### E. corrected_model_net_mean
++```text
++-0.37199999999999817 USD / round-trip      (鍚堣 -7.440)
++```
++
++### F. broker_realized_net_mean
++```text
++-0.372 USD / round-trip                    (鍚堣 -7.440)
++= profit -3.04 + commission -4.40 + swap 0.00
++```
++
++### G. corrected_reconciliation_error
++```text
++CORRECTED_TOTAL_ERROR     = 3.7136960173711486e-14 USD
++MAX_ABS_RESIDUAL          = 8.003597784522753e-13 USD
++MEAN_ABS_RESIDUAL         = 3.0740687773089803e-13 USD
++锛堝鐓?OLD_TOTAL_ERROR = 4.690000000001273 USD 鈫?+0.2345/RT 绯荤粺鎬т箰瑙傦紝宸叉秷闄わ級
++```
++
++### H. data_gaps_addressed
++```text
++- entry_fill_price            鈫?鐜板凡钀界洏锛堟鍓?registry key 涓嶅尮閰嶏紝鏇句负 null锛?+- entry_bid / entry_ask       鈫?钀界洏
++- exit_bid / exit_ask         鈫?钀界洏锛?*浠呭鏂?run 鐢熸晥**锛涘巻鍙?20 绗斾笉鍙洖婧級
++- tick_age_ms                 鈫?钀界洏锛堟鍓嶇畻鑰屾湭璁帮級
++- hold_actual_ms              鈫?鏀圭敤鍗曡皟閽燂紝涓嶅啀琚暣绉?tick 閲忓寲鍒?1000ms
++- broker symbol specification 鈫?闅忔牱鏈惤鐩橈紙contract_size / tick_size / tick_value / currency锛?+- timestamp 绮惧害              鈫?鎻愬崌
++```
++
++### I. data_gaps_remaining
++```text
++- 鍘嗗彶 20 绗旂殑 exit_bid/exit_ask 鏃犳硶鍥炴函锛沠riction 鍒嗚В鍊熺敤涓婁竴鐗堝璁?CSV锛岄€愯鏍囨敞 AUDIT_CSV_SUPPLEMENTARY
++- unit_status = DATA_GAP_TICK_VALUE_INCONSISTENT锛歜roker 鎶?trade_tick_value(0.1) 涓?contract_size(100) 涓嶈嚜娲斤紙宸插瀹炴爣娉紝鏈帺鐩栵級
++- 鑻ラ渶瀹屾暣 exit 渚у井瑙備环鏍硷紝闇€鍦?*鍚庣画鏂?run**涓噰闆?+```
++
++### J. raw_data_immutable
++```text
++TRUE 鈥斺€?4 涓喕缁撲欢 SHA256 涓庢湰浠诲姟寮€宸ュ墠鍩虹嚎閫愪竴姣斿锛屽叏閮ㄤ竴鑷达細
++  data\hft_ledger\v3_calibration_ledger.jsonl        FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C  MATCH
++  data\calibration\PILOT_DONE                        DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6  MATCH
++  data\calibration\registry.jsonl                    7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25  MATCH
++  audit\_probe_broker_out.json                       F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0  MATCH
++鍘熷 calibration 缁撴灉鏈瑕嗙洊/閲嶅啓/閲嶇敓鎴愶紱ledger hash-chain verify ok=True锛?31 浜嬩欢锛夈€?+```
++
++### K. order_send / live / expansion
++```text
++ORDER_SEND              = FALSE   (order_send 璋冪敤 = 0锛涙湭閲嶅彂浠讳綍璁㈠崟)
++LIVE                    = FALSE
++V3_LIVE_ALLOWED         = NO
++V3_ORDER_SEND_ALLOWED   = NO
++V3_FORWARD_ALLOWED      = NO
++EXPANSION               = LOCKED
++CALIBRATION_AUTO_STOP   = TRUE
++
++ALPHA_NOT_PROVEN_AFTER_COST = TRUE
++  锛堜慨姝ｅ悗鐨勭湡瀹炴垚鏈彛寰勪笅锛屾湰娆?20 绗斿喕缁撴柟鍚戝簭鍒楅潪 alpha銆乬ross 鍧囧€?鈮?鏈烘鐨?-spread锛?+   鐪熷疄缁撴瀯鎬ф垚鏈?0.40 USD/RT 鈮?0.914bp锛岃繙楂樹簬鎴愭湰妯″瀷鍘熷彛寰?0.1375 鈮?0.314bp銆?+   缁撹锛氭垚鏈慨姝ｅ悗 edge 涓嶆垚绔?鈫?涓嶅緱鐢ㄦ敼鎴愭湰妯″瀷鐨勬柟寮?淇洖姝ｆ敹鐩?銆傦級
++```
++
++---
++
++## 鍗併€佸繀椤诲洖绛旂殑 10 涓棶棰?+
++| # | 闂 | 绛旀 | 璇佹嵁 |
++|---|---|---|---|
++| 1 | 鏄惁瀛樺湪 spread / slippage 閲嶅璁℃彁 | **鏄紙宸蹭慨锛?* | Test A/B锛汷LD_TOTAL_ERROR +4.69 |
++| 2 | 鏄惁娣锋穯 broker realized 涓?theoretical/estimated execution cost | **鏄紙宸蹭慨锛?* | 涓夎€呭凡鍒嗙锛沗pnl_accounting` 浠?broker 浜嬪疄涓洪敋 |
++| 3 | 鏄惁瀵?commission 绗﹀彿澶勭悊閿欒 | **鏄紙宸蹭慨锛?* | Test C锛涙鍓嶈宸?2脳\|comm\| |
++| 4 | 鏄惁浣挎ā鍨嬫垚鏈郴缁熸€у亸鍚戜箰瑙?| **鏄紙宸叉秷锛?* | 鏃фā鍨?-0.1375 vs 瀹為檯 -0.372锛?0.2345/RT锛?|
++| 5 | 鏄惁浣跨敤浜嗛敊璇殑 symbol 瑙勬牸 | **鍚?*锛堟崲绠楁纭級 | Test G锛涗絾鍙戠幇 tick_value/contract_size 涓嶈嚜娲?鈫?DATA_GAP |
++| 6 | 鏄惁 entry_ts/exit_ts 鏈敤浜庤绠?| **鍚?*锛堟湭璇敤锛?| 鏃堕棿鎴崇敤浜庡欢杩?鎸佷粨鏃堕暱锛沨old_actual_ms 宸叉敼鍗曡皟閽?|
++| 7 | 鏄惁鑷姩淇涓旀湭璁板綍 | **鍚?* | 鍏ㄩ儴鏀瑰姩缁忕敤鎴?GO 骞惰惤 commit `4f6bd54` |
++| 8 | 鏄惁淇敼鍘熷鍘嗗彶鏁版嵁 | **鍚?* | 搂J 鍥涗釜 SHA256 鍏?MATCH |
++| 9 | 鏄惁瑕嗙洊鍘熷 calibration 缁撴灉 | **鍚?* | PILOT_DONE/ledger/registry 鏈姩 |
++| 10 | 鏄惁鏀瑰彉缁熻瀹氫箟 | **鍚?* | 浠呬慨鍏紡**閿欒**锛涚粺璁″彛寰勬湭涓哄噾鏁拌皟鏁?|
++
++## 鍗佷竴銆佸洖褰掗獙璇?+
++```text
++V3 鏃㈡湁 foundation 鍥炲綊 = TEST_COUNT=28  PASS=28  FAIL=0     (foundation/tests/run_all.py)
++V3 ledger SHA256 hash-chain = ok=True (131 events, head 4b4beabe鈥?
++PIT guard = 瀛樺湪涓?pit_no_future_enforced / pit_purged_split_no_overlap 鍧?PASS锛堟棤 look-ahead锛?+V1 鍥炲綊 = 鏈Е纰帮紙V1 鏃犳敼鍔級
++V2 鍥炲綊 = 鏈Е纰帮紙V2 鏃犳敼鍔級
++```
++
++## 鍗佸洓銆佷氦鏄撶郴缁熷仴搴凤紙鏈换鍔℃椂鍒伙級
++
++```text
++V1 = HEALTHY    V2 = HEALTHY (run RUNNING / ledger OK / replay MATCH)    V3 = HEALTHY (PASS 20/20, AUTO_STOP)
++MT5_INSTANCE_COUNT = 3    MT5_ISOLATION = PASS
++UNMAPPED=0  ORPHAN=0  GHOST=0
++ORDER_SEND_CALLS = 0      LIVE = FALSE
++V3_LIVE_ALLOWED/ORDER_SEND_ALLOWED/FORWARD_ALLOWED = NO/NO/NO      EXPANSION = LOCKED
++```
++
++---
++
++## 鍗佸叚銆丟it
++
++```text
++C:\AIQuant commit            = 4f6bd54c4a4963fb2885921fee1d7adb510c940a   (path-limited, V3-only)
++staging report (prefixed)    = collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}
++staging report (canonical)   = collaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}
++```
++
++---
++
++```text
++STATUS = PASS
++RAW_DATA_IMMUTABLE = TRUE
++BROKER_NET_TOTAL = -7.44 USD
++BROKER_NET_MEAN = -0.372 USD/round-trip
++RECONCILIATION = 20/20 (corrected)
++ALPHA_NOT_PROVEN_AFTER_COST = TRUE
++ORDER_SENT = 0
++ORDER_SEND_CALLS = 0
++LIVE = FALSE
++EXPANSION = LOCKED
++WAIT_FOR_CHATGPT_AUDIT
++```
+diff --git a/research/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv b/research/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv
+new file mode 100644
+index 0000000..9d85337
+--- /dev/null
++++ b/research/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv
+@@ -0,0 +1,21 @@
++trade_id,direction,volume,entry_fill_price,exit_fill_price,gross_pnl,commission,swap,broker_realized_net,old_model_net,corrected_model_net,old_error,corrected_error,residual,theoretical_net,execution_cost,cost_spread,cost_slippage,cost_commission,cost_swap
++V3CAL-00,LONG,0.01,4373.73,4373.85,0.12000000000080036,-0.22,0.0,-0.1,-0.15999999999919964,-0.09999999999919965,-0.05999999999919964,8.003597784522753e-13,8.003597784522753e-13,-0.20000000000047294,-0.10000000000127329,0.17999999999938154,-0.28000000000065484,-0.22,0.0
++V3CAL-01,SHORT,0.01,4373.77,4373.96,-0.18999999999959982,-0.22,0.0,-0.41000000000000003,-0.14999999999898136,-0.4099999999995998,0.26000000000101864,4.0023540037736893e-13,4.0023540037736893e-13,-0.23000000000021828,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-02,LONG,0.01,4373.97,4373.82,-0.1500000000005457,-0.22,0.0,-0.37,-0.12000000000105501,-0.37000000000054567,0.24999999999894498,-5.456746166032644e-13,-5.456746166032644e-13,-0.18000000000003638,0.19000000000050932,0.18000000000029104,0.010000000000218279,-0.22,0.0
++V3CAL-03,SHORT,0.01,4373.82,4374.04,-0.22000000000025466,-0.22,0.0,-0.44,-0.1800000000005457,-0.44000000000025463,0.25999999999945433,-2.5462965069777965e-13,-2.5462965069777965e-13,-0.2599999999999636,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-04,LONG,0.01,4374.04,4373.86,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-05,SHORT,0.01,4373.86,4374.04,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-06,LONG,0.01,4374.05,4373.87,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-07,SHORT,0.01,4373.87,4374.05,-0.18000000000029104,-0.22,0.0,-0.4,-0.15000000000080035,-0.400000000000291,0.24999999999919967,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.22,0.0
++V3CAL-08,LONG,0.01,4374.05,4373.87,-0.18000000000029104,-0.22,0.0,-0.4,-0.15000000000080035,-0.400000000000291,0.24999999999919967,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.22,0.0
++V3CAL-09,SHORT,0.01,4373.87,4374.05,-0.18000000000029104,-0.22,0.0,-0.4,-0.14000000000058208,-0.400000000000291,0.2599999999994179,-2.9098945475425353e-13,-2.9098945475425353e-13,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-10,LONG,0.01,4374.03,4373.83,-0.1999999999998181,-0.22,0.0,-0.42000000000000004,-0.1799999999996362,-0.4199999999998181,0.24000000000036384,1.8196555373606316e-13,1.8196555373606316e-13,-0.22,0.1999999999998181,0.1799999999998363,0.01999999999998181,-0.22,0.0
++V3CAL-11,SHORT,0.01,4373.93,4374.11,-0.17999999999938154,-0.22,0.0,-0.4,-0.13999999999876309,-0.3999999999993815,0.2600000000012369,6.185052470186747e-13,6.185052470186747e-13,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-12,LONG,0.01,4374.15,4374.07,-0.07999999999992724,-0.22,0.0,-0.3,-0.11999999999923602,-0.2999999999999272,0.18000000000076397,7.277511926417901e-14,7.277511926417901e-14,-0.03999999999970896,0.2600000000002183,0.17999999999938154,0.08000000000083674,-0.22,0.0
++V3CAL-13,SHORT,0.01,4374.05,4374.13,-0.07999999999992724,-0.22,0.0,-0.3,-0.05999999999974534,-0.2999999999999272,0.24000000000025465,7.277511926417901e-14,7.277511926417901e-14,-0.10000000000010914,0.1999999999998181,0.18000000000029104,0.019999999999527063,-0.22,0.0
++V3CAL-14,LONG,0.01,4374.13,4374.03,-0.1000000000003638,-0.22,0.0,-0.32,-0.060000000000654835,-0.32000000000036377,0.2599999999993452,-3.6376457401843254e-13,-3.6376457401843254e-13,-0.14000000000007276,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-15,SHORT,0.01,4374.02,4374.2,-0.17999999999938154,-0.22,0.0,-0.4,-0.13999999999876309,-0.3999999999993815,0.2600000000012369,6.185052470186747e-13,6.185052470186747e-13,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
++V3CAL-16,LONG,0.01,4374.22,4374.02,-0.1999999999998181,-0.22,0.0,-0.42000000000000004,-0.19999999999916326,-0.4199999999998181,0.22000000000083678,1.8196555373606316e-13,1.8196555373606316e-13,-0.20000000000047294,0.21999999999934516,0.1799999999998363,0.03999999999950887,-0.22,0.0
++V3CAL-17,SHORT,0.01,4374.02,4374.18,-0.15999999999985448,-0.22,0.0,-0.38,-0.11999999999923602,-0.37999999999985445,0.26000000000076395,1.4555023852835802e-13,1.4555023852835802e-13,-0.19999999999956344,0.18000000000029104,0.17999999999938154,9.094947017729282e-13,-0.22,0.0
++V3CAL-18,LONG,0.01,4374.18,4374.05,-0.13000000000010914,-0.22,0.0,-0.35,-0.09000000000040018,-0.3500000000001091,0.2599999999995998,-1.0913492332065289e-13,-1.0913492332065289e-13,-0.1699999999998181,0.18000000000029104,0.18000000000029104,0.0,-0.22,0.0
++V3CAL-19,SHORT,0.01,4374.05,4374.26,-0.21000000000003638,-0.22,0.0,-0.43,-0.16999999999941792,-0.43000000000003635,0.2600000000005821,-3.6359804056473877e-14,-3.6359804056473877e-14,-0.2500000000006548,0.17999999999938154,0.17999999999938154,0.0,-0.22,0.0
+diff --git a/research/hermes/trader_v3/reports/v3_formula_fix_comparison.csv b/research/hermes/trader_v3/reports/v3_formula_fix_comparison.csv
+new file mode 100644
+index 0000000..3613977
+--- /dev/null
++++ b/research/hermes/trader_v3/reports/v3_formula_fix_comparison.csv
+@@ -0,0 +1,21 @@
++trade_id,side,volume,price_unit_usd,entry_fill_price,exit_fill_price,gross_pnl_price,gross_pnl_usd,commission,swap,old_net_pnl,corrected_net_pnl,broker_realized_net,old_error,corrected_error,old_published_model_net,old_formula_reproduced,entry_slippage_adverse,exit_slippage_adverse,spread_at_entry,theoretical_net,execution_friction,friction_spread,friction_slippage,broker_gross_profit,reconciliation_residual,accounting_reconciliation,unit_status,net_pnl_status,exit_quote_source
++V3CAL-00,LONG,0.01,1.0,4373.73,4373.85,0.12000000000080036,0.12000000000080036,-0.22,0.0,-0.15999999999919964,-0.09999999999919965,-0.1,-0.05999999999919964,8.003597784522753e-13,-0.15999999999919964,True,0.019999999999527063,-0.3000000000001819,0.18000000000029104,-0.20000000000047294,-0.10000000000127329,0.17999999999938154,-0.28000000000065484,0.12,8.003597784522753e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-01,SHORT,0.01,1.0,4373.77,4373.96,-0.18999999999959982,-0.18999999999959982,-0.22,0.0,-0.14999999999898136,-0.4099999999995998,-0.41000000000000003,0.26000000000101864,4.0023540037736893e-13,-0.14999999999898136,True,0.0,0.0,0.17999999999938154,-0.23000000000021828,0.17999999999938154,0.17999999999938154,0.0,-0.19,4.0023540037736893e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-02,LONG,0.01,1.0,4373.97,4373.82,-0.1500000000005457,-0.1500000000005457,-0.22,0.0,-0.12000000000105501,-0.37000000000054567,-0.37,0.24999999999894498,-5.456746166032644e-13,-0.12000000000105501,True,0.010000000000218279,0.0,0.18000000000029104,-0.18000000000003638,0.19000000000050932,0.18000000000029104,0.010000000000218279,-0.15,-5.456746166032644e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-03,SHORT,0.01,1.0,4373.82,4374.04,-0.22000000000025466,-0.22000000000025466,-0.22,0.0,-0.1800000000005457,-0.44000000000025463,-0.44,0.25999999999945433,-2.5462965069777965e-13,-0.1800000000005457,True,0.0,0.0,0.18000000000029104,-0.2599999999999636,0.18000000000029104,0.18000000000029104,0.0,-0.22,-2.5462965069777965e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-04,LONG,0.01,1.0,4374.04,4373.86,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-05,SHORT,0.01,1.0,4373.86,4374.04,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-06,LONG,0.01,1.0,4374.05,4373.87,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-07,SHORT,0.01,1.0,4373.87,4374.05,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.15000000000080035,-0.400000000000291,-0.4,0.24999999999919967,-2.9098945475425353e-13,-0.15000000000080035,True,0.0,-0.010000000000218279,0.18000000000029104,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-08,LONG,0.01,1.0,4374.05,4373.87,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.15000000000080035,-0.400000000000291,-0.4,0.24999999999919967,-2.9098945475425353e-13,-0.15000000000080035,True,0.0,-0.010000000000218279,0.18000000000029104,-0.23000000000021828,0.17000000000007276,0.18000000000029104,-0.010000000000218279,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-09,SHORT,0.01,1.0,4373.87,4374.05,-0.18000000000029104,-0.18000000000029104,-0.22,0.0,-0.14000000000058208,-0.400000000000291,-0.4,0.2599999999994179,-2.9098945475425353e-13,-0.14000000000058208,True,0.0,0.0,0.18000000000029104,-0.22,0.18000000000029104,0.18000000000029104,0.0,-0.18,-2.9098945475425353e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-10,LONG,0.01,1.0,4374.03,4373.83,-0.1999999999998181,-0.1999999999998181,-0.22,0.0,-0.1799999999996362,-0.4199999999998181,-0.42000000000000004,0.24000000000036384,1.8196555373606316e-13,-0.1799999999996362,True,0.0,0.020000000000436557,0.17999999999938154,-0.22,0.1999999999998181,0.1799999999998363,0.01999999999998181,-0.2,1.8196555373606316e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-11,SHORT,0.01,1.0,4373.93,4374.11,-0.17999999999938154,-0.17999999999938154,-0.22,0.0,-0.13999999999876309,-0.3999999999993815,-0.4,0.2600000000012369,6.185052470186747e-13,-0.13999999999876309,True,0.0,0.0,0.17999999999938154,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.18,6.185052470186747e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-12,LONG,0.01,1.0,4374.15,4374.07,-0.07999999999992724,-0.07999999999992724,-0.22,0.0,-0.11999999999923602,-0.2999999999999272,-0.3,0.18000000000076397,7.277511926417901e-14,-0.11999999999923602,True,0.07999999999992724,0.0,0.17999999999938154,-0.03999999999970896,0.2600000000002183,0.17999999999938154,0.08000000000083674,-0.08,7.277511926417901e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-13,SHORT,0.01,1.0,4374.05,4374.13,-0.07999999999992724,-0.07999999999992724,-0.22,0.0,-0.05999999999974534,-0.2999999999999272,-0.3,0.24000000000025465,7.277511926417901e-14,-0.05999999999974534,True,0.019999999999527063,0.0,0.18000000000029104,-0.10000000000010914,0.1999999999998181,0.18000000000029104,0.019999999999527063,-0.08,7.277511926417901e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-14,LONG,0.01,1.0,4374.13,4374.03,-0.1000000000003638,-0.1000000000003638,-0.22,0.0,-0.060000000000654835,-0.32000000000036377,-0.32,0.2599999999993452,-3.6376457401843254e-13,-0.060000000000654835,True,0.0,0.0,0.18000000000029104,-0.14000000000007276,0.18000000000029104,0.18000000000029104,0.0,-0.1,-3.6376457401843254e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-15,SHORT,0.01,1.0,4374.02,4374.2,-0.17999999999938154,-0.17999999999938154,-0.22,0.0,-0.13999999999876309,-0.3999999999993815,-0.4,0.2600000000012369,6.185052470186747e-13,-0.13999999999876309,True,0.0,0.0,0.17999999999938154,-0.22,0.17999999999938154,0.17999999999938154,0.0,-0.18,6.185052470186747e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-16,LONG,0.01,1.0,4374.22,4374.02,-0.1999999999998181,-0.1999999999998181,-0.22,0.0,-0.19999999999916326,-0.4199999999998181,-0.42000000000000004,0.22000000000083678,1.8196555373606316e-13,-0.19999999999916326,True,0.020000000000436557,0.019999999999527063,0.17999999999938154,-0.20000000000047294,0.21999999999934516,0.1799999999998363,0.03999999999950887,-0.2,1.8196555373606316e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-17,SHORT,0.01,1.0,4374.02,4374.18,-0.15999999999985448,-0.15999999999985448,-0.22,0.0,-0.11999999999923602,-0.37999999999985445,-0.38,0.26000000000076395,1.4555023852835802e-13,-0.11999999999923602,True,0.0,0.0,0.17999999999938154,-0.19999999999956344,0.18000000000029104,0.17999999999938154,9.094947017729282e-13,-0.16,1.4555023852835802e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-18,LONG,0.01,1.0,4374.18,4374.05,-0.13000000000010914,-0.13000000000010914,-0.22,0.0,-0.09000000000040018,-0.3500000000001091,-0.35,0.2599999999995998,-1.0913492332065289e-13,-0.09000000000040018,True,0.0,0.0,0.18000000000029104,-0.1699999999998181,0.18000000000029104,0.18000000000029104,0.0,-0.13,-1.0913492332065289e-13,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
++V3CAL-19,SHORT,0.01,1.0,4374.05,4374.26,-0.21000000000003638,-0.21000000000003638,-0.22,0.0,-0.16999999999941792,-0.43000000000003635,-0.43,0.2600000000005821,-3.6359804056473877e-14,-0.16999999999941792,True,0.0,0.0,0.17999999999938154,-0.2500000000006548,0.17999999999938154,0.17999999999938154,0.0,-0.21,-3.6359804056473877e-14,PASS,DATA_GAP_TICK_VALUE_INCONSISTENT,OK,AUDIT_CSV_SUPPLEMENTARY
+diff --git a/research/hermes/trader_v3/reports/v3_formula_fix_summary.json b/research/hermes/trader_v3/reports/v3_formula_fix_summary.json
+new file mode 100644
+index 0000000..6c88074
+--- /dev/null
++++ b/research/hermes/trader_v3/reports/v3_formula_fix_summary.json
+@@ -0,0 +1,707 @@
++{
++ "schema": "v3_formula_fix/1",
++ "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
++ "net_pnl_formula_version": "v3-calibration-netpnl-2",
++ "n_roundtrips": 20,
++ "OLD_MODEL_NET_MEAN": -0.13749999999993634,
++ "CORRECTED_MODEL_NET_MEAN": -0.37199999999999817,
++ "BROKER_NET_MEAN": -0.372,
++ "OLD_TOTAL_ERROR": 4.690000000001273,
++ "CORRECTED_TOTAL_ERROR": 3.7136960173711486e-14,
++ "MAX_ABS_RESIDUAL": 8.003597784522753e-13,
++ "MEAN_ABS_RESIDUAL": 3.0740687773089803e-13,
++ "BROKER_NET_SUM": -7.44,
++ "BROKER_GROSS_SUM": -3.04,
++ "BROKER_COMMISSION_SUM": -4.4,
++ "BROKER_SWAP_SUM": 0.0,
++ "UNIT": {
++  "price_unit_usd": 1.0,
++  "volume": 0.01,
++  "contract_size": 100.0,
++  "tick_size": 0.01,
++  "tick_value": 0.1,
++  "account_currency": "USD",
++  "profit_currency": "USD",
++  "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT"
++ },
++ "OLD_FORMULA_REPRODUCED_ALL": true,
++ "CORRECTED_RECONCILED_ALL": true,
++ "CROSS_CHECK_audit_summary": {
++  "MODEL_NET_MEAN_expected": -0.1375,
++  "MODEL_NET_MEAN_actual": -0.13749999999993634,
++  "BROKER_NET_MEAN_expected": -0.372,
++  "BROKER_NET_MEAN_actual": -0.372,
++  "BROKER_NET_SUM_expected": -7.44,
++  "BROKER_NET_SUM_actual": -7.44,
++  "BROKER_BALANCE_DELTA_expected": -7.44
++ },
++ "RAW_DATA_BASELINE_HASHES": {
++  "data/hft_ledger/v3_calibration_ledger.jsonl": {
++   "expected": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
++   "actual": "fc8fd01e5ac487dd63558241d67584d453ccd21d8aa3a91d8bb804304e06750c",
++   "UNCHANGED": true
++  },
++  "data/calibration/PILOT_DONE": {
++   "expected": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
++   "actual": "dec80e9f5166dd4ecdbb76da3b62f8edc7c61d857f5a9ac87269d6bd588339c6",
++   "UNCHANGED": true
++  },
++  "data/calibration/registry.jsonl": {
++   "expected": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
++   "actual": "7ad9596c4cab88bb95e0650daabbb169b53c3d3b796b07ea8bacb7c6366f4f25",
++   "UNCHANGED": true
++  },
++  "audit/_probe_broker_out.json": {
++   "expected": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0",
++   "actual": "f76782ce347738e7b31547c04c9bf5936022e9261a3ba5bb7a2877565bd70ca0",
++   "UNCHANGED": true
++  }
++ },
++ "RAW_DATA_IMMUTABLE": true,
++ "ORDER_SENT": false,
++ "LIVE": false,
++ "EXPANSION": "LOCKED",
++ "exit_quote_note": "exit-side bid/ask are not persisted by the pilot ledger; friction/theoretical decomposition uses the previous audit CSV (supplementary) and is flagged per row. Broker facts and the corrected net use ONLY the ledger fills + broker deals.",
++ "rows": [
++  {
++   "trade_id": "V3CAL-00",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.73,
++   "exit_fill_price": 4373.85,
++   "gross_pnl_price": 0.12000000000080036,
++   "gross_pnl_usd": 0.12000000000080036,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15999999999919964,
++   "corrected_net_pnl": -0.09999999999919965,
++   "broker_realized_net": -0.1,
++   "old_error": -0.05999999999919964,
++   "corrected_error": 8.003597784522753e-13,
++   "old_published_model_net": -0.15999999999919964,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.019999999999527063,
++   "exit_slippage_adverse": -0.3000000000001819,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.20000000000047294,
++   "execution_friction": -0.10000000000127329,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": -0.28000000000065484,
++   "broker_gross_profit": 0.12,
++   "reconciliation_residual": 8.003597784522753e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-01",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.77,
++   "exit_fill_price": 4373.96,
++   "gross_pnl_price": -0.18999999999959982,
++   "gross_pnl_usd": -0.18999999999959982,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14999999999898136,
++   "corrected_net_pnl": -0.4099999999995998,
++   "broker_realized_net": -0.41000000000000003,
++   "old_error": 0.26000000000101864,
++   "corrected_error": 4.0023540037736893e-13,
++   "old_published_model_net": -0.14999999999898136,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.19,
++   "reconciliation_residual": 4.0023540037736893e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-02",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.97,
++   "exit_fill_price": 4373.82,
++   "gross_pnl_price": -0.1500000000005457,
++   "gross_pnl_usd": -0.1500000000005457,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.12000000000105501,
++   "corrected_net_pnl": -0.37000000000054567,
++   "broker_realized_net": -0.37,
++   "old_error": 0.24999999999894498,
++   "corrected_error": -5.456746166032644e-13,
++   "old_published_model_net": -0.12000000000105501,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.010000000000218279,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.18000000000003638,
++   "execution_friction": 0.19000000000050932,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.010000000000218279,
++   "broker_gross_profit": -0.15,
++   "reconciliation_residual": -5.456746166032644e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-03",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.82,
++   "exit_fill_price": 4374.04,
++   "gross_pnl_price": -0.22000000000025466,
++   "gross_pnl_usd": -0.22000000000025466,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.1800000000005457,
++   "corrected_net_pnl": -0.44000000000025463,
++   "broker_realized_net": -0.44,
++   "old_error": 0.25999999999945433,
++   "corrected_error": -2.5462965069777965e-13,
++   "old_published_model_net": -0.1800000000005457,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.2599999999999636,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.22,
++   "reconciliation_residual": -2.5462965069777965e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-04",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.04,
++   "exit_fill_price": 4373.86,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-05",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.86,
++   "exit_fill_price": 4374.04,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-06",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4373.87,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-07",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.87,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15000000000080035,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.24999999999919967,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.15000000000080035,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": -0.010000000000218279,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17000000000007276,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": -0.010000000000218279,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-08",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4373.87,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.15000000000080035,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.24999999999919967,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.15000000000080035,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": -0.010000000000218279,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.23000000000021828,
++   "execution_friction": 0.17000000000007276,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": -0.010000000000218279,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-09",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.87,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.18000000000029104,
++   "gross_pnl_usd": -0.18000000000029104,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.14000000000058208,
++   "corrected_net_pnl": -0.400000000000291,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2599999999994179,
++   "corrected_error": -2.9098945475425353e-13,
++   "old_published_model_net": -0.14000000000058208,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": -2.9098945475425353e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-10",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.03,
++   "exit_fill_price": 4373.83,
++   "gross_pnl_price": -0.1999999999998181,
++   "gross_pnl_usd": -0.1999999999998181,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.1799999999996362,
++   "corrected_net_pnl": -0.4199999999998181,
++   "broker_realized_net": -0.42000000000000004,
++   "old_error": 0.24000000000036384,
++   "corrected_error": 1.8196555373606316e-13,
++   "old_published_model_net": -0.1799999999996362,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.020000000000436557,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.1999999999998181,
++   "friction_spread": 0.1799999999998363,
++   "friction_slippage": 0.01999999999998181,
++   "broker_gross_profit": -0.2,
++   "reconciliation_residual": 1.8196555373606316e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-11",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4373.93,
++   "exit_fill_price": 4374.11,
++   "gross_pnl_price": -0.17999999999938154,
++   "gross_pnl_usd": -0.17999999999938154,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.13999999999876309,
++   "corrected_net_pnl": -0.3999999999993815,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2600000000012369,
++   "corrected_error": 6.185052470186747e-13,
++   "old_published_model_net": -0.13999999999876309,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": 6.185052470186747e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-12",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.15,
++   "exit_fill_price": 4374.07,
++   "gross_pnl_price": -0.07999999999992724,
++   "gross_pnl_usd": -0.07999999999992724,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.11999999999923602,
++   "corrected_net_pnl": -0.2999999999999272,
++   "broker_realized_net": -0.3,
++   "old_error": 0.18000000000076397,
++   "corrected_error": 7.277511926417901e-14,
++   "old_published_model_net": -0.11999999999923602,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.07999999999992724,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.03999999999970896,
++   "execution_friction": 0.2600000000002183,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.08000000000083674,
++   "broker_gross_profit": -0.08,
++   "reconciliation_residual": 7.277511926417901e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-13",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4374.13,
++   "gross_pnl_price": -0.07999999999992724,
++   "gross_pnl_usd": -0.07999999999992724,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.05999999999974534,
++   "corrected_net_pnl": -0.2999999999999272,
++   "broker_realized_net": -0.3,
++   "old_error": 0.24000000000025465,
++   "corrected_error": 7.277511926417901e-14,
++   "old_published_model_net": -0.05999999999974534,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.019999999999527063,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.10000000000010914,
++   "execution_friction": 0.1999999999998181,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.019999999999527063,
++   "broker_gross_profit": -0.08,
++   "reconciliation_residual": 7.277511926417901e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-14",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.13,
++   "exit_fill_price": 4374.03,
++   "gross_pnl_price": -0.1000000000003638,
++   "gross_pnl_usd": -0.1000000000003638,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.060000000000654835,
++   "corrected_net_pnl": -0.32000000000036377,
++   "broker_realized_net": -0.32,
++   "old_error": 0.2599999999993452,
++   "corrected_error": -3.6376457401843254e-13,
++   "old_published_model_net": -0.060000000000654835,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.14000000000007276,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.1,
++   "reconciliation_residual": -3.6376457401843254e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-15",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.02,
++   "exit_fill_price": 4374.2,
++   "gross_pnl_price": -0.17999999999938154,
++   "gross_pnl_usd": -0.17999999999938154,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.13999999999876309,
++   "corrected_net_pnl": -0.3999999999993815,
++   "broker_realized_net": -0.4,
++   "old_error": 0.2600000000012369,
++   "corrected_error": 6.185052470186747e-13,
++   "old_published_model_net": -0.13999999999876309,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.22,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.18,
++   "reconciliation_residual": 6.185052470186747e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-16",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.22,
++   "exit_fill_price": 4374.02,
++   "gross_pnl_price": -0.1999999999998181,
++   "gross_pnl_usd": -0.1999999999998181,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.19999999999916326,
++   "corrected_net_pnl": -0.4199999999998181,
++   "broker_realized_net": -0.42000000000000004,
++   "old_error": 0.22000000000083678,
++   "corrected_error": 1.8196555373606316e-13,
++   "old_published_model_net": -0.19999999999916326,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.020000000000436557,
++   "exit_slippage_adverse": 0.019999999999527063,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.20000000000047294,
++   "execution_friction": 0.21999999999934516,
++   "friction_spread": 0.1799999999998363,
++   "friction_slippage": 0.03999999999950887,
++   "broker_gross_profit": -0.2,
++   "reconciliation_residual": 1.8196555373606316e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-17",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.02,
++   "exit_fill_price": 4374.18,
++   "gross_pnl_price": -0.15999999999985448,
++   "gross_pnl_usd": -0.15999999999985448,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.11999999999923602,
++   "corrected_net_pnl": -0.37999999999985445,
++   "broker_realized_net": -0.38,
++   "old_error": 0.26000000000076395,
++   "corrected_error": 1.4555023852835802e-13,
++   "old_published_model_net": -0.11999999999923602,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.19999999999956344,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 9.094947017729282e-13,
++   "broker_gross_profit": -0.16,
++   "reconciliation_residual": 1.4555023852835802e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-18",
++   "side": "LONG",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.18,
++   "exit_fill_price": 4374.05,
++   "gross_pnl_price": -0.13000000000010914,
++   "gross_pnl_usd": -0.13000000000010914,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.09000000000040018,
++   "corrected_net_pnl": -0.3500000000001091,
++   "broker_realized_net": -0.35,
++   "old_error": 0.2599999999995998,
++   "corrected_error": -1.0913492332065289e-13,
++   "old_published_model_net": -0.09000000000040018,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.18000000000029104,
++   "theoretical_net": -0.1699999999998181,
++   "execution_friction": 0.18000000000029104,
++   "friction_spread": 0.18000000000029104,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.13,
++   "reconciliation_residual": -1.0913492332065289e-13,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  },
++  {
++   "trade_id": "V3CAL-19",
++   "side": "SHORT",
++   "volume": 0.01,
++   "price_unit_usd": 1.0,
++   "entry_fill_price": 4374.05,
++   "exit_fill_price": 4374.26,
++   "gross_pnl_price": -0.21000000000003638,
++   "gross_pnl_usd": -0.21000000000003638,
++   "commission": -0.22,
++   "swap": 0.0,
++   "old_net_pnl": -0.16999999999941792,
++   "corrected_net_pnl": -0.43000000000003635,
++   "broker_realized_net": -0.43,
++   "old_error": 0.2600000000005821,
++   "corrected_error": -3.6359804056473877e-14,
++   "old_published_model_net": -0.16999999999941792,
++   "old_formula_reproduced": true,
++   "entry_slippage_adverse": 0.0,
++   "exit_slippage_adverse": 0.0,
++   "spread_at_entry": 0.17999999999938154,
++   "theoretical_net": -0.2500000000006548,
++   "execution_friction": 0.17999999999938154,
++   "friction_spread": 0.17999999999938154,
++   "friction_slippage": 0.0,
++   "broker_gross_profit": -0.21,
++   "reconciliation_residual": -3.6359804056473877e-14,
++   "accounting_reconciliation": "PASS",
++   "unit_status": "DATA_GAP_TICK_VALUE_INCONSISTENT",
++   "net_pnl_status": "OK",
++   "exit_quote_source": "AUDIT_CSV_SUPPLEMENTARY"
++  }
++ ]
++}
+\ No newline at end of file

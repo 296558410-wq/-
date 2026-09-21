@@ -1,0 +1,16 @@
+{
+ "schema": "v3_reconciliation_summary/1",
+ "count": 20,
+ "broker_total_net_pnl": -7.44,
+ "broker_mean_net_pnl": -0.372,
+ "corrected_total_net_pnl": -7.44,
+ "corrected_mean_net_pnl": -0.372,
+ "old_total_net_pnl": -2.75,
+ "old_mean_net_pnl": -0.1375,
+ "total_error": 3.7e-14,
+ "max_abs_residual": 8.003597784522753e-13,
+ "mean_abs_residual": 3.07e-13,
+ "matched_count": 20,
+ "unmatched_count": 0,
+ "method": "corrected_net = signed(exit_fill - entry_fill) * contract_size * volume + commission + swap, computed ONLY from fill price/volume/spec/commission/swap; broker_net_pnl = sum(deal.profit + deal.commission + deal.swap) from independent MT5 deal export; equality check, NOT copied"
+}

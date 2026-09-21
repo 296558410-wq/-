@@ -1,0 +1,40 @@
+{
+  "schema": "v3_safety_final/1",
+  "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-002",
+  "timestamp_utc": "2026-09-21T16:05:00Z",
+  "source": "read-only checks (process list / state flag files / run health)",
+  "order_send_calls": 0,
+  "new_calibration_orders": 0,
+  "live": false,
+  "v3_order_send_allowed": false,
+  "v3_live_allowed": false,
+  "v3_forward_allowed": false,
+  "expansion": "LOCKED",
+  "calibration_auto_stop": true,
+  "v1_untouched": true,
+  "v2_untouched": true,
+  "openclaw_untouched": true,
+  "mt5_instance_count": 3,
+  "mt5_isolation": "PASS",
+  "mt5_mapping": [
+    {"role": "V1", "path": "C:\\Program Files\\ForexTime (FXTM) MT5\\terminal64.exe", "pid": 1348, "magic": 90002},
+    {"role": "V2", "path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_01\\terminal64.exe", "pid": 36460, "magic": 90003},
+    {"role": "V3", "path": "C:\\AIQuant\\mt5_instances\\fxtm_demo_v3calib\\terminal64.exe", "pid": 49300, "magic": 90004}
+  ],
+  "unmapped": 0,
+  "orphan": 0,
+  "ghost": 0,
+  "flag_files": {
+    "V3_LIVE_ALLOWED": "NO",
+    "V3_ORDER_SEND_ALLOWED": "NO",
+    "V3_FORWARD_ALLOWED": "NO"
+  },
+  "raw_data_immutable": true,
+  "raw_data_baseline_sha256": {
+    "data/hft_ledger/v3_calibration_ledger.jsonl": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
+    "data/calibration/PILOT_DONE": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
+    "data/calibration/registry.jsonl": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
+    "audit/_probe_broker_out.json": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0"
+  },
+  "no_password_token_or_env_included": true
+}

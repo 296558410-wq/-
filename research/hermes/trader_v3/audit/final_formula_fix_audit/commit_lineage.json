@@ -1,0 +1,59 @@
+{
+ "schema": "v3_commit_lineage/1",
+ "base_commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+ "code_commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+ "audit_commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
+ "staging_commit": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
+ "origin_main": "461b980bcf4b11506073ed3424fbe5f9e4849e18",
+ "head_equals_origin_main": true,
+ "purpose_of_each": {
+  "base_commit": "state immediately BEFORE the formula fix (parent of code_commit)",
+  "code_commit": "the actual V3-only formula fix + regression tests + offline recompute artifacts",
+  "audit_commit": "canonical report (md+json) + section-6 20-trade table + reports/ copies (local, path-limited)",
+  "staging_commit": "publish of the canonical report to the GitHub staging repo (origin main)"
+ },
+ "details": {
+  "base": {
+   "commit": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+   "parent": "7351955e1b8e029eda84c20610862d03e1050492",
+   "subject": "audit(v3): record base/audit commit metadata for V3-HFT-COST-BRIDGE-AUDIT-001",
+   "author": "openclaw",
+   "date": "2026-09-21T13:30:32+08:00",
+   "changed_files": [
+    "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_manifest.json",
+    "M\tresearch/hermes/trader_v3/audit/v3_cost_bridge_summary.json"
+   ]
+  },
+  "code": {
+   "commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+   "parent": "6170050dcd6397f29193effc4f0baaed9036e2ab",
+   "subject": "fix(v3-calib): V3-HFT-CALIBRATION-FORMULA-FIX-001 broker-anchored net_pnl (spread/slippage double count, abs(), commission sign) + regression tests + offline old-vs-new comparison",
+   "author": "296558410-wq",
+   "date": "2026-09-21T15:16:45+08:00",
+   "changed_files": [
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+    "A\tresearch/hermes/trader_v3/audit/v3_formula_fix_summary.json",
+    "M\tresearch/hermes/trader_v3/foundation/calibration_pilot.py",
+    "A\tresearch/hermes/trader_v3/foundation/pnl_accounting.py",
+    "A\tresearch/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py"
+   ]
+  },
+  "audit": {
+   "commit": "4ac5a240e752c40ebd1a968350c6f3e95d176cd7",
+   "parent": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+   "subject": "report(v3-calib): FORMULA-FIX-001 canonical result (md+json) + section-6 20-trade table + reports/ copies",
+   "author": "296558410-wq",
+   "date": "2026-09-21T23:56:13+08:00",
+   "changed_files": [
+    "A\tresearch/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv",
+    "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json",
+    "A\tresearch/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md",
+    "A\tresearch/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv",
+    "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_comparison.csv",
+    "A\tresearch/hermes/trader_v3/reports/v3_formula_fix_summary.json"
+   ]
+  }
+ },
+ "verified_by": "git rev-parse / git log / git show --name-status (read directly, not inferred)"
+}

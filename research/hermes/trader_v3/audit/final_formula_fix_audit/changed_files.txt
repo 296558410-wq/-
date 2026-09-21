@@ -1,0 +1,12 @@
+﻿A	research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv
+A	research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv
+A	research/hermes/trader_v3/audit/v3_formula_fix_recompute.py
+A	research/hermes/trader_v3/audit/v3_formula_fix_summary.json
+M	research/hermes/trader_v3/foundation/calibration_pilot.py
+A	research/hermes/trader_v3/foundation/pnl_accounting.py
+A	research/hermes/trader_v3/foundation/tests/test_v3_formula_fix.py
+A	research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json
+A	research/hermes/trader_v3/reports/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md
+A	research/hermes/trader_v3/reports/v3_calibration_formula_fix_20trades.csv
+A	research/hermes/trader_v3/reports/v3_formula_fix_comparison.csv
+A	research/hermes/trader_v3/reports/v3_formula_fix_summary.json

@@ -1,0 +1,13 @@
+﻿ .../audit/v3_calibration_formula_fix_20trades.csv  |  21 +
+ .../trader_v3/audit/v3_formula_fix_comparison.csv  |  21 +
+ .../trader_v3/audit/v3_formula_fix_recompute.py    | 341 ++++++++++
+ .../trader_v3/audit/v3_formula_fix_summary.json    | 707 +++++++++++++++++++++
+ .../trader_v3/foundation/calibration_pilot.py      | 157 ++++-
+ .../hermes/trader_v3/foundation/pnl_accounting.py  | 250 ++++++++
+ .../foundation/tests/test_v3_formula_fix.py        | 249 ++++++++
+ .../V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.json | 139 ++++
+ .../V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.md   | 183 ++++++
+ .../v3_calibration_formula_fix_20trades.csv        |  21 +
+ .../reports/v3_formula_fix_comparison.csv          |  21 +
+ .../trader_v3/reports/v3_formula_fix_summary.json  | 707 +++++++++++++++++++++
+ 12 files changed, 2792 insertions(+), 25 deletions(-)
