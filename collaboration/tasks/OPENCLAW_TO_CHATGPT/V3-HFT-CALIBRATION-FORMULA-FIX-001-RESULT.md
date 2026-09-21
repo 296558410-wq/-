@@ -112,6 +112,11 @@ V3_ORDER_SEND_ALLOWED   = NO
 V3_FORWARD_ALLOWED      = NO
 EXPANSION               = LOCKED
 CALIBRATION_AUTO_STOP   = TRUE
+
+ALPHA_NOT_PROVEN_AFTER_COST = TRUE
+  （修正后的真实成本口径下，本次 20 笔冻结方向序列非 alpha、gross 均值 ≈ 机械的 -spread；
+   真实结构性成本 0.40 USD/RT ≈ 0.914bp，远高于成本模型原口径 0.1375 ≈ 0.314bp。
+   结论：成本修正后 edge 不成立 → 不得用改成本模型的方式"修回正收益"。）
 ```
 
 ---
@@ -166,7 +171,12 @@ staging report (canonical)   = collaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CA
 ```text
 STATUS = PASS
 RAW_DATA_IMMUTABLE = TRUE
+BROKER_NET_TOTAL = -7.44 USD
+BROKER_NET_MEAN = -0.372 USD/round-trip
+RECONCILIATION = 20/20 (corrected)
+ALPHA_NOT_PROVEN_AFTER_COST = TRUE
 ORDER_SENT = 0
+ORDER_SEND_CALLS = 0
 LIVE = FALSE
 EXPANSION = LOCKED
 WAIT_FOR_CHATGPT_AUDIT

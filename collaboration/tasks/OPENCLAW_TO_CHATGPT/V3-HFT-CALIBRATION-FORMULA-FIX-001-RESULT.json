@@ -1,0 +1,139 @@
+{
+  "schema": "v3_hft_calibration_formula_fix/1",
+  "task_id": "V3-HFT-CALIBRATION-FORMULA-FIX-001",
+  "status": "PASS",
+  "authority": "user GO (V3-only minimal fix of calibration accounting formula)",
+  "date": "2026-09-21",
+  "repos": {
+    "code_commit": "4f6bd54c4a4963fb2885921fee1d7adb510c940a",
+    "code_commit_scope": "path-limited, trader_v3 only",
+    "v1_untouched": true,
+    "v2_untouched": true,
+    "openclaw_untouched": true
+  },
+  "A_bugs_fixed": [
+    {"n": 1, "bug": "spread double-charged (fill price already includes bid/ask)", "location": "foundation/calibration_pilot.py::_round_trip -> net_pnl", "fix": "not charged again; spread reported as diagnostic only"},
+    {"n": 2, "bug": "entry/exit slippage double-charged", "location": "same", "fix": "not charged again; diagnostic only"},
+    {"n": 3, "bug": "abs() turned favourable slippage into a cost", "location": "same", "fix": "abs() removed; sign preserved"},
+    {"n": 4, "bug": "MT5 commission sign reversed (commission<0 is a cost; code did -comm)", "location": "same", "fix": "use commission as-is"},
+    {"n": 5, "bug": "broker realized P&L conflated with theoretical execution cost", "location": "same", "fix": "separated into broker realized / execution cost (diagnostic) / model theoretical"},
+    {"n": 6, "bug": "units not anchored to broker symbol spec", "location": "same", "fix": "signed(exit_fill-entry_fill) * contract_size * volume + commission + swap; spec persisted per sample"}
+  ],
+  "new_module": "foundation/pnl_accounting.py (pure functions, formula version v3-calibration-netpnl-2, fail-closed HALT on reconciliation failure)",
+  "B_files_changed": [
+    "foundation/pnl_accounting.py",
+    "foundation/calibration_pilot.py",
+    "foundation/tests/test_v3_formula_fix.py",
+    "audit/v3_formula_fix_recompute.py",
+    "audit/v3_formula_fix_summary.json",
+    "audit/v3_formula_fix_comparison.csv",
+    "audit/v3_calibration_formula_fix_20trades.csv"
+  ],
+  "C_tests": {
+    "file": "foundation/tests/test_v3_formula_fix.py",
+    "cases": [
+      {"id": "A", "name": "test_a_spread_not_double_charged", "result": "PASS"},
+      {"id": "B", "name": "test_b_favourable_slippage_stays_favourable", "result": "PASS"},
+      {"id": "C", "name": "test_c_negative_commission_decreases_net", "result": "PASS"},
+      {"id": "D", "name": "test_d_zero_commission", "result": "PASS"},
+      {"id": "E", "name": "test_e_zero_swap", "result": "PASS"},
+      {"id": "F", "name": "test_f_long_and_short_symmetric", "result": "PASS"},
+      {"id": "G", "name": "test_g_contract_size_and_volume_scale", "result": "PASS"},
+      {"id": "H", "name": "test_h_frozen_20_offline_recompute", "result": "PASS"},
+      {"id": "I", "name": "test_i_broker_realized_reconciliation", "result": "PASS"}
+    ],
+    "total": 9,
+    "pass": 9,
+    "fail": 0
+  },
+  "D_old_model_net_mean": -0.13749999999993634,
+  "E_corrected_model_net_mean": -0.37199999999999817,
+  "F_broker_realized_net_mean": -0.372,
+  "F_broker_realized_net_total": -7.44,
+  "broker_breakdown": {"gross_profit_sum": -3.04, "commission_sum": -4.4, "swap_sum": 0.0},
+  "G_corrected_reconciliation_error": {
+    "corrected_total_error_usd": 3.7136960173711486e-14,
+    "old_total_error_usd": 4.690000000001273,
+    "max_abs_residual_usd": 8.003597784522753e-13,
+    "mean_abs_residual_usd": 3.0740687773089803e-13,
+    "reconciliation_20_20": true,
+    "old_formula_reproduced_all": true,
+    "corrected_reconciled_all": true
+  },
+  "H_data_gaps_addressed": [
+    "entry_fill_price persisted",
+    "entry_bid/entry_ask persisted",
+    "exit_bid/exit_ask persisted (future runs only; historical 20 not retroactive)",
+    "tick_age_ms persisted",
+    "hold_actual_ms uses monotonic clock (no longer quantised to 1000ms)",
+    "broker symbol specification persisted per sample (contract_size/tick_size/tick_value/currency)",
+    "timestamp precision improved"
+  ],
+  "I_data_gaps_remaining": [
+    "historical 20 exit_bid/exit_ask not recoverable; friction decomposition uses previous audit CSV, flagged AUDIT_CSV_SUPPLEMENTARY per row",
+    "unit_status = DATA_GAP_TICK_VALUE_INCONSISTENT: broker reports trade_tick_value(0.1) vs contract_size(100) inconsistent (flagged, not hidden)",
+    "full exit-side microstructure requires a future run"
+  ],
+  "J_raw_data_immutable": {
+    "value": true,
+    "baseline_sha256": {
+      "data/hft_ledger/v3_calibration_ledger.jsonl": "FC8FD01E5AC487DD63558241D67584D453CCD21D8AA3A91D8BB804304E06750C",
+      "data/calibration/PILOT_DONE": "DEC80E9F5166DD4ECDBB76DA3B62F8EDC7C61D857F5A9AC87269D6BD588339C6",
+      "data/calibration/registry.jsonl": "7AD9596C4CAB88BB95E0650DAABBB169B53C3D3B796B07EA8BACB7C6366F4F25",
+      "audit/_probe_broker_out.json": "F76782CE347738E7B31547C04C9BF5936022E9261A3BA5BB7A2877565BD70CA0"
+    },
+    "all_match": true,
+    "ledger_hash_chain_verify": "ok=True (131 events)"
+  },
+  "K_safety": {
+    "ORDER_SEND": false,
+    "ORDER_SEND_CALLS": 0,
+    "LIVE": false,
+    "V3_LIVE_ALLOWED": "NO",
+    "V3_ORDER_SEND_ALLOWED": "NO",
+    "V3_FORWARD_ALLOWED": "NO",
+    "EXPANSION": "LOCKED",
+    "CALIBRATION_AUTO_STOP": true,
+    "ALPHA_NOT_PROVEN_AFTER_COST": true,
+    "ALPHA_NOT_PROVEN_AFTER_COST_note": "post-fix true structural cost 0.40 USD/RT ~= 0.914bp vs old model 0.1375 ~= 0.314bp; frozen direction sequence is not alpha; edge does not survive cost; cost model must not be tuned to restore positive P&L"
+  },
+  "section10_answers": {
+    "q1_spread_slippage_double_count": "YES (fixed)",
+    "q2_broker_vs_theoretical_conflation": "YES (fixed)",
+    "q3_commission_sign_error": "YES (fixed)",
+    "q4_model_cost_optimistic_bias": "YES (eliminated)",
+    "q5_wrong_symbol_spec": "NO (units correct; tick_value/contract_size inconsistency flagged as DATA_GAP)",
+    "q6_timestamps_unused": "NO",
+    "q7_auto_fix_unrecorded": "NO (user GO + commit 4f6bd54)",
+    "q8_original_history_modified": "NO",
+    "q9_original_calibration_overwritten": "NO",
+    "q10_statistics_definition_changed": "NO (only formula errors corrected)"
+  },
+  "section11_regression": {
+    "v3_foundation_suite": "TEST_COUNT=28 PASS=28 FAIL=0 (foundation/tests/run_all.py)",
+    "v3_ledger_sha256_chain": "ok=True (131 events, head 4b4beabecb36c90a2028f476952c909aaff9320cd5af44fcbf72af3c38e96575)",
+    "pit_guard": "present (pit_no_future_enforced PASS, pit_purged_split_no_overlap PASS)",
+    "v1_regression": "untouched",
+    "v2_regression": "untouched"
+  },
+  "section14_health": {
+    "V1": "HEALTHY",
+    "V2": "HEALTHY",
+    "V3": "HEALTHY (calibration PASS n=20, AUTO_STOP=TRUE)",
+    "MT5_INSTANCE_COUNT": 3,
+    "MT5_ISOLATION": "PASS",
+    "MT5_UNMAPPED": 0,
+    "MT5_ORPHAN": 0,
+    "MT5_GHOST": 0
+  },
+  "deliverables": {
+    "audit_csv_section6": "research/hermes/trader_v3/audit/v3_calibration_formula_fix_20trades.csv (20 rows, section-6 column order)",
+    "comparison_csv": "research/hermes/trader_v3/audit/v3_formula_fix_comparison.csv",
+    "summary_json": "research/hermes/trader_v3/audit/v3_formula_fix_summary.json",
+    "recompute_script": "research/hermes/trader_v3/audit/v3_formula_fix_recompute.py",
+    "reports_copy_dir": "research/hermes/trader_v3/reports/",
+    "staging_report_canonical": "collaboration/tasks/OPENCLAW_TO_CHATGPT/V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}",
+    "staging_report_prefixed": "collaboration/tasks/OPENCLAW_TO_CHATGPT/CHATGPT-TASK-V3-HFT-CALIBRATION-FORMULA-FIX-001-RESULT.{md,json}"
+  },
+  "next_state": "WAIT_FOR_CHATGPT_AUDIT"
+}
