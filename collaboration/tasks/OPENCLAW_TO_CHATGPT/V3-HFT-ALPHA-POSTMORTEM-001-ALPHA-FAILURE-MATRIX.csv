@@ -1,0 +1,13 @@
+dimension,conclusion,evidence
+"Price signal","NOT_SUPPORTED","gross rank-IC -0.179@1s, -0.142@5s; best gross +0.096 bp << 0.914 bp cost"
+"Microstructure signal","DATA_GAP","no sizes/prints -> microprice & true OFI unmeasurable"
+"L1 information","NOT_SUPPORTED","bid/ask/ts present & causal; tested 6 price families; no net edge"
+"L2 information","DATA_GAP","no order book / depth on feed"
+"Trade flow","DATA_GAP","volume=volume_real=last identically 0"
+"Sample size","SUPPORTED","eff_n 605,337@1s .. 2,467@5min (see coverage row for short/long tail)"
+"Cost","NOT_SUPPORTED","0.914 bp cost = 2.6x median 1s move; kills net edge at h<=5s"
+"Latency","SUPPORTED","latency grid measured on real ticks; not the binding constraint"
+"OOS","SUPPORTED","train-fit/val-select/test-once; 0/30 FDR reject (minor: test metrics logged in screen)"
+"Statistical power","SUPPORTED","8/30 tests had valid p; 4 horizons with eff_n>2000"
+"Data coverage","NOT_SUPPORTED","gaps 2023-12, 2024-04..2026-07, daily 21:00-22:59Z; 24h unresolvable"
+"Execution observability","DATA_GAP","only spread+commission+latency observable; no fill/queue data"
