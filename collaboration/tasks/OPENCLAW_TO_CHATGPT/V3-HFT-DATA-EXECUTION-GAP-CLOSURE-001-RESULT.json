@@ -1,0 +1,57 @@
+{
+ "schema": "v3_data_execution_gap_closure_result/1",
+ "task": "V3-HFT-DATA-EXECUTION-GAP-CLOSURE-001",
+ "generated_utc": "2026-09-22T03:2x:xxZ",
+ "mode": "AUDIT / READ-ONLY research infrastructure",
+ "FINAL_STATUS": "DUAL_BLOCKED",
+ "status_components": {"COST_BLOCKED": "h <= 2 s (cost/typical-move >= 1.22)",
+                        "DATA_BLOCKED": "true OFI / bid-size / ask-size / microprice / L2 imbalance / trade flow / queue / VPIN / Kyle-lambda / fill probability are DATA_GAP"},
+ "EXECUTABLE_ALPHA_CANDIDATE": "NOT_APPLICABLE (ALPHA_SEARCH = OFF)",
+ "SNAPSHOT": {"SNAPSHOT_ID": "V3-SNAP-20260922T025312Z", "FILE_COUNT": 36,
+               "TOTAL_ROWS": 7285000,
+               "MANIFEST_SHA256": "a036a808d5d924a7a99c5941919971ff00ce9e28c804e8e91860b6ffd7fa61b5",
+               "LIVE_SOURCE_MUTABLE": true, "RESEARCH_SNAPSHOT_IMMUTABLE": true},
+ "Q": {
+  "Q1_snapshot_immutable": "YES",
+  "Q2_live_can_pollute_research": "NO",
+  "Q3_duplicates": {"DUP_TIMESTAMP_COUNT": 1014, "DUP_QUOTE_COUNT": 1014, "DUP_EVENT_COUNT": 0,
+                     "EVENT_IDENTITY": "DATA_GAP", "deleted": 0},
+  "Q4_timestamp_unit_locked": "YES (ms/us/ns; no silent inference; DATA_INVALID if unknown)",
+  "Q5_single_canonical_cost": "YES (CALIBRATION_20RT_20260921, 0.914 bp)",
+  "Q6_0_314_exited": "YES (HISTORICAL_INVALID_FOR_CURRENT_RESEARCH; assert_not_deprecated raises)",
+  "Q7_slippage_sign": "YES (signed; only unfavorable is cost; abs forbidden)",
+  "Q8_commission_sign": "YES (broker negative-of-cost -> research positive-subtracted)",
+  "Q9_markout_formula": "YES (MID/EXECUTION/COST_ADJUSTED, explicit LONG/SHORT)",
+  "Q10_as_sign": "YES (AS>0 adverse; = -EXECUTION_MARKOUT; 4-case matrix PASS)",
+  "Q11_as_mean_censoring": "RESOLVED (HORIZON_CENSORED excluded, never 0; mean reported beside median)",
+  "Q12_type567_observable": "NONE (TYPE5/TYPE6/TYPE7 = NOT_TESTED; only TYPE1/TYPE2 CONFIRMED)",
+  "Q13_L1_can_research": ["spread","mid","quote dynamics","tick-flow proxy","short return","volatility","spread regime","quote arrival","markout","conditional AS"],
+  "Q14_L2_only": ["true OFI","queue imbalance","queue position","true trade flow","fill probability","L2 liquidity withdrawal","cancellation pressure","microprice"],
+  "Q15_next_stage": "evidence only: h<=2s COST_BLOCKED; h>=5s RESEARCHABLE (not tradeable); all Level-B microstructure DATA_GAP; decision belongs to ChatGPT"
+ },
+ "cost_to_move_v2": {
+  "50ms": {"cost_to_move": 1.704, "status": "RESEARCH_BLOCKED_BY_COST", "effective_n": 4239246},
+  "200ms": {"cost_to_move": 1.717, "status": "RESEARCH_BLOCKED_BY_COST", "effective_n": 4239246},
+  "1s": {"cost_to_move": 1.432, "status": "RESEARCH_BLOCKED_BY_COST", "effective_n": 1127639},
+  "2s": {"cost_to_move": 1.221, "status": "RESEARCH_BLOCKED_BY_COST", "effective_n": 563819},
+  "5s": {"cost_to_move": 0.881, "status": "RESEARCHABLE", "effective_n": 225527},
+  "30s": {"cost_to_move": 0.384, "status": "RESEARCHABLE", "effective_n": 37587},
+  "5min": {"cost_to_move": 0.169, "status": "RESEARCHABLE", "effective_n": 3758}
+ },
+ "tests": {"file": "research/tests/test_gap_closure.py", "passed": 27, "failed": 0},
+ "HALT_TRIGGERED": false,
+ "BLOCKING_ISSUES": [],
+ "NON_BLOCKING_ISSUES": [
+  "live_fxtm still appends (EXPECTED_MUTABLE_SOURCE); 1014 cross-file duplicate timestamps",
+  "EVENT_IDENTITY = DATA_GAP (feed has no event id)",
+  "pre-existing uncommitted FORMULA-FIX CSV enrichment (not caused by this task)"
+ ],
+ "IMPACT_ON_PRIOR_RESULTS": "NONE (cost anchor, <=2s block and NO_ALPHA verdict unchanged)",
+ "safety": {
+  "ORDER_SEND": 0, "CALIBRATION": 0, "FORWARD": "NO", "LIVE": "NO", "EXPANSION": "LOCKED",
+  "V1": "UNTOUCHED", "V2": "UNTOUCHED", "OPENCLAW": "UNTOUCHED",
+  "MT5_INSTANCE_COUNT": 3, "MT5_ISOLATION": "PASS",
+  "ALPHA_SEARCH": "OFF", "MODEL_SEARCH": "OFF", "FEATURE_MINING": "OFF"
+ },
+ "WAIT_FOR_CHATGPT_FINAL_AUDIT": true
+}
