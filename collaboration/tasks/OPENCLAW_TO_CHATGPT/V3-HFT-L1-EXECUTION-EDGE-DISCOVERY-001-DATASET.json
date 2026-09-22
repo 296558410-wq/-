@@ -1,0 +1,23 @@
+{
+ "schema": "v3_l1_edge_dataset_manifest/1",
+ "SNAPSHOT_ID": "V3-SNAP-20260922T025312Z",
+ "DATA_MANIFEST_SHA256": "a036a808d5d924a7a99c5941919971ff00ce9e28c804e8e91860b6ffd7fa61b5",
+ "file_count": 36,
+ "row_count": 7285000,
+ "grid_points": 4239246,
+ "median_inter_tick_ms": 266.0,
+ "ts_min": "2026-08-04T01:05:00.093Z",
+ "ts_max": "2026-09-22T02:39:05.572Z",
+ "cost_bp": 0.914,
+ "source": "immutable snapshot only (live_fxtm never read)",
+ "folds": {
+  "train": 1728000,
+  "val": 1209600,
+  "test": 1296001
+ },
+ "fold_definition": {
+  "train": "2026-08-04..2026-08-21",
+  "val": "2026-08-24..2026-09-04",
+  "test": "2026-09-07..2026-09-21"
+ }
+}

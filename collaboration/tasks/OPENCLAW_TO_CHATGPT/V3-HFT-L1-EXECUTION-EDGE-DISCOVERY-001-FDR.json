@@ -1,0 +1,3150 @@
+{
+ "schema": "v3_l1_edge_fdr/1",
+ "method": "Benjamini-Hochberg",
+ "q": 0.05,
+ "family": "all family x horizon x model VAL screen tests",
+ "total_tests": 196,
+ "valid_tests": 35,
+ "insufficient_tests": 161,
+ "significant_tests": 35,
+ "insufficient_definition": "effective_n < 500 or n_trades < 100",
+ "interpretation": "insufficient != failed. 0 significant would be reported as '0/N valid survived FDR, M/N statistically insufficient'.",
+ "screen_rows": [
+  {
+   "family": "PRICE",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 864,
+    "effective_n": 45,
+    "mean_bp": -1.030137938986697,
+    "median_bp": -0.6256000813349518,
+    "gross_mean_bp": -0.14563427079165114,
+    "win_rate": 0.41782407407407407
+   },
+   "val_p": 0.942658393852264,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 750,
+    "effective_n": 39,
+    "mean_bp": -1.0585134893324957,
+    "median_bp": -0.587646095519984,
+    "gross_mean_bp": -0.17568257818360627,
+    "win_rate": 0.42
+   },
+   "val_p": 0.36885072507735733,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 21,
+    "effective_n": 1,
+    "mean_bp": -4.216635740164226,
+    "median_bp": 0.05407766726508634,
+    "gross_mean_bp": -3.333014527856988,
+    "win_rate": 0.5238095238095238
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 397,
+    "effective_n": 21,
+    "mean_bp": -1.6183033528021211,
+    "median_bp": -0.7096222958394219,
+    "gross_mean_bp": -0.7338250044389804,
+    "win_rate": 0.380352644836272
+   },
+   "val_p": 0.19625381141651893,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 299,
+    "effective_n": 15,
+    "mean_bp": -1.7969696669634028,
+    "median_bp": -0.6775682833214125,
+    "gross_mean_bp": -0.9153985632558925,
+    "win_rate": 0.39464882943143814
+   },
+   "val_p": 0.2668791653400532,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 30,
+    "effective_n": 1,
+    "mean_bp": -2.7494850007528404,
+    "median_bp": 0.5705658617888105,
+    "gross_mean_bp": -1.861518185910976,
+    "win_rate": 0.5666666666666667
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 155,
+    "effective_n": 8,
+    "mean_bp": -1.629070206079868,
+    "median_bp": -0.8124126685870395,
+    "gross_mean_bp": -0.7472668124138279,
+    "win_rate": 0.36129032258064514
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 93,
+    "effective_n": 4,
+    "mean_bp": -2.142309459272197,
+    "median_bp": -0.7959783277149336,
+    "gross_mean_bp": -1.2639424477322159,
+    "win_rate": 0.3655913978494624
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 47,
+    "effective_n": 2,
+    "mean_bp": 1.1264793365964303,
+    "median_bp": -1.4929860548916574,
+    "gross_mean_bp": 2.012682229884761,
+    "win_rate": 0.2765957446808511
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 79,
+    "effective_n": 4,
+    "mean_bp": -1.2920653502638888,
+    "median_bp": -1.3409227802803947,
+    "gross_mean_bp": -0.4164446450340862,
+    "win_rate": 0.20253164556962025
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 6,
+    "effective_n": 0,
+    "mean_bp": -44.85032503946207,
+    "median_bp": -52.114368353088494,
+    "gross_mean_bp": -43.948498851139924,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 6,
+    "effective_n": 0,
+    "mean_bp": -44.85032503946207,
+    "median_bp": -52.114368353088494,
+    "gross_mean_bp": -43.948498851139924,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 39,
+    "effective_n": 2,
+    "mean_bp": -5.6673212706885625,
+    "median_bp": -1.183826386887071,
+    "gross_mean_bp": -4.784566891114681,
+    "win_rate": 0.358974358974359
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1,
+    "effective_n": 0,
+    "mean_bp": 0.2277842372841259,
+    "median_bp": 0.2277842372841259,
+    "gross_mean_bp": 1.095366275299402,
+    "win_rate": 1.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1,
+    "effective_n": 0,
+    "mean_bp": 0.2277842372841259,
+    "median_bp": 0.2277842372841259,
+    "gross_mean_bp": 1.095366275299402,
+    "win_rate": 1.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 148,
+    "effective_n": 7,
+    "mean_bp": -1.0861422279551594,
+    "median_bp": -0.6593768958518431,
+    "gross_mean_bp": -0.19741622898095298,
+    "win_rate": 0.47297297297297297
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 5000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80471,
+    "effective_n": 4281,
+    "mean_bp": -1.2276225910352756,
+    "median_bp": -1.277956844819684,
+    "gross_mean_bp": -0.341278735865334,
+    "win_rate": 0.15000434939294902
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 5000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 5000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 5000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 3,
+    "effective_n": 0,
+    "mean_bp": -0.3942674040247633,
+    "median_bp": -0.5570884643899142,
+    "gross_mean_bp": 0.4648612544444471,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 924,
+    "effective_n": 24,
+    "mean_bp": -1.268221769056193,
+    "median_bp": -0.632974547295646,
+    "gross_mean_bp": -0.3836024987059296,
+    "win_rate": 0.4231601731601732
+   },
+   "val_p": 0.34599093451023805,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1777,
+    "effective_n": 47,
+    "mean_bp": -1.2412314760165277,
+    "median_bp": -0.7962398346982837,
+    "gross_mean_bp": -0.35698087710922316,
+    "win_rate": 0.38773213280810354
+   },
+   "val_p": 0.23340352182626065,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 32,
+    "effective_n": 0,
+    "mean_bp": -12.29444945137573,
+    "median_bp": -4.942573779441281,
+    "gross_mean_bp": -11.404951205844988,
+    "win_rate": 0.40625
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 457,
+    "effective_n": 12,
+    "mean_bp": -2.012042816157627,
+    "median_bp": -0.8980190812373059,
+    "gross_mean_bp": -1.1268862429073063,
+    "win_rate": 0.36542669584245074
+   },
+   "val_p": 0.6060187539523161,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1173,
+    "effective_n": 31,
+    "mean_bp": -1.2777599859042788,
+    "median_bp": -0.8877414474798626,
+    "gross_mean_bp": -0.3935043974590271,
+    "win_rate": 0.36658141517476556
+   },
+   "val_p": 0.08835710018881837,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 94,
+    "effective_n": 2,
+    "mean_bp": -2.5155688158138925,
+    "median_bp": 0.27543172854624326,
+    "gross_mean_bp": -1.6287530414997726,
+    "win_rate": 0.5319148936170213
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 170,
+    "effective_n": 4,
+    "mean_bp": -2.203736691183744,
+    "median_bp": -0.8043997788897381,
+    "gross_mean_bp": -1.3207572663715648,
+    "win_rate": 0.37058823529411766
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 430,
+    "effective_n": 11,
+    "mean_bp": -1.3693322679011763,
+    "median_bp": -0.7201096153417992,
+    "gross_mean_bp": -0.4863871269014411,
+    "win_rate": 0.3627906976744186
+   },
+   "val_p": 0.6701921569386717,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 72,
+    "effective_n": 1,
+    "mean_bp": -4.496001224711566,
+    "median_bp": -1.4474250660900654,
+    "gross_mean_bp": -3.608233248345295,
+    "win_rate": 0.3472222222222222
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 2,
+    "effective_n": 0,
+    "mean_bp": -1.5126132402479282,
+    "median_bp": -1.5126132402479282,
+    "gross_mean_bp": -0.6544223160518099,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 111,
+    "effective_n": 2,
+    "mean_bp": 0.2130250705093074,
+    "median_bp": -1.211199891850581,
+    "gross_mean_bp": 1.1012151818549842,
+    "win_rate": 0.38738738738738737
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 8,
+    "effective_n": 0,
+    "mean_bp": -67.22140139591939,
+    "median_bp": -79.01427639202113,
+    "gross_mean_bp": -66.31980190596491,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 8,
+    "effective_n": 0,
+    "mean_bp": -67.22140139591939,
+    "median_bp": -79.01427639202113,
+    "gross_mean_bp": -66.31980190596491,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 462,
+    "effective_n": 12,
+    "mean_bp": -1.7182017313023363,
+    "median_bp": -1.1625688435555266,
+    "gross_mean_bp": -0.8265686562829273,
+    "win_rate": 0.3961038961038961
+   },
+   "val_p": 0.3854851600000847,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 6,
+    "effective_n": 0,
+    "mean_bp": 2.632531748913087,
+    "median_bp": 5.4779608137541524,
+    "gross_mean_bp": 3.524314848811848,
+    "win_rate": 0.6666666666666666
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 31,
+    "effective_n": 0,
+    "mean_bp": 0.1509731150207782,
+    "median_bp": 1.9938819928487406,
+    "gross_mean_bp": 1.039993901010406,
+    "win_rate": 0.5483870967741935
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 10000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80467,
+    "effective_n": 2140,
+    "mean_bp": -1.2294866017105524,
+    "median_bp": -1.2841285690490933,
+    "gross_mean_bp": -0.34314312628777566,
+    "win_rate": 0.20684255657598768
+   },
+   "val_p": 1.9769687865260216e-92,
+   "q_value": 2.4712109831575268e-92,
+   "reject_fdr": true
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 10000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 10000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 10000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 3,
+    "effective_n": 0,
+    "mean_bp": 0.6707854723923629,
+    "median_bp": 1.0284344260626481,
+    "gross_mean_bp": 1.5299141308615731,
+    "win_rate": 0.6666666666666666
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1305,
+    "effective_n": 11,
+    "mean_bp": -0.20764700413714435,
+    "median_bp": -0.4407876400772151,
+    "gross_mean_bp": 0.677110430521209,
+    "win_rate": 0.4689655172413793
+   },
+   "val_p": 0.07952176350203193,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 3222,
+    "effective_n": 28,
+    "mean_bp": -0.6016880613815749,
+    "median_bp": -0.6548628779265804,
+    "gross_mean_bp": 0.28338420550421883,
+    "win_rate": 0.4382371198013656
+   },
+   "val_p": 0.46713035301465744,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 87,
+    "effective_n": 0,
+    "mean_bp": 3.8416134437785305,
+    "median_bp": 5.703007851091832,
+    "gross_mean_bp": 4.7268326674117835,
+    "win_rate": 0.6781609195402298
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 711,
+    "effective_n": 6,
+    "mean_bp": -0.30270250666272275,
+    "median_bp": -0.7347525920963327,
+    "gross_mean_bp": 0.582143857051107,
+    "win_rate": 0.4388185654008439
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 2695,
+    "effective_n": 23,
+    "mean_bp": -0.5429684323482807,
+    "median_bp": -0.6900952196196728,
+    "gross_mean_bp": 0.34261345360622875,
+    "win_rate": 0.4371057513914657
+   },
+   "val_p": 0.22796386493713813,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 64,
+    "effective_n": 0,
+    "mean_bp": 1.0498483409624946,
+    "median_bp": -0.20098463258670723,
+    "gross_mean_bp": 1.9385331530385623,
+    "win_rate": 0.484375
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 226,
+    "effective_n": 2,
+    "mean_bp": -0.7253940990335651,
+    "median_bp": -0.19771310636013412,
+    "gross_mean_bp": 0.15845970569681986,
+    "win_rate": 0.47345132743362833
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1209,
+    "effective_n": 10,
+    "mean_bp": -0.5632287311021994,
+    "median_bp": -0.8821964279510025,
+    "gross_mean_bp": 0.3214135228707187,
+    "win_rate": 0.40694789081885857
+   },
+   "val_p": 0.7453222466953352,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 576,
+    "effective_n": 5,
+    "mean_bp": -1.2948292575201803,
+    "median_bp": -0.9621889005132636,
+    "gross_mean_bp": -0.40662984866776497,
+    "win_rate": 0.4322916666666667
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 164,
+    "effective_n": 1,
+    "mean_bp": 5.798963121999746,
+    "median_bp": -2.1412220618782047,
+    "gross_mean_bp": 6.6828930255836525,
+    "win_rate": 0.3780487804878049
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 117,
+    "effective_n": 1,
+    "mean_bp": -0.5597928554199486,
+    "median_bp": 0.5562775092018006,
+    "gross_mean_bp": 0.340384704448637,
+    "win_rate": 0.5299145299145299
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 97,
+    "effective_n": 0,
+    "mean_bp": -1.9522009195499728,
+    "median_bp": -0.8146316828952144,
+    "gross_mean_bp": -1.0595200455963998,
+    "win_rate": 0.41237113402061853
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 45,
+    "effective_n": 0,
+    "mean_bp": -7.65445512140185,
+    "median_bp": -0.8146316828952144,
+    "gross_mean_bp": -6.7683399757089795,
+    "win_rate": 0.4
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 839,
+    "effective_n": 7,
+    "mean_bp": -2.212438203761667,
+    "median_bp": -1.0823745327813818,
+    "gross_mean_bp": -1.3209110964992898,
+    "win_rate": 0.4433849821215733
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 24,
+    "effective_n": 0,
+    "mean_bp": 1.3717792348723237,
+    "median_bp": -1.528712813148971,
+    "gross_mean_bp": 2.2596854092703778,
+    "win_rate": 0.4583333333333333
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 1942,
+    "effective_n": 17,
+    "mean_bp": -1.76433425938168,
+    "median_bp": -1.0905520915535938,
+    "gross_mean_bp": -0.8789608316697921,
+    "win_rate": 0.43048403707518024
+   },
+   "val_p": 0.2415288948771084,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 30000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80449,
+    "effective_n": 713,
+    "mean_bp": -1.257058592955484,
+    "median_bp": -1.2926170213622088,
+    "gross_mean_bp": -0.37071835896109445,
+    "win_rate": 0.30037663612972193
+   },
+   "val_p": 8.764109953197908e-14,
+   "q_value": 8.764109953197908e-14,
+   "reject_fdr": true
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 30000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 30000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 30000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 3,
+    "effective_n": 0,
+    "mean_bp": 1.512463583789956,
+    "median_bp": 1.3498242011533041,
+    "gross_mean_bp": 2.371592242259166,
+    "win_rate": 1.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1009,
+    "effective_n": 4,
+    "mean_bp": -0.043866756835074495,
+    "median_bp": -0.33594771184145333,
+    "gross_mean_bp": 0.8407822399973586,
+    "win_rate": 0.48166501486620417
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 3177,
+    "effective_n": 14,
+    "mean_bp": -0.5961121365898762,
+    "median_bp": -0.7132604023864705,
+    "gross_mean_bp": 0.28905879526777556,
+    "win_rate": 0.45514636449480644
+   },
+   "val_p": 0.8066038170178642,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 87,
+    "effective_n": 0,
+    "mean_bp": 0.18381697732637786,
+    "median_bp": 5.5229873582688604,
+    "gross_mean_bp": 1.0690362009596317,
+    "win_rate": 0.632183908045977
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 487,
+    "effective_n": 2,
+    "mean_bp": -0.06309229086295905,
+    "median_bp": -0.5601567775007377,
+    "gross_mean_bp": 0.82179571346918,
+    "win_rate": 0.4702258726899384
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 2667,
+    "effective_n": 11,
+    "mean_bp": -0.6285452123864256,
+    "median_bp": -0.7396710428006995,
+    "gross_mean_bp": 0.2571610955056132,
+    "win_rate": 0.4499437570303712
+   },
+   "val_p": 0.6793302816756792,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 77,
+    "effective_n": 0,
+    "mean_bp": 5.621073267327771,
+    "median_bp": 2.9653151475028925,
+    "gross_mean_bp": 6.509001155376569,
+    "win_rate": 0.5584415584415584
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 165,
+    "effective_n": 0,
+    "mean_bp": -0.0007717259681917519,
+    "median_bp": 0.3015481445670204,
+    "gross_mean_bp": 0.8814227714900169,
+    "win_rate": 0.5212121212121212
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1275,
+    "effective_n": 5,
+    "mean_bp": -0.3836036258325684,
+    "median_bp": -0.7190021597233613,
+    "gross_mean_bp": 0.5013584707766963,
+    "win_rate": 0.43529411764705883
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 369,
+    "effective_n": 1,
+    "mean_bp": -3.1620643803628723,
+    "median_bp": -2.846441292114622,
+    "gross_mean_bp": -2.273685065375614,
+    "win_rate": 0.3794037940379404
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 227,
+    "effective_n": 1,
+    "mean_bp": 6.462193299596878,
+    "median_bp": -1.4274685727768857,
+    "gross_mean_bp": 7.345590803503117,
+    "win_rate": 0.3744493392070485
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 710,
+    "effective_n": 3,
+    "mean_bp": -2.4663288284039777,
+    "median_bp": -1.9813047142104212,
+    "gross_mean_bp": -1.5744287905622798,
+    "win_rate": 0.2591549295774648
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 267,
+    "effective_n": 1,
+    "mean_bp": -2.3797660688310422,
+    "median_bp": 0.443319846409013,
+    "gross_mean_bp": -1.495271006446332,
+    "win_rate": 0.5243445692883895
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 58,
+    "effective_n": 0,
+    "mean_bp": -8.477317058472362,
+    "median_bp": 0.8738821103979149,
+    "gross_mean_bp": -7.589980925810971,
+    "win_rate": 0.603448275862069
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 673,
+    "effective_n": 2,
+    "mean_bp": -3.4415455524329297,
+    "median_bp": -2.910229991885678,
+    "gross_mean_bp": -2.550759227234783,
+    "win_rate": 0.4457652303120357
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 19,
+    "effective_n": 0,
+    "mean_bp": -5.655265632564892,
+    "median_bp": -9.207272362707604,
+    "gross_mean_bp": -4.767071706713408,
+    "win_rate": 0.42105263157894735
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 28,
+    "effective_n": 0,
+    "mean_bp": 0.7174935687504517,
+    "median_bp": 1.6090949064151854,
+    "gross_mean_bp": 1.6035062660212762,
+    "win_rate": 0.5357142857142857
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 1842,
+    "effective_n": 8,
+    "mean_bp": -3.094802819077027,
+    "median_bp": -1.6447989007651727,
+    "gross_mean_bp": -2.2093380449725055,
+    "win_rate": 0.4223669923995657
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 60000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80428,
+    "effective_n": 356,
+    "mean_bp": -1.2377708083780328,
+    "median_bp": -1.2962199670940033,
+    "gross_mean_bp": -0.3514347286556916,
+    "win_rate": 0.3520167105982991
+   },
+   "val_p": 5.1901863362007723e-08,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 60000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 60000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 60000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 52,
+    "effective_n": 0,
+    "mean_bp": -0.9255407518941199,
+    "median_bp": -1.0633759524944455,
+    "gross_mean_bp": -0.04267319005254476,
+    "win_rate": 0.38461538461538464
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1624,
+    "effective_n": 1,
+    "mean_bp": -2.024962445124618,
+    "median_bp": -0.09263115981220943,
+    "gross_mean_bp": -1.1393530985931115,
+    "win_rate": 0.4981527093596059
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 1686,
+    "effective_n": 1,
+    "mean_bp": -0.3171501020015094,
+    "median_bp": -0.1146801550855201,
+    "gross_mean_bp": 0.5680936272903327,
+    "win_rate": 0.4970344009489917
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 1235,
+    "effective_n": 1,
+    "mean_bp": -7.586718347827677,
+    "median_bp": -0.9574759483081452,
+    "gross_mean_bp": -6.699596116853475,
+    "win_rate": 0.47935222672064776
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 619,
+    "effective_n": 0,
+    "mean_bp": -3.615492497585765,
+    "median_bp": -1.2685695940345851,
+    "gross_mean_bp": -2.7304000110120628,
+    "win_rate": 0.47334410339256866
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 930,
+    "effective_n": 0,
+    "mean_bp": 0.7852451664899569,
+    "median_bp": 0.0007394422227743891,
+    "gross_mean_bp": 1.670659942226511,
+    "win_rate": 0.5
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 640,
+    "effective_n": 0,
+    "mean_bp": -3.851063388136109,
+    "median_bp": -0.2943542900053157,
+    "gross_mean_bp": -2.96250713238136,
+    "win_rate": 0.4953125
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 320,
+    "effective_n": 0,
+    "mean_bp": -3.0680314257260464,
+    "median_bp": -0.24323795261995512,
+    "gross_mean_bp": -2.183691068481431,
+    "win_rate": 0.5
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 466,
+    "effective_n": 0,
+    "mean_bp": 0.35742020637046823,
+    "median_bp": 0.6202046497965488,
+    "gross_mean_bp": 1.2428646302578084,
+    "win_rate": 0.5171673819742489
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 5988,
+    "effective_n": 5,
+    "mean_bp": -2.874614228287482,
+    "median_bp": -1.846457287541173,
+    "gross_mean_bp": -1.986349931510872,
+    "win_rate": 0.4288577154308617
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 282,
+    "effective_n": 0,
+    "mean_bp": 22.372678339900155,
+    "median_bp": 0.3081508666366612,
+    "gross_mean_bp": 23.254943927972754,
+    "win_rate": 0.5070921985815603
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 421,
+    "effective_n": 0,
+    "mean_bp": 16.370041624392126,
+    "median_bp": -0.6387737771605476,
+    "gross_mean_bp": 17.249879053162626,
+    "win_rate": 0.47980997624703087
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 71914,
+    "effective_n": 63,
+    "mean_bp": -1.8684976549559174,
+    "median_bp": -1.493761170708185,
+    "gross_mean_bp": -0.979916778042226,
+    "win_rate": 0.42695441777678894
+   },
+   "val_p": 0.20488542296394185,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 14963,
+    "effective_n": 13,
+    "mean_bp": -3.733579101635485,
+    "median_bp": -1.7182432018244498,
+    "gross_mean_bp": -2.8460990857765456,
+    "win_rate": 0.4514469023591526
+   },
+   "val_p": 0.799599769549056,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 437,
+    "effective_n": 0,
+    "mean_bp": -16.338782176117107,
+    "median_bp": 0.03256007646818038,
+    "gross_mean_bp": -15.450875941554704,
+    "win_rate": 0.5011441647597255
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 4439,
+    "effective_n": 3,
+    "mean_bp": -5.200219651582225,
+    "median_bp": -0.05568895875607183,
+    "gross_mean_bp": -4.311873445600432,
+    "win_rate": 0.4980851543140347
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1932,
+    "effective_n": 1,
+    "mean_bp": -9.151977773851813,
+    "median_bp": -2.374898007340973,
+    "gross_mean_bp": -8.266761934695177,
+    "win_rate": 0.44306418219461696
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 224,
+    "effective_n": 0,
+    "mean_bp": -24.18346503095855,
+    "median_bp": -11.099525674380413,
+    "gross_mean_bp": -23.29381659257595,
+    "win_rate": 0.40625
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 28803,
+    "effective_n": 25,
+    "mean_bp": -2.6827128530058313,
+    "median_bp": -1.6517409453325465,
+    "gross_mean_bp": -1.8108508137150094,
+    "win_rate": 0.4363781550532931
+   },
+   "val_p": 0.8614308011590608,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 300000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80195,
+    "effective_n": 71,
+    "mean_bp": -1.2746547288614483,
+    "median_bp": -1.280983113809178,
+    "gross_mean_bp": -0.38834617796451304,
+    "win_rate": 0.4311615437371407
+   },
+   "val_p": 0.19345271179641965,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 300000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 300000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 300000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 12,
+    "effective_n": 0,
+    "mean_bp": -6.746497507609771,
+    "median_bp": -4.582071818061931,
+    "gross_mean_bp": -5.879117447027533,
+    "win_rate": 0.3333333333333333
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 435,
+    "effective_n": 115,
+    "mean_bp": -1.440779177481333,
+    "median_bp": -1.102264040237517,
+    "gross_mean_bp": -0.5555418877051905,
+    "win_rate": 0.24367816091954023
+   },
+   "val_p": 0.00011471467154817564,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 26,
+    "effective_n": 6,
+    "mean_bp": 1.1824042262168346,
+    "median_bp": -0.20781824733359316,
+    "gross_mean_bp": 2.0745348348885364,
+    "win_rate": 0.46153846153846156
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 130,
+    "effective_n": 34,
+    "mean_bp": -1.6812938012290948,
+    "median_bp": -1.30557713820195,
+    "gross_mean_bp": -0.797423635025952,
+    "win_rate": 0.2076923076923077
+   },
+   "val_p": 0.0011355115292699016,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 2,
+    "effective_n": 0,
+    "mean_bp": 1.1710085543257374,
+    "median_bp": 1.1710085543257374,
+    "gross_mean_bp": 2.0725978913990706,
+    "win_rate": 0.5
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 44,
+    "effective_n": 11,
+    "mean_bp": -1.2742715167790941,
+    "median_bp": -0.9559302779420142,
+    "gross_mean_bp": -0.3899843485727997,
+    "win_rate": 0.29545454545454547
+   },
+   "val_p": 0.0534795774840158,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 11,
+    "effective_n": 2,
+    "mean_bp": -1.2780278873682416,
+    "median_bp": -1.3832986653387382,
+    "gross_mean_bp": -0.38346452867322234,
+    "win_rate": 0.18181818181818182
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 13,
+    "effective_n": 3,
+    "mean_bp": 0.6920569479818627,
+    "median_bp": 0.8304802755787568,
+    "gross_mean_bp": 1.5686997940438874,
+    "win_rate": 0.6153846153846154
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 128,
+    "effective_n": 34,
+    "mean_bp": -1.9336864199723034,
+    "median_bp": -1.1839347047498132,
+    "gross_mean_bp": -1.0429477788346895,
+    "win_rate": 0.171875
+   },
+   "val_p": 0.006221702344326831,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 64,
+    "effective_n": 17,
+    "mean_bp": -0.9720666303740236,
+    "median_bp": -1.5024808913699257,
+    "gross_mean_bp": -0.08381473087594599,
+    "win_rate": 0.21875
+   },
+   "val_p": 0.3590769824668511,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 1000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 21406,
+    "mean_bp": -1.1767133362592421,
+    "median_bp": -1.172272156619493,
+    "gross_mean_bp": -0.2903692381462912,
+    "win_rate": 0.05550861147699878
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 1000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 1000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 1000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 3,
+    "effective_n": 0,
+    "mean_bp": -1.0239575032893864,
+    "median_bp": -1.1006311131799924,
+    "gross_mean_bp": -0.164828844820176,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 654,
+    "effective_n": 86,
+    "mean_bp": -0.994595830543245,
+    "median_bp": -0.8917423418723478,
+    "gross_mean_bp": -0.10962498999505325,
+    "win_rate": 0.3440366972477064
+   },
+   "val_p": 0.6478743592705172,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "PRICE",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 48,
+    "effective_n": 6,
+    "mean_bp": -0.47474234365991985,
+    "median_bp": 0.1674279681333315,
+    "gross_mean_bp": 0.41315374711652963,
+    "win_rate": 0.5208333333333334
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 301,
+    "effective_n": 40,
+    "mean_bp": -1.4870644852441224,
+    "median_bp": -0.9449064486910146,
+    "gross_mean_bp": -0.6026019140609821,
+    "win_rate": 0.3089700996677741
+   },
+   "val_p": 0.05033040551634896,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "MOMENTUM",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 2,
+    "effective_n": 0,
+    "mean_bp": -1.7494003777906997,
+    "median_bp": -1.7494003777906997,
+    "gross_mean_bp": -0.8478110407173656,
+    "win_rate": 0.5
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 97,
+    "effective_n": 12,
+    "mean_bp": -1.6634408736053417,
+    "median_bp": -0.8820292029872336,
+    "gross_mean_bp": -0.7810670468467029,
+    "win_rate": 0.25773195876288657
+   },
+   "val_p": 0.11794876598857364,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "REVERSAL",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 12,
+    "effective_n": 1,
+    "mean_bp": -0.8252011283315136,
+    "median_bp": -1.5331928038781355,
+    "gross_mean_bp": 0.07133281779850235,
+    "win_rate": 0.25
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "SPREAD",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 13,
+    "effective_n": 1,
+    "mean_bp": 0.566923904646848,
+    "median_bp": -0.2909189930447159,
+    "gross_mean_bp": 1.443566750708873,
+    "win_rate": 0.46153846153846156
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 1,
+    "effective_n": 0,
+    "mean_bp": -10.72568934175263,
+    "median_bp": -10.72568934175263,
+    "gross_mean_bp": -9.824333702871753,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "VOLATILITY",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 57,
+    "effective_n": 7,
+    "mean_bp": -4.099811064462662,
+    "median_bp": -1.6615988225564318,
+    "gross_mean_bp": -3.21018156876199,
+    "win_rate": 0.17543859649122806
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "QUOTE",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 20,
+    "effective_n": 2,
+    "mean_bp": -0.12900746217648681,
+    "median_bp": 0.46380254783379976,
+    "gross_mean_bp": 0.7624353297705311,
+    "win_rate": 0.55
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 2000,
+   "model": "naive_momentum",
+   "val": {
+    "n_trades": 80474,
+    "effective_n": 10703,
+    "mean_bp": -1.2203518420542216,
+    "median_bp": -1.2483589010182667,
+    "gross_mean_bp": -0.3340077439412705,
+    "win_rate": 0.0906752491487934
+   },
+   "val_p": 0.0,
+   "q_value": 0.0,
+   "reject_fdr": true
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 2000,
+   "model": "ridge",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 2000,
+   "model": "logistic",
+   "val": {
+    "n_trades": 0,
+    "effective_n": 0,
+    "mean_bp": null,
+    "median_bp": null,
+    "gross_mean_bp": null,
+    "win_rate": null
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  },
+  {
+   "family": "TICKFLOW_PROXY",
+   "horizon_ms": 2000,
+   "model": "tree_depth3",
+   "val": {
+    "n_trades": 3,
+    "effective_n": 0,
+    "mean_bp": -1.3036879192606396,
+    "median_bp": -1.349849909615221,
+    "gross_mean_bp": -0.44455926079142943,
+    "win_rate": 0.0
+   },
+   "val_p": null,
+   "q_value": null,
+   "reject_fdr": null
+  }
+ ]
+}

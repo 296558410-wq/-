@@ -1,0 +1,108 @@
+{
+  "schema": "v3_l1_execution_edge_plan/1",
+  "task": "V3-HFT-L1-EXECUTION-EDGE-DISCOVERY-001",
+  "created_utc": "2026-09-22T03:15:00Z",
+  "status": "IMMUTABLE — any change requires experiment_plan_v2.json; this file must not be overwritten",
+  "mode": "READ_ONLY / OFFLINE",
+  "research_question": "Does L1 quote dynamics predict a directional markout at 5s-5min, and does that gross edge survive the real round-trip cost, OOS, bootstrap and FDR?",
+  "DATA_SNAPSHOT_ID": "V3-SNAP-20260922T025312Z",
+  "DATA_MANIFEST_SHA256": "a036a808d5d924a7a99c5941919971ff00ce9e28c804e8e91860b6ffd7fa61b5",
+  "primary_dataset_rule": "read the immutable snapshot ONLY; live_fxtm must never be read by any experiment in this task",
+
+  "horizons_ms": [5000, 10000, 30000, 60000, 300000],
+  "horizons_reference_only_ms": [1000, 2000],
+  "horizon_note": "50ms/200ms/1s/2s are COST_BLOCKED and appear as REFERENCE_ONLY only; they are excluded from alpha selection",
+
+  "features": {
+    "max_features_per_family": 2,
+    "max_families": 7,
+    "pit_causal": true,
+    "families": {
+      "PRICE": ["mid_return_1s", "displacement_5s"],
+      "MOMENTUM": ["mom_3t", "mom_10t"],
+      "REVERSAL": ["rev_5t", "overshoot_z"],
+      "SPREAD": ["spread_bp", "spread_pctile_200t"],
+      "VOLATILITY": ["rv_50t", "absret_10t"],
+      "QUOTE": ["quote_update_rate_1s", "time_since_last_quote_s"],
+      "TICKFLOW_PROXY": ["tick_rule_proxy_20t", "tick_rule_proxy_50t"]
+    },
+    "forbidden": ["TRUE_OFI", "QUEUE_IMBALANCE", "REAL_MICROPICE", "ORDER_CANCEL_FLOW",
+                   "TRUE_TRADE_FLOW", "QUEUE_POSITION", "FILL_PROBABILITY"],
+    "windows_frozen": true
+  },
+
+  "labels": {
+    "MID_MARKOUT": "LONG: future_mid - entry_mid ; SHORT: entry_mid - future_mid",
+    "EXECUTION_MARKOUT": "LONG: future_mid - ask(t) ; SHORT: bid(t) - future_mid",
+    "NET_EDGE": "EXECUTION_MARKOUT - round_trip_cost_bp",
+    "sign_convention": "MARKOUT > 0 = favourable; AS = -EXECUTION_MARKOUT, AS > 0 = adverse",
+    "future_close_alone": "FORBIDDEN as the only label",
+    "censoring": "HORIZON_CENSORED samples excluded, never set to 0"
+  },
+
+  "cost": {
+    "COST_MODEL": "CALIBRATION_20RT_20260921",
+    "ROUND_TRIP_COST_USD": 0.40,
+    "ROUND_TRIP_COST_BP": 0.914,
+    "forbidden": "0.314bp (HISTORICAL_INVALID_FOR_CURRENT_RESEARCH)"
+  },
+
+  "train_period": ["2026-08-04", "2026-08-22"],
+  "validation_period": ["2026-08-24", "2026-09-05"],
+  "test_period": ["2026-09-07", "2026-09-22"],
+  "split_rule": "chronological by UTC day; NO random/shuffle split",
+  "purge": "== horizon (train samples whose forward window reaches VAL are dropped; likewise VAL->TEST)",
+  "embargo": "== horizon (carried by the same purge rule)",
+
+  "sample_grid_ms": 1000,
+  "sample_freshness_ms": 5000,
+
+  "minimum_trade_count": 100,
+  "minimum_effective_n": 500,
+  "minimum_regime_n": 500,
+
+  "models": ["naive_momentum", "ridge", "logistic", "tree_depth3"],
+  "forbidden_models": ["Transformer", "LSTM", "large MLP", "RL"],
+  "model_selection_fold": "VALIDATION only; TEST is evaluated once at the end",
+
+  "statistical_tests": {
+    "primary": "two-sided t-test on NON-OVERLAPPING net edges (iid t-test alone is forbidden)",
+    "secondary": "block bootstrap CI",
+    "effective_n_rule": "effective_n = n // max(1, round(rho)), rho = h / median_inter_tick_ms"
+  },
+  "bootstrap_method": {"type": "moving block bootstrap", "n_resamples": 2000,
+                        "block_length": "max(50, int(10*rho))", "ci": "percentile [2.5, 97.5]"},
+  "multiple_testing_method": {"method": "Benjamini-Hochberg", "fdr_q": 0.05,
+                               "family": "all feature-family x horizon x model screen tests on VAL",
+                               "reporting": "report total_tests, valid_tests, insufficient_tests, significant_tests separately"},
+
+  "cost_stress": {"multipliers": [1.0, 1.25, 1.5, 2.0],
+                   "usd_per_rt": [0.40, 0.50, 0.60, 0.80],
+                   "rule": "robustness only; features are NOT reselected after stress"},
+
+  "tail_analysis": {"report": ["top1pct_share", "top5pct_share", "top10pct_share"],
+                     "TAIL_DEPENDENT_if": "mean > 0 and median <= 0 and top10pct_share dominates"},
+
+  "regime_analysis": {"when": "AFTER the main experiment only",
+                       "dimensions": ["spread_regime", "volatility_regime", "quote_arrival_regime"],
+                       "max_dimensions": 3, "max_states_per_dimension": 3,
+                       "min_n": 500,
+                       "forbidden": "combinatorial regime mining"},
+
+  "alpha_acceptance_conditions": [
+    "1 gross edge > 0",
+    "2 net edge > 0",
+    "3 OOS net edge > 0",
+    "4 block bootstrap CI not entirely below 0",
+    "5 BH-FDR q <= 0.05",
+    "6 effective_N >= 500",
+    "7 not solely top1%/5% tail driven",
+    "8 still present after 1.25x cost stress",
+    "9 no future data",
+    "10 execution direction matches markout definition"
+  ],
+  "allowed_final_status": ["SUPPORTED_EXECUTABLE_EDGE", "PREDICTIVE_BUT_NOT_EXECUTABLE",
+                            "STATISTICALLY_UNCONFIRMED", "TAIL_DEPENDENT",
+                            "NO_SUPPORTED_L1_EDGE", "DATA_INSUFFICIENT"],
+  "forbidden_language": ["almost alpha", "promising", "looks good", "potentially profitable", "probably works"]
+}
