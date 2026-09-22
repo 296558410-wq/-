@@ -1,0 +1,342 @@
+{
+ "schema": "v3_parameter_registry/1",
+ "preregistration_id": "V3-HFT-PREREG-001",
+ "generated_utc": "2026-09-22T06:25:00Z",
+ "rule": "any TBD must be resolved before the task ends; unresolvable => MODEL_NOT_READY_FOR_EXPERIMENT",
+ "unresolved_tbd_count": 0,
+ "categories": [
+  "FIXED",
+  "ESTIMATED_ON_TRAIN",
+  "ESTIMATED_ON_DEVELOPMENT",
+  "NOT_ALLOWED_TO_ESTIMATE_ON_TEST"
+ ],
+ "parameters": [
+  {
+   "parameter_id": "P-001",
+   "model_id": "ALL",
+   "parameter_name": "PRIMARY_HORIZONS",
+   "value": [
+    5000,
+    10000,
+    30000,
+    60000,
+    300000
+   ],
+   "unit": "ms",
+   "source": "labels/HORIZON_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-002",
+   "model_id": "ALL",
+   "parameter_name": "REFERENCE_ONLY_HORIZONS",
+   "value": [
+    1000,
+    2000
+   ],
+   "unit": "ms",
+   "source": "labels/HORIZON_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-003",
+   "model_id": "ALL",
+   "parameter_name": "FORBIDDEN_HORIZONS",
+   "value": [
+    50,
+    200
+   ],
+   "unit": "ms",
+   "source": "labels/HORIZON_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-004",
+   "model_id": "ALL",
+   "parameter_name": "SAMPLE_GRID",
+   "value": 1000,
+   "unit": "ms",
+   "source": "data/DATA_SCHEMA.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-005",
+   "model_id": "ALL",
+   "parameter_name": "SAMPLE_FRESHNESS",
+   "value": 5000,
+   "unit": "ms",
+   "source": "data/DATA_SCHEMA.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-006",
+   "model_id": "ALL",
+   "parameter_name": "PURGE",
+   "value": 300000,
+   "unit": "ms",
+   "source": "oos/PURGE_EMBARGO_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-007",
+   "model_id": "ALL",
+   "parameter_name": "EMBARGO",
+   "value": 300000,
+   "unit": "ms",
+   "source": "oos/PURGE_EMBARGO_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-008",
+   "model_id": "ALL",
+   "parameter_name": "MIN_RAW_N",
+   "value": 500,
+   "unit": "observations",
+   "source": "statistics/POWER_PLAN.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-009",
+   "model_id": "ALL",
+   "parameter_name": "MIN_EFFECTIVE_N",
+   "value": {
+    "5000": 274,
+    "10000": 494,
+    "30000": 1439,
+    "60000": 2679,
+    "300000": 13069
+   },
+   "unit": "effective observations",
+   "source": "statistics/POWER_PLAN.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-010",
+   "model_id": "ALL",
+   "parameter_name": "COST_TIERS_USD",
+   "value": [
+    0.4,
+    0.5,
+    0.6,
+    0.8,
+    1.0
+   ],
+   "unit": "USD/RT",
+   "source": "cost/COST_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-011",
+   "model_id": "ALL",
+   "parameter_name": "COST_ANCHOR_BP",
+   "value": 0.914,
+   "unit": "bp",
+   "source": "cost/COST_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-012",
+   "model_id": "ALL",
+   "parameter_name": "FDR_METHOD_AND_Q",
+   "value": "BH q=0.05 (m=20)",
+   "unit": "-",
+   "source": "statistics/FDR_PLAN.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-013",
+   "model_id": "ALL",
+   "parameter_name": "BOOTSTRAP",
+   "value": "moving block, 2000 resamples, block=max(50,10*rho), seed 20260922",
+   "unit": "-",
+   "source": "statistics/BOOTSTRAP_PLAN.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-014",
+   "model_id": "ALL",
+   "parameter_name": "MIN_MARKOUT_HORIZON_MS",
+   "value": 500,
+   "unit": "ms",
+   "source": "labels/LABEL_DEFINITIONS.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-015",
+   "model_id": "ALL",
+   "parameter_name": "DECISION_MARGIN_RULE",
+   "value": "95% block-bootstrap CI half-width of expected net edge",
+   "unit": "bp",
+   "source": "protocol/CAND-001_PROTOCOL.md",
+   "category": "ESTIMATED_ON_TRAIN",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-016",
+   "model_id": "CAND-002",
+   "parameter_name": "STATE_FORM",
+   "value": "CONTINUOUS (COST_MULTIPLE)",
+   "unit": "-",
+   "source": "protocol/CAND-002_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-017",
+   "model_id": "CAND-002",
+   "parameter_name": "COST_MULTIPLE_THRESHOLD",
+   "value": 1.0,
+   "unit": "ratio",
+   "source": "cost identity (NOT data-derived)",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-018",
+   "model_id": "CAND-002",
+   "parameter_name": "EXPLORATORY_THRESHOLD",
+   "value": 0.5,
+   "unit": "ratio",
+   "source": "protocol/CAND-002_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-019",
+   "model_id": "CAND-002",
+   "parameter_name": "WINDOW_W_TICKS",
+   "value": 200,
+   "unit": "ticks",
+   "source": "protocol/CAND-002_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-020",
+   "model_id": "CAND-002",
+   "parameter_name": "WINDOW_WV_TICKS",
+   "value": 50,
+   "unit": "ticks",
+   "source": "protocol/CAND-002_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-021",
+   "model_id": "CAND-002",
+   "parameter_name": "EXPECTED_MOVE_ESTIMATOR",
+   "value": "median |move| on TRAIN, same horizon + session bucket",
+   "unit": "-",
+   "source": "protocol/CAND-002_PROTOCOL.md",
+   "category": "ESTIMATED_ON_TRAIN",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-022",
+   "model_id": "CAND-001",
+   "parameter_name": "MODEL_CLASS",
+   "value": [
+    "ridge",
+    "decision_tree(depth<=3)"
+   ],
+   "unit": "-",
+   "source": "protocol/CAND-001_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-023",
+   "model_id": "CAND-001",
+   "parameter_name": "RIDGE_ALPHA",
+   "value": 1.0,
+   "unit": "-",
+   "source": "protocol/CAND-001_PROTOCOL.md (fixed default, not searched)",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-024",
+   "model_id": "CAND-001",
+   "parameter_name": "TREE_MAX_DEPTH",
+   "value": 3,
+   "unit": "-",
+   "source": "protocol/CAND-001_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-025",
+   "model_id": "CAND-001",
+   "parameter_name": "ADVERSE_SELECTION_ESTIMATOR",
+   "value": "lagged PIT entry-cohort drift estimate",
+   "unit": "-",
+   "source": "protocol/CAND-001_PROTOCOL.md",
+   "category": "ESTIMATED_ON_TRAIN",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-026",
+   "model_id": "CAND-003",
+   "parameter_name": "DECAY_FORM",
+   "value": "exponential (MODEL_ASSUMPTION)",
+   "unit": "-",
+   "source": "protocol/CAND-003_PROTOCOL.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-027",
+   "model_id": "CAND-003",
+   "parameter_name": "LAMBDA",
+   "value": "log-linear OLS on the TRAIN markout curve",
+   "unit": "1/ms",
+   "source": "protocol/CAND-003_PROTOCOL.md",
+   "category": "ESTIMATED_ON_TRAIN",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-028",
+   "model_id": "CAND-003",
+   "parameter_name": "E0",
+   "value": "TRAIN markout curve intercept",
+   "unit": "bp",
+   "source": "protocol/CAND-003_PROTOCOL.md",
+   "category": "ESTIMATED_ON_TRAIN",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-029",
+   "model_id": "CAND-003",
+   "parameter_name": "EXIT_COST_MODEL",
+   "value": "one further spread crossing + commission",
+   "unit": "bp",
+   "source": "cost/COST_POLICY.md",
+   "category": "FIXED",
+   "frozen_before_data_view": true
+  },
+  {
+   "parameter_id": "P-030",
+   "model_id": "ALL",
+   "parameter_name": "ESTIMATE_ON_TEST",
+   "value": false,
+   "unit": "-",
+   "source": "oos/OOS_POLICY.md",
+   "category": "NOT_ALLOWED_TO_ESTIMATE_ON_TEST",
+   "frozen_before_data_view": true
+  }
+ ]
+}
