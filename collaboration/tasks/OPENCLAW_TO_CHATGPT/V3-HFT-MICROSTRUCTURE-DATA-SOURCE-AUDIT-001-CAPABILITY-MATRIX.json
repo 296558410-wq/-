@@ -1,0 +1,46 @@
+{
+ "schema": "v3_microstructure_data_capability_matrix/1",
+ "task": "V3-HFT-MICROSTRUCTURE-DATA-SOURCE-AUDIT-001",
+ "generated_utc": "2026-09-22T03:05:00Z",
+ "mode": "AUDIT_ONLY / READ-ONLY",
+ "allowed_labels": ["SUPPORTED", "PARTIAL", "DATA_GAP", "NOT_USABLE"],
+ "fxmt_v3_symbol": "XAUUSD",
+ "fxmt_v3_account": 160764551,
+ "evidence": [
+  "research/microstructure_source_audit/evidence/mt5_probe_result.json",
+  "research/microstructure_source_audit/evidence/mt5_bookdepth_probe.json",
+  "research/microstructure_source_audit/evidence/mt5_dom_wait_result.json",
+  "research/microstructure_source_audit/evidence/mt5_dom_rich_result.json",
+  "research/microstructure_source_audit/evidence/mt5_dom_authenticity_result.json"
+ ],
+ "matrix": {
+  "FXTM L1 Bid/Ask": "SUPPORTED",
+  "FXTM Bid Size": "PARTIAL",
+  "FXTM Ask Size": "PARTIAL",
+  "FXTM L2": "PARTIAL",
+  "FXTM Trade Flow": "DATA_GAP",
+  "FXTM Queue": "DATA_GAP",
+  "True OFI": "DATA_GAP",
+  "Microprice": "DATA_GAP",
+  "Fill Probability": "DATA_GAP",
+  "历史可得性 (historical depth)": "DATA_GAP",
+  "实时可得性 (realtime depth)": "SUPPORTED",
+  "时间戳质量 (timestamp quality)": "SUPPORTED",
+  "FXTM Execution Link": "SUPPORTED",
+  "数据授权 (license)": "PARTIAL"
+ },
+ "notes": {
+  "FXTM Bid Size": "10 levels are published via MT5 MarketBook, but the size ladder is a CONSTANT synthetic profile [100,400,500,4000,10000] mirrored on both sides (60/60 snapshots, symmetric_sum_fraction=1.0). Sizes are delivered but carry no genuine queue information -> PARTIAL, not SUPPORTED.",
+  "FXTM Ask Size": "same as bid size",
+  "FXTM L2": "10 levels realtime (ticks_bookdepth=10 declared, 10 observed). NOT order-by-order; NOT historical; prices move while sizes stay fixed.",
+  "FXTM Trade Flow": "tick last/volume/volume_real = 0 on all 3,733 ticks in the 30-min probe; session_deals/buy_orders/sell_orders/volume all 0 -> no trade tape.",
+  "True OFI": "needs genuine bid/ask sizes; available sizes are a constant ladder -> OFI_PROXY only.",
+  "Microprice": "with symmetric constant sizes microprice == mid -> no information.",
+  "Fill Probability": "no queue/order-level data; no historical DOM.",
+  "历史可得性": "MT5 Python API exposes no historical market depth function; MarketBook is live-only -> not replayable.",
+  "时间戳质量": "ticks carry time_msc (ms resolution), datetime64[ms,UTC] in the recorded parquet; unit declared via timestamp_unit_guard.",
+  "FXTM Execution Link": "the probe ran on the V3 calibration instance (account 160764551, magic 90004) i.e. the same environment that executes V3 orders.",
+  "数据授权": "broker demo feed; terms for redistribution/research use not verified -> PARTIAL."
+ },
+ "Q1_verdict": "FXTM receives NO traded sizes and NO trade tape; it DOES receive a realtime 10-level DOM whose sizes are a constant synthetic ladder. API-supports != actually-received, and both were checked separately."
+}
