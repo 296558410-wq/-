@@ -1,0 +1,173 @@
+{
+ "schema": "v3_github_distillation_registry/1",
+ "task": "V3-HFT-GITHUB-MICROSTRUCTURE-DISTILLATION-003",
+ "generated_utc": "2026-09-22T05:45:00Z",
+ "mechanisms": [
+  {
+   "MECHANISM_ID": "MECH-001",
+   "NAME": "Cost-multiple entry gate",
+   "SOURCE_REPOS": "A4",
+   "MECHANISM": "Take a trade only if StdDev(fuel) >= k1 * roundTripCost AND distanceToTarget >= k2 * roundTripCost (k1=3,k2=4).",
+   "WHY_IT_MATTERS": "makes marginal trades unprofitable by construction",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE (spread+commission known)",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-002",
+   "NAME": "Adaptive tick-window lookback",
+   "SOURCE_REPOS": "A1",
+   "MECHANISM": "Start at 30 ticks and EXPAND the window until it spans >= 1 second (cap 250) before computing velocity/acceleration.",
+   "WHY_IT_MATTERS": "fixes velocity maths that collapse when gold prints 100+ ticks/s at the NY open",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-003",
+   "NAME": "Rolling p90 spread + spike gate + spread/target ratio in the ranker",
+   "SOURCE_REPOS": "A1/A4",
+   "MECHANISM": "Use a rolling p90 spread, block entries on a spread SPIKE multiple, and carry spread/target cost as a scoring term.",
+   "WHY_IT_MATTERS": "cost becomes a first-class ranking feature, not a binary filter",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-004",
+   "NAME": "Cost-type-failure test (flat-payoff invariance)",
+   "SOURCE_REPOS": "A2",
+   "MECHANISM": "If per-trade expected payoff is flat across the whole parameter surface, the failure is cost, not alpha: stop.",
+   "WHY_IT_MATTERS": "cheapest possible kill-test for a promising-looking sweep",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-005",
+   "NAME": "Perold 4-term implementation shortfall incl. Opportunity on the UNFILLED fraction",
+   "SOURCE_REPOS": "C6/C8",
+   "MECHANISM": "IS = Spread + Impact + Fee + Opportunity, where Opportunity = max(0, adverse post-window drift) * UNFILLED fraction.",
+   "WHY_IT_MATTERS": "retail backtests silently book unfilled size at par (opportunity cost = 0)",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "PARTIAL (fills!)",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-006",
+   "NAME": "Spread-vs-edge pre-trade hurdle + mid-vs-touch asymmetry",
+   "SOURCE_REPOS": "C1/C3",
+   "MECHANISM": "Publish a per-symbol break-even move (cost hurdle); evaluate every signal at the TOUCH, never only at mid.",
+   "WHY_IT_MATTERS": "'inefficient at the mid, efficient at the touch' is a general law",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-007",
+   "NAME": "Reversion-ablation maker/taker classifier",
+   "SOURCE_REPOS": "C1",
+   "MECHANISM": "Drop the mean-reversion features; if IC collapses (0.473 -> 0.177), the edge belongs to the quoter, not the taker.",
+   "WHY_IT_MATTERS": "classifies whether your signal is a taker edge at all",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-008",
+   "NAME": "Purge + embargo + uniqueness + eligibility censoring + day-level AUC",
+   "SOURCE_REPOS": "C7/C1/B5",
+   "MECHANISM": "Chronological splits, purge/embargo by label window, sample-uniqueness weights, exclude unobservable outcomes, report per-day variability.",
+   "WHY_IT_MATTERS": "the standard anti-leakage/anti-inflation protocol",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-009",
+   "NAME": "Markout methodology (signed, multi-horizon, with equity)",
+   "SOURCE_REPOS": "B1/B4",
+   "MECHANISM": "Per fill: sell -> p - m(t+h); buy -> m(t+h) - p; report markout alongside equity and inventory, never instead.",
+   "WHY_IT_MATTERS": "equity can look fine while markout is negative (hidden toxicity)",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "PARTIAL (L1-based)",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-010",
+   "NAME": "FIFO qty_in_front + cancel model + size-aware fill label",
+   "SOURCE_REPOS": "B3/B5",
+   "MECHANISM": "queue_ahead tracked per order; label 'filled' iff cumulative volume at/through price >= queue_ahead + order_size.",
+   "WHY_IT_MATTERS": "the correct passive-fill formulation",
+   "TRANSFERABILITY": "C",
+   "FXTM_DATA_STATUS": "DATA_GAP (no real queue on FXTM)",
+   "STATUS": "PARKED"
+  },
+  {
+   "MECHANISM_ID": "MECH-011",
+   "NAME": "Intensity calibration + overfit ratio",
+   "SOURCE_REPOS": "B2",
+   "MECHANISM": "Fit log(fillRate) = logA - k*spread by OLS; gate every parameter set on OOS_Sharpe / IS_Sharpe.",
+   "WHY_IT_MATTERS": "turns a free parameter into a measured one; flags overfitting",
+   "TRANSFERABILITY": "C",
+   "FXTM_DATA_STATUS": "DATA_GAP (needs fills)",
+   "STATUS": "PARKED"
+  },
+  {
+   "MECHANISM_ID": "MECH-012",
+   "NAME": "Sensitivity parameter published as a first-class result",
+   "SOURCE_REPOS": "B3/B4",
+   "MECHANISM": "Publish the fill-model luck parameter (rho) sweep as an output, not as a hidden constant.",
+   "WHY_IT_MATTERS": "queue assumptions are the dominant unmodelled risk",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE (as a discipline)",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-013",
+   "NAME": "Detect whether your microstructure input is real before using it",
+   "SOURCE_REPOS": "A6/A1",
+   "MECHANISM": "Record has_trade_flags; validate DOM non-degeneracy (constant 50/50 or +-90 jitter = unusable) before it earns weight.",
+   "WHY_IT_MATTERS": "same conclusion reached from both the DOM and the tick side",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-014",
+   "NAME": "Real-tick-only acceptance + generated-vs-real honesty table",
+   "SOURCE_REPOS": "A2/A3",
+   "MECHANISM": "No tick-scale result is admissible unless it declares 100% real ticks; publish the generated-vs-real delta.",
+   "WHY_IT_MATTERS": "same build: generated PF 1.97 vs real 0.34 (5.8x overstatement)",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-015",
+   "NAME": "Init-time invariants, slippage abort, virtual-stop persistence, magic isolation",
+   "SOURCE_REPOS": "A2",
+   "MECHANISM": "Refuse to load on illegal parameter combinations; abort a fill worse than N pips; persist virtual SL/TP; scope every position scan by magic+symbol.",
+   "WHY_IT_MATTERS": "cheap, machine-checkable safety that killed a whole EA generation",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  },
+  {
+   "MECHANISM_ID": "MECH-016",
+   "NAME": "Avoid paying the spread twice: limit exit at the statistical mean",
+   "SOURCE_REPOS": "A4",
+   "MECHANISM": "Enter on the closed bar, exit with a server-side limit at the target so the exit does not cross the spread.",
+   "WHY_IT_MATTERS": "market-order exits pay the spread on both legs",
+   "TRANSFERABILITY": "B",
+   "FXTM_DATA_STATUS": "AVAILABLE",
+   "STATUS": "READY"
+  }
+ ],
+ "counts": {
+  "total": 16,
+  "READY": 14,
+  "PARKED": 2
+ },
+ "note": "no 'best'/'winner' ranking; mechanisms only"
+}

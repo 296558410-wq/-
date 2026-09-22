@@ -1,0 +1,137 @@
+{
+ "schema": "v3_negative_evidence_registry/1",
+ "task": "V3-HFT-GITHUB-MICROSTRUCTURE-DISTILLATION-003",
+ "generated_utc": "2026-09-22T05:45:00Z",
+ "purpose": "failure mechanisms are the highest-value distillation output; each entry states WHAT failed and WHY",
+ "sources": {
+  "internal": 6,
+  "github": 14
+ },
+ "internal": [
+  "V3-NEG-001 COST_ERASED_ALPHA",
+  "V3-NEG-002 TAIL_DEPENDENCE",
+  "V3-NEG-003 MECHANICAL_SIGNAL_ARTIFACT",
+  "V3-NEG-004 LABEL_IMPLEMENTATION_BUG",
+  "V3-NEG-005 SYNTHETIC_DATA_DEPENDENCE",
+  "V3-NEG-006 POWER_LIMITATION"
+ ],
+ "github": [
+  {
+   "id": "NEG-101",
+   "type": "COST_ERASED_ALPHA",
+   "source": "siddhantsingh-1/execution-aware-alpha-backtester",
+   "finding": "OOS IC 0.473; gross +$1,475,656; cost $13,111,643; net -$11,635,987; net Sharpe -0.733; edge 9.11bps vs 10.3bps round trip.",
+   "why": "the signal is inside-spread reversion: dropping reversion features collapses IC 0.473 -> 0.177 (maker's edge, not a taker's).",
+   "v3_action": "V3: publish a per-symbol cost hurdle and screen every candidate against it BEFORE any backtest."
+  },
+  {
+   "id": "NEG-102",
+   "type": "EXECUTION_FAILURE",
+   "source": "snowkings/QIP_adverse_selection",
+   "finding": "+0.29 tick mean signed midpoint move vs 1.08 tick entry+exit spread cost: negative at every valid delay and horizon (median -1.00 tick).",
+   "why": "the directional information is real but smaller than the cost of crossing to act on it.",
+   "v3_action": "V3: measure execution-state value inside the decision, not as a standalone crossing signal."
+  },
+  {
+   "id": "NEG-103",
+   "type": "COST_ERASED_ALPHA",
+   "source": "himagna16/kalshi-microstructure",
+   "finding": "round trip ~9-11c on a 40-50c contract (10.7c break-even); longshots bought at the ask lose 3.1c (t=-8.9); passive maker -$913 over 14,690 fills.",
+   "why": "inefficient at the mid, efficient at the touch.",
+   "v3_action": "V3: compute the break-even adverse move per symbol; test mid AND touch."
+  },
+  {
+   "id": "NEG-104",
+   "type": "QUEUE_ASSUMPTION_FAILURE",
+   "source": "KlishevDA/...+tfrmma/realistic-mm-backtester+xiaohany-cmu-S26/lob-fill-engine",
+   "finding": "passive fills depend on uncalibrated parameters: rho (fraction of a level drop assumed ahead of you), pro-rata cancel apportionment, queue_ahead estimand.",
+   "why": "the fraction of a level-size drop that was ahead of you is unidentifiable without ground-truth cancels/hidden orders.",
+   "v3_action": "V3: treat fills as a SENSITIVITY BAND and publish the sweep; never a point estimate."
+  },
+  {
+   "id": "NEG-105",
+   "type": "COST_TYPE_FAILURE",
+   "source": "NadirAliOfficial/snipe-fx-ea",
+   "finding": "36 real-tick parameter passes on XAUUSD M1 all land at expected payoff ~-0.31/trade (range -0.307462..-0.316822), PF 0.209-0.230, trades 1,049->5,073.",
+   "why": "filters change HOW MANY trades you take, never WHAT A TRADE IS WORTH => pure cost, no alpha to tune.",
+   "v3_action": "V3: adopt this as a mandatory acceptance test."
+  },
+  {
+   "id": "NEG-106",
+   "type": "SYNTHETIC_TICK_FAILURE",
+   "source": "NadirAliOfficial/snipe-fx-ea + trillex-10s-ea",
+   "finding": "same build/settings: generated ticks PF 1.97 / +252 vs real ticks PF 0.34 / -5,258; DD 0.13% vs 52.58% (5.8x).",
+   "why": "generated-tick backtests systematically overstate XAUUSD tick strategies.",
+   "v3_action": "V3: real-tick-only acceptance; publish the generated-vs-real delta."
+  },
+  {
+   "id": "NEG-107",
+   "type": "CLAIM_INFLATION",
+   "source": "diegourda/Statistical-Arb-MM",
+   "finding": "'reducing adverse selection by an estimated 30%' comes from OFIValidator: a z-score-only, engine-free, direction-only toy that defines AS as |realized loss| on synthetic data.",
+   "why": "the headline number is not markout, not passive, and not executed.",
+   "v3_action": "V3: verify every headline against the code that produced it; require a mechanism-matched metric."
+  },
+  {
+   "id": "NEG-108",
+   "type": "TAUTOLOGICAL_ADVERSE_SELECTION",
+   "source": "Leotaby/Market-Making-Simulator",
+   "finding": "AS is injected as a post-fill drift (informed_impact); the README states there is no real LOB, feed, queue or latency.",
+   "why": "if you generate the adverse move you have not measured toxicity.",
+   "v3_action": "V3: never accept an AS result from a simulator that injects the AS."
+  },
+  {
+   "id": "NEG-109",
+   "type": "FICTIONAL_FILL_MODEL",
+   "source": "Sandyyy123/xauusd-scalper-research",
+   "finding": "bar-touch fills at exact SL/TP, SL checked before TP, commission 0.0003 relative, slippage 0.0001 - and NO spread cost at all, on ~18-minute gold scalps.",
+   "why": "win rate is set by barrier geometry, not edge; the reported 77.3% / 4.43x return-DD is a simulator artifact.",
+   "v3_action": "V3: bar-level results must be re-run on ticks before any gold scalp claim."
+  },
+  {
+   "id": "NEG-110",
+   "type": "SYNTHETIC_DATA_DEPENDENCE",
+   "source": "RobertN1D/... + mahmoud20138/OrderFlow-Scalper",
+   "finding": "A1's own source: 'Most retail brokers serve a synthetic DOM derived from their B-book pool ... DISABLE on retail accounts.' A6 records has_trade_flags because MT5 forex usually lacks aggressor flags.",
+   "why": "retail MT5 gold order-flow inputs are inferred or synthetic.",
+   "v3_action": "V3: validate DOM non-degeneracy and flag availability before any microstructure feature earns weight."
+  },
+  {
+   "id": "NEG-111",
+   "type": "DATA_INTEGRITY_FAILURE",
+   "source": "gelatotrade/implementation-shortfall-hyperliquid + himagna16/kalshi-microstructure",
+   "finding": "cross-deployer namespace collision silently overwrote data; a collector printed '0 errors' while persisting nothing; a stale script 'reports a plausible number computed over in-sample and out-of-sample data pooled together'.",
+   "why": "provenance failures are silent and produce plausible numbers.",
+   "v3_action": "V3: hash-lock the IS/OOS split boundary and the cost schedule; assert the guard in CI."
+  },
+  {
+   "id": "NEG-112",
+   "type": "OVERLAP_FAILURE",
+   "source": "snowkings/QIP_adverse_selection + siddhantsingh-1/execution-aware-alpha-backtester",
+   "finding": "4,701 clustered trigger events with overlapping windows => no CI implied; overlapping labels require purging; overlapping rebalancing counts the same move H times.",
+   "why": "overlap inflates both PnL and turnover and invalidates naive t-stats.",
+   "v3_action": "V3: purge, embargo, de-overlap, cluster errors before quoting any statistic."
+  },
+  {
+   "id": "NEG-113",
+   "type": "NO_ALPHA_FOUND_IN_GROUP_A",
+   "source": "Group A (6 XAUUSD/MT5 repos)",
+   "finding": "No Group-A repo demonstrates net-of-cost, out-of-sample, tick-level edge on XAUUSD.",
+   "why": "the only execution-aware honest work concludes the scalping entry is an execution defect; profitability requires NOT scalping.",
+   "v3_action": "V3: treat the XAUUSD tick-scalping route as evidence-backed unproductive."
+  },
+  {
+   "id": "NEG-114",
+   "type": "CALIBRATION_GAP",
+   "source": "AshJha0/electronic-trading",
+   "finding": "author: 'What is not verified: calibration of eta, gamma_p, A, k to any real market'; the AC model also omits the epsilon*X spread/fee term.",
+   "why": "engineering rigor does not imply market validity.",
+   "v3_action": "V3: require an explicit 'what is NOT verified' block and refuse uncalibrated parameters as forecasts."
+  }
+ ],
+ "open_negative_results": [
+  "predictive_R2_vs_contemporaneous_R2_separation: 0 GitHub hits (must be produced internally)",
+  "parameter_change_does_not_affect_per_trade_loss: 0 GitHub hits as a documented cost-type failure (A2 is the nearest, internally produced analogue)",
+  "tail_dominated_PnL_as_a_stated_failure: 0 GitHub hits (C5's stress-regime realised-spread inversion is the closest analogue)"
+ ]
+}
