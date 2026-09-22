@@ -1,0 +1,21 @@
+{
+ "schema": "v3_session_registry/2",
+ "generated_utc": "2026-09-22T06:25:00Z",
+ "test_start": "2026-09-22T06:20:00Z",
+ "session": "CONTIGUOUS_SEGMENT",
+ "segment_gap_threshold_s": 3000,
+ "min_session_ticks": 200000,
+ "target_sessions": 10,
+ "sessions": [],
+ "valid_session_count": 0,
+ "boundary_record": {
+  "last_event_before_test_start": "2026-09-22 05:39:06.954000+00:00",
+  "first_event_after_test_start": null,
+  "boundary_gap_seconds": null,
+  "boundary_note": "this gap is an ARTEFACT of TEST_START, not a natural market gap; it must not be used as a session boundary (\u00a722)",
+  "classification": "TEST_START_ARTEFACT (not a natural market gap)"
+ },
+ "next_session_id": "TEST-S001",
+ "id_rule": "session ids are assigned by DATA BOUNDARY ONLY (never by volatility/price/spread/result)",
+ "invalid_or_incomplete_rule": "INCOMPLETE segments are never padded, merged, or threshold-lowered"
+}

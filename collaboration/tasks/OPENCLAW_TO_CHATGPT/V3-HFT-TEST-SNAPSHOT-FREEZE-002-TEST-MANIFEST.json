@@ -1,0 +1,45 @@
+{
+ "schema": "v3_test_manifest/2",
+ "task": "V3-HFT-TEST-SNAPSHOT-FREEZE-002",
+ "generated_utc": "2026-09-22T06:25:00Z",
+ "utc_now": "2026-09-22 06:22:35.045508+00:00",
+ "test_start": "2026-09-22T06:20:00Z",
+ "session_definition": {
+  "session": "CONTIGUOUS_SEGMENT",
+  "segment_gap_threshold_s": 3000,
+  "min_session_ticks": 200000,
+  "target_sessions": 10
+ },
+ "selected_sessions": [],
+ "session_count": 0,
+ "session_start": null,
+ "session_end": null,
+ "source_files": [],
+ "source_file_hashes": {},
+ "select_sessions": [],
+ "row_count": 0,
+ "timestamp_min": null,
+ "timestamp_max": null,
+ "preregistration_hash": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+ "model_spec_hash": "a98717dc424b0acaf0f33c01707dff6be540e2c941ee7a4da9fa803a4d31b53c",
+ "cost_model_hash": "6f116cfb2d63bedf6e364e9b5a6c6e15f194f91114e9d0c1780fa4d869cdf0aa",
+ "TEST_READY": "NO",
+ "status": "TEST_READY = NO \u2014 valid_session_count = 0 of 10",
+ "why_not_ready": {
+  "events_at_or_after_test_start": 0,
+  "boundary": {
+   "last_event_before_test_start": "2026-09-22 05:39:06.954000+00:00",
+   "first_event_after_test_start": null,
+   "boundary_gap_seconds": null,
+   "boundary_note": "this gap is an ARTEFACT of TEST_START, not a natural market gap; it must not be used as a session boundary (\u00a722)"
+  },
+  "rule_compliance": "no threshold lowering \u00b7 no TEST_START shift \u00b7 no DEVELOPMENT backfill \u00b7 no session cherry-picking \u00b7 no early freeze",
+  "scheduling_estimate": {
+   "median_inter_tick_ms_pretest": 273.0,
+   "contiguous_hours_needed_for_200k_ticks": 15.2,
+   "max_valid_sessions_per_trading_day": 1,
+   "minimum_trading_days_for_10_sessions": 10,
+   "earliest_realistic_TEST_READY": ">= 10 trading days of collection after TEST_START"
+  }
+ }
+}

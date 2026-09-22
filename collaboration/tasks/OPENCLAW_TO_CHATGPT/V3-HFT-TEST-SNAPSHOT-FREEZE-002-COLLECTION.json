@@ -1,0 +1,303 @@
+{
+ "schema": "v3_test_collection_attempt/1",
+ "utc_now": "2026-09-22 06:22:35.045508+00:00",
+ "test_start": "2026-09-22T06:20:00Z",
+ "session_definition": {
+  "session": "CONTIGUOUS_SEGMENT",
+  "segment_gap_threshold_s": 3000,
+  "min_session_ticks": 200000,
+  "target_sessions": 10
+ },
+ "unit_verification": {
+  "declared": "ms",
+  "dtype": "datetime64[ms, UTC]",
+  "interpretations": {
+   "ms": "2026-09-07 01:05:00+00:00",
+   "us": "1970-01-21 16:52:23+00:00",
+   "ns": "1970-01-01 00:29:48+00:00"
+  },
+  "proof": "'ms' is the only interpretation that yields a 2026 date; us/ns would imply 1970",
+  "verdict": "PROVEN_BY_VALUE"
+ },
+ "boundary": {
+  "last_event_before_test_start": "2026-09-22 05:39:06.954000+00:00",
+  "first_event_after_test_start": null,
+  "boundary_gap_seconds": null,
+  "boundary_note": "this gap is an ARTEFACT of TEST_START, not a natural market gap; it must not be used as a session boundary (\u00a722)"
+ },
+ "post_test_start": {
+  "row_count": 0,
+  "timestamp_min": null,
+  "timestamp_max": null,
+  "out_of_order_count": 0,
+  "dup_timestamp": 0,
+  "dup_quote": 0,
+  "DUP_EVENT": "DATA_GAP",
+  "EVENT_IDENTITY": "DATA_GAP (no event id in the feed; (ts,bid,ask) cannot prove identity)"
+ },
+ "sessions": [],
+ "valid_session_count": 0,
+ "TEST_READY": "NO",
+ "projection": {
+  "ticks_after_test_start": 0,
+  "elapsed_hours_since_test_start": 0.043,
+  "observed_ticks_per_hour": null,
+  "hours_of_data_needed_for_one_valid_session": null,
+  "sessions_per_day_upper_bound": 1,
+  "note": "a session is a contiguous segment; the daily market break (>3000 s) splits days, so at most ~1 valid session can form per trading day"
+ },
+ "file_manifest": [
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260907.parquet",
+   "file": "ticks_20260907.parquet",
+   "sha256": "c1ec30d59bbd78e8bcaa1513857fefcc8917cffcbdd94a502803d63dfdf2c886",
+   "size": 4442800,
+   "row_count": 166470,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-07 01:05:00.047000+00:00",
+   "timestamp_max": "2026-09-08 01:16:44.368000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260908.parquet",
+   "file": "ticks_20260908.parquet",
+   "sha256": "13b6e1b27e9b4522f5617903af6ceb8f0f19a440641c0c6f245e9d604446950f",
+   "size": 5215292,
+   "row_count": 203959,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-08 01:15:44.158000+00:00",
+   "timestamp_max": "2026-09-09 01:09:07.344000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260909.parquet",
+   "file": "ticks_20260909.parquet",
+   "sha256": "cb85cf4ce8d0f9e0b8fdf8c07f268ed0e7a3e4e1842bb9b726893c264a8f52be",
+   "size": 5389487,
+   "row_count": 210343,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-09 01:08:07.296000+00:00",
+   "timestamp_max": "2026-09-10 01:09:06.520000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260910.parquet",
+   "file": "ticks_20260910.parquet",
+   "sha256": "f765ccb1ce1b2ec214c18ba30495a4a75b3d3df3d23329ee3be4f23f5ac9bf0c",
+   "size": 5875383,
+   "row_count": 233558,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-10 01:08:06.216000+00:00",
+   "timestamp_max": "2026-09-11 01:09:06.551000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260911.parquet",
+   "file": "ticks_20260911.parquet",
+   "sha256": "3352f502471d33fd73b1d6bc6cda51464eb025e33e527b72772d92dcb720943d",
+   "size": 5737196,
+   "row_count": 227498,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-11 01:08:06.537000+00:00",
+   "timestamp_max": "2026-09-14 01:09:06.993000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260914.parquet",
+   "file": "ticks_20260914.parquet",
+   "sha256": "5de6a32bad6474610561da45254e64ca4c97b071dbb96dc3fead6aef6d453275",
+   "size": 5449090,
+   "row_count": 214223,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-14 01:08:06.021000+00:00",
+   "timestamp_max": "2026-09-15 01:09:05.851000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260915.parquet",
+   "file": "ticks_20260915.parquet",
+   "sha256": "dd001446bc6d22b26aa149c3d40d555ffef59c71fd125f6ccc2ee35e7e41c111",
+   "size": 4772699,
+   "row_count": 184111,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-15 01:08:05.144000+00:00",
+   "timestamp_max": "2026-09-16 01:09:06.826000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260916.parquet",
+   "file": "ticks_20260916.parquet",
+   "sha256": "a496ebc38f8f77afdb43a12cdf69f28af11b82e7b758beceed125cf1438cc40e",
+   "size": 5675704,
+   "row_count": 223031,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-16 01:08:06.283000+00:00",
+   "timestamp_max": "2026-09-17 01:09:06.974000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260917.parquet",
+   "file": "ticks_20260917.parquet",
+   "sha256": "f115b3d662171a148701d334fca1d7850436ab31b559a4996ebdf4f4a6d1c5ef",
+   "size": 5488940,
+   "row_count": 213403,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-17 01:08:07.132000+00:00",
+   "timestamp_max": "2026-09-18 01:09:06.924000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260918.parquet",
+   "file": "ticks_20260918.parquet",
+   "sha256": "97b5ad7d4252c34864f0972f087b4618b59b0735c6651f9745aef73744036e52",
+   "size": 5093088,
+   "row_count": 199006,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-18 01:08:06.542000+00:00",
+   "timestamp_max": "2026-09-21 01:09:06.903000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260921.parquet",
+   "file": "ticks_20260921.parquet",
+   "sha256": "e0927e044e8cf12c82a7cb6d966baecd766d5de62c2ea8f114e3e91e0d423b81",
+   "size": 5228468,
+   "row_count": 204358,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-21 01:08:06.326000+00:00",
+   "timestamp_max": "2026-09-22 01:09:06.923000+00:00"
+  },
+  {
+   "path": "C:/AIQuant/data/live_fxtm/ticks_20260922.parquet",
+   "file": "ticks_20260922.parquet",
+   "sha256": "c56ff7130dd26a6567a7db902d5b4d13669193e8dbe799daff4511edbf3fafc0",
+   "size": 1050155,
+   "row_count": 37474,
+   "cols": [
+    "time",
+    "bid",
+    "ask",
+    "last",
+    "volume",
+    "time_msc",
+    "flags",
+    "volume_real",
+    "utc_ms",
+    "ts_utc"
+   ],
+   "timestamp_min": "2026-09-22 01:08:07.218000+00:00",
+   "timestamp_max": "2026-09-22 05:39:06.954000+00:00"
+  }
+ ]
+}

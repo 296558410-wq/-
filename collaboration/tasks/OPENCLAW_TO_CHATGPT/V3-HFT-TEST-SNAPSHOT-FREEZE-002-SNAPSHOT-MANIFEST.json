@@ -1,0 +1,21 @@
+{
+ "schema": "v3_test_snapshot_manifest/2",
+ "generated_utc": "2026-09-22T06:25:00Z",
+ "test_start": "2026-09-22T06:20:00Z",
+ "session_definition": "CONTIGUOUS_SEGMENT (>3000 s gap)",
+ "segment_gap_threshold": 3000,
+ "minimum_session_ticks": 200000,
+ "selected_sessions": [],
+ "source_files": [],
+ "source_file_hashes": {},
+ "row_count": 0,
+ "timestamp_min": null,
+ "timestamp_max": null,
+ "preregistration_hash": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+ "model_spec_hash": "a98717dc424b0acaf0f33c01707dff6be540e2c941ee7a4da9fa803a4d31b53c",
+ "cost_model_hash": "6f116cfb2d63bedf6e364e9b5a6c6e15f194f91114e9d0c1780fa4d869cdf0aa",
+ "TEST_SNAPSHOT_SHA256": "PENDING_NOT_YET_COLLECTED",
+ "TEST_SNAPSHOT_IMMUTABLE": null,
+ "status": "NOT_CREATED (valid_session_count 0 < 10)",
+ "post_snapshot_data_rule": "any later data is POST-SNAPSHOT DATA and may not enter TEST"
+}
