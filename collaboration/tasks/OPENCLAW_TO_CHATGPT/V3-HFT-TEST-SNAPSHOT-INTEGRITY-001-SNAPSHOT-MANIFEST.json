@@ -1,0 +1,15 @@
+{
+ "schema": "v3_test_snapshot_manifest/1",
+ "generated_utc": "2026-09-22T06:15:00Z",
+ "test_snapshot_id": null,
+ "TEST_SNAPSHOT_SHA256": "PENDING_NOT_YET_COLLECTED",
+ "immutable": null,
+ "status": "NOT_CREATED",
+ "reason": "TEST data has not formed; creating a snapshot now would fabricate an evaluation set",
+ "layout_planned": {
+  "raw": "immutable",
+  "manifest": "hashes",
+  "derived": "deterministic schema transform only"
+ },
+ "preregistration_hash": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3"
+}

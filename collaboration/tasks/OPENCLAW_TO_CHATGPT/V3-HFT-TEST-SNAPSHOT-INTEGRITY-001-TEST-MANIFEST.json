@@ -1,0 +1,35 @@
+{
+ "schema": "v3_test_manifest/1",
+ "task": "V3-HFT-TEST-SNAPSHOT-INTEGRITY-001",
+ "generated_utc": "2026-09-22T06:15:00Z",
+ "utc_now": "2026-09-22 06:13:30.592109+00:00",
+ "test_start": "2026-09-22T06:20:00Z",
+ "test_rule": "first 10 usable sessions strictly after test_start",
+ "selected_sessions": [],
+ "session_count": 0,
+ "session_start": null,
+ "session_end": null,
+ "source_files": [],
+ "source_file_hash": {},
+ "row_count": 0,
+ "schema_hash": "2b99c68b3a4a126e27301efbc03c68f6b485fc85565cefcc2a7301a77cc271fc",
+ "timestamp_min": null,
+ "timestamp_max": null,
+ "selection_rule_hash": "63411dfd7e3fa1f1c91ad1fc7f0670c40d227c250061f525c966a932496b4d78",
+ "preregistration_hash": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+ "status": "TEST_READY = NO (no events exist after test_start)",
+ "why_empty": {
+  "latest_event_utc": "2026-09-22 05:39:06.954000+00:00",
+  "test_start": "2026-09-22T06:20:00Z",
+  "test_start_in_future": true,
+  "minutes_until_test_start": 6.5,
+  "events_after_test_start": 0,
+  "rule_compliance": "no padding, no old data, no shortened window, no session cherry-picking"
+ },
+ "session_definition_source": {
+  "session_definition": "maximal contiguous segment separated by gaps > 3000 s (registered g_max at the longest horizon, from the frozen preregistration)",
+  "session_validity_rule": "timestamps UTC; unit declared ms; ordering and duplicate checks applied",
+  "session_completeness_rule": ">= 200000 ticks",
+  "open_item": "whether a 'session' means a UTC day or a contiguous segment is not spelled out in the frozen protocol; recorded for ChatGPT per the task's ambiguity clause. It cannot affect the verdict because zero sessions exist after test_start."
+ }
+}

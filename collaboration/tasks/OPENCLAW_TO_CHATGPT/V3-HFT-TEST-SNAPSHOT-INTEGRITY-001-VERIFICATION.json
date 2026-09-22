@@ -1,0 +1,68 @@
+{
+ "schema": "v3_test_snapshot_verification/1",
+ "utc_now": "2026-09-22 06:13:30.592109+00:00",
+ "TEST_START": "2026-09-22T06:20:00Z",
+ "checks": {
+  "preregistration_sha256": {
+   "expected": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+   "actual": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+   "match": true
+  },
+  "document_hash_integrity": {
+   "n": 22,
+   "mismatched": [],
+   "clean": true
+  },
+  "model_spec_hash": {
+   "expected": "a98717dc424b0acaf0f33c01707dff6be540e2c941ee7a4da9fa803a4d31b53c",
+   "match": true
+  },
+  "cost_model_hash": {
+   "expected": "6f116cfb2d63bedf6e364e9b5a6c6e15f194f91114e9d0c1780fa4d869cdf0aa",
+   "match": true,
+   "cost_model_id": "CALIBRATION_20RT_20260921",
+   "round_trip_usd": 0.4,
+   "round_trip_bp": 0.914
+  },
+  "feature_schema_hash": {
+   "expected": "2b99c68b3a4a126e27301efbc03c68f6b485fc85565cefcc2a7301a77cc271fc",
+   "match": true
+  },
+  "parameter_registry": {
+   "count": 30,
+   "count_is_30": true,
+   "unresolved_tbd": 0,
+   "categories_unchanged": [
+    "ESTIMATED_ON_TRAIN",
+    "FIXED",
+    "NOT_ALLOWED_TO_ESTIMATE_ON_TEST"
+   ]
+  },
+  "test_boundary": {
+   "rule": "first 10 usable sessions strictly after 2026-09-22T06:20:00Z",
+   "status": "RULE_LOCKED",
+   "TEST_LOCKED_HASH": "PENDING_NOT_YET_COLLECTED",
+   "contaminated_window": "2026-09-07..2026-09-21 (DEMOTED to DEVELOPMENT_CONTAMINATED)"
+  },
+  "protected_paths": {
+   "research/hermes/trader_v1": "PRESENT",
+   "research/hermes/trader_v2": "PRESENT",
+   "research/hermes/trader_v3/execution": "PRESENT",
+   "research/hermes/trader_v3/foundation": "PRESENT",
+   "research/hermes/trader_v3/state/V3_COST_PROFILE.json": "PRESENT",
+   "research/hermes/trader_v3/research/candidate_model_preregistration": "PRESENT",
+   "research/hermes/trader_v3/data/snapshots": "PRESENT",
+   "research/hermes/trader_v3/research/github_microstructure_distillation": "PRESENT",
+   "research/hermes/trader_v3/research/l1_execution_edge": "PRESENT"
+  }
+ },
+ "data_availability": {
+  "live_files": 12,
+  "latest_event_utc": "2026-09-22 05:39:06.954000+00:00",
+  "test_start": "2026-09-22T06:20:00Z",
+  "test_start_in_future": true,
+  "minutes_until_test_start": 6.5,
+  "files_with_events_after_test_start": [],
+  "total_events_after_test_start": 0
+ }
+}
