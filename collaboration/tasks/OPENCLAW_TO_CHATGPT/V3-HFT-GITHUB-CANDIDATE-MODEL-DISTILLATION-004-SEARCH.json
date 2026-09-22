@@ -1,0 +1,265 @@
+{
+ "schema": "v3_candidate_search_registry/1",
+ "task": "V3-HFT-GITHUB-CANDIDATE-MODEL-DISTILLATION-004",
+ "generated_utc": "2026-09-22T06:05:00Z",
+ "method": "GitHub public API only; repo reported only if /repos/<slug> returned 200",
+ "queries_dispatched": [
+  "alpha+decay",
+  "markout+decay",
+  "signal+decay+half+life",
+  "hazard+model+trading",
+  "survival+analysis+order",
+  "dynamic+exit+trading",
+  "execution+markout+curve",
+  "adverse+selection+exit",
+  "profit+protection+limit+exit",
+  "toxic+flow+exit",
+  "touch+exit+spread+aware",
+  "spread+regime",
+  "spread+spike",
+  "dynamic+execution+threshold",
+  "cost+to+move",
+  "spread+to+volatility",
+  "implementation+shortfall+opportunity",
+  "opportunity+cost+execution",
+  "non+execution+risk",
+  "maker+exit",
+  "limit+exit+backtest",
+  "passive+execution+simulator"
+ ],
+ "delegation": {
+  "search_A": "edge decay / dynamic exit (parts/search_edge_decay.md)",
+  "search_B": "spread state vs cost / opportunity cost / maker exit (parts/search_spread_state.md)"
+ },
+ "carried_forward_from_003": [
+  "siddhantsingh-1/execution-aware-alpha-backtester",
+  "snowkings/QIP_adverse_selection",
+  "himagna16/kalshi-microstructure",
+  "gelatotrade/implementation-shortfall-hyperliquid",
+  "aryansiwach/execution-market-microstructure",
+  "tfrmma/realistic-mm-backtester",
+  "KlishevDA/...L2-Market-Making",
+  "xiaohany-cmu-S26/lob-fill-engine",
+  "Trumplus/AAPL-Limit-Order-Fill-Probability-Forecast",
+  "AshJha0/electronic-trading",
+  "NadirAliOfficial/snipe-fx-ea",
+  "n30dyn4m1c/gold-pro-scalper"
+ ],
+ "results": [
+  {
+   "slug": "r33bt/signal-decay-calculator",
+   "E": "E1",
+   "T": "B",
+   "decay_form": "exponential, explicit formula",
+   "formula": "IC(h) = IC0*exp(-lambda*h), lambda by log-linear OLS; half-life = ln2/lambda",
+   "exit_trigger": "threshold on remaining edge (IC>=75% of IC0) -> rebalance cadence; NO intraday exit",
+   "second_crossing": "not modelled",
+   "taxonomy_4way": "no",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "quantskills/skill-factor-ic-decay",
+   "E": "E2",
+   "T": "B",
+   "decay_form": "exponential via log-linear fit",
+   "formula": "IC(h)=A*exp(-h/tau); t_half = tau*ln2; Newey-West t (lag=5); ICIR",
+   "exit_trigger": "none (diagnostic only)",
+   "second_crossing": "not modelled",
+   "taxonomy_4way": "no",
+   "audit": "search_edge_decay",
+   "warning": "author states the half-life is a fitted shape parameter, NOT a promise that the signal works for N more days"
+  },
+  {
+   "slug": "zj092912/wti-airline-stat-arb",
+   "E": "E3",
+   "T": "A",
+   "decay_form": "structural: OU + finite-horizon optimal-stopping free boundary (tightens as time-to-close shrinks)",
+   "formula": "no closed-form E(t); exit boundary from a free-boundary PDE on a 161-node grid",
+   "exit_trigger": "optimal-stopping boundary vs z-score +-2sigma/+-0.5sigma",
+   "second_crossing": "YES - the headline result: buys at ask, sells at bid, tracked in two books",
+   "result": "mark-to-mid Sharpe 1.08, +$463,326  BUT realised -$24,931,458 over 10,907 trades -> the entire mid edge and more is inside the bid-ask spread",
+   "taxonomy_4way": "partial (mid edge vs execution cost)",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "nirholas/markout-fee",
+   "E": "E2",
+   "T": "B",
+   "decay_form": "EWMA toxicity weighting",
+   "formula": "toxicity_t = (1-alpha)*toxicity_{t-1} + alpha*observation ; fee = baseFee + maxSurcharge*toxicity",
+   "exit_trigger": "none (LP fee pricing)",
+   "second_crossing": "no",
+   "taxonomy_4way": "partial (informed vs noise, graded)",
+   "audit": "search_edge_decay",
+   "note": "uses a fixed minHorizon delay before grading, explicitly to avoid measuring the swap's own same-block impact"
+  },
+  {
+   "slug": "punyamodi/Deep-Market-Maker",
+   "E": "E2",
+   "T": "B",
+   "decay_form": "empirical IC/ICIR-vs-horizon curve (no fit)",
+   "formula": "P(fill|q,V)=max(0,1-(q/V)^alpha); Hawkes kernel phi(tau)=alpha*exp(-beta*tau); A-S delta=gamma*sigma^2*(T-t)+(2/gamma)*ln(1+gamma/kappa)",
+   "exit_trigger": "toxicity threshold quotes (toxicity>0.65 -> spread x2.5, size x0.5)",
+   "second_crossing": "simulated exchange with queue fills + fees",
+   "taxonomy_4way": "partial (spread / adverse selection / inventory carry)",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "tfrmma/realistic-mm-backtester",
+   "E": "E3",
+   "T": "C",
+   "decay_form": "none; empirical adverse-selection score over lookback_ticks=10",
+   "exit_trigger": "none",
+   "second_crossing": "taker crossing + FIFO queue + lognormal latency + fees",
+   "taxonomy_4way": "no",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "atiselsts/dex-markout-simulations",
+   "E": "E1",
+   "T": "D",
+   "decay_form": "empirical markout curve at {0,1,3,10,30} min",
+   "exit_trigger": "none",
+   "second_crossing": "no",
+   "taxonomy_4way": "no",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "Harmar88/mm-adverse-selection",
+   "E": "E2",
+   "T": "C",
+   "decay_form": "exponential ARRIVAL-intensity decay lambda(delta)=A*exp(-k*delta) (NOT edge decay)",
+   "exit_trigger": "none (quote width as defence)",
+   "second_crossing": "no",
+   "taxonomy_4way": "partial (exact identity spread + adverse_selection + inventory)",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "AshJha0/electronic-trading",
+   "E": "E3",
+   "T": "C",
+   "decay_form": "exponential e-folding time of the AC trajectory theta=1/kappa (NOT ln2/kappa)",
+   "exit_trigger": "none",
+   "second_crossing": "no",
+   "taxonomy_4way": "no",
+   "audit": "search_edge_decay"
+  },
+  {
+   "slug": "PrazwalR/Assay",
+   "E": "E2",
+   "T": "D",
+   "decay_form": "none",
+   "exit_trigger": "none",
+   "second_crossing": "no",
+   "taxonomy_4way": "adverse selection only",
+   "audit": "search_edge_decay",
+   "note": "honest negative: its own pre-declared gate FAILS (91 positives vs floor 100; weakest walk-forward fold 0.469 vs floor 0.60)"
+  },
+  {
+   "slug": "aryansiwach/execution-market-microstructure",
+   "E": "E4",
+   "T": "A",
+   "spread_role": "COST strictly; decomposed (quoted/effective/realised/impact) - a cost-ADEQUACY identity, not a predictor",
+   "formula": "realised spread = 2*q*(price - mid_{t+h}); price impact = effective - realised; opp = side*(final_mid-arrival_mid)/arrival_mid*1e4 * unfilled/target; is_bps = (filled/target)*exec_cost + opp",
+   "opportunity_cost": "YES - unfilled shares marked to final mid and weighted by fill ratio",
+   "maker_exit": "EXECUTABLE & conservative: simulate_limit uses queue_ahead, cancel_on_through, deadline_ns, then sweeps the residual",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "DaniyalMlk/slippage",
+   "E": "E5",
+   "T": "A",
+   "spread_role": "COST (half-spread split into immediacy price and impact/timing)",
+   "formula": "Perold IS decomposed: delay / trading / opportunity / commission / fees",
+   "opportunity_cost": "YES - most rigorous in the corpus; 'opportunity is the move on shares that never traded'; order-basis vs executed-basis convention stated AND tested",
+   "maker_exit": "NO queue model (consumes fills)",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "K1ta141k/loblab",
+   "E": "E3",
+   "T": "B",
+   "spread_role": "PURE COST - the repo is built around it",
+   "formula": "obi=(bidD-askD)/(bidD+askD); fires at |obi|>0.30; maker r = mid - gamma*inventory + theta*OBI",
+   "finding": "OBI is directionally right, but the move only clears the ~1-tick spread at extreme thresholds where n is tiny; 'that crux (signal < spread) is the whole game in taker alpha'",
+   "maker_exit": "ABSENT - a maker/queue-position model is listed as future work",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "AMIRMAHMOUDINIA/microstructure-signals-vs-executable-alpha",
+   "E": "E5",
+   "T": "A",
+   "spread_role": "COST; spread crossed on both sides; non-overlapping positions; round-trip cost sensitivity 0..12 bps",
+   "formula": "TFI = (2*taker_buy_volume - total_volume)/total_volume",
+   "finding": "every cost scenario failed the economic gate; even at 0 additional bps the selected strategy averaged -0.343 bps/trade; gross break-even additional cost only 0.909 bps",
+   "protocol": "pre-registered gates, locked test set, HAC, BH-FDR, block bootstrap",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "SpencerOzgur/Optimal-High-Frequency-Market-Making-With-Robust-Backtesting",
+   "E": "E3",
+   "T": "A",
+   "spread_role": "spread is an OUTPUT (quote width) driven by volatility and inventory; volatility is the state variable",
+   "formula": "r = s - (q/lot)*gamma*sigma^2*(T-t); spread(t)=gamma_rv*sigma2_t*(T-t)+B",
+   "maker_exit": "THE CLEANEST ANSWER: queue_model='front' (theoretical/optimistic) and 'back' (conservative/executable) are BOTH run and REPORTED SEPARATELY",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "chinthakat/xauusd-rl-engine",
+   "E": "E2",
+   "T": "B",
+   "spread_role": "PURE COST - a static hard gate",
+   "formula": "if spread_points > MAX_SPREAD_POINTS(=50): refuse; MAX_SLIPPAGE=30 as MT5 deviation",
+   "note": "XAUUSD on MT5 - the same venue family as Hermes; no regime, no dynamic threshold",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "khintchine/rs-heston-mm",
+   "E": "E2",
+   "T": "B",
+   "spread_role": "regime-INDEXED (the only genuine state use found)",
+   "formula": "Lambda^a_i(delta)=A^a_i*exp(-eta^a_i*delta) indexed by volatility regime i; Wonham filter; Q = [[-lambda_HL, lambda_HL],[lambda_LH,-lambda_LH]]",
+   "note": "the state is the VOLATILITY regime; spread is an argument, not the state -> causal direction is backwards for the gap",
+   "audit": "search_spread_state"
+  },
+  {
+   "slug": "andrewkni/bayesian-spike-detector",
+   "E": "E1",
+   "T": "D",
+   "finding": "the only repo where a spread change is read as evidence about a future move - and it predicts REVERSAL ('widening spread on a big YES jump increases alpha = fake spike'), the OPPOSITE sign to the gap hypothesis",
+   "audit": "search_spread_state"
+  }
+ ],
+ "result_count": 18,
+ "negative_searches_zero_repos": [
+  "passive execution simulator",
+  "market maker backtest limit order fill",
+  "opportunity cost unfilled order",
+  "limit order exit strategy backtest",
+  "cost aware entry filter trading",
+  "spread predictor future returns",
+  "take profit limit order queue simulation",
+  "bid ask spread volatility relationship",
+  "spread cost filter strategy signal",
+  "maker exit limit order profit",
+  "expected move versus cost trade"
+ ],
+ "noise_only_searches": [
+  "spread spike",
+  "dynamic execution threshold",
+  "cost to move trading",
+  "touch exit limit order",
+  "cost of not trading",
+  "non execution risk trading",
+  "spread regime filter"
+ ],
+ "verification_caveat": "the literal /repos/<slug> endpoint was HTTP 403 for both searches (unauthenticated core quota 0/60 drained by the search phase). Existence was proven instead by (a) api.github.com scoped search returning an EXACT full_name match (search A: 15/15), and (b) github.com/<slug> HTTP 200 + successful raw.githubusercontent.com README/source fetches (search B: 18/18). No slug is reported on inference.",
+ "synthesis": [
+  "SPREAD_IS_COST_NOT_PREDICTOR: across all verified repos, NO repo shows a stable spread-state -> expected-future-move relationship. Gap (A) remains genuinely open in public repos; spread is a cost / a hurdle / a quote-width output.",
+  "INDEPENDENT_CONFIRMATION: K1ta141k/loblab ('signal < spread is the whole game in taker alpha') and AMIRMAHMOUDINIA ('even at 0 additional bps, -0.343 bps/trade; gross break-even additional cost 0.909 bps') independently reproduce V3's own central finding (0.914 bp cost vs sub-cost edge).",
+  "EXIT_COST_ANNIHILATION: zj092912 - mark-to-mid Sharpe 1.08 / +$463,326 became realised -$24,931,458. The second spread crossing is not a detail; it is the result.",
+  "THEORETICAL_VS_EXECUTABLE_MAKER_EXIT: SpencerOzgur is the only repo that runs front-of-queue and back-of-queue AND reports them separately - the cleanest way to publish maker-exit uncertainty.",
+  "OPPORTUNITY_COST_IS_RARE: only 2 of 18 repos charge unfilled quantity (aryansiwach, DaniyalMlk). Retail backtests silently set opportunity cost to zero.",
+  "NO_REPO_DERIVES_E(t): the exponential E(t)=E0*exp(-lambda t) is the only reusable form, and it is a fit. The 4-way taxonomy (ENTRY_WRONG / EDGE_DECAY / ADVERSE_SELECTION / COST_EROSION) is implemented by NO repo - CAND-003 must supply it itself."
+ ]
+}

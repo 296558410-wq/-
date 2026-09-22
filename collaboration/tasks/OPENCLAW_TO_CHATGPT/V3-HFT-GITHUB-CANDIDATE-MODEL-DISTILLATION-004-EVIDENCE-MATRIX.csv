@@ -1,0 +1,13 @@
+repo,evidence_level,transferability,negative_type,key_finding
+siddhantsingh-1/execution-aware-alpha-backtester,E4,B,COST_ERASED_ALPHA,"gross +$1.48M, cost $13.11M, net -$11.64M; reversion-ablation IC 0.473->0.177"
+snowkings/QIP_adverse_selection,E4,B,EXECUTION_FAILURE,"+0.29 tick move vs 1.08 tick spread; clustered events, no CI implied"
+himagna16/kalshi-microstructure,E4,B,COST_ERASED_ALPHA,"inefficient at the mid, efficient at the touch; 10.7c break-even"
+gelatotrade/implementation-shortfall-hyperliquid,E3,B,DATA_INTEGRITY_FAILURE,Perold 4-term IS incl. Opportunity on the unfilled fraction
+aryansiwach/execution-market-microstructure,E3,B,REGIME_DEPENDENT_COST,realised spread turns negative under stress; IS never zero for large orders
+tfrmma/realistic-mm-backtester,E3,B,UNFALSIFIED_EDGE,"FIFO qty_in_front + cancel model + latency + fees + OOS framework, no published OOS result"
+KlishevDA/...L2-Market-Making,E3,B,QUEUE_ASSUMPTION_FAILURE,markout curves + rho luck parameter; single 600s session; no fees
+xiaohany-cmu-S26/lob-fill-engine,E3,B,MODEL_DEPENDENT_LABEL,rigorous fill-probability protocol; no economic closure
+Trumplus/AAPL-Limit-Order-Fill-Probability-Forecast,E3,C,MODEL_DEPENDENT_LABEL,AUC~0.72 ceiling; queue position dominates; eligibility censoring
+AshJha0/electronic-trading,E4_ENGINEERING_E1_MARKET,B,CALIBRATION_GAP,IS decomposition + price-shift invariance; calibration explicitly NOT verified
+NadirAliOfficial/snipe-fx-ea,E4,B,COST_TYPE_FAILURE,flat ~-0.31/trade across 36 real-tick passes (PF<=0.23)
+n30dyn4m1c/gold-pro-scalper,E1,B,NO_PUBLISHED_EVIDENCE,cost-multiple gate (corroboration only; E1 so PARK as a primary basis)

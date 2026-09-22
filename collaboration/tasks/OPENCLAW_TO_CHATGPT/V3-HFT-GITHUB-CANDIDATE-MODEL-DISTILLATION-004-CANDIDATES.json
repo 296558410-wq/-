@@ -1,0 +1,107 @@
+{
+ "schema": "v3_candidate_model_registry/1",
+ "task": "V3-HFT-GITHUB-CANDIDATE-MODEL-DISTILLATION-004",
+ "generated_utc": "2026-09-22T05:55:00Z",
+ "status_note": "CANDIDATE_MODEL = UNTESTED. READY_FOR_PRE_REGISTRATION is a documentation state, not a result.",
+ "candidates": [
+  {
+   "CANDIDATE_ID": "V3-HFT-CAND-001",
+   "NAME": "Execution-Aware L1 Markout Gate",
+   "ROLE": "PRIMARY_CANDIDATE",
+   "ROLE_JUSTIFICATION": "general form: hosts the state/edge/cost/gate/exit components behind one interface",
+   "components": [
+    "CMP-01",
+    "CMP-02",
+    "CMP-03",
+    "CMP-04",
+    "CMP-05",
+    "CMP-06",
+    "CMP-07",
+    "CMP-08",
+    "CMP-09"
+   ],
+   "anchor_evidence": "E4 (snowkings, siddhantsingh)",
+   "FXTM_DATA": "L1 only",
+   "DECISION": [
+    "TAKE",
+    "WAIT",
+    "EXIT"
+   ],
+   "STATUS": "UNTESTED",
+   "PRE_REGISTRATION_READINESS": "READY_FOR_PRE_REGISTRATION"
+  },
+  {
+   "CANDIDATE_ID": "V3-HFT-CAND-002",
+   "NAME": "Spread-State Execution",
+   "ROLE": "SECONDARY_CANDIDATE",
+   "ROLE_JUSTIFICATION": "the policy/filter view of the same machinery; answers 'can any action be economic now?'",
+   "components": [
+    "CMP-01",
+    "CMP-04",
+    "CMP-06",
+    "CMP-07",
+    "CMP-09"
+   ],
+   "anchor_evidence": "E3-E4 (himagna16, aryansiwach, siddhantsingh)",
+   "FXTM_DATA": "L1 only",
+   "DECISION": [
+    "TRADEABLE",
+    "NOT_TRADEABLE",
+    "UNKNOWN"
+   ],
+   "STATUS": "UNTESTED",
+   "PRE_REGISTRATION_READINESS": "READY_FOR_PRE_REGISTRATION"
+  },
+  {
+   "CANDIDATE_ID": "V3-HFT-CAND-003",
+   "NAME": "Adverse-Selection Conditional Exit",
+   "ROLE": "EXPLORATORY_CANDIDATE",
+   "ROLE_JUSTIFICATION": "depends on the least-established piece (the functional form of edge decay)",
+   "components": [
+    "CMP-01",
+    "CMP-03",
+    "CMP-05",
+    "CMP-06",
+    "CMP-08",
+    "CMP-09"
+   ],
+   "anchor_evidence": "E3-E4 (AshJha0, snowkings, KlishevDA)",
+   "FXTM_DATA": "L1 only",
+   "DECISION": [
+    "HOLD",
+    "EXIT"
+   ],
+   "STATUS": "UNTESTED",
+   "PRE_REGISTRATION_READINESS": "READY_FOR_PRE_REGISTRATION"
+  },
+  {
+   "CANDIDATE_ID": "V3-HFT-CAND-004",
+   "NAME": "Passive / Queue Market Making",
+   "ROLE": "PARKED",
+   "components": [
+    "CMP-10",
+    "CMP-06"
+   ],
+   "blocking": "fill probability / queue position / real depth = DATA_GAP on FXTM",
+   "STATUS": "PARKED"
+  },
+  {
+   "CANDIDATE_ID": "V3-HFT-CAND-005",
+   "NAME": "Cross-Venue Context",
+   "ROLE": "PARKED",
+   "components": [
+    "CMP-01"
+   ],
+   "blocking": "another venue's data is not FXTM's execution pool",
+   "STATUS": "PARKED"
+  }
+ ],
+ "interface": {
+  "ModelState": "CMP-01 -> GrossEdge: CMP-03 -> ExecutionCost: CMP-04/06 -> AdverseSelectionRisk: CMP-05 -> NetEdge -> Decision(TAKE|WAIT|EXIT)"
+ },
+ "forbidden_language": [
+  "best",
+  "winner",
+  "most profitable"
+ ]
+}

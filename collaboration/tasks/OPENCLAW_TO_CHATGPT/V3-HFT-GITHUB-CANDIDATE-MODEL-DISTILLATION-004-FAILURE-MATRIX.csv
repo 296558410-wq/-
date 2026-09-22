@@ -1,0 +1,11 @@
+failure_id,class,where_it_appears,description,mitigation_in_spec
+F-01,COST_ERASED_ALPHA,"siddhantsingh, himagna16, V3 internal",edge smaller than round-trip cost,CMP-07 gate: compare edge to full cost before trading
+F-02,EXECUTION_FAILURE,"snowkings, V3 internal","real directional info, negative at every delay/horizon",CMP-06 counts the spread twice; CAND-003 exit rule
+F-03,LOOK_AHEAD,general risk,future outcome leaking into the decision,timelines/ mark every field AVAILABLE / LABEL_ONLY / DIAGNOSTIC_ONLY
+F-04,POST_FILL_LEAKAGE,AS-based ideas,realised markout used as an entry feature,CMP-05 is DIAGNOSTIC_ONLY; AS may enter only as a lagged PIT estimate
+F-05,SELECTION_BIAS,any multi-variant search,choosing on VAL/TEST or re-selecting after stress,"OOS discipline: VAL-only selection, single TEST evaluation, FDR"
+F-06,OVERLAP_INFLATION,"snowkings, siddhantsingh",clustered events treated as independent,CMP-09 effective_N + cluster-robust/bootstrap; no CI from raw counts
+F-07,TAIL_DEPENDENCE,V3 internal,mean driven by a few extreme outcomes,report mean AND median AND top1/5/10% shares
+F-08,OPPORTUNITY_COST_OMITTED,"gelatotrade, AshJha0",unfilled size booked at arrival price,CMP-04 Opportunity term on the UNFILLED fraction
+F-09,QUEUE_ASSUMPTION,"tfrmma, KlishevDA, xiaohany",uncalibrated fill/luck parameters,CAND-004 PARKED; sensitivity parameter must be published (CMP-09)
+F-10,DATA_INTEGRITY,"himagna16, gelatotrade",silent provenance failure producing plausible numbers,hash-locked split boundary + cost schedule asserted in CI
