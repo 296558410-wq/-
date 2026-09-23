@@ -1,0 +1,77 @@
+{
+ "generated_utc": "2026-09-23T10:51:36.559848+00:00",
+ "artifacts": [
+  {
+   "path": "research/hermes/trader_v2/config/v2_config.json",
+   "size": 4287,
+   "modified_time": "2026-09-19T15:36:31.075844+00:00",
+   "sha256": "b0cc254b809da52844778bbbb8a298df77dd2d031a8353fec3f982dac26be0e5",
+   "role": "config",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/V2_G3_FREEZE.json",
+   "size": 8209,
+   "modified_time": "2026-09-17T10:53:18.980494+00:00",
+   "sha256": "a22c369cf34e50b7b08e373d1f200396fc5b9778ec6fba0cffd1c8c09c573759",
+   "role": "freeze",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/v2_run_health.json",
+   "size": 3789,
+   "modified_time": "2026-09-23T10:38:15.104393+00:00",
+   "sha256": "b6d8e0bb36f4e3a8db9a111c0c2ccd0e3ae11cee6bdb41525d1450922fd3ac46",
+   "role": "registry",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/v2_scheduler_state.json",
+   "size": 194,
+   "modified_time": "2026-09-23T10:38:15.105445+00:00",
+   "sha256": "1d11ee8c3c24db1505225c27642ea9d048240fa48e50ba2d63b5747992defc9f",
+   "role": "registry",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/opportunity_ledger.jsonl",
+   "size": 1271005,
+   "modified_time": "2026-09-23T10:38:14.824910+00:00",
+   "sha256": "4c819d67876d0191e01c9ef5e4a3a14ba177062847942480f50188abb19a0247",
+   "role": "ledger",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/FORWARD_VALIDATION_ALLOWED",
+   "size": 4,
+   "modified_time": "2026-09-18T10:25:30.788629+00:00",
+   "sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+   "role": "gate",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v2/state/SHADOW_ALLOWED",
+   "size": 4,
+   "modified_time": "2026-09-17T02:16:26.676068+00:00",
+   "sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+   "role": "gate",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/state/MT5_INSTANCE_REGISTRY.json",
+   "size": 2220,
+   "modified_time": "2026-09-20T12:25:36.425821+00:00",
+   "sha256": "bf920d9aad9fe260aeb4cba141a1fc3c159989ef7bf1d0015157f2a3012c75b4",
+   "role": "registry",
+   "immutable": false
+  }
+ ],
+ "excluded_for_secrecy": [
+  ".env*",
+  "FXTM_DEMO_PASSWORD/LOGIN",
+  "tokens",
+  "API keys",
+  "private keys",
+  "cookies"
+ ]
+}
