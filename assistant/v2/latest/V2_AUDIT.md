@@ -1,6 +1,6 @@
 # V2 最新交易状态与完整性审计
 
-生成 UTC：`2026-09-23T10:51:36.559848+00:00`
+生成 UTC：`2026-09-23T10:52:59.627350+00:00`
 仓库：`fix/v2-full-system-repair-20260917` @ `ebce041` · dirty_lines=1274
 
 ## 一、当前结论（核心四问）
@@ -39,7 +39,7 @@ RETURN_BASE_MISMATCH   : TRUE —— 真实 demo 起始资金 = $1000.0（不是
 
 ```text
 合计 gross=79.31 · commission=-2.86 · swap=0.42 · NET=76.87
-最大回撤=-84.41 USD · 峰值权益=2161.28
+最大回撤=-84.41 USD · 峰值权益=1161.28
 ```
 
 ## 三、执行审计
@@ -95,7 +95,7 @@ V2 独立 MT5 路径 = C:\AIQuant\mt5_instances\fxtm_demo_01\terminal64.exe · a
 冻结基准 = V2_G3_FREEZE.json（2026-09-17T10:53:18.858395+00:00 @ 8d997fb）
 比对文件 = 14 个 · 一致 = 10 · 变更 = 4
 STRATEGY_CODE_CHANGED = True
-changed detail = [{"file": "config\\v2_config.json", "frozen": "7bfab969722ff38a2d5607257750f138241851b464007186ae101316eaf37aff", "now": "b0cc254b809da52844778bbbb8a298df77dd2d031a8353fec3f982dac26be0e5", "status": "CHANGED"}, {"file": "data_sources\\mt5_market.py", "frozen": "256442a90d2415c22f690eca0efb4564d26b88fe7b58e08ce9ae76ec2b97f9c5", "now": "954b3dcc48e12f07e9d564c8e1793780800a99fe99ae2a70afe149a8e8b7a42b", "status": "CHANGED"}, {"file": "runtime\\shadow_run.py", "frozen": "eec256c8bcd2bdc763c236aa1f30639ca64140499c83c8504335e5a7ff724a8d", "now": "ef1473bdfbc5fe7afd7377460cd80b6a54dda661f53cf611082c207007835217", "status": "CHANGED"}, {"file": "dashboard\\datasource.py", "frozen": "2c02e650911c56db14eed7be3fa4e4702e48407dcaae52d47928204c4257a411", "now": "fc8a99b35afe970f86089bc2b524ef0ea1a516b2bb8c86f1294960c00a04621c", "status": "CHANGED"}]
+changed detail = [{"file": "config\\v2_config.json", "frozen": "7bfab969722ff38a2d5607257750f138241851b464007186ae101316eaf37aff", "now": "b0cc254b809da52844778bbbb8a298df77dd2d031a8353fec3f982dac26be0e5", "status": "CHANGED", "mtime_utc": "2026-09-19T15:36:31.075844+00:00", "git_diff_numstat": "1\t1\tresearch/hermes/trader_v2/config/v2_config.json", "trades_before_change": 5, "trades_after_change": 8}, {"file": "data_sources\\mt5_market.py", "frozen": "256442a90d2415c22f690eca0efb4564d26b88fe7b58e08ce9ae76ec2b97f9c5", "now": "954b3dcc48e12f07e9d564c8e1793780800a99fe99ae2a70afe149a8e8b7a42b", "status": "CHANGED", "mtime_utc": "2026-09-17T23:39:38.720994+00:00", "git_diff_numstat": "1\t1\tresearch/hermes/trader_v2/data_sources/mt5_market.py", "trades_before_change": 3, "trades_after_change": 10}, {"file": "runtime\\shadow_run.py", "frozen": "eec256c8bcd2bdc763c236aa1f30639ca64140499c83c8504335e5a7ff724a8d", "now": "ef1473bdfbc5fe7afd7377460cd80b6a54dda661f53cf611082c207007835217", "status": "CHANGED", "mtime_utc": "2026-09-19T14:46:02.172761+00:00", "git_diff_numstat": "54\t12\tresearch/hermes/trader_v2/runtime/shadow_run.py", "trades_before_change": 5, "trades_after_change": 8}, {"file": "dashboard\\datasource.py", "frozen": "2c02e650911c56db14eed7be3fa4e4702e48407dcaae52d47928204c4257a411", "now": "fc8a99b35afe970f86089bc2b524ef0ea1a516b2bb8c86f1294960c00a04621c", "status": "CHANGED", "mtime_utc": "2026-09-18T12:04:43.526884+00:00", "git_diff_numstat": "15\t9\tresearch/hermes/trader_v2/dashboard/datasource.py", "trades_before_change": 3, "trades_after_change": 10}]
 是否存在"看到盈利后改参数再混统计"：见上（若 changed 为空则无）
 ```
 
