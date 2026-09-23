@@ -1,0 +1,117 @@
+{
+ "generated_utc": "2026-09-23 10:41:29.363967+00:00",
+ "root": "C:\\AIQuant",
+ "artifacts": [
+  {
+   "path": "research/hermes/trader_v3/research/snapshot/V3_DATA_SNAPSHOT_V3-SNAP-20260922T025312Z.json",
+   "size": 26852,
+   "modified_time": "2026-09-22T02:53:56.575277805+00:00",
+   "sha256": "13fb5d1720a3b25768d0bca59eda897e85e66ba6d7741d538fc32ed33ef8eb54",
+   "role": "immutable_snapshot_manifest",
+   "immutable": true
+  },
+  {
+   "path": "research/hermes/trader_v3/research/candidate_model_preregistration/registries/preregistration_manifest.json",
+   "size": 4914,
+   "modified_time": "2026-09-22T06:06:18.988248348+00:00",
+   "sha256": "6360fa4ca35f8911586a9a3dc6df6242f003277674af9281bb08edd86d488995",
+   "role": "preregistration",
+   "immutable": true
+  },
+  {
+   "path": "research/hermes/trader_v3/research/candidate_model_preregistration/registries/parameter_registry.json",
+   "size": 8334,
+   "modified_time": "2026-09-22T06:06:18.986257076+00:00",
+   "sha256": "e842141886afc7cd5cef8315d189aabd9c482fd67f8e51b9fff48dd0da8e09c3",
+   "role": "registry",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/test_snapshot_integrity/manifest/TEST_MANIFEST.json",
+   "size": 1780,
+   "modified_time": "2026-09-22T06:23:08.941754818+00:00",
+   "sha256": "ff48e5e5cfe50e46b512f89a7810cae5d6283b8a2c115f096f699c9bb4d5f32e",
+   "role": "report",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/test_snapshot_integrity/registry/session_registry.json",
+   "size": 900,
+   "modified_time": "2026-09-22T06:23:08.945305586+00:00",
+   "sha256": "e0b8621da1d6b35cbb0e2b81bfec85ee462c6d8004ed6bf7f15e1fbc88ca3096",
+   "role": "registry",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/test_snapshot_integrity/final_test_snapshot_report.md",
+   "size": 2145,
+   "modified_time": "2026-09-22T06:23:08.949301958+00:00",
+   "sha256": "c95e727cfab228ddfd92bb46b9af4651a1154e9c6416d83e205454ab3fc765f1",
+   "role": "report",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/state/MT5_INSTANCE_REGISTRY.json",
+   "size": 2220,
+   "modified_time": "2026-09-20T12:25:36.425820589+00:00",
+   "sha256": "bf920d9aad9fe260aeb4cba141a1fc3c159989ef7bf1d0015157f2a3012c75b4",
+   "role": "report",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/state/V3_FORWARD_ALLOWED",
+   "size": 2,
+   "modified_time": "2026-09-17T11:17:57.177634478+00:00",
+   "sha256": "23794d91c53ae875c8e247d72561e35d9d06ee07c70c9e0dbcc977a6d161504a",
+   "role": "state_gate",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/state/V3_LIVE_ALLOWED",
+   "size": 2,
+   "modified_time": "2026-09-17T11:17:57.174113035+00:00",
+   "sha256": "23794d91c53ae875c8e247d72561e35d9d06ee07c70c9e0dbcc977a6d161504a",
+   "role": "state_gate",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/l1_execution_edge/final_decision.md",
+   "size": 3630,
+   "modified_time": "2026-09-22T03:30:13.417965889+00:00",
+   "sha256": "1410ebf47027fcf0e2dbcb559ee44426d18f6839346a5be1e055040323c4e15a",
+   "role": "report",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/l1_statistical_power/final_decision.md",
+   "size": 5401,
+   "modified_time": "2026-09-22T05:18:43.671068192+00:00",
+   "sha256": "51f7854f92e1d4fabf1d13b2ac61794e063ecbb1037848af6ac60531cc7bdc9d",
+   "role": "report",
+   "immutable": false
+  },
+  {
+   "path": "research/hermes/trader_v3/research/candidate_model_preregistration/final_preregistration_report.md",
+   "size": 5004,
+   "modified_time": "2026-09-22T06:05:53.515930413+00:00",
+   "sha256": "e3f6d2fbf1cb6a71a667884ade434fc91a17a76f394c7131c621a30f02adc3e1",
+   "role": "preregistration",
+   "immutable": true
+  },
+  {
+   "path": "research/hermes/trader_v3/research/test_snapshot_integrity/final_test_snapshot_report.md",
+   "size": 2145,
+   "modified_time": "2026-09-22T06:23:08.949301958+00:00",
+   "sha256": "c95e727cfab228ddfd92bb46b9af4651a1154e9c6416d83e205454ab3fc765f1",
+   "role": "report",
+   "immutable": false
+  }
+ ],
+ "excluded_for_secrecy": [
+  ".env*",
+  "credentials",
+  "tokens",
+  "MT5 passwords",
+  "private keys"
+ ]
+}

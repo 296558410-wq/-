@@ -1,0 +1,26 @@
+{
+ "test_start": "2026-09-22T06:20:00Z",
+ "generated_utc": "2026-09-23 10:41:29.363967+00:00",
+ "session_definition": {
+  "session": "CONTIGUOUS_SEGMENT",
+  "gap_threshold_s": 3000,
+  "min_session_ticks": 200000,
+  "target_sessions": 10
+ },
+ "valid_session_count": 1,
+ "target_session_count": 10,
+ "sessions": [
+  {
+   "session_id": "TEST-S001",
+   "start": "2026-09-22 07:21:08.832000+00:00",
+   "end": "2026-09-23 10:39:06.758000+00:00",
+   "tick_count": 232746,
+   "min_tick_count_gate": 200000,
+   "boundary_gap_before_s": 6121.878,
+   "crosses_test_start": true,
+   "valid": true,
+   "reason": "tick_count >= 200000",
+   "gap_after_s": null
+  }
+ ]
+}

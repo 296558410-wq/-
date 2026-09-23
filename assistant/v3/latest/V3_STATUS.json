@@ -1,0 +1,47 @@
+{
+ "timestamp_utc": "2026-09-23 10:41:29.363967+00:00",
+ "git_commit": "ebce041",
+ "git_branch": "fix/v2-full-system-repair-20260917",
+ "worktree_clean": false,
+ "test_start": "2026-09-22T06:20:00Z",
+ "current_test_status": "TEST_COLLECTION_WAIT",
+ "valid_session_count": 1,
+ "target_session_count": 10,
+ "session_ready": false,
+ "snapshot_status": "NOT_CREATED (TEST window incomplete)",
+ "protocol_hashes": {
+  "preregistration_sha256": "e273be091fc38cda0274cd2fededaeb28c2a11cd3398db770a6023d54faf5dc3",
+  "model_spec_hash": "a98717dc424b0acaf0f33c01707dff6be540e2c941ee7a4da9fa803a4d31b53c",
+  "cost_model_hash": "6f116cfb2d63bedf6e364e9b5a6c6e15f194f91114e9d0c1780fa4d869cdf0aa",
+  "feature_schema_hash": "2b99c68b3a4a126e27301efbc03c68f6b485fc85565cefcc2a7301a77cc271fc",
+  "statistical_plan_hash": "e3ab9ece0eb23155e57d752002a99bcea1ed15c69b49a17a06df0873562bcc69"
+ },
+ "safety": {
+  "ORDER_SEND": 0,
+  "CALIBRATION": 0,
+  "FORWARD": "NO",
+  "LIVE": "NO",
+  "EXPANSION": "LOCKED",
+  "ALPHA_SEARCH": "OFF",
+  "MODEL_TRAINING": "OFF",
+  "FEATURE_MINING": "OFF",
+  "DATA_SNAPSHOT": "IMMUTABLE",
+  "COST_MODEL": "CANONICAL",
+  "V1_CHANGED": false,
+  "V2_CHANGED": false,
+  "V3_STRATEGY_CHANGED": false
+ },
+ "alpha_experiment_status": "NOT_STARTED",
+ "ALPHA_EXPERIMENT_STARTED": false,
+ "ALPHA_EXPERIMENT_AUTHORIZED": false,
+ "PREMATURE_TESTING": false,
+ "blockers": [
+  "TEST sessions 1/10 (collection in progress)"
+ ],
+ "latest_artifact": "V3_AUDIT.md",
+ "audit_result": "AUDIT_READY",
+ "final_status": "TEST_COLLECTION_WAIT",
+ "elapsed_hours_since_test_start": 28.36,
+ "events_ge_test_start": 232746,
+ "detached_audit_only": "no V1/V2/V3 modification; new audit files + git commit only"
+}
